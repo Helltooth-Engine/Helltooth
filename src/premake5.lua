@@ -1,6 +1,6 @@
 function setProjectOutputDirectories() 
 	objdir "$(SolutionDir)\\Intermediates\\"
-	targetdir "$(SolutionDir)\\bin\\$(Platform)\\$(Configuration)"
+	targetdir "$(SolutionDir)\\bin\\$(Platform)\\$(Configuration)\\$(ProjectName)\\"
 end
 
 workspace ("Helltooth")
@@ -15,13 +15,15 @@ workspace ("Helltooth")
     location "../Solution/"
     startproject "Sandbox"
 
+
 project ("Helltooth")
     kind ("StaticLib")
     files {
-        "src/**.h",
-        "src/**.cpp",
+        "engine/**.h",
+        "engine/**.cpp",
     }
     location "../Solution/Helltooth/"
+
     setProjectOutputDirectories() 
 
 project ("Sandbox")
@@ -32,4 +34,16 @@ project ("Sandbox")
     }
     location "../Solution/Sandbox/"
     dependson "Helltooth"
+    links {
+    	"Opengl32",
+		"Helltooth.lib",
+	}
+	sysincludedirs {
+		"$(SolutionDir)../src/engine/"
+	}
+
+	syslibdirs {
+		"$(SolutionDir)bin\\$(Platform)\\$(Configuration)\\Helltooth\\"
+	}
+
     setProjectOutputDirectories() 
