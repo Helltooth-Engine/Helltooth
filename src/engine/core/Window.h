@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <tchar.h>
 
 #include <stdio.h>
 #include <string>
@@ -10,13 +11,21 @@ namespace ht { namespace core {
 		int width, height;
 		bool isVisible;
 		unsigned int vSync;
-		std::string title;
+		std::wstring title;
 		HWND hwnd;
 
 	public:
-		Window(const std::string& title, int width, int height);
-		~Window() {} //crying internally
+		Window(const std::wstring& title, int width, int height);
+		~Window();
 
+
+		void SwapBuffers() {
+			MSG msg;
+			if (PeekMessage(&msg, hwnd, 0, 0, PM_REMOVE)) {
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+		}
 
 	};
 

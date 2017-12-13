@@ -7,7 +7,11 @@ using namespace core;
 
 
 int main() {
-	Window window("Fuck you", 500, 100);
+	Window window(L"Window", 1280, 720);
+
+	while (true) {
+		window.SwapBuffers();
+	}
 
 	system("PAUSE");
 	return 0;
