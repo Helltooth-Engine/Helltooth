@@ -3,18 +3,46 @@ function setProjectOutputDirectories()
 	targetdir "$(SolutionDir)\\bin\\$(Platform)\\$(Configuration)\\$(ProjectName)\\"
 end
 
+function setConfigurationFilters() 
+	filter {"configurations:OpenGL-Debug"}
+		defines {
+			"HT_OPENGL",
+			"HT_DEBUG"
+		}
+	filter {"configurations:OpenGL-Release"}
+		defines {
+			"HT_OPENGL",
+			"HT_RELEASE"
+		}
+	filter {"configurations:DirectX-Debug"}
+		defines {
+			"HT_DIRECTX",
+			"HT_DEBUG"
+		}
+	filter {"configurations:DirectX-Release"}
+		defines {
+			"HT_DIRECTX",
+			"HT_RELEASE"
+		}
+	filter {}
+end
+
+
 workspace ("Helltooth")
     configurations {
-        "Debug",
-        "Release",
+        "OpenGL-Debug",
+        "OpenGL-Release",
+        "DirectX-Debug",
+        "DirectX-Release",
     }
+
     platforms {
         "x86",
         "x64",
     }
+
     location "../Solution/"
     startproject "Sandbox"
-
 
 project ("Helltooth")
     kind ("StaticLib")
@@ -23,8 +51,12 @@ project ("Helltooth")
         "engine/**.cpp",
     }
     location "../Solution/Helltooth/"
+    sysincludedirs {
+		"$(SolutionDir)../src/engine/"
+	}
 
     setProjectOutputDirectories() 
+    setConfigurationFilters()
 
 project ("Sandbox")
     kind ("ConsoleApp")
@@ -48,3 +80,4 @@ project ("Sandbox")
 	}
 
     setProjectOutputDirectories() 
+    setConfigurationFilters()

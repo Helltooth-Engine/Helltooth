@@ -1,5 +1,5 @@
 #include <iostream>
-#include <helltooth.h>
+#include <Helltooth.hpp>
 
 using namespace std;
 using namespace ht;
