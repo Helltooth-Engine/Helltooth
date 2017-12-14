@@ -19,7 +19,7 @@ workspace ("Helltooth")
 project ("Helltooth")
     kind ("StaticLib")
     files {
-        "engine/**.h",
+        "engine/**.hpp",
         "engine/**.cpp",
     }
     location "../Solution/Helltooth/"
@@ -30,6 +30,7 @@ project ("Sandbox")
     kind ("ConsoleApp")
     files {
         "demo/**.h",
+        "demo/**.hpp",
         "demo/**.cpp",
     }
     location "../Solution/Sandbox/"
