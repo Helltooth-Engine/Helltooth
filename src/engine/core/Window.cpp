@@ -5,36 +5,46 @@ namespace ht { namespace core {
 
 	LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (msg) {
-		case WM_DESTROY:
-			m_ShouldClose = true;
-			break;
 		}
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 	}
 
-	Window::Window(const std::wstring& title, int width, int height)
+	Window::Window(const std::string& title, int width, int height)
 		:m_Title(title), m_Width(width), m_Height(height) {
 		printf("Window created %s, width: %i, height %i\n", m_Title.c_str(), m_Width, m_Height);
-		WNDCLASSEX wcex;
+		WNDCLASSEXA wcex;
 		wcex.cbSize			= sizeof(WNDCLASSEX);
 		wcex.lpfnWndProc	= WndProc;
 		wcex.cbClsExtra		= 0;
 		wcex.cbWndExtra		= 0;
-		wcex.hInstance		= 0;
-		wcex.hIcon			= LoadIcon(0, MAKEINTRESOURCE(IDI_APPLICATION));
-		wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
-		wcex.hbrBackground	= 0;
-		wcex.lpszClassName	= L"Helltooth window";
+		wcex.hInstance		= GetModuleHandleA(nullptr);
+		wcex.hIcon			= nullptr;
+		wcex.hCursor		= nullptr;
+		wcex.hbrBackground	= reinterpret_cast<HBRUSH>(COLOR_ACTIVEBORDER);
+		wcex.lpszClassName	= "Helltooth window";
 		wcex.lpszMenuName	= 0;
 		wcex.hIconSm		= 0;
-		wcex.style			= CS_VREDRAW | CS_HREDRAW;
+		wcex.style			= CS_VREDRAW | CS_HREDRAW | CS_OWNDC;
 
-		if (!RegisterClassEx(&wcex)) {
+		if (!RegisterClassExA(&wcex)) {
 			//proper logging
 			printf("Could not register class");
 			return;
 		}
-		m_Hwnd = CreateWindow(L"Helltooth window", m_Title.c_str(), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, m_Width, m_Height, 0, 0, 0, 0);
+		m_Hwnd = CreateWindowEx(
+			WS_EX_OVERLAPPEDWINDOW,
+			L"Helltooth window",
+			L"Helltooth window",
+			WS_EX_OVERLAPPEDWINDOW,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT,
+			m_Width,
+			m_Height,
+			0,
+			0,
+			wcex.hInstance,
+			0
+		);
 		if (!m_Hwnd) {
 			DWORD word = GetLastError();
 			printf("Could not create window %i!", word);
@@ -48,14 +58,22 @@ namespace ht { namespace core {
 
 	Window::~Window() {
 		delete m_Context;
+		DestroyWindow(m_Hwnd);
 	}
 
-	void Window::SwapBuffers() {
+	void Window::Update() {
 		MSG msg;
+		if (msg.message == WM_DESTROY)
+			m_ShouldClose = true;
 		if (PeekMessage(&msg, m_Hwnd, 0, 0, PM_REMOVE)) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+		m_Context->Update();
+	}
+
+	void Window::Clear() {
+		m_Context->Clear();
 	}
 
 	void Window::SetVisible(bool visible) {

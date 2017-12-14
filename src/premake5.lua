@@ -51,7 +51,7 @@ project ("Helltooth")
         "engine/**.cpp",
     }
     location "../Solution/Helltooth/"
-    sysincludedirs {
+    includedirs {
 		"$(SolutionDir)../src/engine/"
 	}
 

@@ -1,3 +1,4 @@
+#pragma once
 #include <Windows.h>
 #include <stdio.h>
 
@@ -11,6 +12,9 @@ namespace ht { namespace graphics {
 	public:
 		Context(HWND hwnd);
 		~Context();
+
+		void Update();
+		void Clear();
 	};
 
 } }
