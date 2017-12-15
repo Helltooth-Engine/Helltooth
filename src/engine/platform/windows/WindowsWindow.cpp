@@ -13,7 +13,7 @@ namespace ht { namespace core {
 	Window::Window(std::wstring title, int width, int height)
 		:m_Title(title), m_Width(width), m_Height(height) {
 
-		WNDCLASSEXA wcex;
+		WNDCLASSEX wcex;
 		wcex.cbSize			= sizeof(WNDCLASSEX);
 		wcex.lpfnWndProc	= WndProc;
 		wcex.cbClsExtra		= 0;
@@ -22,18 +22,18 @@ namespace ht { namespace core {
 		wcex.hIcon			= nullptr;
 		wcex.hCursor		= nullptr;
 		wcex.hbrBackground	= 0;
-		wcex.lpszClassName	= "Helltooth window";
+		wcex.lpszClassName	= L"Helltooth window";
 		wcex.lpszMenuName	= 0;
 		wcex.hIconSm		= 0;
 		wcex.style			= CS_VREDRAW | CS_HREDRAW | CS_OWNDC;
 
-		if (!RegisterClassExA(&wcex)) {
+		if (!RegisterClassEx(&wcex)) {
 			DWORD word = GetLastError();
 			HT_FATAL("[Window] Could not register window class, %d!", word);
 			return;
 		}
 		m_Hwnd = CreateWindow(L"Helltooth window", m_Title.c_str(),
-			WS_EX_OVERLAPPEDWINDOW , CW_USEDEFAULT, CW_USEDEFAULT, m_Width, m_Height, 0, 0, wcex.hInstance, 0);
+			WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, m_Width, m_Height, 0, 0, wcex.hInstance, 0);
 
 
 		if (!m_Hwnd) {

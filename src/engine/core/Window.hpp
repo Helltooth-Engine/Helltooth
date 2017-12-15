@@ -16,9 +16,10 @@ namespace ht { namespace core {
 		bool m_IsVisible;
 		unsigned int m_VSync;
 		std::wstring m_Title;
-		HWND m_Hwnd;
 		graphics::Context* m_Context;
-
+#ifdef HT_WINDOWS
+		HWND m_Hwnd;
+#endif
 		bool m_ShouldClose = false;
 
 	public:
