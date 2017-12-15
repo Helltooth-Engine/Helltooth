@@ -4,17 +4,21 @@
 	if((PROC)function == (PROC)0 || (PROC)function == (PROC)-1) return false;
 
 
-HT_CPP_FUNCTION_POINTER(glClear);
-HT_CPP_FUNCTION_POINTER(glClearColor);
-HT_CPP_FUNCTION_POINTER(glBegin);
-HT_CPP_FUNCTION_POINTER(glEnd);
 
 bool GLInit() {
-	HT_GET_GL_FUNCTION(glClear)
-	HT_GET_GL_FUNCTION(glClearColor)
 
-	HT_GET_GL_FUNCTION(glBegin)
-	HT_GET_GL_FUNCTION(glEnd)
 
+	return true;
+}
+
+
+PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB;
+PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB;
+
+bool wglInit() {
+
+	wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC)wglGetProcAddress("wglChoosePixelFormatARB");
+	wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
+	
 	return true;
 }

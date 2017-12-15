@@ -4,7 +4,6 @@
 
 #include <stdio.h>
 #include <string>
-
 #include "graphics/Context.hpp"
 
 namespace ht { namespace core {
@@ -14,14 +13,14 @@ namespace ht { namespace core {
 		int m_Width, m_Height;
 		bool m_IsVisible;
 		unsigned int m_VSync;
-		std::string m_Title;
+		std::wstring m_Title;
 		HWND m_Hwnd;
 		graphics::Context* m_Context;
 
 		bool m_ShouldClose = false;
 
 	public:
-		Window(const std::string& title, int width, int height);
+		Window(std::wstring title, int width, int height);
 		~Window();
 
 		void SetVisible(bool visible);

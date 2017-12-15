@@ -1,6 +1,11 @@
 #ifdef HT_OPENGL
 #pragma once
 #include <Windows.h>
+#include <stdio.h>
+
+#define HT_FUNCTION_NAME(function) PFN##function##PROC
+#define HT_CREATE_FUNCTION_POINTER(returntype, function, ...) typedef returntype(APIENTRY * HT_FUNCTION_NAME(function)) (__VA_ARGS__); \
+		extern HT_FUNCTION_NAME(function) function
 
 typedef unsigned int GLenum;
 typedef unsigned int GLbitfield;
@@ -39,16 +44,30 @@ typedef void GLvoid;
 //Buffer bits
 #define GL_COLOR_BUFFER_BIT 0x00004000
 #define GL_DEPTH_BUFFER_BIT 0x00000100
-#define HT_FUNCTION_NAME(function) PFN##function##PROC
-#define HT_CREATE_FUNCTION_POINTER(returntype, function, ...) typedef returntype(APIENTRY * HT_FUNCTION_NAME(function)) (__VA_ARGS__); \
-		extern HT_FUNCTION_NAME(function) function
 
-
-HT_CREATE_FUNCTION_POINTER(void, glClearColor, GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
-HT_CREATE_FUNCTION_POINTER(void, glClear, GLbitfield mask);
-HT_CREATE_FUNCTION_POINTER(void, glBegin, GLenum mode);
-HT_CREATE_FUNCTION_POINTER(void, glEnd, void);
+#define GL_VERSION 0x1F02
 
 extern bool GLInit();
+
+#define WGL_DRAW_TO_WINDOW_ARB            0x2001
+#define WGL_SUPPORT_OPENGL_ARB            0x2010
+#define WGL_DOUBLE_BUFFER_ARB             0x2011
+#define WGL_PIXEL_TYPE_ARB                0x2013
+#define WGL_TYPE_RGBA_ARB                 0x202B
+#define WGL_COLOR_BITS_ARB                0x2014
+#define WGL_DEPTH_BITS_ARB                0x2022
+#define WGL_STENCIL_BITS_ARB              0x2023
+#define WGL_CONTEXT_MAJOR_VERSION_ARB     0x2091
+#define WGL_CONTEXT_MINOR_VERSION_ARB     0x2092
+#define WGL_CONTEXT_LAYER_PLANE_ARB       0x2093
+#define WGL_CONTEXT_FLAGS_ARB             0x2094
+
+typedef BOOL(WINAPI * PFNWGLCHOOSEPIXELFORMATARBPROC) (HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats);
+typedef HGLRC(WINAPI * PFNWGLCREATECONTEXTATTRIBSARBPROC) (HDC hDC, HGLRC hShareContext, const int *attribList);
+
+extern PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB;
+extern PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB;
+
+extern bool wglInit();
 
 #endif // HT_OPENGL

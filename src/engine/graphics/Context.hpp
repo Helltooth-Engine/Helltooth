@@ -10,7 +10,7 @@ namespace ht { namespace graphics {
 		HDC m_DeviceContext;
 
 	public:
-		Context(HWND hwnd);
+		Context(HWND& hwnd);
 		~Context();
 
 		void Update();
