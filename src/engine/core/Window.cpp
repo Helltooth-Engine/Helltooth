@@ -6,7 +6,7 @@ namespace ht { namespace core {
 	LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (msg) {
 		}
-		return DefWindowProcA(hwnd, msg, wParam, lParam);
+		return DefWindowProc(hwnd, msg, wParam, lParam);
 	}
 
 	Window::Window(std::wstring title, int width, int height)
@@ -56,9 +56,9 @@ namespace ht { namespace core {
 		MSG msg;
 		if (msg.message == WM_DESTROY)
 			m_ShouldClose = true;
-		if (PeekMessageA(&msg, m_Hwnd, 0, 0, PM_REMOVE)) {
+		if (PeekMessage(&msg, m_Hwnd, 0, 0, PM_REMOVE)) {
 			TranslateMessage(&msg);
-			DispatchMessageA(&msg);
+			DispatchMessage(&msg);
 		}
 		m_Context->Update();
 	}
