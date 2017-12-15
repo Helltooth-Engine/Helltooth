@@ -1,6 +1,6 @@
 #pragma once
 #include <Windows.h>
-#include <stdio.h>
+#include "utils/Log.hpp"
 
 #ifdef HT_DIRECTX
 #include <d3d11.h>

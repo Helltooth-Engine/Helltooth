@@ -4,7 +4,9 @@
 
 #include <stdio.h>
 #include <string>
+
 #include "graphics/Context.hpp"
+#include "utils/Log.hpp"
 
 namespace ht { namespace core {
 

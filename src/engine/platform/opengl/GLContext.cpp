@@ -20,8 +20,8 @@ namespace ht { namespace graphics {
 		m_DeviceContext = GetDC(hwnd);
 		int pixelFormat = ChoosePixelFormat(m_DeviceContext, &pfd);
 		if (pixelFormat == 0) {
-			//TODO: proper logging
-			printf("Could not choose pixel format.");
+			DWORD err = GetLastError();
+			HT_FATAL("[GLContext] Could not choose pixel format, %d!", err);
 			return;
 		}
 
@@ -29,7 +29,7 @@ namespace ht { namespace graphics {
 		HGLRC fakeContext = wglCreateContext(m_DeviceContext);
 		if (!wglMakeCurrent(m_DeviceContext, fakeContext)) {
 			DWORD err = GetLastError();
-			printf("Could not create context, %d !", err);
+			HT_FATAL("[GLContext] Could not create context, %d !", err);
 			return;
 		}
 
@@ -45,7 +45,7 @@ namespace ht { namespace graphics {
 		m_Context = wglCreateContextAttribsARB(m_DeviceContext, NULL, attribs);
 		if (!m_Context) {
 			DWORD err = GetLastError();
-			printf("Could not create context, %d !", err);
+			HT_FATAL("[GLContext] Could not create context, %d !", err);
 			return;
 		}
 
@@ -53,15 +53,18 @@ namespace ht { namespace graphics {
 		wglDeleteContext(fakeContext);
 		if (!wglMakeCurrent(m_DeviceContext, m_Context)) {
 			DWORD err = GetLastError();
-			printf("Could not create context, %d !", err);
+			HT_FATAL("[GLContext] Could not make context current, %d !", err);
 			return;
 		}
 		
-		printf("Gl version: %s", glGetString(GL_VERSION));
+		HT_WARN("GL version: %s", (const char*)glGetString(GL_VERSION));
+		HT_WARN("GL vendor: %s", (const char*)glGetString(GL_VENDOR));
+		HT_WARN("GL renderer: %s", (const char*)glGetString(GL_RENDERER));
+		HT_WARN("GL shading language version: %s", (const char*)glGetString(GL_SHADING_LANGUAGE_VERSION));
 
 		if (!GLInit()) {
 			DWORD err = GetLastError(); 
-			printf("Could not initialize GL, %d!", err);
+			HT_FATAL("[GLContext] Could not initialize GL, %d!", err);
 		}
 	}
 

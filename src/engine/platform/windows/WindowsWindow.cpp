@@ -1,4 +1,5 @@
-#include "Window.hpp"
+#ifdef HT_WINDOWS
+#include "core/Window.hpp"
 
 namespace ht { namespace core {
 	using namespace graphics;
@@ -27,8 +28,8 @@ namespace ht { namespace core {
 		wcex.style			= CS_VREDRAW | CS_HREDRAW | CS_OWNDC;
 
 		if (!RegisterClassExA(&wcex)) {
-			//proper logging
-			printf("Could not register class");
+			DWORD word = GetLastError();
+			HT_FATAL("[Window] Could not register window class, %d!", word);
 			return;
 		}
 		m_Hwnd = CreateWindow(L"Helltooth window", m_Title.c_str(),
@@ -37,7 +38,8 @@ namespace ht { namespace core {
 
 		if (!m_Hwnd) {
 			DWORD word = GetLastError();
-			printf("Could not create window %i!", word);
+			HT_FATAL("[Window] Could not create window, %d!", word);
+			return;
 
 		}
 		SetVisible(true);
@@ -73,3 +75,4 @@ namespace ht { namespace core {
 	}
 
 } }
+#endif

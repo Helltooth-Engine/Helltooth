@@ -24,6 +24,15 @@ function setConfigurationFilters()
 			"HT_DIRECTX",
 			"HT_RELEASE"
 		}
+
+	filter {"platforms:x86"}
+		defines {
+			"HT_WINDOWS"
+		}
+	filter {"platforms:x64"}
+		defines {
+			"HT_WINDOWS"
+		}
 	filter {}
 end
 

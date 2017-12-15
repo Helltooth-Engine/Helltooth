@@ -3,5 +3,6 @@
 #error ("No Graphics API defined!")
 #endif
 
-#include "platform/opengl/GL.hpp"
 #include "core/Window.hpp"
+
+#include "utils/Log.hpp"
