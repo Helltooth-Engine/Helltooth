@@ -2,7 +2,7 @@
 #include "graphics/Context.hpp"
 #include "platform/opengl/GL.hpp"
 
-#include <gl/GL.h>
+
 
 namespace ht { namespace graphics {
 
@@ -39,7 +39,11 @@ namespace ht { namespace graphics {
 		{
 			//WGL_CONTEXT_MAJOR_VERSION_ARB, 4,
 			//WGL_CONTEXT_MINOR_VERSION_ARB, 6,
+#ifdef HT_DEBUG
+			WGL_CONTEXT_FLAGS_ARB, WGL_CONTEXT_DEBUG_BIT_ARB,
+#else
 			WGL_CONTEXT_FLAGS_ARB, 0,
+#endif
 			0
 		};
 		m_Context = wglCreateContextAttribsARB(m_DeviceContext, NULL, attribs);

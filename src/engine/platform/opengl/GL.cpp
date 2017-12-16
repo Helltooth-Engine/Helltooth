@@ -1,3 +1,4 @@
+#ifdef HT_OPENGL
 #include "GL.hpp"
 #define HT_CPP_FUNCTION_POINTER(function) HT_FUNCTION_NAME(function) function
 #define HT_GET_GL_FUNCTION(function) function = ( HT_FUNCTION_NAME(function) )wglGetProcAddress(#function); \
@@ -22,3 +23,4 @@ bool wglInit() {
 	
 	return true;
 }
+#endif

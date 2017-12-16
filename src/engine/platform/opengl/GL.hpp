@@ -1,7 +1,7 @@
 #ifdef HT_OPENGL
 #pragma once
 #include <Windows.h>
-#include <stdio.h>
+#include <gl/GL.h>
 
 #define HT_FUNCTION_NAME(function) PFN##function##PROC
 #define HT_CREATE_FUNCTION_POINTER(returntype, function, ...) typedef returntype(APIENTRY * HT_FUNCTION_NAME(function)) (__VA_ARGS__); \
@@ -63,6 +63,7 @@ extern bool GLInit();
 #define WGL_CONTEXT_MINOR_VERSION_ARB     0x2092
 #define WGL_CONTEXT_LAYER_PLANE_ARB       0x2093
 #define WGL_CONTEXT_FLAGS_ARB             0x2094
+#define WGL_CONTEXT_DEBUG_BIT_ARB         0x00000001
 
 typedef BOOL(WINAPI * PFNWGLCHOOSEPIXELFORMATARBPROC) (HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats);
 typedef HGLRC(WINAPI * PFNWGLCREATECONTEXTATTRIBSARBPROC) (HDC hDC, HGLRC hShareContext, const int *attribList);

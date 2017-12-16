@@ -19,6 +19,8 @@ namespace ht { namespace graphics {
 		IDXGISwapChain* m_SwapChain;
 		ID3D11Device* m_Device;
 		ID3D11DeviceContext* m_Context;
+		ID3D11RenderTargetView* m_RenderTarget;
+		ID3D11DepthStencilView* m_DepthStencilView;
 #endif
 
 	public:
