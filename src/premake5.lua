@@ -77,9 +77,26 @@ project ("Sandbox")
     location "../Solution/Sandbox/"
     dependson "Helltooth"
     links {
-    	"Opengl32",
 		"Helltooth.lib",
 	}
+	filter {"configurations:OpenGL-Debug"}
+		links {
+			"opengl32"
+		}
+	filter {"configurations:OpenGL-Release"}
+		links {
+			"opengl32"
+		}
+	filter {"configurations:DirectX-Debug"}
+		links {
+			"D3D11"
+		}
+	filter {"configurations:DirectX-Release"}
+		links {
+			"D3D11"
+		}
+	filter {}
+	
 	sysincludedirs {
 		"$(SolutionDir)../src/engine/"
 	}
