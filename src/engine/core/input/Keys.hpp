@@ -2,6 +2,16 @@
 
 #ifdef HT_WINDOWS
 
+#define HT_MOUSE_LBUTTON		1
+#define HT_MOUSE_RBUTTON		2
+#define HT_MOUSE_BUTTON3		3
+#define HT_MOUSE_BUTTON4		4
+#define HT_MOUSE_BUTTON5		5
+#define HT_MOUSE_BUTTON6		6
+#define HT_MOUSE_BUTTON7		7
+#define HT_MOUSE_BUTTON8		8
+#define HT_MOUSE_BUTTON9		9
+
 #define HT_KEY_UNKNOWN			-1
 #define HT_KEY_SPACE			32
 #define HT_KEY_APOSTROPHE		39 /* ' */
