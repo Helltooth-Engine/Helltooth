@@ -4,8 +4,15 @@
 namespace ht { namespace core {
 	using namespace graphics;
 
-	LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	Window* Window::s_Window = nullptr;
+
+	LRESULT Window::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		Window* window = Window::GetWindow();
 		switch (msg) {
+		case WM_CLOSE:
+			window->m_ShouldClose = true;
+			break;
+
 		}
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 	}
@@ -46,18 +53,18 @@ namespace ht { namespace core {
 		SetFocus(m_Hwnd);
 		UpdateWindow(m_Hwnd);
 		m_Context = new Context(m_Hwnd);
+		HT_ASSERT(s_Window == nullptr, "Multiple windows not supported!");
 
 	}
 
 	Window::~Window() {
+		s_Window = nullptr;
 		delete m_Context;
 		DestroyWindow(m_Hwnd);
 	}
 
 	void Window::Update() {
 		MSG msg;
-		if (msg.message == WM_DESTROY)
-			m_ShouldClose = true;
 		if (PeekMessage(&msg, m_Hwnd, 0, 0, PM_REMOVE)) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
