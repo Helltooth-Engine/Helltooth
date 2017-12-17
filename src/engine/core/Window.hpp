@@ -1,12 +1,18 @@
 #pragma once
+#ifdef HT_WINDOWS
 #include <Windows.h>
+#include <windowsx.h>
 #include <tchar.h>
-
+#endif
 #include <stdio.h>
 #include <string>
 #include <vector>
 
+#include "input/Event.hpp"
+#include "input/EventDispatcher.hpp"
+
 #include "graphics/Context.hpp"
+
 #include "utils/Log.hpp"
 
 namespace ht { namespace core {
