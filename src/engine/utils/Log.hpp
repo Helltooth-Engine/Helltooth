@@ -61,26 +61,17 @@
 #define _HT_MSG(format, ...)
 #endif
 #ifdef HT_DEBUG
-#define HT_ASSERT(condition, statement) if(!(condition))  {\
+#define HT_ASSERT(condition, statement) if(condition)  {\
 			HT_FATAL("*******************"); \
 			HT_FATAL("ASSERTION FAILED"); \
-			HT_FATAL("Condition: %s, ", #condition, statement); \
-			HT_FATAL("File: %s, line: %d", __FILE__, __LINE__); \
-			HT_FATAL("*******************"); \
-			__debugbreak(); \
-		}
-
-#define HT_ASSERT(condition) if(!(condition))  {\
-			HT_FATAL("*******************"); \
-			HT_FATAL("ASSERTION FAILED"); \
-			HT_FATAL("Condition: %s, ", #condition); \
+			HT_FATAL("Condition: %s", #condition); \
+			HT_FATAL("%s", statement); \
 			HT_FATAL("File: %s, line: %d", __FILE__, __LINE__); \
 			HT_FATAL("*******************"); \
 			__debugbreak(); \
 		}
 #else
 #define HT_ASSERT(condition, statement)
-#define HT_ASSERT(condition)
 #endif
 namespace ht { namespace utils {
 #ifdef HT_WINDOWS
