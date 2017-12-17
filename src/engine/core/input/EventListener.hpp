@@ -12,15 +12,15 @@ namespace ht { namespace core {
 	public:
 		EventListener(utils::String name) : m_Name(name) {}
 
-		virtual void OnMove(float x, float y);
-		virtual void OnPress(float x, float y);
-		virtual void OnRelease(float x, float y);
+		virtual bool OnMove(float x, float y);
+		virtual bool OnPress(float x, float y);
+		virtual bool OnRelease(float x, float y);
 
-		virtual void OnScroll(float xOffset);
+		virtual bool OnScroll(float xOffset);
 
-		virtual void OnKeyPress(int key, unsigned short modifier);
-		virtual void OnKeyRepeat(int key, unsigned short modifier);
-		virtual void OnKeyRelease(int key);
+		virtual bool OnKeyPress(int key, unsigned short modifier);
+		virtual bool OnKeyRepeat(int key, unsigned short modifier);
+		virtual bool OnKeyRelease(int key);
 	};
 
 
