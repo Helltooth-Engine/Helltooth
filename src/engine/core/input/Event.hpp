@@ -45,7 +45,7 @@ namespace ht { namespace core {
 			struct {
 				int key;
 				State state;
-				Modifier modifiers;
+				int modifiers;
 			} m_Key;
 		};
 
@@ -56,11 +56,6 @@ namespace ht { namespace core {
 			m_Mouse.mouseButton = -1;
 			m_Mouse.mouseButtonState = State::UNKNOWN;
 		}
-
-		bool HasModifier(Modifier modifier) const {
-			HT_ASSERT(m_EventType != EventType::KEYBOARD, "[Event] Can't check modifier if event is not keyboard type.");
-		}
-
 	};
 
 } }
