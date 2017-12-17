@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <utility>
+#include <intrin.h>
 
 #define HT_LEVEL_FATAL			0x04
 #define HT_LEVEL_ERROR			0x0C
@@ -59,7 +60,28 @@
 #define HT_MSG(format, ...)
 #define _HT_MSG(format, ...)
 #endif
+#ifdef HT_DEBUG
+#define HT_ASSERT(condition, statement) if(!(condition))  {\
+			HT_FATAL("*******************"); \
+			HT_FATAL("ASSERTION FAILED"); \
+			HT_FATAL("Condition: %s, ", #condition, statement); \
+			HT_FATAL("File: %s, line: %d", __FILE__, __LINE__); \
+			HT_FATAL("*******************"); \
+			__debugbreak(); \
+		}
 
+#define HT_ASSERT(condition) if(!(condition))  {\
+			HT_FATAL("*******************"); \
+			HT_FATAL("ASSERTION FAILED"); \
+			HT_FATAL("Condition: %s, ", #condition); \
+			HT_FATAL("File: %s, line: %d", __FILE__, __LINE__); \
+			HT_FATAL("*******************"); \
+			__debugbreak(); \
+		}
+#else
+#define HT_ASSERT(condition, statement)
+#define HT_ASSERT(condition)
+#endif
 namespace ht { namespace utils {
 #ifdef HT_WINDOWS
 	template<typename First, typename ... Args>
