@@ -12,6 +12,7 @@ namespace ht { namespace core {
 #define HT_MAX_KEYBOARD_KEYS 65535
 
 	enum class Modifier {
+		NONE = 0x0,
 		SHIFT = 0x1,
 		CTRL = 0x10,
 		ALT = 0x100,
@@ -24,19 +25,27 @@ namespace ht { namespace core {
 		KEYBOARD = 2
 	};
 
+	enum class State {
+		UNKNOWN = -1,
+		NONE = 0,
+		RELEASED = 1,
+		PRESSED = 2,
+		REPEAT = 3,
+	};
+
 	struct Event {
 		EventType m_EventType;
 		union {
 			struct {
 				float x, y;
 				char mouseButton;
-				char mouseButtonState;
+				State mouseButtonState;
 			} m_Mouse;
 
 			struct {
-				char keyboard;
-				char state;
-				int modifiers;
+				int key;
+				State state;
+				Modifier modifiers;
 			} m_Key;
 		};
 
@@ -45,7 +54,7 @@ namespace ht { namespace core {
 			m_Mouse.x = -1.f;
 			m_Mouse.y = -1.f;
 			m_Mouse.mouseButton = -1;
-			m_Mouse.mouseButtonState - 1;
+			m_Mouse.mouseButtonState = State::UNKNOWN;
 		}
 
 		bool HasModifier(Modifier modifier) const {
