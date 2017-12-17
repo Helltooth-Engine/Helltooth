@@ -45,7 +45,7 @@ namespace ht { namespace core {
 			struct {
 				int key;
 				State state;
-				int modifiers;
+				unsigned short modifiers;
 			} m_Key;
 		};
 
