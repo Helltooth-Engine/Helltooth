@@ -6,16 +6,16 @@
 #define HT_LEVEL_FATAL			0x04
 #define HT_LEVEL_ERROR			0x0C
 #define HT_LEVEL_WARNING		0x0E
-#define HT_LEVEL_DEBUG			0x0F
+#define HT_LEVEL_INFO			0x0F
 #define HT_LEVEL_MSG			0x07
 
 #define	HT_LOG_LEVEL_FATAL		0
 #define	HT_LOG_LEVEL_ERROR		1
 #define	HT_LOG_LEVEL_WARNING	2
-#define	HT_LOG_LEVEL_DEBUG		3 
+#define	HT_LOG_LEVEL_INFO		3 
 #define	HT_LOG_LEVEL_MSG		4	
 
-#ifdef HT_DEBUG && !defined(HT_LOG_LEVEL)
+#if defined(HT_DEBUG) && !defined(HT_LOG_LEVEL)
 #	define HT_LOG_LEVEL 4
 #else
 #	define HT_LOG_LEVEL 2
@@ -45,12 +45,12 @@
 #define _HT_WARN(format, ...)
 #endif
 
-#if HT_LOG_LEVEL_DEBUG <= HT_LOG_LEVEL
-#define HT_DEBUG(format, ...) ht::utils::Log(HT_LEVEL_DEBUG, true, format, __VA_ARGS__)
-#define _HT_DEBUG(format, ...) ht::utils::Log(HT_LEVEL_DEBUG, false, format, __VA_ARGS__)
+#if HT_LOG_LEVEL_INFO <= HT_LOG_LEVEL
+#define HT_INFO(format, ...) ht::utils::Log(HT_LEVEL_INFO, true, format, __VA_ARGS__)
+#define _HT_INFO(format, ...) ht::utils::Log(HT_LEVEL_INFO, false, format, __VA_ARGS__)
 #else
-#define HT_DEBUG(format, ...)
-#define _HT_DEBUG(format, ...)
+#define HT_INFO(format, ...)
+#define _HT_INFO(format, ...)
 #endif
 
 #if HT_LOG_LEVEL_MSG <= HT_LOG_LEVEL

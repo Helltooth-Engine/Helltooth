@@ -61,7 +61,7 @@ namespace ht { namespace core {
 
 	void EventDispatcher::Remove(EventListener* listener) {
 		HT_ASSERT(listener == nullptr, "EventListener cannot be nullptr!");
-		for (int i = 0; i < s_EventListeners.size(); i++)
+		for (unsigned int i = 0; i < s_EventListeners.size(); i++)
 			if (s_EventListeners[i] == listener) {
 				s_EventListeners.erase(s_EventListeners.begin() + i);
 				break;
