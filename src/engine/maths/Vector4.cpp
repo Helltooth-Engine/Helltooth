@@ -4,8 +4,8 @@ namespace ht { namespace maths {
 
 	Vector4::Vector4() : x(0), y(0), z(0), w(0) {}
 	Vector4::Vector4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
-	Vector4::Vector4(Vector2 xy, float z = 0.0f, float w = 0.0f) : x(xy.x), y(xy.y), z(z), w(w) {}
-	Vector4::Vector4(Vector3 xyz, float w = 0.0f) : x(xyz.x), y(xyz.y), z(xyz.z), w(w) {}
+	Vector4::Vector4(Vector2 xy, float z, float w) : x(xy.x), y(xy.y), z(z), w(w) {}
+	Vector4::Vector4(Vector3 xyz, float w) : x(xyz.x), y(xyz.y), z(xyz.z), w(w) {}
 
 	Vector4 operator+(Vector4 left, const Vector4& right) {
 		left.x += right.x;

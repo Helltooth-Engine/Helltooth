@@ -2,7 +2,7 @@
 
 namespace ht { namespace maths {
 
-	Matrix4::Matrix4(float diagonal = 0.0f) {
+	Matrix4::Matrix4(float diagonal) {
 		memset(elements, 0, 4 * 4 * sizeof(float));
 		
 		if (diagonal) {

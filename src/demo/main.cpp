@@ -13,9 +13,10 @@ int main() {
 
 	Player player = Player();
 	EventDispatcher::Add((EventListener*)&player);
-
-	//glClearColor(0.3f, 0.4f, 0.7f, 1.0f);
-	while (!window.WindowShouldClose()) {
+#ifdef HT_OPENGL
+	glClearColor(0.3f, 0.4f, 0.7f, 1.0f);
+#endif
+	while (!window.ShouldClose()) {
 		window.Clear();
 		window.Update();
 	}

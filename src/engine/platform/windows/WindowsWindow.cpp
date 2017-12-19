@@ -8,6 +8,7 @@ namespace ht { namespace core {
 
 	LRESULT Window::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		Window* window = Window::GetWindow();
+
 		Event *e = new Event();
 		bool inputEvent = false;
 		switch (msg) {
@@ -127,13 +128,15 @@ namespace ht { namespace core {
 		SetFocus(m_Hwnd);
 		UpdateWindow(m_Hwnd);
 		HT_ASSERT(s_Window != nullptr, "Multiple windows not supported!");
+		s_Window = this;
 		m_Context = new Context(m_Hwnd);
 	}
 
 	Window::~Window() {
-		s_Window = nullptr;
-		delete m_Context;
 		DestroyWindow(m_Hwnd);
+		m_Hwnd = nullptr; 
+		delete m_Context;
+		s_Window = nullptr;
 	}
 
 	void Window::Update() {

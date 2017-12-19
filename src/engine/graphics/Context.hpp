@@ -15,6 +15,7 @@ namespace ht { namespace graphics {
 		HDC m_DeviceContext;
 #ifdef HT_OPENGL
 		HGLRC m_Context;
+		HWND m_Hwnd;
 #elif defined(HT_DIRECTX)
 		IDXGISwapChain* m_SwapChain;
 		ID3D11Device* m_Device;

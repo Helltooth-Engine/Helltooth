@@ -44,9 +44,10 @@ namespace ht { namespace core {
 		void Update();
 		void Clear();
 
+
 		bool IsHWND(HWND other) { return m_Hwnd == other; }
 
-		inline bool WindowShouldClose() { return m_ShouldClose; }
+		inline bool ShouldClose() { return m_ShouldClose; }
 
 		static Window* GetWindow() { return s_Window; }
 	};

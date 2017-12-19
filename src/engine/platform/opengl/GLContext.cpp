@@ -4,7 +4,8 @@
 
 namespace ht { namespace graphics {
 
-	Context::Context(HWND& hwnd) {
+	Context::Context(HWND& hwnd)
+		:m_Hwnd(hwnd) {
 		PIXELFORMATDESCRIPTOR pfd;
 		ZeroMemory(&pfd, sizeof(PIXELFORMATDESCRIPTOR));
 		pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR);
@@ -73,6 +74,7 @@ namespace ht { namespace graphics {
 	Context::~Context() {
 		wglMakeCurrent(m_DeviceContext, NULL);
 		wglDeleteContext(m_Context);
+		ReleaseDC(m_Hwnd, m_DeviceContext);
 	}
 
 	void Context::Update() {
