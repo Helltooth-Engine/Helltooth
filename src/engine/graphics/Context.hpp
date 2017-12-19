@@ -28,6 +28,11 @@ namespace ht { namespace graphics {
 		Context(HWND& hwnd);
 		~Context();
 
+#ifdef HT_DIRECTX
+		inline ID3D11Device* GetDevice() { return m_Device; }
+		inline ID3D11DeviceContext* GetDeviceContext() { return m_Context; }
+#endif
+
 		void Update();
 		void Clear();
 	};
