@@ -44,12 +44,17 @@ namespace ht { namespace core {
 		void Update();
 		void Clear();
 
-
 		bool IsHWND(HWND other) { return m_Hwnd == other; }
 
 		inline bool ShouldClose() { return m_ShouldClose; }
+		inline graphics::Context* GetContext() { return m_Context; }
 
 		static Window* GetWindow() { return s_Window; }
+
+#ifdef HT_DIRECTX
+		inline ID3D11Device* GetDevice() { return m_Context->GetDevice(); }
+		inline ID3D11DeviceContext* GetDeviceContext() { return m_Context->GetDeviceContext(); }
+#endif
 	};
 
 } }
