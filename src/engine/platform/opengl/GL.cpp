@@ -5,9 +5,21 @@
 	if((PROC)function == (PROC)0 || (PROC)function == (PROC)-1) return false;
 
 
+HT_CPP_FUNCTION_POINTER(glGenBuffers);
+HT_CPP_FUNCTION_POINTER(glBindBuffer);
+HT_CPP_FUNCTION_POINTER(glBufferData);
+HT_CPP_FUNCTION_POINTER(glEnableVertexAttribArray);
+HT_CPP_FUNCTION_POINTER(glDisableVertexAttribArray);
+HT_CPP_FUNCTION_POINTER(glVertexAttribPointer);
 
 bool GLInit() {
 
+	HT_GET_GL_FUNCTION(glGenBuffers);
+	HT_GET_GL_FUNCTION(glBindBuffer);
+	HT_GET_GL_FUNCTION(glBufferData);
+	HT_GET_GL_FUNCTION(glEnableVertexAttribArray);
+	HT_GET_GL_FUNCTION(glDisableVertexAttribArray);
+	HT_GET_GL_FUNCTION(glVertexAttribPointer);
 
 	return true;
 }

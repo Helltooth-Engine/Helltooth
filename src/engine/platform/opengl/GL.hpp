@@ -10,6 +10,7 @@
 typedef unsigned int GLenum;
 typedef unsigned int GLbitfield;
 typedef unsigned int GLuint;
+typedef long long GLsizeiptr;
 typedef int GLint;
 typedef int GLsizei;
 typedef unsigned char GLboolean;
@@ -31,6 +32,16 @@ typedef void GLvoid;
 #define GL_TRUE 1
 #define GL_ONE 1
 
+//Types
+#define GL_BYTE 0x1400
+#define GL_UNSIGNED_BYTE 0x1401
+#define GL_SHORT 0x1402
+#define GL_UNSIGNED_SHORT 0x1403
+#define GL_INT 0x1404
+#define GL_UNSIGNED_INT 0x1405
+#define GL_FLOAT 0x1406
+#define GL_DOUBLE 0x140A
+
 //Draw modes
 #define GL_LINES 0x0001
 #define GL_LINE_LOOP 0x0002
@@ -48,6 +59,19 @@ typedef void GLvoid;
 #define GL_VERSION 0x1F02
 
 #define GL_SHADING_LANGUAGE_VERSION 0x8B8C
+
+//Buffers
+#define GL_ARRAY_BUFFER 0x8892
+#define GL_ELEMENT_ARRAY_BUFFER 0x8893
+#define GL_STATIC_DRAW 0x88E4
+#define GL_DYNAMIC_DRAW 0x88E8
+
+HT_CREATE_FUNCTION_POINTER(void, glGenBuffers, GLsizei n, GLuint* buffers);
+HT_CREATE_FUNCTION_POINTER(void, glBindBuffer, GLenum target, GLuint buffer);
+HT_CREATE_FUNCTION_POINTER(void, glEnableVertexAttribArray, GLuint index);
+HT_CREATE_FUNCTION_POINTER(void, glDisableVertexAttribArray, GLuint index);
+HT_CREATE_FUNCTION_POINTER(void, glBufferData, GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage);
+HT_CREATE_FUNCTION_POINTER(void, glVertexAttribPointer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* pointer);
 
 extern bool GLInit();
 
