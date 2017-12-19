@@ -4,7 +4,7 @@ namespace ht { namespace maths {
 
 	Vector3::Vector3() : x(0), y(0), z(0) {}
 	Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
-	Vector3::Vector3(Vector2 xy, float z = 0.0f) : x(xy.x), y(xy.y), z(z) {}
+	Vector3::Vector3(Vector2 xy, float z) : x(xy.x), y(xy.y), z(z) {}
 
 	Vector3 operator+(Vector3 left, const Vector3& right) {
 		left.x += right.x;
