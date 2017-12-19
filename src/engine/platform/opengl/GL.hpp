@@ -72,6 +72,7 @@ HT_CREATE_FUNCTION_POINTER(void, glEnableVertexAttribArray, GLuint index);
 HT_CREATE_FUNCTION_POINTER(void, glDisableVertexAttribArray, GLuint index);
 HT_CREATE_FUNCTION_POINTER(void, glBufferData, GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage);
 HT_CREATE_FUNCTION_POINTER(void, glVertexAttribPointer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* pointer);
+HT_CREATE_FUNCTION_POINTER(void, glDeleteBuffers, GLsizei n, const GLuint* buffers);
 
 extern bool GLInit();
 

@@ -11,6 +11,7 @@ HT_CPP_FUNCTION_POINTER(glBufferData);
 HT_CPP_FUNCTION_POINTER(glEnableVertexAttribArray);
 HT_CPP_FUNCTION_POINTER(glDisableVertexAttribArray);
 HT_CPP_FUNCTION_POINTER(glVertexAttribPointer);
+HT_CPP_FUNCTION_POINTER(glDeleteBuffers);
 
 bool GLInit() {
 
@@ -20,6 +21,7 @@ bool GLInit() {
 	HT_GET_GL_FUNCTION(glEnableVertexAttribArray);
 	HT_GET_GL_FUNCTION(glDisableVertexAttribArray);
 	HT_GET_GL_FUNCTION(glVertexAttribPointer);
+	HT_GET_GL_FUNCTION(glDeleteBuffers);
 
 	return true;
 }
