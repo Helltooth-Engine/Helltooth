@@ -2,8 +2,6 @@
 #include "graphics/Context.hpp"
 #include "platform/opengl/GL.hpp"
 
-
-
 namespace ht { namespace graphics {
 
 	Context::Context(HWND& hwnd) {

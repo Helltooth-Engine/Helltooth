@@ -1,7 +1,7 @@
 #pragma once
 
 #ifdef HT_WINDOWS
-#include <mmintrin.h>
+#include <intrin.h>
 #else
 #error Other platforms not supported.
 #endif
