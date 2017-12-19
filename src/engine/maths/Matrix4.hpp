@@ -24,6 +24,9 @@ namespace ht { namespace maths {
 	public:
 		Matrix4(float diagonal = 0.0f);
 
+		static Matrix4 CreatePerspective(float fieldOfView, float nearPlane, float farPlane, float aspectRatio);
+		static Matrix4 CreateOrthographic(float left, float right, float top, float bottom, float near, float far);
+
 		Matrix4& Translate(float x, float y, float z);
 		Matrix4& Translate(const Vector3& translation);
 

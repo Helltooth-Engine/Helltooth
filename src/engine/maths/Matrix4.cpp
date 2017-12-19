@@ -27,6 +27,33 @@ namespace ht { namespace maths {
 		xmm[3] = _mm_set_ps(elements[3 + 3 * 4], elements[2 + 3 * 4], elements[1 + 3 * 4], elements[0 + 3 * 4]);
 	}
 
+	Matrix4 Matrix4::CreatePerspective(float fieldOfView, float nearPlane, float farPlane, float aspectRatio) {
+		Matrix4 result = Matrix4();
+
+		float tanHalf = tanh(ToRadians(fieldOfView) / 2.0f);
+
+		result[0 + 0 * 4] = 1.0f / (tanHalf * aspectRatio);
+		result[1 + 1 * 4] = 1.0f / tanHalf;
+		result[2 + 2 * 4] = -(farPlane + nearPlane) / (farPlane - nearPlane);
+		result[3 + 2 * 4] = -1.0f;
+		result[2 + 3 * 4] = -(2.0f * farPlane * nearPlane) / (farPlane - nearPlane);
+		result[3 + 3 * 4] = 0.0f;
+
+		return result;
+	}
+
+	Matrix4 Matrix4::CreateOrthographic(float left, float right, float top, float bottom, float near, float far) {
+		Matrix4 result = Matrix4(1.0f);
+
+		result[0 + 0 * 4] = 2.0f / (right - left);
+		result[1 + 1 * 4] = 2.0f / (top - bottom);
+		result[2 + 2 * 4] = 2.0f / (near - far);
+		result[0 + 3 * 4] = (left + right) / (left - right);
+		result[1 + 3 * 4] = (bottom + top) / (bottom - top);
+		result[2 + 3 * 4] = (far + near) / (far - near);
+		
+		return result;
+	}
 
 	Matrix4& Matrix4::Translate(float x, float y, float z) {
 		Matrix4 translationMat4 = Matrix4(1.0f);
