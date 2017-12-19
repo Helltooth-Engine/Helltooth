@@ -57,6 +57,16 @@ namespace ht { namespace graphics {
 		m_Device->CreateDepthStencilView(tmp, &dsd, &m_DepthStencilView);
 		tmp->Release();
 		m_Context->OMSetRenderTargets(1, &m_RenderTarget, m_DepthStencilView);
+		D3D11_VIEWPORT v;
+		v.TopLeftX = 0;
+		v.TopLeftY = 0;
+		v.Width = size.right - size.left;
+		v.Height = size.bottom - size.top;
+		v.MinDepth = 0.0f;
+		v.MaxDepth = 1.0f;
+
+		m_Context->RSSetViewports(1, &v);
+		m_Context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	}
 
 	Context::~Context() {
