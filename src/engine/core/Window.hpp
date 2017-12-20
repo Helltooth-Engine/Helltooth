@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+#include "Internal.hpp"
+
 #include "input/Event.hpp"
 #include "input/EventDispatcher.hpp"
 
@@ -19,9 +21,9 @@ namespace ht { namespace core {
 
 	class Window {
 	private:
-		int m_Width, m_Height;
+		u32 m_Width, m_Height;
 		bool m_IsVisible;
-		unsigned int m_VSync;
+		bool m_VSync;
 		std::wstring m_Title;
 		graphics::Context* m_Context;
 #ifdef HT_WINDOWS
@@ -37,7 +39,7 @@ namespace ht { namespace core {
 		static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	public:
-		Window(std::wstring title, int width, int height);
+		Window(std::wstring title, u32 width, u32 height);
 		~Window();
 
 		void SetVisible(bool visible);

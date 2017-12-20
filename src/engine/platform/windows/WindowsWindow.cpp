@@ -92,7 +92,7 @@ namespace ht { namespace core {
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 	}
 
-	Window::Window(std::wstring title, int width, int height)
+	Window::Window(std::wstring title, u32 width, u32 height)
 		:m_Title(title), m_Width(width), m_Height(height) {
 
 		WNDCLASSEX wcex;
