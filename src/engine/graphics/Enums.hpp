@@ -1,7 +1,8 @@
 #pragma once
 
+#include "core/Internal.hpp"
+
 #if defined(HT_OPENGL)
-#include <gl/GL.h>
 #include "platform/opengl/GL.hpp"
 #elif defined(HT_DIRECTX)
 #include <d3d11.h>
@@ -35,5 +36,7 @@ namespace ht { namespace graphics {
 #error Platform not recognized!
 #endif
 	};
+
+	inline static core::u32 DataTypeSize(DataType type);
 
 } }
