@@ -1,12 +1,15 @@
 #pragma once
 
+#include "core/Internal.hpp"
+
 namespace ht { namespace maths {
+	using namespace core;
 
 	struct Vector2 {
-		float x, y;
+		f32 x, y;
 
 		Vector2();
-		Vector2(float x, float y);
+		Vector2(f32 x, f32 y);
 
 		friend Vector2 operator+(Vector2 left, const Vector2& right);
 		friend Vector2 operator-(Vector2 left, const Vector2& right);
@@ -18,15 +21,15 @@ namespace ht { namespace maths {
 		void operator*=(const Vector2& other);
 		void operator/=(const Vector2& other);
 
-		friend Vector2 operator+(Vector2 left, float right);
-		friend Vector2 operator-(Vector2 left, float right);
-		friend Vector2 operator*(Vector2 left, float right);
-		friend Vector2 operator/(Vector2 left, float right);
+		friend Vector2 operator+(Vector2 left, f32 right);
+		friend Vector2 operator-(Vector2 left, f32 right);
+		friend Vector2 operator*(Vector2 left, f32 right);
+		friend Vector2 operator/(Vector2 left, f32 right);
 
-		void operator+=(float other);
-		void operator-=(float other);
-		void operator*=(float other);
-		void operator/=(float other);
+		void operator+=(f32 other);
+		void operator-=(f32 other);
+		void operator*=(f32 other);
+		void operator/=(f32 other);
 
 		inline bool operator==(const Vector2& other) { return (x == other.x) && (y == other.y); }
 		inline bool operator!=(const Vector2& other) { return (x != other.x) || (y != other.y); }

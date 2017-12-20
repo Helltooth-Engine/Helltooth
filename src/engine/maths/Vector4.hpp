@@ -3,15 +3,18 @@
 #include "Vector2.hpp"
 #include "Vector3.hpp"
 
+#include "core/Internal.hpp"
+
 namespace ht { namespace maths {
+	using namespace core;
 
 	struct Vector4 {
-		float x, y, z, w;
+		f32 x, y, z, w;
 
 		Vector4();
-		Vector4(float x, float y, float z, float w);
-		Vector4(Vector2 xy, float z = 0.0f, float w = 0.0f);
-		Vector4(Vector3 xyz, float w = 0.0f);
+		Vector4(f32 x, f32 y, f32 z, f32 w);
+		Vector4(Vector2 xy, f32 z = 0.0f, f32 w = 0.0f);
+		Vector4(Vector3 xyz, f32 w = 0.0f);
 
 		friend Vector4 operator+(Vector4 left, const Vector4& right);
 		friend Vector4 operator-(Vector4 left, const Vector4& right);
@@ -23,15 +26,15 @@ namespace ht { namespace maths {
 		void operator*=(const Vector4& other);
 		void operator/=(const Vector4& other);
 
-		friend Vector4 operator+(Vector4 left, float right);
-		friend Vector4 operator-(Vector4 left, float right);
-		friend Vector4 operator*(Vector4 left, float right);
-		friend Vector4 operator/(Vector4 left, float right);
+		friend Vector4 operator+(Vector4 left, f32 right);
+		friend Vector4 operator-(Vector4 left, f32 right);
+		friend Vector4 operator*(Vector4 left, f32 right);
+		friend Vector4 operator/(Vector4 left, f32 right);
 
-		void operator+=(float other);
-		void operator-=(float other);
-		void operator*=(float other);
-		void operator/=(float other);
+		void operator+=(f32 other);
+		void operator-=(f32 other);
+		void operator*=(f32 other);
+		void operator/=(f32 other);
 
 		inline bool operator==(const Vector4& other) { return (x == other.x) && (y == other.y) && (z == other.z) && (w == other.w); }
 		inline bool operator!=(const Vector4& other) { return (x != other.x) || (y != other.y) || (z != other.z) || (w != other.w); }

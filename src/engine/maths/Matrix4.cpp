@@ -2,8 +2,8 @@
 
 namespace ht { namespace maths {
 
-	Matrix4::Matrix4(float diagonal) {
-		memset(elements, 0, 4 * 4 * sizeof(float));
+	Matrix4::Matrix4(f32 diagonal) {
+		memset(elements, 0, 4 * 4 * sizeof(f32));
 		
 		if (diagonal) {
 			elements[0 + 0 * 4] = diagonal;
@@ -27,10 +27,10 @@ namespace ht { namespace maths {
 		xmm[3] = _mm_set_ps(elements[3 + 3 * 4], elements[2 + 3 * 4], elements[1 + 3 * 4], elements[0 + 3 * 4]);
 	}
 
-	Matrix4 Matrix4::CreatePerspective(float fieldOfView, float nearPlane, float farPlane, float aspectRatio) {
+	Matrix4 Matrix4::CreatePerspective(f32 fieldOfView, f32 nearPlane, f32 farPlane, f32 aspectRatio) {
 		Matrix4 result = Matrix4();
 
-		float tanHalf = tanh(ToRadians(fieldOfView) / 2.0f);
+		f32 tanHalf = tanh(ToRadians(fieldOfView) / 2.0f);
 
 		result[0 + 0 * 4] = 1.0f / (tanHalf * aspectRatio);
 		result[1 + 1 * 4] = 1.0f / tanHalf;
@@ -42,7 +42,7 @@ namespace ht { namespace maths {
 		return result;
 	}
 
-	Matrix4 Matrix4::CreateOrthographic(float left, float right, float top, float bottom, float near, float far) {
+	Matrix4 Matrix4::CreateOrthographic(f32 left, f32 right, f32 top, f32 bottom, f32 near, f32 far) {
 		Matrix4 result = Matrix4(1.0f);
 
 		result[0 + 0 * 4] = 2.0f / (right - left);
@@ -55,7 +55,7 @@ namespace ht { namespace maths {
 		return result;
 	}
 
-	Matrix4& Matrix4::Translate(float x, float y, float z) {
+	Matrix4& Matrix4::Translate(f32 x, f32 y, f32 z) {
 		Matrix4 translationMat4 = Matrix4(1.0f);
 		translationMat4[0 + 3 * 4] = x;
 		translationMat4[1 + 3 * 4] = y;
@@ -73,7 +73,7 @@ namespace ht { namespace maths {
 		return *this;
 	}
 
-	Matrix4& Matrix4::Scale(float x, float y, float z) {
+	Matrix4& Matrix4::Scale(f32 x, f32 y, f32 z) {
 		Matrix4 scaleMatrix = Matrix4(1.0f);
 		scaleMatrix[0 + 0 * 4] = x;
 		scaleMatrix[1 + 1 * 4] = y;
@@ -91,7 +91,7 @@ namespace ht { namespace maths {
 		return *this;
 	}
 
-	Matrix4& Matrix4::Rotate(float x, float y, float z) {
+	Matrix4& Matrix4::Rotate(f32 x, f32 y, f32 z) {
 		return Rotate(Vector3(x, y, z));
 	}
 
@@ -100,12 +100,12 @@ namespace ht { namespace maths {
 		Matrix4 roty = Matrix4(1.0f);
 		Matrix4 rotz = Matrix4(1.0f);
 
-		float xcos = cosf(ToRadians(rotation.x));
-		float xsin = sinf(ToRadians(rotation.x));
-		float ycos = cosf(ToRadians(rotation.y));
-		float ysin = sinf(ToRadians(rotation.y));
-		float zcos = cosf(ToRadians(rotation.z));
-		float zsin = sinf(ToRadians(rotation.z));
+		f32 xcos = cosf(ToRadians(rotation.x));
+		f32 xsin = sinf(ToRadians(rotation.x));
+		f32 ycos = cosf(ToRadians(rotation.y));
+		f32 ysin = sinf(ToRadians(rotation.y));
+		f32 zcos = cosf(ToRadians(rotation.z));
+		f32 zsin = sinf(ToRadians(rotation.z));
 
 		rotx[1 + 1 * 4] = xcos;
 		rotx[1 + 2 * 4] = -xsin;
