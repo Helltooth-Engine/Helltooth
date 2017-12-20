@@ -9,6 +9,7 @@ namespace ht { namespace graphics {
 		case DataType::UNSIGNED_INT: return sizeof(u32);
 		case DataType::UNSIGNED_BYTE: return sizeof(u8);
 		}
+		HT_ASSERT("[Enums] DataType not recognized!");
 	}
 
 } }

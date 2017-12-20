@@ -1,7 +1,5 @@
 #pragma once
 
-#include "core/Internal.hpp"
-
 #if defined(HT_OPENGL)
 #include "platform/opengl/GL.hpp"
 #elif defined(HT_DIRECTX)
@@ -9,6 +7,10 @@
 #else
 #error Platform not recognized!
 #endif
+
+#include "core/Internal.hpp"
+
+#include "utils/Log.hpp"
 
 namespace ht { namespace graphics {
 
@@ -37,6 +39,6 @@ namespace ht { namespace graphics {
 #endif
 	};
 
-	inline static u32 DataTypeSize(DataType type);
+	inline extern u32 DataTypeSize(DataType type);
 
 } }
