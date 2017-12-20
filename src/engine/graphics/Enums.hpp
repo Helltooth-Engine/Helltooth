@@ -37,6 +37,6 @@ namespace ht { namespace graphics {
 #endif
 	};
 
-	inline static core::u32 DataTypeSize(DataType type);
+	inline static u32 DataTypeSize(DataType type);
 
 } }

@@ -3,7 +3,6 @@
 #include "core/Internal.hpp"
 
 namespace ht { namespace maths {
-	using namespace core;
 
 	struct Vector2 {
 		f32 x, y;

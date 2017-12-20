@@ -1,8 +1,6 @@
 #include "Enums.hpp"
 
-
 namespace ht { namespace graphics {
-	using namespace core;
 
 	inline u32 DataTypeSize(DataType type) {
 		switch (type) {

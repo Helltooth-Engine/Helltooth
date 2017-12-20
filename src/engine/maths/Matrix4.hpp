@@ -12,7 +12,6 @@
 #include "core/Internal.hpp"
 
 namespace ht { namespace maths {
-	using namespace core;
 
 	class Matrix4 {
 	private:
