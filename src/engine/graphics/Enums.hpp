@@ -33,7 +33,10 @@ namespace ht { namespace graphics {
 		UNSIGNED_INT = GL_UNSIGNED_INT,
 		UNSIGNED_BYTE = GL_UNSIGNED_BYTE
 #elif defined(HT_DIRECTX)
-
+		FLOAT = DXGI_FORMAT_R32_FLOAT,
+		UNSIGNED_SHORT = DXGI_FORMAT_R16_UINT,
+		UNSIGNED_INT = DXGI_FORMAT_R32_UINT,
+		UNSIGNED_BYTE = DXGI_FORMAT_R8_UINT
 #else
 #error Platform not recognized!
 #endif
