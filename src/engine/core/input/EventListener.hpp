@@ -1,5 +1,8 @@
 #pragma once
 #include "Event.hpp"
+
+#include "core/Internal.hpp"
+
 #include "utils/Log.hpp"
 #include "utils/String.hpp"
 
@@ -12,15 +15,15 @@ namespace ht { namespace core {
 	public:
 		EventListener(utils::String name) : m_Name(name) {}
 
-		virtual bool OnMove(float x, float y);
-		virtual bool OnPress(float x, float y);
-		virtual bool OnRelease(float x, float y);
+		virtual bool OnMove(f32 x, f32 y);
+		virtual bool OnPress(f32 x, f32 y);
+		virtual bool OnRelease(f32 x, f32 y);
 
-		virtual bool OnScroll(float xOffset);
+		virtual bool OnScroll(f32 xOffset);
 
-		virtual bool OnKeyPress(int key, unsigned short modifier);
-		virtual bool OnKeyRepeat(int key, unsigned short modifier);
-		virtual bool OnKeyRelease(int key);
+		virtual bool OnKeyPress(u16 key, u16 modifier);
+		virtual bool OnKeyRepeat(u16 key, u16 modifier);
+		virtual bool OnKeyRelease(u16 key);
 	};
 
 

@@ -4,6 +4,8 @@
 
 #include "Keys.hpp"
 
+#include "core/Internal.hpp"
+
 #include "utils/Log.hpp"
 
 namespace ht { namespace core {
@@ -37,15 +39,15 @@ namespace ht { namespace core {
 		EventType m_EventType;
 		union {
 			struct {
-				float x, y;
-				char mouseButton;
+				f32 x, y;
+				s8 mouseButton;
 				State mouseButtonState;
 			} m_Mouse;
 
 			struct {
-				int key;
+				u16 key;
 				State state;
-				unsigned short modifiers;
+				u16 modifiers;
 			} m_Key;
 		};
 

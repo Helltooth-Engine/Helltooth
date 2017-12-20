@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include "core/Internal.hpp"
+
 #include "EventListener.hpp"
 
 namespace ht { namespace core {

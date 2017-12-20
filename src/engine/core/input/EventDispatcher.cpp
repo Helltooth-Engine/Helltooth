@@ -10,9 +10,9 @@ namespace ht { namespace core {
 		switch (e->m_EventType) {
 		case EventType::MOUSE:
 			{
-				float x = e->m_Mouse.x;
-				float y = e->m_Mouse.y;
-				char button = e->m_Mouse.mouseButton;
+				f32 x = e->m_Mouse.x;
+				f32 y = e->m_Mouse.y;
+				u8 button = e->m_Mouse.mouseButton;
 				State state = e->m_Mouse.mouseButtonState;
 				switch (state) {
 				case State::PRESSED:
@@ -32,8 +32,8 @@ namespace ht { namespace core {
 			break;
 		case EventType::KEYBOARD:
 			{
-				int key = e->m_Key.key;
-				int modifier = e->m_Key.modifiers;
+				u16 key = e->m_Key.key;
+				u16 modifier = e->m_Key.modifiers;
 				State state = e->m_Key.state;
 				switch (state) {
 				case State::PRESSED:
@@ -61,7 +61,7 @@ namespace ht { namespace core {
 
 	void EventDispatcher::Remove(EventListener* listener) {
 		HT_ASSERT(listener == nullptr, "EventListener cannot be nullptr!");
-		for (unsigned int i = 0; i < s_EventListeners.size(); i++)
+		for (u32 i = 0; i < s_EventListeners.size(); i++)
 			if (s_EventListeners[i] == listener) {
 				s_EventListeners.erase(s_EventListeners.begin() + i);
 				break;
