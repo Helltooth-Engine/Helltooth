@@ -11,42 +11,11 @@
 #include "core/Internal.hpp"
 
 #include "graphics/Enums.hpp"
+#include "graphics/buffers/BufferLayout.hpp"
 
 #include "utils/Log.hpp"
 
 namespace ht { namespace graphics {
-
-	struct BufferAttribute {
-		DataType type;
-		u16 count;
-		u16 stride;
-		bool normalized;
-	};
-
-	struct BufferLayout {
-		std::vector<BufferAttribute> attributes;
-
-		template<typename T>
-		void AddLayout(u16 count, u16 stride, bool normalized) {
-			HT_ASSERT(true, "[BufferLayout] Data type not recognized.");
-		}
-
-		template<>
-		void AddLayout<float>(u16 count, u16 stride, bool normalized) {
-			attributes.push_back({ DataType::FLOAT, count, stride, normalized });
-		}
-
-		template<>
-		void AddLayout<unsigned short>(u16 count, u16 stride, bool normalized) {
-			attributes.push_back({ DataType::UNSIGNED_SHORT, count, stride, normalized });
-		}
-
-		template<>
-		void AddLayout<unsigned int>(u16 count, u16 stride, bool normalized) {
-			attributes.push_back({ DataType::UNSIGNED_INT, count, stride, normalized });
-		}
-
-	};
 
 	class VertexBuffer {
 	private:
