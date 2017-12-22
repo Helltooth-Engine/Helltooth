@@ -13,6 +13,21 @@ HT_CPP_FUNCTION_POINTER(glDisableVertexAttribArray);
 HT_CPP_FUNCTION_POINTER(glVertexAttribPointer);
 HT_CPP_FUNCTION_POINTER(glDeleteBuffers);
 
+
+HT_CPP_FUNCTION_POINTER(glCreateProgram);
+HT_CPP_FUNCTION_POINTER(glCreateShader);
+HT_CPP_FUNCTION_POINTER(glShaderSource);
+HT_CPP_FUNCTION_POINTER(glCompileShader);
+HT_CPP_FUNCTION_POINTER(glGetShaderiv);
+HT_CPP_FUNCTION_POINTER(glGetShaderInfoLog);
+
+HT_CPP_FUNCTION_POINTER(glAttachShader);
+HT_CPP_FUNCTION_POINTER(glLinkProgram);
+HT_CPP_FUNCTION_POINTER(glValidateProgram);
+HT_CPP_FUNCTION_POINTER(glDeleteShader);
+HT_CPP_FUNCTION_POINTER(glUseProgram);
+HT_CPP_FUNCTION_POINTER(glDeleteProgram);
+
 bool GLInit() {
 
 	HT_GET_GL_FUNCTION(glGenBuffers);
@@ -22,6 +37,21 @@ bool GLInit() {
 	HT_GET_GL_FUNCTION(glDisableVertexAttribArray);
 	HT_GET_GL_FUNCTION(glVertexAttribPointer);
 	HT_GET_GL_FUNCTION(glDeleteBuffers);
+
+
+	HT_GET_GL_FUNCTION(glCreateProgram);
+	HT_GET_GL_FUNCTION(glCreateShader);
+	HT_GET_GL_FUNCTION(glShaderSource);
+	HT_GET_GL_FUNCTION(glCompileShader);
+	HT_GET_GL_FUNCTION(glGetShaderiv);
+	HT_GET_GL_FUNCTION(glGetShaderInfoLog);
+
+	HT_GET_GL_FUNCTION(glAttachShader);
+	HT_GET_GL_FUNCTION(glLinkProgram);
+	HT_GET_GL_FUNCTION(glValidateProgram);
+	HT_GET_GL_FUNCTION(glDeleteShader);
+	HT_GET_GL_FUNCTION(glUseProgram);
+	HT_GET_GL_FUNCTION(glDeleteProgram);
 
 	return true;
 }

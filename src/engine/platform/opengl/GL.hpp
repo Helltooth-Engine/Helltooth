@@ -24,6 +24,7 @@ typedef float GLclampf;
 typedef double GLdouble;
 typedef double GLclampd;
 typedef void GLvoid;
+typedef char GLchar;
 
 #define GL_ZERO 0
 #define GL_FALSE 0
@@ -74,6 +75,29 @@ HT_CREATE_FUNCTION_POINTER(void, glDisableVertexAttribArray, GLuint index);
 HT_CREATE_FUNCTION_POINTER(void, glBufferData, GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage);
 HT_CREATE_FUNCTION_POINTER(void, glVertexAttribPointer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* pointer);
 HT_CREATE_FUNCTION_POINTER(void, glDeleteBuffers, GLsizei n, const GLuint* buffers);
+
+//Shaders
+#define GL_FRAGMENT_SHADER 0x8B30
+#define GL_VERTEX_SHADER 0x8B31
+#define GL_DELETE_STATUS 0x8B80
+#define GL_COMPILE_STATUS 0x8B81
+#define GL_LINK_STATUS 0x8B82
+#define GL_VALIDATE_STATUS 0x8B83
+#define GL_INFO_LOG_LENGTH 0x8B84
+
+HT_CREATE_FUNCTION_POINTER(GLuint, glCreateProgram);
+HT_CREATE_FUNCTION_POINTER(GLuint, glCreateShader, GLenum type);
+HT_CREATE_FUNCTION_POINTER(void, glShaderSource, GLuint shader, GLsizei count, const GLchar **string, const GLint *length);
+HT_CREATE_FUNCTION_POINTER(void, glCompileShader, GLuint shader);
+HT_CREATE_FUNCTION_POINTER(void, glGetShaderiv, GLuint shader, GLenum pname, GLint *params);
+HT_CREATE_FUNCTION_POINTER(void, glGetShaderInfoLog, GLuint shader, GLsizei maxLength, GLsizei *length, GLchar *infoLog);
+
+HT_CREATE_FUNCTION_POINTER(void, glAttachShader, GLuint program, GLuint shader);
+HT_CREATE_FUNCTION_POINTER(void, glLinkProgram, GLuint program);
+HT_CREATE_FUNCTION_POINTER(void, glValidateProgram, GLuint program);
+HT_CREATE_FUNCTION_POINTER(void, glDeleteShader, GLuint shader);
+HT_CREATE_FUNCTION_POINTER(void, glUseProgram, GLuint program);
+HT_CREATE_FUNCTION_POINTER(void, glDeleteProgram, GLuint program);
 
 extern bool GLInit();
 
