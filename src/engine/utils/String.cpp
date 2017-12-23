@@ -4,7 +4,7 @@
 namespace ht { namespace utils {
 	String::String()
 		: m_Size(0) {
-		m_Data = new char;
+		m_Data = new char[1];
 		m_Data[0] = 0;
 	}
 
@@ -34,8 +34,7 @@ namespace ht { namespace utils {
 	}
 	
 	String::~String() {
-		if (m_Data)
-			delete[] m_Data;
+		delete[] m_Data;
 	}
 
 
@@ -88,7 +87,7 @@ namespace ht { namespace utils {
 			result.m_Size = m_Size - left;
 			result.m_Data = new char[result.m_Size + 1];
 			memcpy(result.m_Data, m_Data + left, result.m_Size);
-			result.m_Data[result.m_Size + 1] = 0;
+			result.m_Data[result.m_Size] = 0;
 		}
 		else {
 			result.m_Size = right - left;
@@ -103,7 +102,7 @@ namespace ht { namespace utils {
 	std::vector<String> String::Split(char delimiter) {
 		std::vector<String> result;
 		String split = "";
-		for (u32 i = 0; i < m_Size - 1; i++) {
+		for (u32 i = 0; i < m_Size; i++) {
 			if (m_Data[i] == delimiter) {
 				result.push_back(split);
 				split = "";
