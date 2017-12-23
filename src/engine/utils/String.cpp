@@ -8,16 +8,16 @@ namespace ht { namespace utils {
 		m_Data[0] = 0;
 	}
 
-	String::String(const String& other) {
-		m_Size = other.m_Size;
-		m_Data = new char[m_Size + 1];
-		memcpy(m_Data, other.m_Data, m_Size + 1);
-	}
-
 	String::String(const char* string) {
 		m_Size = strlen(string);
 		m_Data = new char[m_Size + 1];
 		memcpy(m_Data, string, m_Size + 1);
+	}
+
+	String::String(const String& string) {
+		m_Size = string.m_Size;
+		m_Data = new char[m_Size + 1];
+		memcpy(m_Data, string.m_Data, m_Size + 1);
 	}
 
 	String::String(const std::string& string) {
@@ -40,7 +40,7 @@ namespace ht { namespace utils {
 
 
 	void String::Append(char c) {
-		char* temp = new char[m_Size + 2]; // 1 for null terminated, 1 for the char to be added
+		char* temp = new char[m_Size + 2];
 		memcpy(temp, m_Data, m_Size);
 		temp[m_Size + 1] = 0;
 		temp[m_Size] = c;
@@ -124,6 +124,24 @@ namespace ht { namespace utils {
 		m_HashValue = 0;
 	}
 
+
+	void String::operator=(const char* string) {
+		m_Size = strlen(string);
+		m_Data = new char[m_Size + 1];
+		memcpy(m_Data, string, m_Size + 1);
+	}
+
+	void String::operator=(const String& string) {
+		m_Size = string.m_Size;
+		m_Data = new char[m_Size + 1];
+		memcpy(m_Data, string.m_Data, m_Size + 1);
+	}
+
+	void String::operator=(const std::string& string) {
+		m_Size = string.size();
+		m_Data = new char[m_Size + 1];
+		memcpy(m_Data, string.c_str(), m_Size + 1);
+	}
 
 #define STRING_HASH_A 54059
 #define STRING_HASH_B 76963
