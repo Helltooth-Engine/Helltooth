@@ -33,7 +33,8 @@ namespace ht { namespace utils {
 		inline unsigned int GetSize() const { return m_Size; }
 		inline const char* GetData() const { return m_Data; }
 
-		inline bool EndsIn(char c) const { return m_Data[m_Size - 2] == c; }
+		inline bool EndsWith(char c) const { return m_Data[m_Size - 2] == c; }
+		inline bool StartsWith(char c) const { return m_Data[0] == c; }
 
 	public: // operator block
 
