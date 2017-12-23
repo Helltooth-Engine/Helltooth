@@ -27,6 +27,10 @@ namespace ht { namespace graphics {
 	};
 
 	enum class DataType {
+		VECTOR2,
+		VECTOR3,
+		VECTOR4,
+		MATRIX4,
 #ifdef HT_OPENGL
 		FLOAT = GL_FLOAT,
 		UNSIGNED_SHORT = GL_UNSIGNED_SHORT,
@@ -40,10 +44,19 @@ namespace ht { namespace graphics {
 #else
 #error Platform not recognized!
 #endif
-		VECTOR2,
-		VECTOR3,
-		VECTOR4,
-		MATRIX4
+		
+	};
+
+	enum class ShaderType {
+#ifdef HT_OPENGL
+		VERTEX = GL_VERTEX_SHADER,
+		FRAGMENT = GL_FRAGMENT_SHADER
+#elif defined(HT_DIRECTX)
+		VERTEX,
+		FRAGMENT
+#else
+#error Platform not recognized!
+#endif
 	};
 
 	inline extern u32 DataTypeSize(DataType type);
