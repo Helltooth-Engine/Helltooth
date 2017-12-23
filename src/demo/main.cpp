@@ -7,8 +7,12 @@
 using namespace std;
 using namespace ht;
 using namespace core;
+using namespace utils;
 
 int main() {
+	VFS::Mount("res", "res/shaders/");
+	String result = VFS::Resolve("/res/shader.vert");
+
 	Window window(L"Window", 1280, 720);
 
 	float positions[] = {

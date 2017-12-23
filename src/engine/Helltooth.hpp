@@ -20,3 +20,4 @@
 
 #include "utils/Log.hpp"
 #include "utils/String.hpp"
+#include "utils/Vfs.hpp"
