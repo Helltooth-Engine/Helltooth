@@ -47,6 +47,7 @@ namespace ht { namespace utils {
 		delete[] m_Data;
 		m_Data = temp;
 		m_Size++;
+		m_HashValue = 0;
 	}
 
 	void String::Append(const char* string) {
@@ -57,6 +58,7 @@ namespace ht { namespace utils {
 		delete[] m_Data;
 		m_Data = temp;
 		m_Size += stringSize;
+		m_HashValue = 0;
 	}
 
 	void String::Append(const String& string) {
@@ -66,6 +68,7 @@ namespace ht { namespace utils {
 		delete[] m_Data;
 		m_Data = temp;
 		m_Size += string.m_Size;
+		m_HashValue = 0;
 	}
 
 	void String::Append(const std::string& string) {
@@ -75,6 +78,7 @@ namespace ht { namespace utils {
 		delete[] m_Data;
 		m_Data = temp;
 		m_Size += string.size();
+		m_HashValue = 0;
 	}
 
 

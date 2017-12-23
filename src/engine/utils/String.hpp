@@ -33,6 +33,8 @@ namespace ht { namespace utils {
 		inline unsigned int GetSize() const { return m_Size; }
 		inline const char* GetData() const { return m_Data; }
 
+		inline bool EndsIn(char c) const { return m_Data[m_Size - 2] == c; }
+
 	public: // operator block
 
 		inline friend String operator+(String left, char right) { left.Append(right); return left; }
@@ -52,3 +54,12 @@ namespace ht { namespace utils {
 	};
 
 } }
+
+namespace std {
+	template <>
+	struct hash<ht::utils::String> {
+		std::size_t operator()(const ht::utils::String& k) const {
+			return k.Hash();
+		}
+	};
+}
