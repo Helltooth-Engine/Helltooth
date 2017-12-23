@@ -26,10 +26,10 @@ namespace ht { namespace utils {
 		memcpy(m_Data, string.c_str(), m_Size + 1);
 	}
 
-	String::String(char c, int rep) {
+	String::String(char c, u32 rep) {
 		m_Size = rep;
 		m_Data = new char[m_Size + 1];
-		for (unsigned int i; i < m_Size; i++)
+		for (u32 i; i < m_Size; i++)
 			m_Data[i] = c;
 	}
 	
@@ -51,7 +51,7 @@ namespace ht { namespace utils {
 	}
 
 	void String::Append(const char* string) {
-		unsigned int stringSize = strlen(string);
+		u32 stringSize = strlen(string);
 		char* temp = new char[m_Size + stringSize + 1];
 		memcpy(temp, m_Data, m_Size);
 		memcpy(temp + m_Size, string, stringSize + 1);
@@ -82,9 +82,9 @@ namespace ht { namespace utils {
 	}
 
 
-	String String::Substring(unsigned int left, unsigned int right) {
+	String String::Substring(u32 left, u32 right) const{
 		String result = String();
-		if (right == (unsigned int)-1) { // 'till the end
+		if (right == (u32)-1) { // 'till the end
 			result.m_Size = m_Size - left;
 			result.m_Data = new char[result.m_Size + 1];
 			memcpy(result.m_Data, m_Data + left, result.m_Size);
@@ -97,6 +97,21 @@ namespace ht { namespace utils {
 			result.m_Data[result.m_Size] = 0;
 		}
 		result.m_HashValue = 0;
+		return result;
+	}
+
+	std::vector<String> String::Split(char delimiter) {
+		std::vector<String> result;
+		String split = "";
+		for (u32 i = 0; i < m_Size - 1; i++) {
+			if (m_Data[i] == delimiter) {
+				result.push_back(split);
+				split = "";
+				continue;
+			}
+			split += m_Data[i];
+		}
+		result.push_back(split);
 		return result;
 	}
 
@@ -115,10 +130,10 @@ namespace ht { namespace utils {
 #define STRING_HASH_C 86969
 #define STRING_HASH_FIRSTH 37
 
-	unsigned int String::Hash() const {
+	u32 String::Hash() const {
 		if (m_HashValue == 0) {
-			unsigned h = STRING_HASH_FIRSTH;
-			for (unsigned int i = 0; i < m_Size; i++) {
+			u32 h = STRING_HASH_FIRSTH;
+			for (u32 i = 0; i < m_Size; i++) {
 				h = (h * STRING_HASH_A) ^ (m_Data[i] * STRING_HASH_B);
 			}
 

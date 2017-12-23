@@ -1,21 +1,25 @@
 #pragma once
+
 #include <string>
+#include <vector>
+
+#include "core/Internal.hpp"
 
 namespace ht { namespace utils {
 
 	class String {
 	private:
 		char* m_Data = nullptr;
-		unsigned int m_Size;
+		u32 m_Size;
 
-		mutable unsigned int m_HashValue = 0;
+		mutable u32 m_HashValue = 0;
 
 	public:
 		String();
 		String(const String& other);
 		String(const char* string);
 		String(const std::string& string);
-		String(char c, int rep = 1);
+		String(char c, u32 rep = 1);
 
 		~String();
 
@@ -24,13 +28,15 @@ namespace ht { namespace utils {
 		void Append(const String& string);
 		void Append(const std::string& string);
 
-		String Substring(unsigned int left, unsigned int right = (unsigned int)-1);
+		String Substring(u32 left, u32 right = (u32)-1) const;
+
+		std::vector<String> Split(char delimiter);
 
 		void Clear();
 
-		unsigned int Hash() const;
+		u32 Hash() const;
 
-		inline unsigned int GetSize() const { return m_Size; }
+		inline u32 GetSize() const { return m_Size; }
 		inline const char* GetData() const { return m_Data; }
 
 		inline bool EndsWith(char c) const { return m_Data[m_Size - 2] == c; }
@@ -51,7 +57,7 @@ namespace ht { namespace utils {
 		inline bool operator==(const String& other) const { return (Hash() == other.Hash()); }
 		inline bool operator!=(const String& other) const { return (Hash() != other.Hash()); }
 
-		inline char operator[](unsigned int index) const { return m_Data[index]; }
+		inline char operator[](u32 index) const { return m_Data[index]; }
 	};
 
 } }
