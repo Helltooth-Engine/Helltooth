@@ -73,6 +73,7 @@ project ("Sandbox")
         "demo/**.h",
         "demo/**.hpp",
         "demo/**.cpp",
+        "../Solution/Sandbox/res/*/*.*"
     }
     location "../Solution/Sandbox/"
     dependson "Helltooth"
