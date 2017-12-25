@@ -3,6 +3,13 @@
 #include <utility>
 #include <intrin.h>
 
+
+#ifdef HT_OPENGL
+#include "platform/opengl/GL.hpp"
+#endif
+
+#include "core/Internal.hpp"
+
 #define HT_LEVEL_FATAL			0x04
 #define HT_LEVEL_ERROR			0x0C
 #define HT_LEVEL_WARNING		0x0E
@@ -73,6 +80,20 @@
 #else
 #define HT_ASSERT(condition, statement)
 #endif
+
+#ifdef HT_DEBUG
+#	if defined(HT_OPENGL)
+#		define GL(func) func; ht::utils::GLCallLog(#func, __FILE__, __LINE__)
+#	elif defined(HT_DIRECTX)
+
+#	else
+#		error Platform not recognized!
+#	endif
+#else
+#define GL(x) x
+
+#endif
+
 namespace ht { namespace utils {
 #ifdef HT_WINDOWS
 	template<typename First, typename ... Args>
@@ -83,5 +104,14 @@ namespace ht { namespace utils {
 	}
 #else
 #	error "Log file not created for other platforms."
+#endif
+#ifdef HT_OPENGL
+	inline static void GLCallLog(const char* funcName, const char* file, u32 line) {
+		u32 error = 0;
+		while (error = glGetError()) {
+			HT_FATAL("[GL] Error %u, calling %s in %s:%u", error, funcName, file, line);
+			//__debugbreak();
+		}
+	}
 #endif
 } }
