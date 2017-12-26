@@ -9,6 +9,7 @@ namespace ht { namespace graphics {
 		GL(glGenBuffers(1, &m_Buffer));
 		GL(glBindBuffer(GL_ARRAY_BUFFER, m_Buffer));
 
+		GL(glNamedBufferData(m_Buffer, size, data, (GLenum)usage));
 
 		u32 offset = 0;
 		for (u32 i = 0; i < layout.attributes.size(); i++) {
@@ -18,8 +19,6 @@ namespace ht { namespace graphics {
 				(GLboolean)layout.attributes[i].normalized, layout.attributes[i].stride * dataSize, (GLvoid*)offset));
 			offset += layout.attributes[i].count * dataSize;
 		}
-		
-		GL(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
 	}
 
 	VertexBuffer::~VertexBuffer() {
