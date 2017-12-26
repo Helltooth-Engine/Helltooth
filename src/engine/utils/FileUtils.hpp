@@ -17,7 +17,7 @@ namespace ht { namespace utils {
 
 			u32 length;
 			file.seekg(0, std::ios::end);
-			length = file.tellg();
+			length = (u32)file.tellg();
 			file.seekg(0, std::ios::beg);
 
 			char* data = new char[length + 1];
