@@ -14,6 +14,7 @@
 namespace ht { namespace graphics {
 
 	struct BufferAttribute {
+		utils::String semanticName;
 		DataType type;
 		u16 count;
 		u16 stride;
@@ -24,23 +25,23 @@ namespace ht { namespace graphics {
 		std::vector<BufferAttribute> attributes;
 
 		template<typename T>
-		void AddLayout(u16 count, u16 stride, bool normalized) {
+		void AddLayout(utils::String semanticName, u16 count, u16 stride, bool normalized) {
 			HT_ASSERT(true, "[BufferLayout] Data type not recognized.");
 		}
 
 		template<>
-		void AddLayout<f32>(u16 count, u16 stride, bool normalized) {
-			attributes.push_back({ DataType::FLOAT, count, stride, normalized });
+		void AddLayout<f32>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
+			attributes.push_back({ semanticName, DataType::FLOAT, count, stride, normalized });
 		}
 
 		template<>
-		void AddLayout<u16>(u16 count, u16 stride, bool normalized) {
-			attributes.push_back({ DataType::UNSIGNED_SHORT, count, stride, normalized });
+		void AddLayout<u16>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
+			attributes.push_back({ semanticName, DataType::UNSIGNED_SHORT, count, stride, normalized });
 		}
 
 		template<>
-		void AddLayout<u32>(u16 count, u16 stride, bool normalized) {
-			attributes.push_back({ DataType::UNSIGNED_INT, count, stride, normalized });
+		void AddLayout<u32>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
+			attributes.push_back({ semanticName, DataType::UNSIGNED_INT, count, stride, normalized });
 		}
 	};
 
