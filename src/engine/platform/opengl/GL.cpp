@@ -14,6 +14,8 @@ HT_CPP_FUNCTION_POINTER(glVertexAttribPointer);
 HT_CPP_FUNCTION_POINTER(glDeleteBuffers);
 HT_CPP_FUNCTION_POINTER(glGenVertexArrays);
 HT_CPP_FUNCTION_POINTER(glBindVertexArray);
+HT_CPP_FUNCTION_POINTER(glNamedBufferData);
+
 
 HT_CPP_FUNCTION_POINTER(glCreateProgram);
 HT_CPP_FUNCTION_POINTER(glCreateShader);
@@ -27,7 +29,9 @@ HT_CPP_FUNCTION_POINTER(glValidateProgram);
 HT_CPP_FUNCTION_POINTER(glDeleteShader);
 HT_CPP_FUNCTION_POINTER(glUseProgram);
 HT_CPP_FUNCTION_POINTER(glDeleteProgram);
-
+HT_CPP_FUNCTION_POINTER(glDetachShader);
+HT_CPP_FUNCTION_POINTER(glGetProgramiv);
+HT_CPP_FUNCTION_POINTER(glGetProgramInfoLog);
 
 bool GLInit() {
 
@@ -40,6 +44,7 @@ bool GLInit() {
 	HT_GET_GL_FUNCTION(glDeleteBuffers);
 	HT_GET_GL_FUNCTION(glGenVertexArrays);
 	HT_GET_GL_FUNCTION(glBindVertexArray);
+	HT_GET_GL_FUNCTION(glNamedBufferData);
 
 	HT_GET_GL_FUNCTION(glCreateProgram);
 	HT_GET_GL_FUNCTION(glCreateShader);
@@ -53,6 +58,9 @@ bool GLInit() {
 	HT_GET_GL_FUNCTION(glDeleteShader);
 	HT_GET_GL_FUNCTION(glUseProgram);
 	HT_GET_GL_FUNCTION(glDeleteProgram);
+	HT_GET_GL_FUNCTION(glDetachShader);
+	HT_GET_GL_FUNCTION(glGetProgramiv);
+	HT_GET_GL_FUNCTION(glGetProgramInfoLog);
 
 	return true;
 }

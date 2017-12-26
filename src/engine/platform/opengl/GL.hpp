@@ -78,6 +78,7 @@ HT_CREATE_FUNCTION_POINTER(void, glDeleteBuffers, GLsizei n, const GLuint* buffe
 
 HT_CREATE_FUNCTION_POINTER(void, glGenVertexArrays, GLsizei n, GLuint* arrays);
 HT_CREATE_FUNCTION_POINTER(void, glBindVertexArray, GLuint array);
+HT_CREATE_FUNCTION_POINTER(void, glNamedBufferData, GLuint buffer, GLsizei size, const void *data, GLenum usage);
 
 //Shaders
 #define GL_FRAGMENT_SHADER 0x8B30
@@ -101,6 +102,9 @@ HT_CREATE_FUNCTION_POINTER(void, glValidateProgram, GLuint program);
 HT_CREATE_FUNCTION_POINTER(void, glDeleteShader, GLuint shader);
 HT_CREATE_FUNCTION_POINTER(void, glUseProgram, GLuint program);
 HT_CREATE_FUNCTION_POINTER(void, glDeleteProgram, GLuint program);
+HT_CREATE_FUNCTION_POINTER(void, glDetachShader, GLuint program, GLuint shader);
+HT_CREATE_FUNCTION_POINTER(void, glGetProgramiv, GLuint program, GLenum pname, GLint *params);
+HT_CREATE_FUNCTION_POINTER(void, glGetProgramInfoLog, GLuint program, GLsizei maxLength, GLsizei *length, GLchar *infoLog);
 
 extern bool GLInit();
 
@@ -120,6 +124,7 @@ extern bool GLInit();
 #define WGL_CONTEXT_CORE_PROFILE_BIT_ARB			0x00000001
 #define WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB	0x00000002
 #define WGL_CONTEXT_PROFILE_MASK_ARB				0x9126
+
 typedef BOOL(WINAPI * PFNWGLCHOOSEPIXELFORMATARBPROC) (HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats);
 typedef HGLRC(WINAPI * PFNWGLCREATECONTEXTATTRIBSARBPROC) (HDC hDC, HGLRC hShareContext, const int *attribList);
 
