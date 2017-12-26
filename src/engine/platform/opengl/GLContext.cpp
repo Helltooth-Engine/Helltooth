@@ -36,15 +36,13 @@ namespace ht { namespace graphics {
 
 		int attribs[] =
 		{
-			//WGL_CONTEXT_MAJOR_VERSION_ARB, 4,
-			//WGL_CONTEXT_MINOR_VERSION_ARB, 6,
 			WGL_CONTEXT_PROFILE_MASK_ARB, WGL_CONTEXT_CORE_PROFILE_BIT_ARB,
 #ifdef HT_DEBUG
 			WGL_CONTEXT_FLAGS_ARB, WGL_CONTEXT_DEBUG_BIT_ARB,
 #else
-			WGL_CONTEXT_FLAGS_ARB, 0,
+			WGL_CONTEXT_FLAGS_ARB,
 #endif
-			0
+			0, 0
 		};
 		m_Context = wglCreateContextAttribsARB(m_DeviceContext, NULL, attribs);
 		if (!m_Context) {
