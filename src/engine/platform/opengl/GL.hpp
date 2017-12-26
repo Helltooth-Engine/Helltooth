@@ -75,10 +75,11 @@ HT_CREATE_FUNCTION_POINTER(void, glDisableVertexAttribArray, GLuint index);
 HT_CREATE_FUNCTION_POINTER(void, glBufferData, GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage);
 HT_CREATE_FUNCTION_POINTER(void, glVertexAttribPointer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* pointer);
 HT_CREATE_FUNCTION_POINTER(void, glDeleteBuffers, GLsizei n, const GLuint* buffers);
+HT_CREATE_FUNCTION_POINTER(void, glNamedBufferData, GLuint buffer, GLsizei size, const void *data, GLenum usage);
 
 HT_CREATE_FUNCTION_POINTER(void, glGenVertexArrays, GLsizei n, GLuint* arrays);
 HT_CREATE_FUNCTION_POINTER(void, glBindVertexArray, GLuint array);
-HT_CREATE_FUNCTION_POINTER(void, glNamedBufferData, GLuint buffer, GLsizei size, const void *data, GLenum usage);
+HT_CREATE_FUNCTION_POINTER(void, glDeleteVertexArrays, GLsizei n, const GLuint* arrays);
 
 //Shaders
 #define GL_FRAGMENT_SHADER 0x8B30

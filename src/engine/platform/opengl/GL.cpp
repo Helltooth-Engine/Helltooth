@@ -12,10 +12,10 @@ HT_CPP_FUNCTION_POINTER(glEnableVertexAttribArray);
 HT_CPP_FUNCTION_POINTER(glDisableVertexAttribArray);
 HT_CPP_FUNCTION_POINTER(glVertexAttribPointer);
 HT_CPP_FUNCTION_POINTER(glDeleteBuffers);
+HT_CPP_FUNCTION_POINTER(glNamedBufferData);
 HT_CPP_FUNCTION_POINTER(glGenVertexArrays);
 HT_CPP_FUNCTION_POINTER(glBindVertexArray);
-HT_CPP_FUNCTION_POINTER(glNamedBufferData);
-
+HT_CPP_FUNCTION_POINTER(glDeleteVertexArrays);
 
 HT_CPP_FUNCTION_POINTER(glCreateProgram);
 HT_CPP_FUNCTION_POINTER(glCreateShader);
@@ -45,6 +45,7 @@ bool GLInit() {
 	HT_GET_GL_FUNCTION(glGenVertexArrays);
 	HT_GET_GL_FUNCTION(glBindVertexArray);
 	HT_GET_GL_FUNCTION(glNamedBufferData);
+	HT_GET_GL_FUNCTION(glDeleteVertexArrays);
 
 	HT_GET_GL_FUNCTION(glCreateProgram);
 	HT_GET_GL_FUNCTION(glCreateShader);
