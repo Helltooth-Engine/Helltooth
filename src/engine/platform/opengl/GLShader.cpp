@@ -9,7 +9,7 @@ namespace ht { namespace graphics {
 
 	int CompileShader(const char* source, ShaderType type) {
 		u32 id = GL(glCreateShader((GLenum)type));
-		GL(glShaderSource(id, 1, &source, nullptr));
+		GL(glShaderSource(id, 1, &source, 0));
 		GL(glCompileShader(id));
 
 		s32 result;
@@ -36,25 +36,40 @@ namespace ht { namespace graphics {
 			fragmentID = CompileShader(fragmentPath.GetData(), ShaderType::FRAGMENT);
 		}
 		else {
-			const char* vertData, *fragData;
+			String vertData, fragData;
 			
 			vertData = FileUtils::ReadFile(VFS::Resolve(vertexPath));
 			fragData = FileUtils::ReadFile(VFS::Resolve(fragmentPath));
 
-			vertexID = CompileShader(vertData, ShaderType::VERTEX);
-			fragmentID = CompileShader(fragData, ShaderType::FRAGMENT);
-			//delete[] vertData;
-			//delete[] fragData;
+			vertexID = CompileShader(vertData.GetData(), ShaderType::VERTEX);
+			fragmentID = CompileShader(fragData.GetData(), ShaderType::FRAGMENT);
 		}
 
 		GL(glAttachShader(m_Program, vertexID));
 		GL(glAttachShader(m_Program, fragmentID));
 
 		GL(glLinkProgram(m_Program));
-		GL(glValidateProgram(m_Program));
 
-		GL(glDeleteShader(vertexID));
-		GL(glDeleteShader(fragmentID));
+		GLint isLinked;
+		glGetProgramiv(m_Program, GL_LINK_STATUS, &isLinked);
+		if (isLinked == GL_FALSE) {
+
+			GLint maxLength = 0;
+			glGetProgramiv(m_Program, GL_INFO_LOG_LENGTH, &maxLength);
+
+			char* data = new char[maxLength];
+			GL(glGetShaderInfoLog(m_Program, maxLength, &maxLength, data));
+
+			HT_FATAL("Failed to link program!\n %s", data);
+			GL(glDeleteProgram(m_Program));
+			delete[] data;
+		}
+
+		//GL(glDetachShader(m_Program, vertexID));
+		//GL(glDetachShader(m_Program, fragmentID)); 
+
+		//GL(glDeleteShader(vertexID));
+		//GL(glDeleteShader(fragmentID));
 	}
 
 	Shader::~Shader() {
