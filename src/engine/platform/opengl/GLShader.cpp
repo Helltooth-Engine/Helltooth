@@ -53,23 +53,23 @@ namespace ht { namespace graphics {
 		GLint isLinked;
 		glGetProgramiv(m_Program, GL_LINK_STATUS, &isLinked);
 		if (isLinked == GL_FALSE) {
-
+		
 			GLint maxLength = 0;
 			glGetProgramiv(m_Program, GL_INFO_LOG_LENGTH, &maxLength);
-
+		
 			char* data = new char[maxLength];
-			GL(glGetShaderInfoLog(m_Program, maxLength, &maxLength, data));
-
+			GL(glGetProgramInfoLog(m_Program, maxLength, &maxLength, data));
+		
 			HT_FATAL("Failed to link program!\n %s", data);
 			GL(glDeleteProgram(m_Program));
 			delete[] data;
 		}
 
-		//GL(glDetachShader(m_Program, vertexID));
-		//GL(glDetachShader(m_Program, fragmentID)); 
+		GL(glDetachShader(m_Program, vertexID));
+		GL(glDetachShader(m_Program, fragmentID)); 
 
-		//GL(glDeleteShader(vertexID));
-		//GL(glDeleteShader(fragmentID));
+		GL(glDeleteShader(vertexID));
+		GL(glDeleteShader(fragmentID));
 	}
 
 	Shader::~Shader() {
