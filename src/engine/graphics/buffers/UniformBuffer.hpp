@@ -1,10 +1,11 @@
 #pragma once
 
-#ifdef HT_OPENGL
+#if defined(HT_OPENGL)
 #include "platform/opengl/GL.hpp"
 #elif defined(HT_DIRECTX)
-#include <d3d11.h>
-#include "core/Window.hpp"
+#include "platform/directx/DX.hpp"
+#else
+#error Platform not recognzied
 #endif
 
 #include <unordered_map>
