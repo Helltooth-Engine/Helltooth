@@ -9,23 +9,26 @@ namespace ht { namespace utils {
 
 	class FileUtils {
 	public:
-		inline static char* ReadFile(String path) {
+		inline static String ReadFile(String path) {
 			std::fstream file;
 			file.open(path.GetData(), std::fstream::in);
 			if (!file.good())
 				HT_ERROR("[FileUtils] File \"%s\" does not exist", path.GetData());
 
 			u32 length;
-			file.seekg(0, file.end);
+			file.seekg(0, std::ios::end);
 			length = file.tellg();
-			file.seekg(0, file.beg);
+			file.seekg(0, std::ios::beg);
 
 			char* data = new char[length + 1];
 			memset(data, 0, length + 1);
 			file.read(data, length);
 			file.close();
 
-			return data;
+			String a = data;
+			delete[] data;
+
+			return a;
 		}
 
 	};
