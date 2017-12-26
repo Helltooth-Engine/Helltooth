@@ -1,6 +1,6 @@
 #ifdef HT_DIRECTX
 #include "graphics/buffers/VertexBuffer.hpp"
-#include "core/Window.hpp"
+#include "DX.hpp"
 
 namespace ht { namespace graphics {
 	using namespace core;
@@ -14,7 +14,7 @@ namespace ht { namespace graphics {
 		D3D11_SUBRESOURCE_DATA rd = {};
 		rd.pSysMem = data;
 		
-		Window::GetWindow()->GetDevice()->CreateBuffer(&bd, &rd, &m_Buffer);
+		DIRECTX_DEVICE->CreateBuffer(&bd, &rd, &m_Buffer);
 		m_Offset = 0;
 		for (BufferAttribute attrib : layout.attributes)
 			m_Stride += attrib.stride * DataTypeSize(attrib.type);
@@ -26,7 +26,7 @@ namespace ht { namespace graphics {
 
 	void VertexBuffer::Bind() const {
 		unsigned int offset = 0;
-		Window::GetWindow()->GetDeviceContext()->IASetVertexBuffers(0, 1, &m_Buffer, &m_Stride, &m_Offset);
+		DIRECTX_CONTEXT->IASetVertexBuffers(0, 1, &m_Buffer, &m_Stride, &m_Offset);
 	}
 
 } }
