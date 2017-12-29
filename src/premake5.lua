@@ -90,11 +90,13 @@ project ("Sandbox")
 		}
 	filter {"configurations:DirectX-Debug"}
 		links {
-			"D3D11"
+			"D3D11",
+			"d3dcompiler"
 		}
 	filter {"configurations:DirectX-Release"}
 		links {
-			"D3D11"
+			"D3D11",
+			"d3dcompiler"
 		}
 	filter {}
 	
