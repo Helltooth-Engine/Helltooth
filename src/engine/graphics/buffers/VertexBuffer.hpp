@@ -24,15 +24,12 @@ namespace ht { namespace graphics {
 		u32 m_Buffer;
 #elif defined(HT_DIRECTX)
 		ID3D11Buffer* m_Buffer;
-		
-		u32 m_Stride = 0;
-		u32 m_Offset = 0;
 #endif
 	public:
 		VertexBuffer(const void* data, u32 size, BufferUsage usage);
 		~VertexBuffer();
 
-		void Bind() const;
+		void Bind(u32 stride = 0) const;
 	};
 
 } }

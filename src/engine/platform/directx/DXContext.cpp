@@ -19,7 +19,7 @@ namespace ht { namespace graphics {
 		sd.OutputWindow = hwnd;
 		sd.SampleDesc.Count = 1;
 		sd.SampleDesc.Quality = 0;
-		sd.Windowed = TRUE;
+		sd.Windowed = true;
 		
 		const D3D_FEATURE_LEVEL lvl[] = { 
 			D3D_FEATURE_LEVEL_11_1, 
@@ -31,8 +31,8 @@ namespace ht { namespace graphics {
 		createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 		m_Device = nullptr;
-		D3D11CreateDeviceAndSwapChain(0, D3D_DRIVER_TYPE_HARDWARE, 0, createDeviceFlags, lvl, _countof(lvl), D3D11_SDK_VERSION,
-			&sd, &m_SwapChain, &m_Device, &FeatureLevelIsSupprted, &m_Context);
+		DX(D3D11CreateDeviceAndSwapChain(0, D3D_DRIVER_TYPE_HARDWARE, 0, createDeviceFlags, lvl, _countof(lvl), D3D11_SDK_VERSION,
+			&sd, &m_SwapChain, &m_Device, &FeatureLevelIsSupprted, &m_Context));
 		ID3D11Texture2D* tmp = nullptr;
 		m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&tmp);
 		m_Device->CreateRenderTargetView(tmp, 0, &m_RenderTarget);
@@ -40,22 +40,23 @@ namespace ht { namespace graphics {
 
 		D3D11_TEXTURE2D_DESC td;
 		ZeroMemory(&td, sizeof(D3D11_TEXTURE2D_DESC));
-		td.ArraySize = 1;
-		td.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-		td.Format = DXGI_FORMAT_D32_FLOAT;
 		td.Width = size.right - size.left;
 		td.Height = size.bottom - size.top;
+		td.MipLevels = 1;
+		td.ArraySize = 1;
+		td.Format = DXGI_FORMAT_D32_FLOAT;
+		td.Usage = D3D11_USAGE_DEFAULT;
+		td.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 		td.SampleDesc.Count = 1;
 		td.SampleDesc.Quality = 0;
 
-		m_Device->CreateTexture2D(&td, 0, &tmp);
+		DX(m_Device->CreateTexture2D(&td, 0, &m_DepthStencilBuffer));
 		D3D11_DEPTH_STENCIL_VIEW_DESC dsd;
 		ZeroMemory(&dsd, sizeof(D3D11_DEPTH_STENCIL_VIEW_DESC));
 		dsd.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 		dsd.Format = DXGI_FORMAT_D32_FLOAT;
 
-		m_Device->CreateDepthStencilView(tmp, &dsd, &m_DepthStencilView);
-		tmp->Release();
+		DX(m_Device->CreateDepthStencilView(m_DepthStencilBuffer, &dsd, &m_DepthStencilView));
 		m_Context->OMSetRenderTargets(1, &m_RenderTarget, m_DepthStencilView);
 		D3D11_VIEWPORT v;
 		v.TopLeftX = 0;
@@ -66,16 +67,20 @@ namespace ht { namespace graphics {
 		v.MaxDepth = 1.0f;
 
 		m_Context->RSSetViewports(1, &v);
-		m_Context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		m_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	}
 
 	Context::~Context() {
 		m_Device->Release();
+		m_Context->Release();
+		m_SwapChain->Release();
+		m_DepthStencilBuffer->Release();
+		m_DepthStencilView->Release();
 
 	}
 
 	void Context::Update() {
-		m_SwapChain->Present(0, 0);
+		DX(m_SwapChain->Present(0, 0));
 	}
 
 	void Context::Clear() {

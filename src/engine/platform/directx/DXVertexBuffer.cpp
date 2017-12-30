@@ -5,7 +5,7 @@
 namespace ht { namespace graphics {
 	using namespace core;
 
-	VertexBuffer::VertexBuffer(const void* data, u32 size, BufferLayout layout, BufferUsage usage): m_Layout(layout) {
+	VertexBuffer::VertexBuffer(const void* data, u32 size, BufferUsage usage) {
 		D3D11_BUFFER_DESC bd = {};
 		bd.Usage = (D3D11_USAGE)usage;
 		bd.ByteWidth = size;
@@ -14,19 +14,16 @@ namespace ht { namespace graphics {
 		D3D11_SUBRESOURCE_DATA rd = {};
 		rd.pSysMem = data;
 		
-		DIRECTX_DEVICE->CreateBuffer(&bd, &rd, &m_Buffer);
-		m_Offset = 0;
-		for (BufferAttribute attrib : layout.attributes)
-			m_Stride += attrib.stride * DataTypeSize(attrib.type);
+		DX(DIRECTX_DEVICE->CreateBuffer(&bd, &rd, &m_Buffer));
 	}
 
 	VertexBuffer::~VertexBuffer() {
 		m_Buffer->Release();
 	}
 
-	void VertexBuffer::Bind() const {
-		unsigned int offset = 0;
-		DIRECTX_CONTEXT->IASetVertexBuffers(0, 1, &m_Buffer, &m_Stride, &m_Offset);
+	void VertexBuffer::Bind(u32 stride) const {
+		static u32 offset = 0;
+		DIRECTX_CONTEXT->IASetVertexBuffers(0, 1, &m_Buffer, &stride, &offset);
 	}
 
 } }

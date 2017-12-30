@@ -16,4 +16,21 @@ namespace ht { namespace graphics {
 		HT_ASSERT("[Enums] DataType not recognized!");
 	}
 
+	extern u32 GetSemanticIndex(DataType type) {
+		switch (type) {
+		case DataType::FLOAT:
+		case DataType::UNSIGNED_SHORT:
+		case DataType::UNSIGNED_INT:
+		case DataType::UNSIGNED_BYTE:
+		case DataType::VECTOR2:
+		case DataType::VECTOR3:
+		case DataType::VECTOR4:
+			return 0;
+		case DataType::MATRIX4:
+			return 4;
+		}
+		HT_ASSERT("[Enums] DataType not recognized!");
+	}
+
+
 } }

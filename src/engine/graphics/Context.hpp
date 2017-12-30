@@ -22,6 +22,7 @@ namespace ht { namespace graphics {
 		ID3D11DeviceContext* m_Context;
 		ID3D11RenderTargetView* m_RenderTarget;
 		ID3D11DepthStencilView* m_DepthStencilView;
+		ID3D11Texture2D* m_DepthStencilBuffer;
 #endif
 
 	public:

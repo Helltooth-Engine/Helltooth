@@ -60,5 +60,5 @@ namespace ht { namespace graphics {
 	};
 
 	inline extern u32 DataTypeSize(DataType type);
-
+	inline extern u32 GetSemanticIndex(DataType type);
 } }

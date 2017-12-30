@@ -6,7 +6,7 @@ namespace ht { namespace graphics {
 	using namespace core;
 
 	UniformBuffer::UniformBuffer(UniformBufferLayout layout, BufferUsage usage) : m_Layout(layout) {
-		for (u32 i = 0; i < layout.attributes.size; i++)
+		for (u32 i = 0; i < layout.attributes.size(); i++)
 			m_Size += DataTypeSize(layout.attributes[i]);
 		
 		HT_ASSERT(m_Size % 16 != 0, "[UniformBuffer] Layout not 16 byte aligned");

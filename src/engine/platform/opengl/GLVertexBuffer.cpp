@@ -14,7 +14,7 @@ namespace ht { namespace graphics {
 		GL(glDeleteBuffers(1, &m_Buffer));
 	}
 
-	void VertexBuffer::Bind() const {
+	void VertexBuffer::Bind(u32 stride) const {
 		GL(glBindBuffer(GL_ARRAY_BUFFER, m_Buffer));
 	}
 

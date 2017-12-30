@@ -11,6 +11,8 @@
 
 #include "graphics/Enums.hpp"
 
+#include "utils/String.hpp"
+
 namespace ht { namespace graphics {
 
 	struct BufferAttribute {
