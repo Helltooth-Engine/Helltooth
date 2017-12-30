@@ -102,7 +102,7 @@ namespace ht { namespace core {
 		wcex.cbWndExtra		= 0;
 		wcex.hInstance		= GetModuleHandleA(nullptr);
 		wcex.hIcon			= nullptr;
-		wcex.hCursor		= nullptr;
+		wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
 		wcex.hbrBackground	= 0;
 		wcex.lpszClassName	= L"Helltooth window";
 		wcex.lpszMenuName	= 0;
