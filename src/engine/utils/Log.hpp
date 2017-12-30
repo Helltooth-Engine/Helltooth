@@ -85,7 +85,7 @@
 #	if defined(HT_OPENGL)
 #		define GL(func) func; ht::utils::GLCallLog(#func, __FILE__, __LINE__)
 #	elif defined(HT_DIRECTX)
-
+#		define DX(func) ht::utils::DXCall(func, #func, __FILE__, __LINE__)
 #	else
 #		error Platform not recognized!
 #	endif
@@ -110,7 +110,15 @@ namespace ht { namespace utils {
 		u32 error = 0;
 		while (error = glGetError()) {
 			HT_FATAL("[GL] Error %u, calling %s in %s:%u", error, funcName, file, line);
-			//__debugbreak();
+			__debugbreak();
+		}
+	}
+#elif defined(HT_DIRECTX)
+
+	inline static void DXCall(HRESULT result, const char* funcName, const char* file, u32 line) {
+		if (result != S_OK) {
+			HT_FATAL("[DX] Error %u, calling %s in %s:%u", result, funcName, file, line);
+			__debugbreak();
 		}
 	}
 #endif
