@@ -38,6 +38,8 @@ namespace ht { namespace maths {
 		Matrix4& Rotate(f32 x, f32 y, f32 z);
 		Matrix4& Rotate(const Vector3& rotation);
 
+		Matrix4& Transpose();
+
 		friend Matrix4 operator*(const Matrix4& left, const Matrix4& right);
 		friend Vector4 operator*(const Matrix4& left, const Vector4& right);
 		friend Vector3 operator*(const Matrix4& left, const Vector3& right);

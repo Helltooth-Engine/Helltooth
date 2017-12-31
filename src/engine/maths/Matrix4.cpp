@@ -55,6 +55,19 @@ namespace ht { namespace maths {
 		return result;
 	}
 
+	Matrix4& Matrix4::Transpose() {
+		f32 tmp[16];
+		memcpy(tmp, elements, sizeof(elements));
+
+		for (u32 y = 0; y < 4; y++) {
+			for (u32 x = 0; x < 4; x++) {
+				elements[y + x * 4] = tmp[x + y * 4];
+			}
+		}
+		return *this;
+	}
+
+
 	Matrix4& Matrix4::Translate(f32 x, f32 y, f32 z) {
 		Matrix4 translationMat4 = Matrix4(1.0f);
 		translationMat4[0 + 3 * 4] = x;
