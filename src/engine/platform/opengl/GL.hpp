@@ -67,6 +67,8 @@ typedef char GLchar;
 #define GL_UNIFORM_BUFFER 0x8A11
 #define GL_STATIC_DRAW 0x88E4
 #define GL_DYNAMIC_DRAW 0x88E8
+#define GL_STREAM_DRAW 0x88E0
+#define GL_WRITE_ONLY 0x88B9
 
 HT_CREATE_FUNCTION_POINTER(void, glGenBuffers, GLsizei n, GLuint* buffers);
 HT_CREATE_FUNCTION_POINTER(void, glBindBuffer, GLenum target, GLuint buffer);
@@ -80,6 +82,13 @@ HT_CREATE_FUNCTION_POINTER(void, glNamedBufferData, GLuint buffer, GLsizei size,
 HT_CREATE_FUNCTION_POINTER(void, glGenVertexArrays, GLsizei n, GLuint* arrays);
 HT_CREATE_FUNCTION_POINTER(void, glBindVertexArray, GLuint array);
 HT_CREATE_FUNCTION_POINTER(void, glDeleteVertexArrays, GLsizei n, const GLuint* arrays);
+HT_CREATE_FUNCTION_POINTER(void*, glMapNamedBuffer, GLuint buffer, GLenum access);
+HT_CREATE_FUNCTION_POINTER(GLboolean, glUnmapNamedBuffer, GLuint buffer);
+HT_CREATE_FUNCTION_POINTER(void, glNamedBufferSubData, GLuint buffer, GLsizeiptr offset, GLsizei size, const void* data);
+HT_CREATE_FUNCTION_POINTER(void, glBindBufferBase, GLenum target, GLuint index, GLuint buffer);
+HT_CREATE_FUNCTION_POINTER(void, glBufferSubData, GLenum target, GLsizeiptr offset, GLsizeiptr size, const GLvoid* data);
+HT_CREATE_FUNCTION_POINTER(void*, glMapBuffer, GLenum target, GLenum access);
+HT_CREATE_FUNCTION_POINTER(GLboolean, glUnmapBuffer, GLenum target);
 
 //Shaders
 #define GL_FRAGMENT_SHADER 0x8B30
@@ -106,6 +115,8 @@ HT_CREATE_FUNCTION_POINTER(void, glDeleteProgram, GLuint program);
 HT_CREATE_FUNCTION_POINTER(void, glDetachShader, GLuint program, GLuint shader);
 HT_CREATE_FUNCTION_POINTER(void, glGetProgramiv, GLuint program, GLenum pname, GLint *params);
 HT_CREATE_FUNCTION_POINTER(void, glGetProgramInfoLog, GLuint program, GLsizei maxLength, GLsizei *length, GLchar *infoLog);
+HT_CREATE_FUNCTION_POINTER(GLuint, glGetUniformBlockIndex, GLuint program, const GLchar* uniformBlockName);
+HT_CREATE_FUNCTION_POINTER(void, glUniformBlockBinding, GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
 
 extern bool GLInit();
 

@@ -21,6 +21,9 @@ namespace ht { namespace graphics {
 
 	struct UniformBufferLayout {
 		std::vector<DataType> attributes;
+		ShaderType type;
+
+		UniformBufferLayout(ShaderType type) : type(type) {}
 
 		template<typename T>
 		void AddUniform() {
@@ -55,7 +58,7 @@ namespace ht { namespace graphics {
 	private:
 		UniformBufferLayout m_Layout;
 		std::vector<f32> m_Data;
-		u32 m_Size;
+		u32 m_Size = 0;
 
 #if defined(HT_OPENGL)
 		u32 m_Buffer;
@@ -69,6 +72,10 @@ namespace ht { namespace graphics {
 		~UniformBuffer();
 
 		void Set(u32 index, void* data);
+
+		void Bind();
+
+		inline ShaderType GetShaderType() { return m_Layout.type; }
 	};
 
 } }

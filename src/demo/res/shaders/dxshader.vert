@@ -3,10 +3,14 @@ struct Out {
 	float4 color : COLOR;
 };
 
-Out main(float2 position : POSITION) {
+cbuffer Vertex : register(b0) {
+	float4x4 c_projectionMatrix;
+}
+
+Out main(float3 position : POSITION) {
 	Out o;
-	float4 pos = float4(position, 0.0, 1.0);
-	o.position = pos;
-	o.color = pos;
+	o.position = mul(c_projectionMatrix, float4(position, 1.0));
+	//o.position = float4(position, 1.0);
+	o.color = o.position;
 	return o;
 }

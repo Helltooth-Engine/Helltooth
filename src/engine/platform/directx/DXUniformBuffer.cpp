@@ -19,10 +19,11 @@ namespace ht { namespace graphics {
 		bd.ByteWidth = m_Size;
 		bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		bd.StructureByteStride = m_Size;
 
 		D3D11_SUBRESOURCE_DATA rd = {};
 		rd.pSysMem = &m_Data[0];
-
+		
 		Window::GetWindow()->GetDevice()->CreateBuffer(&bd, &rd, &m_Buffer);
 	}
 
@@ -39,6 +40,19 @@ namespace ht { namespace graphics {
 
 		f32* bufferData = (f32*)data;
 		memcpy((void*)(&m_Data[0] + dataLocation), (void*)bufferData, size);
+	}
+
+	void UniformBuffer::Bind() {
+		D3D11_MAPPED_SUBRESOURCE mappedBuffer = {};
+		DX(HT_DXCONTEXT->Map(m_Buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedBuffer));
+		memcpy(mappedBuffer.pData, &m_Data[0], m_Size);
+		HT_DXCONTEXT->Unmap(m_Buffer, 0);
+
+		if (m_Layout.type == ShaderType::VERTEX)
+			HT_DXCONTEXT->VSSetConstantBuffers(0, 1, &m_Buffer);
+		else if(m_Layout.type == ShaderType::FRAGMENT)
+			HT_DXCONTEXT->PSSetConstantBuffers(0, 1, &m_Buffer);
+		else HT_ASSERT(true, "[UniformBuffer] Shader Type not recognized");
 	}
 
 } }

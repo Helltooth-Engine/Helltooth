@@ -16,6 +16,13 @@ HT_CPP_FUNCTION_POINTER(glNamedBufferData);
 HT_CPP_FUNCTION_POINTER(glGenVertexArrays);
 HT_CPP_FUNCTION_POINTER(glBindVertexArray);
 HT_CPP_FUNCTION_POINTER(glDeleteVertexArrays);
+HT_CPP_FUNCTION_POINTER(glMapNamedBuffer);
+HT_CPP_FUNCTION_POINTER(glUnmapNamedBuffer);
+HT_CPP_FUNCTION_POINTER(glNamedBufferSubData);
+HT_CPP_FUNCTION_POINTER(glBindBufferBase);
+HT_CPP_FUNCTION_POINTER(glBufferSubData);
+HT_CPP_FUNCTION_POINTER(glMapBuffer);
+HT_CPP_FUNCTION_POINTER(glUnmapBuffer);
 
 HT_CPP_FUNCTION_POINTER(glCreateProgram);
 HT_CPP_FUNCTION_POINTER(glCreateShader);
@@ -32,6 +39,8 @@ HT_CPP_FUNCTION_POINTER(glDeleteProgram);
 HT_CPP_FUNCTION_POINTER(glDetachShader);
 HT_CPP_FUNCTION_POINTER(glGetProgramiv);
 HT_CPP_FUNCTION_POINTER(glGetProgramInfoLog);
+HT_CPP_FUNCTION_POINTER(glGetUniformBlockIndex);
+HT_CPP_FUNCTION_POINTER(glUniformBlockBinding);
 
 bool GLInit() {
 
@@ -46,6 +55,13 @@ bool GLInit() {
 	HT_GET_GL_FUNCTION(glBindVertexArray);
 	HT_GET_GL_FUNCTION(glNamedBufferData);
 	HT_GET_GL_FUNCTION(glDeleteVertexArrays);
+	HT_GET_GL_FUNCTION(glMapNamedBuffer);
+	HT_GET_GL_FUNCTION(glUnmapNamedBuffer);
+	HT_GET_GL_FUNCTION(glNamedBufferSubData);
+	HT_GET_GL_FUNCTION(glBindBufferBase);
+	HT_GET_GL_FUNCTION(glBufferSubData);
+	HT_GET_GL_FUNCTION(glMapBuffer);
+	HT_GET_GL_FUNCTION(glUnmapBuffer);
 
 	HT_GET_GL_FUNCTION(glCreateProgram);
 	HT_GET_GL_FUNCTION(glCreateShader);
@@ -62,6 +78,9 @@ bool GLInit() {
 	HT_GET_GL_FUNCTION(glDetachShader);
 	HT_GET_GL_FUNCTION(glGetProgramiv);
 	HT_GET_GL_FUNCTION(glGetProgramInfoLog);
+	HT_GET_GL_FUNCTION(glGetUniformBlockIndex);
+	HT_GET_GL_FUNCTION(glUniformBlockBinding);
+
 
 	return true;
 }

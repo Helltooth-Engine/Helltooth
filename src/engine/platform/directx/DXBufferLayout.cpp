@@ -23,7 +23,25 @@ namespace ht { namespace graphics {
 			D3D11_INPUT_ELEMENT_DESC current = {};
 			current.SemanticIndex = 0;
 			current.SemanticName = m_Attributes[i].semanticName.GetData();
-			current.Format = DXGI_FORMAT_R32G32_FLOAT;
+			if ((DXGI_FORMAT)m_Attributes[i].type == DXGI_FORMAT_R32_FLOAT) {
+				switch (m_Attributes[i].count) {
+				case 1:
+					current.Format = DXGI_FORMAT_R32_FLOAT;
+					break;
+				case 2:
+					current.Format = DXGI_FORMAT_R32G32_FLOAT;
+					break;
+				case 3:
+					current.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+					break;
+				case 4:
+					current.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+					break;
+				}
+			}
+			else {
+				current.Format = (DXGI_FORMAT)m_Attributes[i].type;
+			}
 			current.InputSlot = 0;
 			current.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 			current.InstanceDataStepRate = 0;

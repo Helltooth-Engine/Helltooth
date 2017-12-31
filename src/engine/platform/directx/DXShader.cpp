@@ -37,7 +37,7 @@ namespace ht { namespace graphics {
 		}
 
 		ID3DBlob* vertexShaderBlob = nullptr, *vertexErrorBlob = nullptr;
-		DX(D3DCompile(vertex, vSize, NULL, NULL, NULL, "main", "vs_5_0", flag, 0, &vertexShaderBlob, &vertexErrorBlob));
+		D3DCompile(vertex, vSize, NULL, NULL, NULL, "main", "vs_5_0", flag, 0, &vertexShaderBlob, &vertexErrorBlob);
 		if (vertexErrorBlob) {
 			HT_WARN("Vertex shader errors: \n%s", (const char*)vertexErrorBlob->GetBufferPointer());
 			vertexErrorBlob->Release();
@@ -47,7 +47,7 @@ namespace ht { namespace graphics {
 
 		ID3DBlob* fragmentShaderBlob = nullptr, *fragmentErrorBlob = nullptr;
 
-		DX(D3DCompile(fragment, fSize, NULL, NULL, NULL, "main", "ps_5_0", flag, 0, &fragmentShaderBlob, &fragmentErrorBlob));
+		D3DCompile(fragment, fSize, NULL, NULL, NULL, "main", "ps_5_0", flag, 0, &fragmentShaderBlob, &fragmentErrorBlob);
 		if (fragmentErrorBlob) {
 			HT_WARN("Fragment shader errors: \n%s", (const char*)fragmentErrorBlob->GetBufferPointer());
 			fragmentErrorBlob->Release();
@@ -63,10 +63,6 @@ namespace ht { namespace graphics {
 	Shader::~Shader() {
 		m_VertexShader->Release();
 		m_FragmentShader->Release();
-	}
-
-	void Shader::SetUniformBuffer(UniformBuffer* buffer) {
-
 	}
 
 	void Shader::Start() {

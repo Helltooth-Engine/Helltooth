@@ -12,15 +12,15 @@ namespace ht { namespace graphics {
 
 		for (u32 i = 0; i < m_Size / sizeof(f32); i++)
 			m_Data.push_back(0.0f);
-		
-		glGenBuffers(1, &m_Buffer);
-		glBindBuffer(GL_UNIFORM_BUFFER, m_Buffer);
-		glBufferData(GL_UNIFORM_BUFFER, m_Size, &m_Data[0], (GLenum)usage);
-		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+		GL(glGenBuffers(1, &m_Buffer));
+		GL(glBindBuffer(GL_UNIFORM_BUFFER, m_Buffer));
+		GL(glNamedBufferData(m_Buffer, m_Size, &m_Data[0], GL_STREAM_DRAW));
+		GL(glBindBuffer(GL_UNIFORM_BUFFER, 0));
 	}
 
 	UniformBuffer::~UniformBuffer() {
-		glDeleteBuffers(1, &m_Buffer);
+		GL(glDeleteBuffers(1, &m_Buffer));
 	}
 
 	void UniformBuffer::Set(u32 index, void* data) {
@@ -32,6 +32,22 @@ namespace ht { namespace graphics {
 
 		f32* bufferData = (f32*)data;
 		memcpy((void*)(&m_Data[0] + dataLocation), (void*)bufferData, size);
+	}
+
+	void UniformBuffer::Bind() {
+		GL(glBindBuffer(GL_UNIFORM_BUFFER, m_Buffer));
+		void* data = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
+		memcpy(data, &m_Data[0], m_Size);
+		glUnmapBuffer(GL_UNIFORM_BUFFER);
+
+		switch (m_Layout.type) {
+		case ShaderType::VERTEX:
+			GL(glBindBufferBase(GL_UNIFORM_BUFFER, 0, m_Buffer));
+			break;
+		case ShaderType::FRAGMENT:
+			GL(glBindBufferBase(GL_UNIFORM_BUFFER, 1, m_Buffer));
+			break;
+		}
 	}
 
 } }

@@ -70,15 +70,23 @@ namespace ht { namespace graphics {
 
 		GL(glDeleteShader(vertexID));
 		GL(glDeleteShader(fragmentID));
+
+		u32 vIndex = glGetUniformBlockIndex(m_Program, "Vertex");
+		if (vIndex == (u32)-1) {
+			HT_WARN("[Shader] No uniform block found called \"Vertex\", skipping it.");
+		}
+		else GL(glUniformBlockBinding(m_Program, vIndex, 0));
+
+		u32 fIndex = glGetUniformBlockIndex(m_Program, "Fragment");
+		if (fIndex == (u32)-1) {
+			HT_WARN("[Shader] No uniform block found called \"Fragment\", skipping it.");
+		}
+		else GL(glUniformBlockBinding(m_Program, fIndex, 1));
+
 	}
 
 	Shader::~Shader() {
 		GL(glDeleteProgram(m_Program));
-	}
-
-
-	void Shader::SetUniformBuffer(UniformBuffer* buffer) {
-
 	}
 
 	void Shader::Start() {

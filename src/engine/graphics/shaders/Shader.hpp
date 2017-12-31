@@ -33,8 +33,6 @@ namespace ht { namespace graphics {
 		Shader(BufferLayout* layout, utils::String vertexPath, utils::String fragmentPath, bool path = true);
 		~Shader();
 
-		void SetUniformBuffer(UniformBuffer* buffer);
-
 		void Start();
 
 		inline u32 GetStride() { 

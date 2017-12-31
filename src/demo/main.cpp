@@ -9,6 +9,7 @@
 using namespace std;
 using namespace ht;
 using namespace core;
+using namespace maths;
 using namespace utils;
 
 int main() {
@@ -17,9 +18,9 @@ int main() {
 	VFS::Mount("res", "res/shaders/");
 
 	float positions[] = {
-		-.5f, -.5f,
-		0.0f, .5f,
-		.5f, -.5f
+		-.5f, -.5f, -5.5f,
+		 0.0f, .5f,	-5.5f,
+		 .5f, -.5f,	-5.5f
 	};
 
 	u16 indices[] = {
@@ -27,7 +28,7 @@ int main() {
 	};
 
 	BufferLayout* layout = new BufferLayout();
-	layout->AddLayout<float>("POSITION", 2, 2, false);
+	layout->AddLayout<float>("POSITION", 3, 3, false);
 
 #ifdef HT_OPENGL
 	Shader* shader = new Shader(layout, "/res/glshader.vert", "/res/glshader.frag");
@@ -39,12 +40,20 @@ int main() {
 	
 	IndexBuffer* ibo = new IndexBuffer(indices, 3, BufferUsage::STATIC);
 
+	UniformBufferLayout ulayout(ShaderType::VERTEX);
+	ulayout.AddUniform<Matrix4>();
+
+	Matrix4 proj = Matrix4::CreatePerspective(70, 0.01f, 1000.0f, 1.77f);
+
+	UniformBuffer* buffer = new UniformBuffer(ulayout);
+	buffer->Set(0, &proj[0]);
 
 	while (!window.ShouldClose()) {
 		window.Clear();
+		shader->Start();
 		vbo->Bind(shader->GetStride());
 		ibo->Bind();
-		shader->Start();
+		buffer->Bind();
 #ifdef HT_DIRECTX
 		HT_DXCONTEXT->DrawIndexed(ibo->GetCount(), 0, 0);
 #else
