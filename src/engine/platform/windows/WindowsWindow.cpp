@@ -95,6 +95,12 @@ namespace ht { namespace core {
 	Window::Window(std::wstring title, u32 width, u32 height)
 		:m_Title(title), m_Width(width), m_Height(height) {
 
+#if defined(HT_OPENGL)
+		m_Title.append(L" - OpenGL");
+#elif defined (HT_DIRECTX)
+		m_Title.append(L" - DirectX");
+#endif
+
 		WNDCLASSEX wcex;
 		wcex.cbSize			= sizeof(WNDCLASSEX);
 		wcex.lpfnWndProc	= WndProc;
