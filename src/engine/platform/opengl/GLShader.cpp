@@ -74,15 +74,6 @@ namespace ht { namespace graphics {
 		HT_ASSERT(layout.attributes.size() > 10, "[VertexBuffer] Layout attributes can not be bigger than 10!");
 		GL(glGenVertexArrays(1, &m_VertexArray));
 		GL(glBindVertexArray(m_VertexArray));
-
-		u32 offset = 0;
-		for (u32 i = 0; i < layout.attributes.size(); i++) {
-			u8 dataSize = DataTypeSize(layout.attributes[i].type);
-			GL(glEnableVertexAttribArray(i));
-			GL(glVertexAttribPointer(i, layout.attributes[i].count, (GLenum)layout.attributes[i].type,
-				(GLboolean)layout.attributes[i].normalized, layout.attributes[i].stride * dataSize, (GLvoid*)offset));
-			offset += layout.attributes[i].count * dataSize;
-		}
 		GL(glBindVertexArray(0));
 
 	}
@@ -97,8 +88,16 @@ namespace ht { namespace graphics {
 	}
 
 	void Shader::Start() {
-		GL(glUseProgram(m_Program));
 		GL(glBindVertexArray(m_VertexArray));
+		u32 offset = 0; 
+		for (u32 i = 0; i < m_Layout.attributes.size(); i++) {
+			u8 dataSize = DataTypeSize(m_Layout.attributes[i].type);
+			GL(glEnableVertexAttribArray(i));
+			GL(glVertexAttribPointer(i, m_Layout.attributes[i].count, (GLenum)m_Layout.attributes[i].type,
+				(GLboolean)m_Layout.attributes[i].normalized, m_Layout.attributes[i].stride * dataSize, (GLvoid*)offset));
+			offset += m_Layout.attributes[i].count * dataSize;
+		}
+		GL(glUseProgram(m_Program));
 	}
 
 } }
