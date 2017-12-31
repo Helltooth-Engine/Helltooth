@@ -7,7 +7,7 @@ namespace ht { namespace graphics {
 	using namespace utils;
 
 
-	Shader::Shader(BufferLayout layout, String vertexPath, String fragmentPath, bool path) : m_Layout(layout) {
+	Shader::Shader(BufferLayout* layout, String vertexPath, String fragmentPath, bool path) : m_Layout(layout) {
 		UINT flag = D3DCOMPILE_ENABLE_STRICTNESS;
 #ifdef HT_DEBUG
 		flag |= D3DCOMPILE_DEBUG;
@@ -43,19 +43,6 @@ namespace ht { namespace graphics {
 			vertexErrorBlob->Release();
 		}
 
-		std::vector<D3D11_INPUT_ELEMENT_DESC> elementDescs;
-
-		for (u32 i = 0; i < layout.attributes.size(); i++) {
-			D3D11_INPUT_ELEMENT_DESC current = {};
-			current.SemanticIndex = 0;
-			current.SemanticName = layout.attributes[i].semanticName.GetData();
-			current.Format = DXGI_FORMAT_R32G32_FLOAT;
-			current.InputSlot = 0;
-			current.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-			current.InstanceDataStepRate = 0;
-			elementDescs.push_back(current);
-		}
-
 		DX(DIRECTX_DEVICE->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, &m_VertexShader));
 
 		ID3DBlob* fragmentShaderBlob = nullptr, *fragmentErrorBlob = nullptr;
@@ -67,11 +54,7 @@ namespace ht { namespace graphics {
 		}
 		DX(DIRECTX_DEVICE->CreatePixelShader(fragmentShaderBlob->GetBufferPointer(), fragmentShaderBlob->GetBufferSize(), NULL, &m_FragmentShader));
 
-
-		for (BufferAttribute attrib : layout.attributes)
-			m_Stride += attrib.stride * DataTypeSize(attrib.type);
-		
-		DX(DIRECTX_DEVICE->CreateInputLayout(&elementDescs[0], elementDescs.size(), vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), &m_InputLayout));
+		m_Layout->Init(vertexShaderBlob);
 	
 		vertexShaderBlob->Release();
 		fragmentShaderBlob->Release();
@@ -89,7 +72,7 @@ namespace ht { namespace graphics {
 	void Shader::Start() {
 		DIRECTX_CONTEXT->VSSetShader(m_VertexShader, nullptr, 0);
 		DIRECTX_CONTEXT->PSSetShader(m_FragmentShader, nullptr, 0);
-		DIRECTX_CONTEXT->IASetInputLayout(m_InputLayout);
+		m_Layout->Start();
 	}
 
 } }

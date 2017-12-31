@@ -23,8 +23,8 @@ int main() {
 	};
 
 
-	BufferLayout layout;
-	layout.AddLayout<float>("POSITION", 2, 2, false);
+	BufferLayout* layout = new BufferLayout();
+	layout->AddLayout<float>("POSITION", 2, 2, false);
 
 
 #ifdef HT_OPENGL

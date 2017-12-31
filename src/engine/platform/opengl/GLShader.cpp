@@ -27,7 +27,7 @@ namespace ht { namespace graphics {
 		return id;
 	}
 
-	Shader::Shader(BufferLayout layout, utils::String vertexPath, utils::String fragmentPath, bool path) : m_Layout(layout) {
+	Shader::Shader(BufferLayout* layout, utils::String vertexPath, utils::String fragmentPath, bool path) : m_Layout(layout) {
 		m_Program = GL(glCreateProgram());
 		u32 vertexID, fragmentID;
 
@@ -70,12 +70,6 @@ namespace ht { namespace graphics {
 
 		GL(glDeleteShader(vertexID));
 		GL(glDeleteShader(fragmentID));
-
-		HT_ASSERT(layout.attributes.size() > 10, "[VertexBuffer] Layout attributes can not be bigger than 10!");
-		GL(glGenVertexArrays(1, &m_VertexArray));
-		GL(glBindVertexArray(m_VertexArray));
-		GL(glBindVertexArray(0));
-
 	}
 
 	Shader::~Shader() {
@@ -88,15 +82,7 @@ namespace ht { namespace graphics {
 	}
 
 	void Shader::Start() {
-		GL(glBindVertexArray(m_VertexArray));
-		u32 offset = 0; 
-		for (u32 i = 0; i < m_Layout.attributes.size(); i++) {
-			u8 dataSize = DataTypeSize(m_Layout.attributes[i].type);
-			GL(glEnableVertexAttribArray(i));
-			GL(glVertexAttribPointer(i, m_Layout.attributes[i].count, (GLenum)m_Layout.attributes[i].type,
-				(GLboolean)m_Layout.attributes[i].normalized, m_Layout.attributes[i].stride * dataSize, (GLvoid*)offset));
-			offset += m_Layout.attributes[i].count * dataSize;
-		}
+		m_Layout->Start();
 		GL(glUseProgram(m_Program));
 	}
 

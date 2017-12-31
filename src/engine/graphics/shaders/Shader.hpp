@@ -19,9 +19,7 @@ namespace ht { namespace graphics {
 
 	class Shader {
 	private:
-		BufferLayout m_Layout;
-
-		u32 m_Stride = 0;
+		BufferLayout* m_Layout;
 
 #ifdef HT_OPENGL
 		u32 m_Program;
@@ -29,18 +27,17 @@ namespace ht { namespace graphics {
 #elif defined(HT_DIRECTX)
 		ID3D11VertexShader* m_VertexShader;
 		ID3D11PixelShader* m_FragmentShader;
-		ID3D11InputLayout* m_InputLayout;
 #endif
 
 	public:
-		Shader(BufferLayout layout, utils::String vertexPath, utils::String fragmentPath, bool path = true);
+		Shader(BufferLayout* layout, utils::String vertexPath, utils::String fragmentPath, bool path = true);
 		~Shader();
 
 		void SetUniformBuffer(UniformBuffer* buffer);
 
 		void Start();
 
-		inline u32 GetStride() { return m_Stride; }
+		inline u32 GetStride() { return m_Layout->GetStride(); }
 
 	};
 
