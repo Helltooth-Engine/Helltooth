@@ -7,6 +7,8 @@
 #endif
 
 #include "graphics/Enums.hpp"
+
+#include "graphics/buffers/BufferLayout.hpp"
 #include "graphics/buffers/UniformBuffer.hpp"
 
 #include "utils/String.hpp"

@@ -8,13 +8,48 @@
 #error Platform not recognzied
 #endif
 
-#include <unordered_map>
+#include "graphics/Enums.hpp"
 
-#include "graphics/buffers/BufferLayout.hpp"
+#include "maths/Vector2.hpp"
+#include "maths/Vector3.hpp"
+#include "maths/Vector4.hpp"
+#include "maths/Matrix4.hpp"
 
 #include "utils/String.hpp"
 
 namespace ht { namespace graphics {
+
+	struct UniformBufferLayout {
+		std::vector<DataType> attributes;
+
+		template<typename T>
+		void AddUniform() {
+			HT_ASSERT(true, "[UniformBufferLayout] Data type not recognized.");
+		}
+
+		template<>
+		void AddUniform<f32>() {
+			attributes.push_back(DataType::FLOAT);
+		}
+
+		template<>
+		void AddUniform<maths::Vector2>() {
+			attributes.push_back(DataType::VECTOR2);
+		}
+		template<>
+		void AddUniform<maths::Vector3>() {
+			attributes.push_back(DataType::VECTOR3);
+		}
+		template<>
+		void AddUniform<maths::Vector4>() {
+			attributes.push_back(DataType::VECTOR4);
+		}
+
+		template<>
+		void AddUniform<maths::Matrix4>() {
+			attributes.push_back(DataType::MATRIX4);
+		}
+	};
 
 	class UniformBuffer {
 	private:
