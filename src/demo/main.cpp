@@ -22,10 +22,12 @@ int main() {
 		.5f, -.5f
 	};
 
+	u16 indices[] = {
+		0, 1, 2
+	};
 
 	BufferLayout* layout = new BufferLayout();
 	layout->AddLayout<float>("POSITION", 2, 2, false);
-
 
 #ifdef HT_OPENGL
 	Shader* shader = new Shader(layout, "/res/glshader.vert", "/res/glshader.frag");
@@ -35,16 +37,18 @@ int main() {
 #endif
 	VertexBuffer* vbo = new VertexBuffer(positions, sizeof(positions), BufferUsage::STATIC);
 	
+	IndexBuffer* ibo = new IndexBuffer(indices, 3, BufferUsage::STATIC);
 
 
 	while (!window.ShouldClose()) {
 		window.Clear();
 		vbo->Bind(shader->GetStride());
+		ibo->Bind();
 		shader->Start();
 #ifdef HT_DIRECTX
-		DIRECTX_CONTEXT->Draw(3, 0);
+		HT_DXCONTEXT->DrawIndexed(ibo->GetCount(), 0, 0);
 #else
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawElements(GL_TRIANGLES, ibo->GetCount(), ibo->GetFormat(), 0);
 #endif
 
 		window.Update();

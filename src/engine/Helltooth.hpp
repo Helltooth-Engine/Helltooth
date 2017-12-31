@@ -13,6 +13,7 @@
 #include "graphics/Enums.hpp"
 #include "graphics/buffers/VertexBuffer.hpp"
 #include "graphics/buffers/UniformBuffer.hpp"
+#include "graphics/buffers/IndexBuffer.hpp"
 
 #include "maths/Mathcommon.hpp"
 #include "maths/Vector2.hpp"
