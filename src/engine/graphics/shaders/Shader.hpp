@@ -37,7 +37,13 @@ namespace ht { namespace graphics {
 
 		void Start();
 
-		inline u32 GetStride() { return m_Layout->GetStride(); }
+		inline u32 GetStride() { 
+#ifdef HT_DIRECTX
+			return m_Layout->GetStride();
+#else
+			return 0;
+#endif
+		}
 
 	};
 
