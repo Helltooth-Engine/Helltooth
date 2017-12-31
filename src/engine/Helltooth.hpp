@@ -12,7 +12,6 @@
 #include "graphics/Context.hpp"
 #include "graphics/Enums.hpp"
 #include "graphics/buffers/VertexBuffer.hpp"
-#include "graphics/buffers/VertexArray.hpp"
 #include "graphics/buffers/UniformBuffer.hpp"
 
 #include "maths/Mathcommon.hpp"

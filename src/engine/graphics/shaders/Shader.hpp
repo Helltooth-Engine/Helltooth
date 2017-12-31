@@ -8,7 +8,6 @@
 
 #include "graphics/Enums.hpp"
 #include "graphics/buffers/UniformBuffer.hpp"
-#include "graphics/buffers/VertexArray.hpp"
 
 #include "utils/String.hpp"
 #include "utils/FileUtils.hpp"
