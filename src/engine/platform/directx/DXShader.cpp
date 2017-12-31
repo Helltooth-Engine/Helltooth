@@ -43,7 +43,7 @@ namespace ht { namespace graphics {
 			vertexErrorBlob->Release();
 		}
 
-		DX(DIRECTX_DEVICE->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, &m_VertexShader));
+		DX(HT_DXDEVICE->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, &m_VertexShader));
 
 		ID3DBlob* fragmentShaderBlob = nullptr, *fragmentErrorBlob = nullptr;
 
@@ -52,7 +52,7 @@ namespace ht { namespace graphics {
 			HT_WARN("Fragment shader errors: \n%s", (const char*)fragmentErrorBlob->GetBufferPointer());
 			fragmentErrorBlob->Release();
 		}
-		DX(DIRECTX_DEVICE->CreatePixelShader(fragmentShaderBlob->GetBufferPointer(), fragmentShaderBlob->GetBufferSize(), NULL, &m_FragmentShader));
+		DX(HT_DXDEVICE->CreatePixelShader(fragmentShaderBlob->GetBufferPointer(), fragmentShaderBlob->GetBufferSize(), NULL, &m_FragmentShader));
 
 		m_Layout->Init(vertexShaderBlob);
 	
@@ -70,8 +70,8 @@ namespace ht { namespace graphics {
 	}
 
 	void Shader::Start() {
-		DIRECTX_CONTEXT->VSSetShader(m_VertexShader, nullptr, 0);
-		DIRECTX_CONTEXT->PSSetShader(m_FragmentShader, nullptr, 0);
+		HT_DXCONTEXT->VSSetShader(m_VertexShader, nullptr, 0);
+		HT_DXCONTEXT->PSSetShader(m_FragmentShader, nullptr, 0);
 		m_Layout->Start();
 	}
 

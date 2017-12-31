@@ -14,7 +14,7 @@ namespace ht { namespace graphics {
 		D3D11_SUBRESOURCE_DATA rd = {};
 		rd.pSysMem = data;
 		
-		DX(DIRECTX_DEVICE->CreateBuffer(&bd, &rd, &m_Buffer));
+		DX(HT_DXDEVICE->CreateBuffer(&bd, &rd, &m_Buffer));
 	}
 
 	VertexBuffer::~VertexBuffer() {
@@ -23,7 +23,7 @@ namespace ht { namespace graphics {
 
 	void VertexBuffer::Bind(u32 stride) const {
 		static u32 offset = 0;
-		DIRECTX_CONTEXT->IASetVertexBuffers(0, 1, &m_Buffer, &stride, &offset);
+		HT_DXCONTEXT->IASetVertexBuffers(0, 1, &m_Buffer, &stride, &offset);
 	}
 
 } }

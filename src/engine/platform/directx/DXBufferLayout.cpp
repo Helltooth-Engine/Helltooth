@@ -30,12 +30,12 @@ namespace ht { namespace graphics {
 			elementDescs.push_back(current);
 		}
 
-		DX(DIRECTX_DEVICE->CreateInputLayout(&elementDescs[0], elementDescs.size(),
+		DX(HT_DXDEVICE->CreateInputLayout(&elementDescs[0], elementDescs.size(),
 			shader->GetBufferPointer(), shader->GetBufferSize(), &m_InputLayout));
 	}
 
 	void BufferLayout::Start() {
-		DIRECTX_CONTEXT->IASetInputLayout(m_InputLayout);
+		HT_DXCONTEXT->IASetInputLayout(m_InputLayout);
 	}
 
 } }
