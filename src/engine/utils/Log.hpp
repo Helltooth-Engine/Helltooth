@@ -91,7 +91,7 @@
 #	endif
 #else
 #define GL(x) x
-
+#define DX(x) x
 #endif
 
 namespace ht { namespace utils {
