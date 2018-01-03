@@ -6,9 +6,10 @@ out vec4 positions;
 
 uniform Vertex {
 	mat4 projectionMatrix;
+	mat4 modelMatrix;
 };
 
 void main() {
-	positions = projectionMatrix * vec4(position, 1.0);
+	positions = projectionMatrix * modelMatrix * vec4(position, 1.0);
 	gl_Position = vec4(positions);
 }

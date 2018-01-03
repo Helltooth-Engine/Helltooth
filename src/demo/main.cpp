@@ -42,17 +42,21 @@ int main() {
 
 	UniformBufferLayout ulayout(ShaderType::VERTEX);
 	ulayout.AddUniform<Matrix4>();
+	ulayout.AddUniform<Matrix4>();
 
 	Matrix4 proj = Matrix4::CreatePerspective(70, 0.01f, 1000.0f, 1.77f);
-
+	Matrix4 mdl = Matrix4(1.0f);
 	UniformBuffer* buffer = new UniformBuffer(ulayout);
 	buffer->Set(0, &proj[0]);
-
+	buffer->Set(1, &mdl[0]);
+	int rot = 0;
 	while (!window.ShouldClose()) {
 		window.Clear();
 		shader->Start();
+		mdl.Rotate(Vector3(0, 0, 0.05f));
 		vbo->Bind(shader->GetStride());
 		ibo->Bind();
+		buffer->Set(1, &mdl[0]);
 		buffer->Bind();
 #ifdef HT_DIRECTX
 		HT_DXCONTEXT->DrawIndexed(ibo->GetCount(), 0, 0);
