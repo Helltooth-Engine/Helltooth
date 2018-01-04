@@ -4,6 +4,7 @@
 #endif
 
 #include "core/Window.hpp"
+#include "core/Asset.hpp"
 #include "core/input/Event.hpp"
 #include "core/input/EventDispatcher.hpp"
 #include "core/input/EventListener.hpp"
