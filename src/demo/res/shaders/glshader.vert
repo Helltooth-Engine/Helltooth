@@ -1,8 +1,9 @@
 #version 330 core
 
 layout (location = 0) in vec3 position;
+layout (location = 1) in vec2 uv;
 
-out vec4 positions;
+out vec2 uvs;
 
 uniform Vertex {
 	mat4 projectionMatrix;
@@ -10,6 +11,6 @@ uniform Vertex {
 };
 
 void main() {
-	positions = projectionMatrix * modelMatrix * vec4(position, 1.0);
-	gl_Position = vec4(positions);
+	uvs = uv;
+	gl_Position = projectionMatrix * modelMatrix * vec4(position, 1.0);
 }
