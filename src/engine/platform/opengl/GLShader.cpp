@@ -11,7 +11,7 @@ namespace ht { namespace graphics {
 		u32 id = GL(glCreateShader((GLenum)type));
 		GL(glShaderSource(id, 1, &source, 0));
 		GL(glCompileShader(id));
-
+#ifdef HT_DEBUG
 		s32 result;
 		GL(glGetShaderiv(id, GL_COMPILE_STATUS, &result));
 		if (result == GL_FALSE) {
@@ -24,6 +24,7 @@ namespace ht { namespace graphics {
 			GL(glDeleteShader(id));
 			return -1;
 		}
+#endif
 		return id;
 	}
 
@@ -49,7 +50,7 @@ namespace ht { namespace graphics {
 		GL(glAttachShader(m_Program, fragmentID));
 
 		GL(glLinkProgram(m_Program));
-
+#ifdef HT_DEBUG
 		GLint isLinked;
 		glGetProgramiv(m_Program, GL_LINK_STATUS, &isLinked);
 		if (isLinked == GL_FALSE) {
@@ -64,7 +65,7 @@ namespace ht { namespace graphics {
 			GL(glDeleteProgram(m_Program));
 			delete[] data;
 		}
-
+#endif
 		GL(glDetachShader(m_Program, vertexID));
 		GL(glDetachShader(m_Program, fragmentID)); 
 
