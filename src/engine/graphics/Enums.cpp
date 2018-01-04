@@ -2,7 +2,7 @@
 
 namespace ht { namespace graphics {
 
-	inline u32 DataTypeSize(DataType type) {
+	u32 DataTypeSize(DataType type) {
 		switch (type) {
 		case DataType::FLOAT: return sizeof(f32);
 		case DataType::UNSIGNED_SHORT: return sizeof(u16);
@@ -15,8 +15,15 @@ namespace ht { namespace graphics {
 		}
 		HT_ASSERT("[Enums] DataType not recognized!");
 	}
+	u32 TextureFormatSize(TextureFormat type) {
+		switch (type) {
+		case TextureFormat::RGB: return 3;
+		case TextureFormat::RGBA: return 4;
+		}
+		HT_ASSERT("[Enums] TextureFormat not recognized!");
+	}
 
-	extern u32 GetSemanticIndex(DataType type) {
+	u32 GetSemanticIndex(DataType type) {
 		switch (type) {
 		case DataType::FLOAT:
 		case DataType::UNSIGNED_SHORT:
@@ -29,8 +36,15 @@ namespace ht { namespace graphics {
 		case DataType::MATRIX4:
 			return 4;
 		}
-		HT_ASSERT("[Enums] DataType not recognized!");
+		HT_ASSERT("[Enums] Semantic Index not recognized!");
 	}
 
+	TextureFormat GetFormat(u32 bpp) {
+		switch (bpp) {
+		case 24: return TextureFormat::RGB;
+		case 32: return TextureFormat::RGBA;
+		}
+		HT_ASSERT("[Enums] Texture Format not recognized!");
+	}
 
 } }

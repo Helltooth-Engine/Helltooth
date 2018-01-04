@@ -15,7 +15,7 @@
 namespace ht { namespace graphics {
 
 	enum class BufferUsage {
-#ifdef HT_OPENGL
+#if defined(HT_OPENGL)
 		STATIC = GL_STATIC_DRAW,
 		DYNAMIC = GL_DYNAMIC_DRAW
 #elif defined(HT_DIRECTX)
@@ -31,7 +31,8 @@ namespace ht { namespace graphics {
 		VECTOR3,
 		VECTOR4,
 		MATRIX4,
-#ifdef HT_OPENGL
+		TEXTURE_2D,
+#if defined(HT_OPENGL)
 		FLOAT = GL_FLOAT,
 		UNSIGNED_SHORT = GL_UNSIGNED_SHORT,
 		UNSIGNED_INT = GL_UNSIGNED_INT,
@@ -48,7 +49,7 @@ namespace ht { namespace graphics {
 	};
 
 	enum class ShaderType {
-#ifdef HT_OPENGL
+#if defined(HT_OPENGL)
 		VERTEX = GL_VERTEX_SHADER,
 		FRAGMENT = GL_FRAGMENT_SHADER
 #elif defined(HT_DIRECTX)
@@ -59,6 +60,27 @@ namespace ht { namespace graphics {
 #endif
 	};
 
-	inline extern u32 DataTypeSize(DataType type);
-	inline extern u32 GetSemanticIndex(DataType type);
+	enum class TextureFormat {
+		UNKNOWN = 0,
+#if defined(HT_OPENGL)
+		RGB = GL_RGB,
+		RGBA = GL_RGBA,
+#elif defined(HT_DIRECTX)
+		RGB = UNKNOWN, //no support
+		RGBA = DXGI_FORMAT_R8G8B8A8_UNORM
+#else
+#error Platform not recognized!
+#endif
+	};
+
+	enum class TextureType {
+		UNKNOWN,
+		TEXTURE_2D,
+		TEXTURE_3D
+	};
+
+	extern u32 DataTypeSize(DataType type);
+	extern u32 TextureFormatSize(TextureFormat type);
+	extern u32 GetSemanticIndex(DataType type);
+	extern TextureFormat GetFormat(u32 bpp);
 } }
