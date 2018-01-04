@@ -4,7 +4,7 @@
 
 namespace ht { namespace graphics {
 
-	BufferLayout::BufferLayout() {
+	BufferLayout::BufferLayout() : m_Stride(0) {
 		glGenVertexArrays(1, &m_VaoID);
 	}
 
@@ -23,7 +23,7 @@ namespace ht { namespace graphics {
 			u8 dataSize = DataTypeSize(m_Attributes[i].type);
 			GL(glEnableVertexAttribArray(i));
 			GL(glVertexAttribPointer(i, m_Attributes[i].count, (GLenum)m_Attributes[i].type,
-				(GLboolean)m_Attributes[i].normalized, m_Attributes[i].stride * dataSize, (GLvoid*)offset));
+				(GLboolean)m_Attributes[i].normalized, m_Stride, (GLvoid*)offset));
 			offset += m_Attributes[i].count * dataSize;
 		}
 	}
