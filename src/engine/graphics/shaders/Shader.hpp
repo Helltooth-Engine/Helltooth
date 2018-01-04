@@ -42,7 +42,12 @@ namespace ht { namespace graphics {
 			return 0;
 #endif
 		}
+#if defined(HT_OPENGL)
+		void SetSamplers(s32* array, u32 size) { glUniform1iv(glGetUniformLocation(m_Program, "samplers"), size, array); }
+#elif defined(HT_DIRECTX)
+		void SetSamplers(s32* array, u32 size);
 
+#endif
 	};
 
 } }
