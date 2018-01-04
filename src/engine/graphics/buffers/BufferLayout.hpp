@@ -33,12 +33,12 @@ namespace ht { namespace graphics {
 	private:
 		std::vector<BufferAttribute> m_Attributes;
 
+		u32 m_Stride = 0;
+
 #if defined(HT_OPENGL)
 		u32 m_VaoID;
-
 #elif defined(HT_DIRECTX)
 		ID3D11InputLayout* m_InputLayout;
-		u32 m_Stride = 0;
 #endif
 
 	public:
@@ -57,21 +57,22 @@ namespace ht { namespace graphics {
 		template<>
 		void AddLayout<f32>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
 			m_Attributes.push_back({ semanticName, DataType::FLOAT, count, stride, normalized });
+			m_Stride += stride * DataTypeSize(DataType::FLOAT);
 		}
 
 		template<>
 		void AddLayout<u16>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
 			m_Attributes.push_back({ semanticName, DataType::UNSIGNED_SHORT, count, stride, normalized });
+			m_Stride += stride * DataTypeSize(DataType::UNSIGNED_SHORT);
 		}
 
 		template<>
 		void AddLayout<u32>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
 			m_Attributes.push_back({ semanticName, DataType::UNSIGNED_INT, count, stride, normalized });
+			m_Stride += stride * DataTypeSize(DataType::UNSIGNED_INT);
 		}
 
-#ifdef HT_DIRECTX
 		u32 GetStride() { return m_Stride; }
-#endif
 	};
 
 } }
