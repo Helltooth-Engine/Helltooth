@@ -32,8 +32,9 @@ namespace ht { namespace graphics {
 		glTexImage2D(GL_TEXTURE_2D, 0, (GLenum)m_Format, m_Width, m_Height, 0, (GLenum)m_Format, GL_UNSIGNED_BYTE, pixels);
 	}
 
-	void Texture2D::Bind() {
+	void Texture2D::Bind(u32 slot) {
 		glBindTexture(GL_TEXTURE_2D, m_Texture);
+		glActiveTexture(GL_TEXTURE0 + slot);
 	}
 
 
