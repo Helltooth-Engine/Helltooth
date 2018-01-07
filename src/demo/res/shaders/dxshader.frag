@@ -1,3 +1,6 @@
-float4 main(float4 position : SV_POSITION, float4 color : COLOR) : SV_Target0 {
-	return float4(color.x + 0.5, color.y + 0.5, color.z + 0.5, color.w);
+Texture2D shaderTexture;
+SamplerState sampleType;
+
+float4 main(float4 position : SV_POSITION, float4 color : COLOR, float2 uvs : UVS) : SV_Target0 {
+	return shaderTexture.Sample(sampleType, uvs);
 }

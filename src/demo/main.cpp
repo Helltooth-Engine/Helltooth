@@ -60,8 +60,7 @@ int main() {
 	
 	Texture* texture = Asset::LoadTexture("/res/final_logo.httexture");
 
-	texture->Bind();
-	glActiveTexture(GL_TEXTURE0);
+	texture->Bind(0);
 	int rot = 0;
 	while (!window.ShouldClose()) {
 		window.Clear();
