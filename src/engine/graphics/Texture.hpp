@@ -13,12 +13,14 @@ namespace ht { namespace graphics {
 		TextureType m_Type = TextureType::UNKNOWN;
 #if defined(HT_OPENGL)
 		u32 m_Texture;
+#elif defined(HT_DIRECTX)
+		ID3D11ShaderResourceView* m_ResourceView;
 #endif
 	protected:
 		Texture(u32 width, u32 height, TextureType type) : m_Width(width), m_Height(height), m_Type(type) {}
 		Texture(u32 width, u32 height, TextureType type, TextureFormat format) : m_Width(width), m_Height(height), m_Type(type), m_Format(format) {}
 	public:
-		virtual void Bind() = 0;
+		virtual void Bind(u32 slot) = 0;
 	};
 
 
