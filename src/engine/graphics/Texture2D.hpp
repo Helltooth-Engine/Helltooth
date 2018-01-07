@@ -28,6 +28,8 @@ namespace ht { namespace graphics {
 
 		void Bind(u32 slot) override;
 	
+	private:
+		void SetSamplerState(TextureFormat format);
 	};
 
 } }
