@@ -25,7 +25,7 @@ namespace ht { namespace graphics {
 		virtual void Bind(u32 slot) = 0;
 
 	private:
-		virtual void SetSamplerState(TextureFormat format) = 0;
+		virtual void SetSamplerState() = 0;
 	};
 
 

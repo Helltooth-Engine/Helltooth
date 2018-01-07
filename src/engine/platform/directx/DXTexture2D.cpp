@@ -3,7 +3,7 @@
 
 namespace ht { namespace graphics {
 
-	void Texture2D::SetSamplerState(TextureFormat format) {
+	void Texture2D::SetSamplerState() {
 		D3D11_SAMPLER_DESC samplerDesc = {};
 		samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 		samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -18,7 +18,7 @@ namespace ht { namespace graphics {
 
 
 	Texture2D::Texture2D(u32 width, u32 height, TextureFormat format) : Texture(width, height, TextureType::TEXTURE_2D, format) {
-		SetSamplerState(format);
+		SetSamplerState();
 		D3D11_TEXTURE2D_DESC textureDesc = {};
 		textureDesc.Width = width;
 		textureDesc.Width = height;
@@ -43,7 +43,7 @@ namespace ht { namespace graphics {
 	}
 
 	Texture2D::Texture2D(byte* pixels, u32 width, u32 height, TextureFormat format) : Texture(width, height, TextureType::TEXTURE_2D, format) {
-		SetSamplerState(format);
+		SetSamplerState();
 		D3D11_TEXTURE2D_DESC textureDesc = {};
 		textureDesc.Width = width;
 		textureDesc.Height = height;
