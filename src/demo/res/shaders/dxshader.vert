@@ -9,9 +9,9 @@ cbuffer Vertex : register(b0) {
 	float4x4 c_modelMatrix;
 }
 
-Out main(float3 position : POSITION, float2 uv : UVS) {
+Out main(float3 position : POSITION, float2 uvs : UVS) {
 	Out o;
-	o.uvs = uv;
+	o.uvs = uvs;
 	o.position = mul(c_projectionMatrix, mul(c_modelMatrix, float4(position, 1.0)));
 	//o.position = float4(position, 1.0);
 	o.color = o.position;
