@@ -13,9 +13,6 @@ namespace ht { namespace graphics {
 
 	void BufferLayout::Init(void* shaderBlob) {
 		ID3DBlob* shader = (ID3DBlob*)shaderBlob;
-		m_Stride = 0;
-		for (BufferAttribute attrib : m_Attributes)
-			m_Stride += attrib.stride * DataTypeSize(attrib.type);
 
 		std::vector<D3D11_INPUT_ELEMENT_DESC> elementDescs;
 
@@ -42,9 +39,11 @@ namespace ht { namespace graphics {
 			else {
 				current.Format = (DXGI_FORMAT)m_Attributes[i].type;
 			}
+
 			current.InputSlot = 0;
 			current.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 			current.InstanceDataStepRate = 0;
+			current.AlignedByteOffset = (i > 0) ? D3D11_APPEND_ALIGNED_ELEMENT : 0;
 			elementDescs.push_back(current);
 		}
 
