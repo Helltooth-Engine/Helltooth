@@ -62,14 +62,18 @@ int main() {
 
 	texture->Bind(0);
 	int rot = 0;
+	Timer timer;
+
+	vbo->Bind(shader->GetStride()); 
+	shader->Start();
+	ibo->Bind();
+	buffer->Bind();
 	while (!window.ShouldClose()) {
 		window.Clear();
-		vbo->Bind(shader->GetStride());
-		shader->Start();
-		mdl.Rotate(Vector3(0, 0, 0.05f));
-		buffer->Set(1, &mdl[0]);
-		ibo->Bind();
-		buffer->Bind();
+		
+		//mdl.Rotate(Vector3(0, 0, 0.05f));
+		//buffer->Set(1, &mdl[0]);
+
 #ifdef HT_DIRECTX
 		HT_DXCONTEXT->DrawIndexed(ibo->GetCount(), 0, 0);
 #else
@@ -77,6 +81,8 @@ int main() {
 #endif
 
 		window.Update();
+		float frames = 1.0f / timer.GetDelta();
+		window.SetTitle(L"Window | frames: " + std::to_wstring(frames));
 	}
 
 	delete shader;
