@@ -16,8 +16,8 @@ namespace ht { namespace core {
 		EventListener(utils::String name) : m_Name(name) {}
 
 		virtual bool OnMove(f32 x, f32 y);
-		virtual bool OnPress(f32 x, f32 y);
-		virtual bool OnRelease(f32 x, f32 y);
+		virtual bool OnPress(u8 button, f32 x, f32 y);
+		virtual bool OnRelease(u8 button, f32 x, f32 y);
 
 		virtual bool OnScroll(f32 xOffset);
 

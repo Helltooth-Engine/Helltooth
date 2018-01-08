@@ -17,11 +17,11 @@ namespace ht { namespace core {
 				switch (state) {
 				case State::PRESSED:
 					for (EventListener* listener : s_EventListeners)
-						listener->OnPress(x, y);
+						listener->OnPress(button, x, y);
 					break;
 				case State::RELEASED:
 					for (EventListener* listener : s_EventListeners)
-						listener->OnRelease(x, y);
+						listener->OnRelease(button, x, y);
 					break;
 				case State::NONE:
 					for (EventListener* listener : s_EventListeners)

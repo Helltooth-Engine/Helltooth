@@ -7,12 +7,12 @@ namespace ht { namespace core {
 		return false;
 	}
 
-	bool EventListener::OnPress(f32 x, f32 y) {
+	bool EventListener::OnPress(u8 button, f32 x, f32 y) {
 		HT_MSG("[EventListener] OnPress not implemented for %s.", m_Name.GetData());
 		return false;
 	}
 
-	bool EventListener::OnRelease(f32 x, f32 y)  {
+	bool EventListener::OnRelease(u8 button, f32 x, f32 y)  {
 		HT_MSG("[EventListener] OnRelease not implemented for %s.", m_Name.GetData());
 		return false;
 	}
