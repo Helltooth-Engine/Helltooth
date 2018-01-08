@@ -64,6 +64,8 @@ namespace ht { namespace graphics {
 		HT_WARN("GL renderer: %s", (const char*)glGetString(GL_RENDERER));
 		HT_WARN("GL shading language version: %s", (const char*)glGetString(GL_SHADING_LANGUAGE_VERSION));
 
+		wglSwapIntervalEXT(0);
+
 		if (!GLInit()) {
 			DWORD err = GetLastError(); 
 			HT_FATAL("[GLContext] Could not initialize GL, %d!", err);

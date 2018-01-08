@@ -95,12 +95,13 @@ bool GLInit() {
 
 PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB;
 PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB;
+PFNWGLSWAPINTERVALEXTPROC wglSwapIntervalEXT;
 
 bool wglInit() {
 
 	wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC)wglGetProcAddress("wglChoosePixelFormatARB");
 	wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
-	
+	wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC)wglGetProcAddress("wglSwapIntervalEXT");
 	return true;
 }
 #endif

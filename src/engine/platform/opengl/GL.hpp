@@ -178,10 +178,12 @@ extern bool GLInit();
 
 typedef BOOL(WINAPI * PFNWGLCHOOSEPIXELFORMATARBPROC) (HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats);
 typedef HGLRC(WINAPI * PFNWGLCREATECONTEXTATTRIBSARBPROC) (HDC hDC, HGLRC hShareContext, const int *attribList);
+typedef BOOL(WINAPI *PFNWGLSWAPINTERVALEXTPROC) (int interval);
+
 
 extern PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB;
 extern PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB;
-
+extern PFNWGLSWAPINTERVALEXTPROC wglSwapIntervalEXT;
 extern bool wglInit();
 
 #endif // HT_OPENGL
