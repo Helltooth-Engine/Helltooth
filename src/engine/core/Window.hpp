@@ -53,6 +53,8 @@ namespace ht { namespace core {
 
 		static Window* GetWindow() { return s_Window; }
 
+		void SetTitle(std::wstring title);
+
 #ifdef HT_DIRECTX
 		inline ID3D11Device* GetDevice() { return m_Context->GetDevice(); }
 		inline ID3D11DeviceContext* GetDeviceContext() { return m_Context->GetDeviceContext(); }

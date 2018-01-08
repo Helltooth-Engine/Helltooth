@@ -163,5 +163,10 @@ namespace ht { namespace core {
 		m_IsVisible = visible;
 	}
 
+	void Window::SetTitle(std::wstring title) {
+		SetWindowText(m_Hwnd, title.c_str());
+	}
+
+
 } }
 #endif
