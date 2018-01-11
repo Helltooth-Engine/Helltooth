@@ -1,4 +1,7 @@
 #pragma once
+
+#include <cmath>
+
 #include "Vector2.hpp"
 
 #include "core/Internal.hpp"
@@ -32,6 +35,14 @@ namespace ht { namespace maths {
 		void operator*=(f32 other);
 		void operator/=(f32 other);
 
+		inline void Normalize() { 
+			f32 length = sqrt(x * x + y * y + z * z);
+			if (!length)
+				return;
+			x /= length;
+			y /= length;
+			z /= length;
+		}
 		inline bool operator==(const Vector3& other) { return (x == other.x) && (y == other.y) && (z == other.z); }
 		inline bool operator!=(const Vector3& other) { return (x != other.x) || (y != other.y) || (z != other.z); }
 	};
