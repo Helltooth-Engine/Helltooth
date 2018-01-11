@@ -4,13 +4,12 @@
 
 #include <graphics/shaders/Shader.hpp>
 
-#include "Player.hpp"
-
 using namespace std;
 using namespace ht;
 using namespace core;
 using namespace maths;
 using namespace utils;
+using namespace graphics;
 
 int main() {
 	Window window(L"Window", 1280, 720);
@@ -29,6 +28,8 @@ int main() {
 		1, 2, 0,
 		2, 3, 0
 	};
+
+	Camera* camera = new FPSCamera(0, 0, 0);
 
 	BufferLayout* layout = new BufferLayout();
 	layout->AddLayout<float>("POSITION", 3, 3, false);
@@ -50,14 +51,15 @@ int main() {
 	UniformBufferLayout ulayout(ShaderType::VERTEX);
 	ulayout.AddUniform<Matrix4>();
 	ulayout.AddUniform<Matrix4>();
+	ulayout.AddUniform<Matrix4>();
 
 	Matrix4 proj = Matrix4::CreatePerspective(70, 0.01f, 1000.0f, 1.77f);
 	Matrix4 mdl = Matrix4(1.0f);
-
+	Matrix4 viewMatrix = Matrix4(1.0f);
 	UniformBuffer* buffer = new UniformBuffer(ulayout);
 	buffer->Set(0, &proj[0]);
-	buffer->Set(1, &mdl[0]);
-	
+	buffer->Set(1, &viewMatrix[0]);
+	buffer->Set(2, &mdl[0]);
 	Texture* texture = Asset::LoadTexture("/res/final_logo.httexture");
 
 	texture->Bind(0);
@@ -68,11 +70,17 @@ int main() {
 	shader->Start();
 	ibo->Bind();
 	buffer->Bind();
+	float delta = 0.0f;
 	while (!window.ShouldClose()) {
 		window.Clear();
-		
-		//mdl.Rotate(Vector3(0, 0, 0.05f));
-		//buffer->Set(1, &mdl[0]);
+		camera->Update(delta);
+
+		viewMatrix = camera->GetViewMatrix();
+
+		mdl.Rotate(Vector3(0, 0, 100.0f * delta));
+		buffer->Set(2, &mdl[0]);
+		buffer->Set(1, &viewMatrix[0]);
+		buffer->Bind();
 
 #ifdef HT_DIRECTX
 		HT_DXCONTEXT->DrawIndexed(ibo->GetCount(), 0, 0);
@@ -81,12 +89,16 @@ int main() {
 #endif
 
 		window.Update();
-		float frames = 1.0f / timer.GetDelta();
+		delta = timer.GetDelta();
+		float frames = 1.0f / delta;
 		window.SetTitle(L"Window | frames: " + std::to_wstring(frames));
 	}
 
 	delete shader;
 	delete vbo;
+	delete camera;
+	delete buffer;
+	delete texture;
 
 	//system("PAUSE");
 	return 0;
