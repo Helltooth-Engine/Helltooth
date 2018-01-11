@@ -5,7 +5,7 @@
 
 namespace ht { namespace core {
 
-	class EventBufferer : private EventListener {
+	class EventBufferer : public EventListener {
 	protected:
 		bool m_Keys[HT_MAX_KEYBOARD_KEYS];
 		bool m_MouseKeys[HT_MAX_MOUSE_BUTTONS];
