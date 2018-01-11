@@ -36,13 +36,44 @@ namespace ht { namespace graphics {
 
 		m_MouseLast = Vector2(m_MouseX, m_MouseY);
 
+		f32 sinXRot = sin(ToRadians(m_Rotation.x));
+		f32 cosXRot = cos(ToRadians(m_Rotation.x));
 
-		//if (m_Keys[HT_KEY_W]) {
-		//	m_Position.x += m_SpeedFactor * delta;
-		//}
+		f32 sinYRot = sin(ToRadians(m_Rotation.y));
+		f32 cosYRot = cos(ToRadians(m_Rotation.y));
+
+		Vector3 movement = Vector3();
+
+		if (m_Keys[HT_KEY_W]) {
+			movement.x += sinYRot * cosXRot;
+			movement.y += sinXRot;
+			movement.z += cosYRot * cosXRot;
+		}
+
+		if (m_Keys[HT_KEY_S]) {
+			movement.x += -sinYRot * cosXRot;
+			movement.y += -sinXRot;
+			movement.z += -cosYRot * cosXRot;
+		}
+
+		if (m_Keys[HT_KEY_A]) {
+			movement.x += cosYRot;
+			movement.z += -sinYRot;
+		}
+
+		if (m_Keys[HT_KEY_D]) {
+			movement.x += -cosYRot;
+			movement.z += sinYRot;
+		}
+
+		movement.Normalize();
+
+		movement *= m_SpeedFactor * delta;
+
+		m_Position += movement;
 
 		m_ViewMatrix = Matrix4(1.0f);
-		m_ViewMatrix.Rotate(Vector3(m_Rotation));
+		m_ViewMatrix.Rotate(Vector3(m_Rotation)).Translate(m_Position);
 	}
 
 } }
