@@ -7,8 +7,8 @@ namespace ht { namespace graphics {
 	class FPSCamera : public Camera {
 	private:
 		f32 m_SpeedFactor = 10; // 10 units / second 
-		f32 m_YawSensitivity = 50.f; // degrees / second
-		f32 m_PitchSensitivty = 50.f; // degres / second
+		f32 m_YawSensitivity = 0.2f; // degrees / second
+		f32 m_PitchSensitivty = 0.2f; // degres / second
 		
 		maths::Vector2 m_MouseLast;
 	public:

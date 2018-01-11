@@ -12,8 +12,8 @@ namespace ht { namespace graphics {
 
 	void FPSCamera::Update(f32 delta) {
 		if (m_MouseKeys[HT_MOUSE_RBUTTON]) {
-			f32 hMovement = (m_MouseX - m_MouseLast.x) * m_YawSensitivity * delta;
-			f32 vMovement = (m_MouseY - m_MouseLast.y) * m_PitchSensitivty * delta;
+			f32 hMovement = (m_MouseX - m_MouseLast.x) * m_YawSensitivity;
+			f32 vMovement = (m_MouseY - m_MouseLast.y) * m_PitchSensitivty;
 
 			m_Rotation.x += vMovement;
 			m_Rotation.y -= hMovement;
