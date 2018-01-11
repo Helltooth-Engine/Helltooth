@@ -10,11 +10,13 @@
 #include "core/input/EventListener.hpp"
 #include "core/input/Keys.hpp"
 
-#include "graphics/Context.hpp"
-#include "graphics/Enums.hpp"
 #include "graphics/buffers/VertexBuffer.hpp"
 #include "graphics/buffers/UniformBuffer.hpp"
 #include "graphics/buffers/IndexBuffer.hpp"
+#include "graphics/camera/Camera.hpp"
+#include "graphics/camera/FPSCamera.hpp"
+#include "graphics/Context.hpp"
+#include "graphics/Enums.hpp"
 
 #include "maths/Mathcommon.hpp"
 #include "maths/Vector2.hpp"
@@ -26,3 +28,4 @@
 #include "utils/String.hpp"
 #include "utils/Vfs.hpp"
 #include "utils/Timer.hpp"
+#include "utils/FileUtils.hpp"
