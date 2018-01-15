@@ -153,6 +153,7 @@ HT_CREATE_FUNCTION_POINTER(GLint, glGetUniformLocation, GLuint program, const GL
 #define GL_TEXTURE29 0x84DD
 #define GL_TEXTURE30 0x84DE
 #define GL_TEXTURE31 0x84DF
+#define GL_BGRA 0x80E1
 
 HT_CREATE_FUNCTION_POINTER(void, glActiveTexture, GLenum texture);
 
