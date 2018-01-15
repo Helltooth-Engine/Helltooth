@@ -35,6 +35,8 @@ int main() {
 	layout->AddLayout<float>("POSITION", 3, 3, false);
 	layout->AddLayout<float>("UVS", 2, 2, false);
 
+	Entity* entity = new Entity();
+
 #ifdef HT_OPENGL
 	Shader* shader = new Shader(layout, "/res/glshader.vert", "/res/glshader.frag");
 	s32 ids[] = { 0, 1 };
@@ -54,12 +56,12 @@ int main() {
 	ulayout.AddUniform<Matrix4>();
 
 	Matrix4 proj = Matrix4::CreatePerspective(70, 0.01f, 1000.0f, 1.77f);
-	Matrix4 mdl = Matrix4(1.0f);
 	Matrix4 viewMatrix = Matrix4(1.0f);
 	UniformBuffer* buffer = new UniformBuffer(ulayout);
 	buffer->Set(0, &proj[0]);
 	buffer->Set(1, &viewMatrix[0]);
-	buffer->Set(2, &mdl[0]);
+	buffer->Set(2, &entity->GetModelMatrix()[0]);
+
 	Texture* texture = Asset::LoadTexture("/res/final_logo.httexture");
 
 	texture->Bind(0);
@@ -74,12 +76,14 @@ int main() {
 	while (!window.ShouldClose()) {
 		window.Clear();
 		camera->Update(delta);
+		entity->Rotate(50.f * delta, 50.f * delta, 50.f * delta);
 
+		entity->Update(delta);
+		
 		viewMatrix = camera->GetViewMatrix();
 
-		mdl.Rotate(Vector3(0, 0, 100.0f * delta));
-		buffer->Set(2, &mdl[0]);
 		buffer->Set(1, &viewMatrix[0]);
+		buffer->Set(2, &entity->GetModelMatrix()[0]);
 		buffer->Bind();
 
 #ifdef HT_DIRECTX
@@ -94,11 +98,7 @@ int main() {
 		window.SetTitle(L"Window | frames: " + std::to_wstring(frames));
 	}
 
-	delete shader;
-	delete vbo;
-	delete camera;
-	delete buffer;
-	delete texture;
+	delete shader, vbo, buffer, camera, layout, entity, texture, ibo;
 
 	//system("PAUSE");
 	return 0;
