@@ -47,4 +47,12 @@ namespace ht { namespace graphics {
 		HT_ASSERT("[Enums] Texture Format not recognized!");
 	}
 
+	TextureFormat GetBaseFormat(TextureFormat format) {
+		switch (format) {
+		case TextureFormat::RGBA: return TextureFormat::BGRA;
+		}
+		HT_ASSERT("[Enums] Texture Format not recognized!");
+
+	}
+
 } }

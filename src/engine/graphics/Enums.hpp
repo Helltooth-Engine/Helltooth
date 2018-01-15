@@ -65,9 +65,11 @@ namespace ht { namespace graphics {
 #if defined(HT_OPENGL)
 		RGB = GL_RGB,
 		RGBA = GL_RGBA,
+		BGRA = GL_BGRA,
 #elif defined(HT_DIRECTX)
 		RGB = UNKNOWN, //no support
-		RGBA = DXGI_FORMAT_R8G8B8A8_UNORM
+		RGBA = DXGI_FORMAT_R8G8B8A8_UNORM,
+		BGRA = DXGI_FORMAT_B8G8R8A8_UNORM,
 #else
 #error Platform not recognized!
 #endif
@@ -83,4 +85,5 @@ namespace ht { namespace graphics {
 	extern u32 TextureFormatSize(TextureFormat type);
 	extern u32 GetSemanticIndex(DataType type);
 	extern TextureFormat GetFormat(u32 bpp);
+	extern TextureFormat GetBaseFormat(TextureFormat);
 } }
