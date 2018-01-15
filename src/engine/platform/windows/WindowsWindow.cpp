@@ -164,6 +164,11 @@ namespace ht { namespace core {
 	}
 
 	void Window::SetTitle(std::wstring title) {
+#if defined(HT_OPENGL)
+		title.append(L" - OpenGL");
+#elif defined (HT_DIRECTX)
+		title.append(L" - DirectX");
+#endif
 		SetWindowText(m_Hwnd, title.c_str());
 	}
 
