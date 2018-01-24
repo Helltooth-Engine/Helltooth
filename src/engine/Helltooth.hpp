@@ -17,7 +17,7 @@
 #include "graphics/camera/FPSCamera.hpp"
 #include "graphics/Context.hpp"
 #include "graphics/Enums.hpp"
-#include "graphics/Entity.hpp"
+#include "graphics/entities/Entity.hpp"
 
 #include "maths/Mathcommon.hpp"
 #include "maths/Vector2.hpp"
