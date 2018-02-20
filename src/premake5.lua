@@ -14,6 +14,8 @@ function setConfigurationFilters()
 			"HT_OPENGL",
 			"HT_RELEASE"
 		}
+		optimize "Full"
+    	symbols "Off"
 	filter {"configurations:DirectX-Debug"}
 		defines {
 			"HT_DIRECTX",
@@ -24,7 +26,8 @@ function setConfigurationFilters()
 			"HT_DIRECTX",
 			"HT_RELEASE"
 		}
-
+		optimize "Full"
+    	symbols "Off"
 	filter {"platforms:x86"}
 		defines {
 			"HT_WINDOWS"
