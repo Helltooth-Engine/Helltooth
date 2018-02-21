@@ -51,13 +51,14 @@ namespace ht { namespace graphics {
 	enum class ShaderType {
 #if defined(HT_OPENGL)
 		VERTEX = GL_VERTEX_SHADER,
-		FRAGMENT = GL_FRAGMENT_SHADER
+		FRAGMENT = GL_FRAGMENT_SHADER,
 #elif defined(HT_DIRECTX)
 		VERTEX,
-		FRAGMENT
+		FRAGMENT,
 #else
 #error Platform not recognized!
 #endif
+		UNKOWN,
 	};
 
 	enum class TextureFormat {
