@@ -23,7 +23,7 @@ namespace ht { namespace graphics {
 			u8 dataSize = DataTypeSize(m_Attributes[i].type);
 			GL(glEnableVertexAttribArray(i));
 			GL(glVertexAttribPointer(i, m_Attributes[i].count, static_cast<GLenum>(m_Attributes[i].type),
-				static_cast<GLboolean>(m_Attributes[i].normalized), m_Stride, static_cast<GLvoid*>(offset)));
+				static_cast<GLboolean>(m_Attributes[i].normalized), m_Stride, reinterpret_cast<GLvoid*>(offset)));
 			offset += m_Attributes[i].count * dataSize;
 		}
 	}
