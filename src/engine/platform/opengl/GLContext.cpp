@@ -59,10 +59,10 @@ namespace ht { namespace graphics {
 			return;
 		}
 		
-		HT_WARN("GL version: %s", (const char*)glGetString(GL_VERSION));
-		HT_WARN("GL vendor: %s", (const char*)glGetString(GL_VENDOR));
-		HT_WARN("GL renderer: %s", (const char*)glGetString(GL_RENDERER));
-		HT_WARN("GL shading language version: %s", (const char*)glGetString(GL_SHADING_LANGUAGE_VERSION));
+		HT_WARN("GL version: %s", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+		HT_WARN("GL vendor: %s", reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+		HT_WARN("GL renderer: %s", reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+		HT_WARN("GL shading language version: %s", reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
 
 		wglSwapIntervalEXT(0);
 

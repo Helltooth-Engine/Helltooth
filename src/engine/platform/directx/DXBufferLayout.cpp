@@ -12,7 +12,7 @@ namespace ht { namespace graphics {
 	}
 
 	void BufferLayout::Init(void* shaderBlob) {
-		ID3DBlob* shader = (ID3DBlob*)shaderBlob;
+		ID3DBlob* shader = static_cast<ID3DBlob*>(shaderBlob);
 
 		std::vector<D3D11_INPUT_ELEMENT_DESC> elementDescs;
 
@@ -20,7 +20,7 @@ namespace ht { namespace graphics {
 			D3D11_INPUT_ELEMENT_DESC current = {};
 			current.SemanticIndex = 0;
 			current.SemanticName = m_Attributes[i].semanticName.GetData();
-			if ((DXGI_FORMAT)m_Attributes[i].type == DXGI_FORMAT_R32_FLOAT) {
+			if (static_cast<DXGI_FORMAT>(m_Attributes[i].type) == DXGI_FORMAT_R32_FLOAT) {
 				switch (m_Attributes[i].count) {
 				case 1:
 					current.Format = DXGI_FORMAT_R32_FLOAT;
@@ -37,7 +37,7 @@ namespace ht { namespace graphics {
 				}
 			}
 			else {
-				current.Format = (DXGI_FORMAT)m_Attributes[i].type;
+				current.Format = static_cast<DXGI_FORMAT>(m_Attributes[i].type);
 			}
 
 			current.InputSlot = 0;

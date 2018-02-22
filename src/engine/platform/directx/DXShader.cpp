@@ -39,7 +39,7 @@ namespace ht { namespace graphics {
 		ID3DBlob* vertexShaderBlob = nullptr, *vertexErrorBlob = nullptr;
 		D3DCompile(vertex, vSize, NULL, NULL, NULL, "main", "vs_5_0", flag, 0, &vertexShaderBlob, &vertexErrorBlob);
 		if (vertexErrorBlob) {
-			HT_WARN("Vertex shader errors: \n%s", (const char*)vertexErrorBlob->GetBufferPointer());
+			HT_WARN("Vertex shader errors: \n%s", static_cast<const char*>(vertexErrorBlob->GetBufferPointer()));
 			vertexErrorBlob->Release();
 		}
 
@@ -49,7 +49,7 @@ namespace ht { namespace graphics {
 
 		D3DCompile(fragment, fSize, NULL, NULL, NULL, "main", "ps_5_0", flag, 0, &fragmentShaderBlob, &fragmentErrorBlob);
 		if (fragmentErrorBlob) {
-			HT_WARN("Fragment shader errors: \n%s", (const char*)fragmentErrorBlob->GetBufferPointer());
+			HT_WARN("Fragment shader errors: \n%s", static_cast<const char*>(fragmentErrorBlob->GetBufferPointer()));
 			fragmentErrorBlob->Release();
 		}
 		DX(HT_DXDEVICE->CreatePixelShader(fragmentShaderBlob->GetBufferPointer(), fragmentShaderBlob->GetBufferSize(), NULL, &m_FragmentShader));

@@ -15,7 +15,7 @@ namespace ht { namespace graphics {
 			m_Data.push_back(0.0f);
 
 		D3D11_BUFFER_DESC bd = {};
-		bd.Usage = (D3D11_USAGE)usage;
+		bd.Usage = static_cast<D3D11_USAGE>(usage);
 		bd.ByteWidth = m_Size;
 		bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
@@ -39,7 +39,7 @@ namespace ht { namespace graphics {
 		u32 size = DataTypeSize(m_Layout.attributes[index]);
 
 		f32* bufferData = (f32*)data;
-		memcpy((void*)(&m_Data[0] + dataLocation), (void*)bufferData, size);
+		memcpy(static_cast<void*>((&m_Data[0] + dataLocation)), static_cast<void*>(bufferData), size);
 	}
 
 	void UniformBuffer::Bind() {

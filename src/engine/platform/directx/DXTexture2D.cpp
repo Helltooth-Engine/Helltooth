@@ -24,7 +24,7 @@ namespace ht { namespace graphics {
 		textureDesc.Width = height;
 		textureDesc.MipLevels = 1;
 		textureDesc.ArraySize = 1;
-		textureDesc.Format = (DXGI_FORMAT)GetBaseFormat(format);
+		textureDesc.Format = static_cast<DXGI_FORMAT>(GetBaseFormat(format));
 		textureDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 		textureDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		textureDesc.Usage = D3D11_USAGE_DYNAMIC;
@@ -49,7 +49,7 @@ namespace ht { namespace graphics {
 		textureDesc.Height = height;
 		textureDesc.MipLevels = 1;
 		textureDesc.ArraySize = 1;
-		textureDesc.Format = (DXGI_FORMAT)GetBaseFormat(format);
+		textureDesc.Format = static_cast<DXGI_FORMAT>(GetBaseFormat(format));
 		textureDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 		textureDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		textureDesc.Usage = D3D11_USAGE_DEFAULT;

@@ -22,8 +22,8 @@ namespace ht { namespace graphics {
 		for (u32 i = 0; i < m_Attributes.size(); i++) {
 			u8 dataSize = DataTypeSize(m_Attributes[i].type);
 			GL(glEnableVertexAttribArray(i));
-			GL(glVertexAttribPointer(i, m_Attributes[i].count, (GLenum)m_Attributes[i].type,
-				(GLboolean)m_Attributes[i].normalized, m_Stride, (GLvoid*)offset));
+			GL(glVertexAttribPointer(i, m_Attributes[i].count, static_cast<GLenum>(m_Attributes[i].type),
+				static_cast<GLboolean>(m_Attributes[i].normalized), m_Stride, static_cast<GLvoid*>(offset)));
 			offset += m_Attributes[i].count * dataSize;
 		}
 	}

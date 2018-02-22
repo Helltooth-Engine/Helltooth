@@ -8,7 +8,7 @@ namespace ht { namespace graphics {
 #define Stringify(type) #type
 
 	int CompileShader(const char* source, ShaderType type) {
-		u32 id = GL(glCreateShader((GLenum)type));
+		u32 id = GL(glCreateShader(static_cast<GLenum>(type)));
 		GL(glShaderSource(id, 1, &source, 0));
 		GL(glCompileShader(id));
 #ifdef HT_DEBUG

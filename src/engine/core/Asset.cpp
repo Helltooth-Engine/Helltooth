@@ -14,9 +14,9 @@ namespace ht { namespace core {
 
 		Object* object = database->getObject("texture2D");
 		if (object != nullptr) {
-			u32 width = (u32)object->getField("width")->getValue<s32>();
-			u32 height = (u32)object->getField("height")->getValue<s32>();
-			u32 bpp = (u32)object->getField("bpp")->getValue<s32>();
+			u32 width = static_cast<u32>(object->getField("width")->getValue<s32>());
+			u32 height = static_cast<u32>(object->getField("height")->getValue<s32>());
+			u32 bpp = static_cast<u32>(object->getField("bpp")->getValue<s32>());
 			
 			Array* pArray = object->getArray("pixels");
 

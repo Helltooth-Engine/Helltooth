@@ -30,8 +30,8 @@ namespace ht { namespace graphics {
 
 		u32 size = DataTypeSize(m_Layout.attributes[index]);
 
-		f32* bufferData = (f32*)data;
-		memcpy((void*)(&m_Data[0] + dataLocation), (void*)bufferData, size);
+		f32* bufferData = static_cast<f32*>(data);
+		memcpy(static_cast<void*>(&m_Data[0] + dataLocation), static_cast<void*>(bufferData), size);
 	}
 
 	void UniformBuffer::Bind() {
