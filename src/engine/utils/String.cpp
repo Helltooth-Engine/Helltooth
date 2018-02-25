@@ -29,7 +29,7 @@ namespace ht { namespace utils {
 	String::String(char c, u32 rep) {
 		m_Size = rep;
 		m_Data = new char[m_Size + 1];
-		for (u32 i; i < m_Size; i++)
+		for (u32 i = 0; i < m_Size; i++)
 			m_Data[i] = c;
 	}
 	
