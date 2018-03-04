@@ -36,15 +36,13 @@ int main() {
 	layout->AddLayout<float>("UVS", 2, 2, false);
 
 	Entity* entity = new Entity();
+	Shader* shader = new Shader(layout, "/res/shader.vert", "/res/shader.frag", ShaderLocationType::FROM_PATH | ShaderLocationType::FROM_HTSL);
 
 #ifdef HT_OPENGL
-	Shader* shader = new Shader(layout, "/res/glshader.vert", "/res/glshader.frag");
 	s32 ids[] = { 0, 1 };
 	shader->SetSamplers(ids, 2);
 
 	glClearColor(0.3f, 0.4f, 0.7f, 1.0f);
-#elif defined(HT_DIRECTX)
-	Shader* shader = new Shader(layout, "/res/dxshader.vert", "/res/dxshader.frag");
 #endif
 	VertexBuffer* vbo = new VertexBuffer(positions, sizeof(positions), BufferUsage::STATIC);
 	
