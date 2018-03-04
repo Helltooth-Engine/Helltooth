@@ -6,6 +6,8 @@
 #include "platform/directx/DX.hpp"
 #endif
 
+#include <Parser.hpp>
+
 #include "graphics/Enums.hpp"
 
 #include "graphics/buffers/BufferLayout.hpp"
@@ -14,6 +16,7 @@
 #include "utils/String.hpp"
 #include "utils/FileUtils.hpp"
 #include "utils/Vfs.hpp"
+
 
 namespace ht { namespace graphics {
 
@@ -30,7 +33,7 @@ namespace ht { namespace graphics {
 #endif
 
 	public:
-		Shader(BufferLayout* layout, utils::String vertexPath, utils::String fragmentPath, bool path = true);
+		Shader(BufferLayout* layout, utils::String vertexPath, utils::String fragmentPath, int path = ShaderLocationType::FROM_PATH);
 		~Shader();
 
 		void Start();

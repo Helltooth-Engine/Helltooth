@@ -28,22 +28,43 @@ namespace ht { namespace graphics {
 		return id;
 	}
 
-	Shader::Shader(BufferLayout* layout, utils::String vertexPath, utils::String fragmentPath, bool path) : m_Layout(layout) {
+	Shader::Shader(BufferLayout* layout, utils::String vertexPath, utils::String fragmentPath, int path) : m_Layout(layout) {
 		m_Program = GL(glCreateProgram());
 		u32 vertexID, fragmentID;
 
-		if (!path) {
+		if (path & ShaderLocationType::FROM_MEMORY != 0) {
 			vertexID = CompileShader(vertexPath.GetData(), ShaderType::VERTEX);
 			fragmentID = CompileShader(fragmentPath.GetData(), ShaderType::FRAGMENT);
+
 		}
-		else {
+		else if(path & ShaderLocationType::FROM_PATH != 0) {
 			String vertData, fragData;
 			
 			vertData = FileUtils::ReadFile(VFS::Resolve(vertexPath));
 			fragData = FileUtils::ReadFile(VFS::Resolve(fragmentPath));
 
+			
+			
+			if (path & ShaderLocationType::FROM_HTSL != 0) {
+				HT_MSG("");
+				htsl::Parser::Init();
+				std::vector<std::string> result;
+				result = htsl::Parser::Get()->Parse(vertData.GetData());
+				vertData = result[0];
+
+				std::cout << vertData.GetData() << std::endl;
+
+				result = htsl::Parser::Get()->Parse(fragData.GetData());
+				fragData = result[0];
+
+				std::cout << fragData.GetData() << std::endl;
+
+				htsl::Parser::End();
+			}
+
 			vertexID = CompileShader(vertData.GetData(), ShaderType::VERTEX);
 			fragmentID = CompileShader(fragData.GetData(), ShaderType::FRAGMENT);
+		
 		}
 
 		GL(glAttachShader(m_Program, vertexID));
