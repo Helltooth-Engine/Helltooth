@@ -7,33 +7,58 @@ namespace ht { namespace graphics {
 	using namespace utils;
 
 
-	Shader::Shader(BufferLayout* layout, String vertexPath, String fragmentPath, bool path) : m_Layout(layout) {
+	Shader::Shader(BufferLayout* layout, String vertexPath, String fragmentPath, int path) : m_Layout(layout) {
 		UINT flag = D3DCOMPILE_ENABLE_STRICTNESS;
 #ifdef HT_DEBUG
 		flag |= D3DCOMPILE_DEBUG;
 #endif
 		char* vertex, *fragment;
 		u32 vSize, fSize;
-		if (path) {
+		if (path & ShaderLocationType::FROM_PATH != 0) {
 			String vertexData = FileUtils::ReadFile(VFS::Resolve(vertexPath));
 			String fragmentData = FileUtils::ReadFile(VFS::Resolve(fragmentPath));
 			vSize = vertexData.GetSize() + 1;
 			fSize = fragmentData.GetSize() + 1;
 
-			vertex = new char[vSize];
-			memcpy(vertex, vertexData.GetData(), vSize);
+			
+			if (path & ShaderLocationType::FROM_HTSL != 0) {
+				htsl::Parser::Init();
 
-			fragment = new char[fSize];
-			memcpy(fragment, fragmentData.GetData(), fSize);
+				std::vector<std::string> result;
+				result = htsl::Parser::Get()->Parse(vertexData.GetData());
+				vSize = result[0].size();
+				vertex = new char[vSize + 1];
+				memcpy(vertex, result[0].c_str(), vSize + 1);
 
+				std::cout << vertex << std::endl;
+
+				result = htsl::Parser::Get()->Parse(fragmentData.GetData());
+				fSize = result[0].size();
+				fragment = new char[fSize + 1];
+				memcpy(fragment, result[0].c_str(), fSize + 1);
+
+				std::cout << fragment << std::endl;
+
+				htsl::Parser::End();
+			}
+			else {
+				vertex = new char[vSize];
+				memcpy(vertex, vertexData.GetData(), vSize);
+
+				fragment = new char[fSize];
+				memcpy(fragment, fragmentData.GetData(), fSize);
+			}
 		}
-		else {
+		else if (path & ShaderLocationType::FROM_MEMORY != 0) {
 			vSize = vertexPath.GetSize() + 1;
 			fSize = fragmentPath.GetSize() + 1;
 			vertex = new char[vSize];
 			fragment = new char[fSize];
 			memcpy(vertex, vertexPath.GetData(), vSize);
 			memcpy(fragment, fragmentPath.GetData(), fSize);
+		}
+		else {
+			HT_ASSERT(true, "[Shader] ShaderLocationType Unknown!");
 		}
 
 		ID3DBlob* vertexShaderBlob = nullptr, *vertexErrorBlob = nullptr;
@@ -58,6 +83,8 @@ namespace ht { namespace graphics {
 	
 		vertexShaderBlob->Release();
 		fragmentShaderBlob->Release();
+		delete[] vertex;
+		delete[] fragment;
 	}
 
 	Shader::~Shader() {

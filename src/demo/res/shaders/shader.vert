@@ -4,7 +4,6 @@
 layout {
 	vec3 POSITION as position;
 	vec2 UV as uv;
-	vec3 NORMAL as normals;
 };
 
 uniform {
