@@ -82,6 +82,12 @@ namespace ht { namespace graphics {
 		TEXTURE_3D
 	};
 
+	enum ShaderLocationType {
+		FROM_MEMORY = 0,
+		FROM_PATH = 1,
+		FROM_HTSL = 10
+	};
+
 	extern u32 DataTypeSize(DataType type);
 	extern u32 TextureFormatSize(TextureFormat type);
 	extern u32 GetSemanticIndex(DataType type);
