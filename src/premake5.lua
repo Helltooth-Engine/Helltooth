@@ -39,7 +39,6 @@ function setConfigurationFilters()
 	filter {}
 end
 
-
 workspace ("Helltooth")
     configurations {
         "Debug-GL",
@@ -56,15 +55,31 @@ workspace ("Helltooth")
     location "../Solution/"
     startproject "Sandbox"
 
+project("Helltooth-ShadingLanguage")
+	kind ("StaticLib")
+	files {
+		"Helltooth-ShadingLanguage/src/htsl/**.hpp",
+		"Helltooth-ShadingLanguage/src/htsl/**.cpp",
+	}
+	location "../Solution/Helltooth-ShadingLanguage/"
+	includedirs {
+		"$(SolutionDir)../src/Helltooth-ShadingLanguage/src/htsl/"
+	}
+
+	setProjectOutputDirectories() 
+    setConfigurationFilters()
+
 project ("Helltooth")
     kind ("StaticLib")
     files {
         "engine/**.hpp",
         "engine/**.cpp",
     }
-    location "../Solution/Helltooth/"
+	location "../Solution/Helltooth/"
+	dependson "Helltooth-ShadingLanguage"
     includedirs {
-		"$(SolutionDir)../src/engine/"
+		"$(SolutionDir)../src/engine/",
+		"$(SolutionDir)../src/Helltooth-ShadingLanguage/src/htsl/",
 	}
 
     setProjectOutputDirectories() 
@@ -79,9 +94,14 @@ project ("Sandbox")
         "../Solution/Sandbox/res/*/*.*"
     }
     location "../Solution/Sandbox/"
-    dependson "Helltooth"
+	dependson {
+		"Helltooth",
+		"Helltooth-ShadingLanguage",
+	}
+	
     links {
 		"Helltooth.lib",
+		"Helltooth-ShadingLanguage.lib",
 	}
 	filter {"configurations:Debug-GL"}
 		links {
@@ -104,11 +124,13 @@ project ("Sandbox")
 	filter {}
 	
 	sysincludedirs {
-		"$(SolutionDir)../src/engine/"
+		"$(SolutionDir)../src/engine/",
+		"$(SolutionDir)../src/Helltooth-ShadingLanguage/src/htsl/",
 	}
 
 	syslibdirs {
-		"$(SolutionDir)bin\\$(Platform)\\$(Configuration)\\Helltooth\\"
+		"$(SolutionDir)bin\\$(Platform)\\$(Configuration)\\Helltooth\\",
+		"$(SolutionDir)bin\\$(Platform)\\$(Configuration)\\Helltooth-ShadingLanguage\\",
 	}
 
     setProjectOutputDirectories() 

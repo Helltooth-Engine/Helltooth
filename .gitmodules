@@ -1,0 +1,3 @@
+[submodule "src/Helltooth-ShadingLanguage"]
+	path = src/Helltooth-ShadingLanguage
+	url = https://github.com/Helltooth-Engine/Helltooth-ShadingLanguage.git
