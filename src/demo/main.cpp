@@ -4,7 +4,6 @@
 
 #include <graphics/shaders/Shader.hpp>
 
-using namespace std;
 using namespace ht;
 using namespace core;
 using namespace maths;
