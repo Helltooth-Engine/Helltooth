@@ -52,12 +52,8 @@ namespace ht { namespace graphics {
 				result = htsl::Parser::Get()->Parse(vertData.GetData());
 				vertData = result[0];
 
-				std::cout << vertData.GetData() << std::endl;
-
 				result = htsl::Parser::Get()->Parse(fragData.GetData());
 				fragData = result[0];
-
-				std::cout << fragData.GetData() << std::endl;
 
 				htsl::Parser::End();
 			}

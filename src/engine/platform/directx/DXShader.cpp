@@ -30,14 +30,10 @@ namespace ht { namespace graphics {
 				vertex = new char[vSize + 1];
 				memcpy(vertex, result[0].c_str(), vSize + 1);
 
-				std::cout << vertex << std::endl;
-
 				result = htsl::Parser::Get()->Parse(fragmentData.GetData());
 				fSize = result[0].size();
 				fragment = new char[fSize + 1];
 				memcpy(fragment, result[0].c_str(), fSize + 1);
-
-				std::cout << fragment << std::endl;
 
 				htsl::Parser::End();
 			}
