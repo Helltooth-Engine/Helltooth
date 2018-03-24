@@ -3,7 +3,7 @@
 #include "maths/Vector3.hpp"
 #include "maths/Matrix4.hpp"
 
-namespace ht { namespace graphics {
+namespace ht { namespace core {
 
 	class Entity {
 	private:

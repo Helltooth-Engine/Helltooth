@@ -22,7 +22,6 @@ private:
 	Texture* texture;
 	Matrix4 proj, viewMatrix;
 
-
 public:
 	// In here you should initialize stuff that's not depended to the rendering context
 	Game() 

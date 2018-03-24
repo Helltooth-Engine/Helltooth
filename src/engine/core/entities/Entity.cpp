@@ -1,7 +1,6 @@
 #include "Entity.hpp"
 
-
-namespace ht { namespace graphics {
+namespace ht { namespace core {
 	using namespace maths;
 
 	Entity::Entity(f32 x, f32 y, f32 z) 
