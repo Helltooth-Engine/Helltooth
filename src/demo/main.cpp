@@ -31,8 +31,8 @@ int main() {
 	Camera* camera = new FPSCamera(0, 0, 0);
 
 	BufferLayout* layout = new BufferLayout();
-	layout->AddLayout<float>("POSITION", 3, 3, false);
 	layout->AddLayout<float>("UV", 2, 2, false);
+	layout->AddLayout<float>("POSITION", 3, 3, false);
 
 	Entity* entity = new Entity();
 	Shader* shader = new Shader(layout, "/res/shader.vert", "/res/shader.frag", ShaderLocationType::FROM_PATH | ShaderLocationType::FROM_HTSL);

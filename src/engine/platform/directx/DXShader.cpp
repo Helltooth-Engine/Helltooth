@@ -27,6 +27,8 @@ namespace ht { namespace graphics {
 				std::vector<std::string> result;
 				result = htsl::Parser::Get()->Parse(vertexData.GetData());
 				vSize = result[0].size();
+				m_Layout = new ModelLayout(htsl::Parser::Get()->GetVertexInputLayout(), layout);
+				modelLayout = true;
 				vertex = new char[vSize + 1];
 				memcpy(vertex, result[0].c_str(), vSize + 1);
 
@@ -86,6 +88,8 @@ namespace ht { namespace graphics {
 	Shader::~Shader() {
 		m_VertexShader->Release();
 		m_FragmentShader->Release();
+		if (modelLayout)
+			delete m_Layout;
 	}
 
 	void Shader::Start() {

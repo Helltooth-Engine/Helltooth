@@ -50,6 +50,8 @@ namespace ht { namespace graphics {
 				htsl::Parser::Init();
 				std::vector<std::string> result;
 				result = htsl::Parser::Get()->Parse(vertData.GetData());
+				m_Layout = new ModelLayout(htsl::Parser::Get()->GetVertexInputLayout(), layout);
+				modelLayout = true;
 				vertData = result[0];
 
 				result = htsl::Parser::Get()->Parse(fragData.GetData());
@@ -105,6 +107,8 @@ namespace ht { namespace graphics {
 
 	Shader::~Shader() {
 		GL(glDeleteProgram(m_Program));
+		if (modelLayout) 
+			delete m_Layout;
 	}
 
 	void Shader::Start() {

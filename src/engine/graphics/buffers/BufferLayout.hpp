@@ -30,7 +30,7 @@ namespace ht { namespace graphics {
 	};
 
 	class BufferLayout {
-	private:
+	protected:
 		std::vector<BufferAttribute> m_Attributes;
 
 		u32 m_Stride = 0;

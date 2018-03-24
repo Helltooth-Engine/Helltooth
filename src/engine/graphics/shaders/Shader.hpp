@@ -11,6 +11,7 @@
 #include "graphics/Enums.hpp"
 
 #include "graphics/buffers/BufferLayout.hpp"
+#include "graphics/buffers/ModelLayout.hpp"
 #include "graphics/buffers/UniformBuffer.hpp"
 
 #include "utils/String.hpp"
@@ -23,6 +24,7 @@ namespace ht { namespace graphics {
 	class Shader {
 	private:
 		BufferLayout* m_Layout;
+		bool modelLayout = false;
 
 #ifdef HT_OPENGL
 		u32 m_Program;
