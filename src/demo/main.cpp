@@ -39,7 +39,7 @@ public:
 	}
 
 	void Init() {
-		float positions[] = {
+		float data[] = {
 			-0.5f, -0.5f, -1.0f, 0.0f, 0.0f,
 			-0.5f,  0.5f, -1.0f, 0.0f, 1.0f,
 			0.5f,  0.5f, -1.0f, 1.0f, 1.0f,
@@ -57,7 +57,7 @@ public:
 
 
 		shader = new Shader(layout, "/res/shader.vert", "/res/shader.frag", ShaderLocationType::FROM_PATH | ShaderLocationType::FROM_HTSL);
-		vbo = new VertexBuffer(positions, sizeof(positions), BufferUsage::STATIC);
+		vbo = new VertexBuffer(data, sizeof(data), BufferUsage::STATIC);
 
 #ifdef HT_OPENGL
 		s32 ids[] = { 0, 1 };
