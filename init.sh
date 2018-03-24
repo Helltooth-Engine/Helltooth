@@ -65,3 +65,4 @@ elif [ "$os" == "osx" ]; then
 	$(tar -xvzf "tmp/premake5.tar.gz" -C "bin")
 fi
 rm -rf tmp
+git submodule update --init
