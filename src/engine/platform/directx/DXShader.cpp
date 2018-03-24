@@ -14,14 +14,14 @@ namespace ht { namespace graphics {
 #endif
 		char* vertex, *fragment;
 		u32 vSize, fSize;
-		if (path & ShaderLocationType::FROM_PATH != 0) {
+		if ((path & ShaderLocationType::FROM_PATH) != 0) {
 			String vertexData = FileUtils::ReadFile(VFS::Resolve(vertexPath));
 			String fragmentData = FileUtils::ReadFile(VFS::Resolve(fragmentPath));
 			vSize = vertexData.GetSize() + 1;
 			fSize = fragmentData.GetSize() + 1;
 
 			
-			if (path & ShaderLocationType::FROM_HTSL != 0) {
+			if ((path & ShaderLocationType::FROM_HTSL) != 0) {
 				htsl::Parser::Init();
 
 				std::vector<std::string> result;
@@ -47,7 +47,7 @@ namespace ht { namespace graphics {
 				memcpy(fragment, fragmentData.GetData(), fSize);
 			}
 		}
-		else if (path & ShaderLocationType::FROM_MEMORY != 0) {
+		else if ((path & ShaderLocationType::FROM_MEMORY) != 0) {
 			vSize = vertexPath.GetSize() + 1;
 			fSize = fragmentPath.GetSize() + 1;
 			vertex = new char[vSize];

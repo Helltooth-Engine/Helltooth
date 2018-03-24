@@ -32,12 +32,12 @@ namespace ht { namespace graphics {
 		m_Program = GL(glCreateProgram());
 		u32 vertexID, fragmentID;
 
-		if (path & ShaderLocationType::FROM_MEMORY != 0) {
+		if ((path & ShaderLocationType::FROM_MEMORY) != 0) {
 			vertexID = CompileShader(vertexPath.GetData(), ShaderType::VERTEX);
 			fragmentID = CompileShader(fragmentPath.GetData(), ShaderType::FRAGMENT);
 
 		}
-		else if(path & ShaderLocationType::FROM_PATH != 0) {
+		else if((path & ShaderLocationType::FROM_PATH) != 0) {
 			String vertData, fragData;
 			
 			vertData = FileUtils::ReadFile(VFS::Resolve(vertexPath));
@@ -45,7 +45,7 @@ namespace ht { namespace graphics {
 
 			
 			
-			if (path & ShaderLocationType::FROM_HTSL != 0) {
+			if ((path & ShaderLocationType::FROM_HTSL) != 0) {
 				HT_MSG("");
 				htsl::Parser::Init();
 				std::vector<std::string> result;
