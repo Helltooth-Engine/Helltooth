@@ -1,6 +1,5 @@
 #include "String.hpp"
 
-
 namespace ht { namespace utils {
 	String::String()
 		: m_Size(0) {
@@ -36,7 +35,6 @@ namespace ht { namespace utils {
 	String::~String() {
 		delete[] m_Data;
 	}
-
 
 	void String::Append(char c) {
 		char* temp = new char[m_Size + 2];
@@ -80,7 +78,6 @@ namespace ht { namespace utils {
 		m_HashValue = 0;
 	}
 
-
 	String String::Substring(u32 left, u32 right) const{
 		String result = String();
 		if (right == (u32)-1) { // 'till the end
@@ -114,7 +111,6 @@ namespace ht { namespace utils {
 		return result;
 	}
 
-
 	void String::Clear() {
 		if (m_Data) delete[] m_Data;
 		m_Data = new char[1];
@@ -122,7 +118,6 @@ namespace ht { namespace utils {
 		m_Size = 1;
 		m_HashValue = 0;
 	}
-
 
 	void String::operator=(const char* string) {
 		m_Size = strlen(string);
@@ -158,6 +153,5 @@ namespace ht { namespace utils {
 		}
 		return m_HashValue; // or return h % C;
 	}
-
 
 } }

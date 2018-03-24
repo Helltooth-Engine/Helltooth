@@ -17,7 +17,6 @@
 #include "utils/FileUtils.hpp"
 #include "utils/Vfs.hpp"
 
-
 namespace ht { namespace graphics {
 
 	class Shader {

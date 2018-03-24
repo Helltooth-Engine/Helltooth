@@ -157,7 +157,6 @@ HT_CREATE_FUNCTION_POINTER(GLint, glGetUniformLocation, GLuint program, const GL
 
 HT_CREATE_FUNCTION_POINTER(void, glActiveTexture, GLenum texture);
 
-
 extern bool GLInit();
 
 #define WGL_DRAW_TO_WINDOW_ARB						0x2001
@@ -180,7 +179,6 @@ extern bool GLInit();
 typedef BOOL(WINAPI * PFNWGLCHOOSEPIXELFORMATARBPROC) (HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats);
 typedef HGLRC(WINAPI * PFNWGLCREATECONTEXTATTRIBSARBPROC) (HDC hDC, HGLRC hShareContext, const int *attribList);
 typedef BOOL(WINAPI *PFNWGLSWAPINTERVALEXTPROC) (int interval);
-
 
 extern PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB;
 extern PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB;

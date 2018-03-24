@@ -1,6 +1,5 @@
 #ifdef HT_DIRECTX
 #include "graphics/buffers/VertexBuffer.hpp"
-#include "DX.hpp"
 
 namespace ht { namespace graphics {
 	using namespace core;

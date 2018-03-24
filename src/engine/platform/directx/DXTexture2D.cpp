@@ -16,7 +16,6 @@ namespace ht { namespace graphics {
 		HT_DXDEVICE->CreateSamplerState(&samplerDesc, &m_SamplerState);
 	}
 
-
 	Texture2D::Texture2D(u32 width, u32 height, TextureFormat format) : Texture(width, height, TextureType::TEXTURE_2D, format) {
 		SetSamplerState();
 		D3D11_TEXTURE2D_DESC textureDesc = {};
@@ -60,7 +59,6 @@ namespace ht { namespace graphics {
 		data.pSysMem = pixels;
 		data.SysMemPitch = width * TextureFormatSize(format);
 
-
 		DX(HT_DXDEVICE->CreateTexture2D(&textureDesc, &data, &m_Texture));
 
 		D3D11_SHADER_RESOURCE_VIEW_DESC viewDesc = {};
@@ -91,8 +89,6 @@ namespace ht { namespace graphics {
 		HT_DXCONTEXT->PSSetSamplers(slot, 1, &m_SamplerState);
 	}
 
-
 } }
-
 
 #endif

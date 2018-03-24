@@ -6,7 +6,6 @@ namespace ht { namespace graphics {
 	using namespace core;
 	using namespace utils;
 
-
 	Shader::Shader(BufferLayout* layout, String vertexPath, String fragmentPath, int path) : m_Layout(layout) {
 		UINT flag = D3DCOMPILE_ENABLE_STRICTNESS;
 #ifdef HT_DEBUG
@@ -19,7 +18,6 @@ namespace ht { namespace graphics {
 			String fragmentData = FileUtils::ReadFile(VFS::Resolve(fragmentPath));
 			vSize = vertexData.GetSize() + 1;
 			fSize = fragmentData.GetSize() + 1;
-
 			
 			if ((path & ShaderLocationType::FROM_HTSL) != 0) {
 				htsl::Parser::Init();

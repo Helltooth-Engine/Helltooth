@@ -34,8 +34,6 @@ namespace ht { namespace graphics {
 		HT_DXCONTEXT->IASetIndexBuffer(m_IndexBuffer, m_Format, 0);
 	}
 
-
 } }
-
 
 #endif

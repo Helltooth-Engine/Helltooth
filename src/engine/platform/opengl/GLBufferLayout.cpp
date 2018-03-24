@@ -28,7 +28,6 @@ namespace ht { namespace graphics {
 		}
 	}
 
-
 } }
 
 #endif

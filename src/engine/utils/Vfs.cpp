@@ -1,10 +1,8 @@
 #include "Vfs.hpp"
 
-
 namespace ht { namespace utils {
 
 	std::unordered_map<String, std::vector<String>> VFS::mounts;
-
 
 	void VFS::Mount(const String &virtualPath, const String &physicalPath) {
 		String path = physicalPath;

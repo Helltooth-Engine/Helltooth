@@ -1,12 +1,15 @@
 #pragma once
-#include <Windows.h>
-#include "utils/Log.hpp"
-
-#ifdef HT_DIRECTX
+#if defined(HT_DIRECTX)
 #include <d3d11.h>
 #include <d3d10.h>
 #include <dxgi.h>
+#elif defined(HT_OPENGL)
+#include "platform/opengl/GL.hpp"
 #endif
+
+#include <Windows.h>
+
+#include "utils/Log.hpp"
 
 namespace ht { namespace graphics {
 

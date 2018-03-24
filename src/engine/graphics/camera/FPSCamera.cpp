@@ -1,6 +1,5 @@
 #include "FPSCamera.hpp"
 
-
 namespace ht { namespace graphics {
 	using namespace maths;
 

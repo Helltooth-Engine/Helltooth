@@ -23,5 +23,4 @@ namespace ht { namespace utils {
 		}
 	};
 
-
 } }

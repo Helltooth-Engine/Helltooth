@@ -1,6 +1,5 @@
 #ifdef HT_OPENGL
 #include "graphics/Context.hpp"
-#include "platform/opengl/GL.hpp"
 
 namespace ht { namespace graphics {
 

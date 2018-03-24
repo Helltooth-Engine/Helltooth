@@ -172,6 +172,5 @@ namespace ht { namespace core {
 		SetWindowText(m_Hwnd, title.c_str());
 	}
 
-
 } }
 #endif

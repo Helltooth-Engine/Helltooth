@@ -1,5 +1,4 @@
 #ifdef HT_OPENGL
-
 #include "graphics/buffers/UniformBuffer.hpp"
 
 namespace ht { namespace graphics {
@@ -51,6 +50,5 @@ namespace ht { namespace graphics {
 	}
 
 } }
-
 
 #endif

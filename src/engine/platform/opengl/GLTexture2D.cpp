@@ -41,8 +41,6 @@ namespace ht { namespace graphics {
 		GL(glActiveTexture(GL_TEXTURE0 + slot));
 	}
 
-
 } }
-
 
 #endif

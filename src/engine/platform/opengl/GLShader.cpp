@@ -1,5 +1,4 @@
 #ifdef HT_OPENGL
-
 #include "graphics/shaders/Shader.hpp"
 
 namespace ht { namespace graphics {
@@ -35,15 +34,12 @@ namespace ht { namespace graphics {
 		if ((path & ShaderLocationType::FROM_MEMORY) != 0) {
 			vertexID = CompileShader(vertexPath.GetData(), ShaderType::VERTEX);
 			fragmentID = CompileShader(fragmentPath.GetData(), ShaderType::FRAGMENT);
-
 		}
 		else if((path & ShaderLocationType::FROM_PATH) != 0) {
 			String vertData, fragData;
 			
 			vertData = FileUtils::ReadFile(VFS::Resolve(vertexPath));
 			fragData = FileUtils::ReadFile(VFS::Resolve(fragmentPath));
-
-			
 			
 			if ((path & ShaderLocationType::FROM_HTSL) != 0) {
 				HT_MSG("");
@@ -62,7 +58,6 @@ namespace ht { namespace graphics {
 
 			vertexID = CompileShader(vertData.GetData(), ShaderType::VERTEX);
 			fragmentID = CompileShader(fragData.GetData(), ShaderType::FRAGMENT);
-		
 		}
 
 		GL(glAttachShader(m_Program, vertexID));
@@ -73,7 +68,6 @@ namespace ht { namespace graphics {
 		GLint isLinked;
 		glGetProgramiv(m_Program, GL_LINK_STATUS, &isLinked);
 		if (isLinked == GL_FALSE) {
-		
 			GLint maxLength = 0;
 			glGetProgramiv(m_Program, GL_INFO_LOG_LENGTH, &maxLength);
 		
@@ -117,6 +111,5 @@ namespace ht { namespace graphics {
 	}
 
 } }
-
 
 #endif

@@ -21,7 +21,6 @@ namespace ht { namespace graphics {
 	public:
 		Texture2D(u32 width, u32 height, TextureFormat format);
 		Texture2D(byte* pixels, u32 width, u32 height, TextureFormat format);
-
 		~Texture2D();
 
 		void SetPixels(byte* pixels);
