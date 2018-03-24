@@ -50,7 +50,7 @@ namespace ht { namespace graphics {
 				htsl::Parser::Init();
 				std::vector<std::string> result;
 				result = htsl::Parser::Get()->Parse(vertData.GetData());
-				m_Layout = new ModelLayout(htsl::Parser::Get()->GetVertexInputLayout(), layout);
+				m_Layout->SetSemanticNames(htsl::Parser::Get()->GetVertexInputLayout());
 				modelLayout = true;
 				vertData = result[0];
 

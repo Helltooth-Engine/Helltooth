@@ -27,7 +27,7 @@ namespace ht { namespace graphics {
 				std::vector<std::string> result;
 				result = htsl::Parser::Get()->Parse(vertexData.GetData());
 				vSize = result[0].size();
-				m_Layout = new ModelLayout(htsl::Parser::Get()->GetVertexInputLayout(), layout);
+				m_Layout->SetSemanticNames(htsl::Parser::Get()->GetVertexInputLayout());
 				modelLayout = true;
 				vertex = new char[vSize + 1];
 				memcpy(vertex, result[0].c_str(), vSize + 1);

@@ -72,6 +72,25 @@ namespace ht { namespace graphics {
 			m_Stride += stride * DataTypeSize(DataType::UNSIGNED_INT);
 		}
 
+		void SetSemanticNames(const std::vector<std::string>& semanticNames) {
+			HT_ASSERT(semanticNames.size() > m_Attributes.size(), "[BufferLayout] Too many semanticNames in the shader.");
+
+			int semanticCount = 0;
+
+			std::vector<BufferAttribute> newAttributes; // The new attributes are going to get here
+
+			for (const std::string& semanticName : semanticNames) {
+				for (int i = 0; i < m_Attributes.size(); i++) {
+					if (utils::String(semanticName) == m_Attributes[i].semanticName) {
+						newAttributes.push_back(m_Attributes[i]);
+						semanticCount++;
+						break;
+					}
+				}
+			}
+			m_Attributes = newAttributes;
+		}
+
 		u32 GetStride() { return m_Stride; }
 	};
 
