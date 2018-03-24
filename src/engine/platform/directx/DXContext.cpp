@@ -61,8 +61,8 @@ namespace ht { namespace graphics {
 		D3D11_VIEWPORT v;
 		v.TopLeftX = 0;
 		v.TopLeftY = 0;
-		v.Width = size.right - size.left;
-		v.Height = size.bottom - size.top;
+		v.Width = static_cast<float>(size.right - size.left);
+		v.Height = static_cast<float>(size.bottom - size.top);
 		v.MinDepth = 0.0f;
 		v.MaxDepth = 1.0f;
 

@@ -80,7 +80,7 @@ namespace ht { namespace graphics {
 			std::vector<BufferAttribute> newAttributes; // The new attributes are going to get here
 
 			for (const std::string& semanticName : semanticNames) {
-				for (int i = 0; i < m_Attributes.size(); i++) {
+				for (u32 i = 0; i < m_Attributes.size(); i++) {
 					if (utils::String(semanticName) == m_Attributes[i].semanticName) {
 						newAttributes.push_back(m_Attributes[i]);
 						semanticCount++;
