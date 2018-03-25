@@ -16,13 +16,13 @@ workspace ("Helltooth")
 
 	filter {}
 
-    platforms {
-        "x86",
-        "x64",
-    }
+	platforms {
+		"x86",
+		"x64",
+	}
 
-    location "../../Solution/"
-    startproject "Sandbox"
+	location "../../Solution/"
+	startproject "Sandbox"
 
 makeProject("Helltooth-ShadingLanguage")
 	kind ("StaticLib")
@@ -35,31 +35,31 @@ makeProject("Helltooth-ShadingLanguage")
 	}
 
 makeProject ("Helltooth")
-    kind ("StaticLib")
-    files {
-        "../engine/**.hpp",
-        "../engine/**.cpp",
-    }
+	kind ("StaticLib")
+	files {
+		"../engine/**.hpp",
+		"../engine/**.cpp",
+	}
 	dependson "Helltooth-ShadingLanguage"
-    includedirs {
+	includedirs {
 		"../engine/",
 		"../Helltooth-ShadingLanguage/src/htsl/",
 	}
 
 makeProject ("Sandbox")
-    kind ("ConsoleApp")
-    files {
-        "../demo/**.h",
-        "../demo/**.hpp",
-        "../demo/**.cpp",
-        "../../Solution/Sandbox/res/*/*.*"
-    }
+	kind ("ConsoleApp")
+	files {
+		"../demo/**.h",
+		"../demo/**.hpp",
+		"../demo/**.cpp",
+		"../../Solution/Sandbox/res/*/*.*"
+	}
 	dependson {
 		"Helltooth",
 		"Helltooth-ShadingLanguage",
 	}
 	
-    links {
+	links {
 		"Helltooth.lib",
 		"Helltooth-ShadingLanguage.lib",
 	}
