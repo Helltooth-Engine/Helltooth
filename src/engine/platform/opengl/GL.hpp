@@ -1,10 +1,18 @@
 #ifdef HT_OPENGL
 #pragma once
+
+#if defined(HT_WINDOWS)
 #include <Windows.h>
 #include <gl/GL.h>
+#elif defined(HT_LINUX)
+#include <GL/glx.h>
+#endif
 
 #define HT_FUNCTION_NAME(function) PFN##function##PROC
-#define HT_CREATE_FUNCTION_POINTER(returntype, function, ...) typedef returntype(APIENTRY * HT_FUNCTION_NAME(function)) (__VA_ARGS__); \
+
+#define HT_APIENTRY __stdcall
+
+#define HT_CREATE_FUNCTION_POINTER(returntype, function, ...) typedef returntype(HT_APIENTRY * HT_FUNCTION_NAME(function)) (__VA_ARGS__); \
 		extern HT_FUNCTION_NAME(function) function
 
 typedef unsigned int GLenum;
