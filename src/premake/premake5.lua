@@ -1,12 +1,20 @@
 require "projectTemplate"
 
 workspace ("Helltooth")
-    configurations {
-        "Debug-GL",
-        "Release-GL",
-        "Debug-DX",
-        "Release-DX",
-    }
+	filter { "system:windows"}
+		configurations {
+			"Debug-GL",
+			"Release-GL",
+			"Debug-DX",
+			"Release-DX",
+		}
+	filter { "system:linux"}
+		configurations {
+			"Debug-GL",
+			"Release-GL",
+		}
+
+	filter {}
 
     platforms {
         "x86",
@@ -55,23 +63,31 @@ makeProject ("Sandbox")
 		"Helltooth.lib",
 		"Helltooth-ShadingLanguage.lib",
 	}
-	filter {"configurations:Debug-GL"}
+
+	filter {"configurations:Debug-GL", "system:windows" }
 		links {
 			"opengl32"
 		}
-	filter {"configurations:Release-GL"}
+	filter {"configurations:Release-GL", "system:windows" }
 		links {
 			"opengl32"
 		}
-	filter {"configurations:Debug-DX"}
+	filter {"configurations:Debug-DX", "system:windows" }
 		links {
 			"D3D11",
 			"d3dcompiler"
 		}
-	filter {"configurations:Release-DX"}
+	filter {"configurations:Release-DX", "system:windows" }
 		links {
 			"D3D11",
 			"d3dcompiler"
+		}
+
+	filter { "system:linux", "configurations:Debug-GL"}
+		links {
+			"GL",
+			"X11",
+			"GLU",
 		}
 	filter {}
 	

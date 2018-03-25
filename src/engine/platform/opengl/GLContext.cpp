@@ -2,7 +2,7 @@
 #include "graphics/Context.hpp"
 
 namespace ht { namespace graphics {
-
+#if defined(HT_WINDOWS)
 	Context::Context(HWND& hwnd)
 		:m_Hwnd(hwnd) {
 		PIXELFORMATDESCRIPTOR pfd;
@@ -80,6 +80,42 @@ namespace ht { namespace graphics {
 	void Context::Update() {
 		SwapBuffers(m_DeviceContext);
 	}
+
+#elif defined(HT_LINUX)
+	Context::Context(Display* display, Window& window) {
+		GLint attributes[] = {
+			GLX_RGBA,
+			GLX_DEPTH_SIZE, 24,
+			GLX_DOUBLEBUFFER,
+			0 // End of attributes
+		};
+
+		m_VisualInfo = glxChooseVisual(display, 0, attributes);
+
+		if (m_VisualInfo == NULL) {
+			HT_FATAL("[Context] No appropriate visual found.");
+			return;
+		}
+
+		m_ColorMap = XCreateColormap(display, window, m_VisualInfo->visual, AllocNone);
+
+		m_WindowAttributes.colormap = m_Colormap;
+		m_WindowAttributes.event_mask = ExposureMak | KeyPressMask;
+	}
+
+	Context::~Context() {
+
+	}
+
+	void Context::Update() {
+
+	}
+
+	void Context::Clear() {
+
+	}
+
+#endif
 
 	void Context::Clear() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

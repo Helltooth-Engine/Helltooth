@@ -3,6 +3,12 @@
 #include <Windows.h>
 #include <windowsx.h>
 #include <tchar.h>
+#elif defined(HT_LINUX)
+#include <X11/X.h>
+#include <X11/Xlib.h>
+#include <GL/gl.h>
+#include <GL/glx.h>
+#include <GL/glu.h>
 #endif
 
 #include <stdio.h>
@@ -27,8 +33,12 @@ namespace ht { namespace core {
 		bool m_VSync;
 		std::wstring m_Title;
 		graphics::Context* m_Context;
-#ifdef HT_WINDOWS
+
+#if defined(HT_WINDOWS)
 		HWND m_Hwnd;
+#elif defined(HT_LINUX)
+		Display m_Display;
+		Window m_Window;
 #else
 #	error "Others platform is not supported"
 #endif
@@ -37,7 +47,9 @@ namespace ht { namespace core {
 		static Window* s_Window;
 
 	private:
+#ifdef HT_WINDOWS
 		static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+#endif
 
 	public:
 		Window(std::wstring title, u32 width, u32 height);
@@ -47,14 +59,15 @@ namespace ht { namespace core {
 		void Update();
 		void Clear();
 
-		bool IsHWND(HWND other) { return m_Hwnd == other; }
-
 		inline bool ShouldClose() { return m_ShouldClose; }
 		inline graphics::Context* GetContext() { return m_Context; }
 
 		static Window* GetWindow() { return s_Window; }
 
 		void SetTitle(std::wstring title);
+#ifdef HT_WINDOWS
+		bool IsHWND(HWND other) { return m_Hwnd == other; }
+#endif
 
 #ifdef HT_DIRECTX
 		inline ID3D11Device* GetDevice() { return m_Context->GetDevice(); }

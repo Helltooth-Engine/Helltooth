@@ -7,7 +7,15 @@
 #include "platform/opengl/GL.hpp"
 #endif
 
+#if defined(HT_WINDOWS)
 #include <Windows.h>
+#elif defined(HT_LINUX)
+#include <X11/X.h>
+#include <X11/Xlib.h>
+#include <GL/gl.h>
+#include <GL/glx.h>
+#include <GL/glu.h>
+#endif
 
 #include "utils/Log.hpp"
 
@@ -15,10 +23,17 @@ namespace ht { namespace graphics {
 
 	class Context {
 	private:
-		HDC m_DeviceContext;
 #ifdef HT_OPENGL
+#	if defined(HT_WINDOWS)
+		HDC m_DeviceContext;
 		HGLRC m_Context;
 		HWND m_Hwnd;
+#	elif defined(HT_LINUX)
+		GLXContext m_Context;
+		XVisualInfo* m_VisualInfo;
+		Colormap m_ColorMap;
+		XSetWindowAttributes m_WindowAttributes;
+#	endif
 #elif defined(HT_DIRECTX)
 		IDXGISwapChain* m_SwapChain;
 		ID3D11Device* m_Device;
@@ -29,7 +44,11 @@ namespace ht { namespace graphics {
 #endif
 
 	public:
+#if defined(HT_WINDOWS)
 		Context(HWND& hwnd);
+#elif defined(HT_LINUX)
+		Context(Display* dpy, Window& root);
+#endif
 		~Context();
 
 #ifdef HT_DIRECTX
@@ -39,6 +58,13 @@ namespace ht { namespace graphics {
 
 		void Update();
 		void Clear();
+
+#if defined(HT_LINUX)
+		inline Colormap& GetColormap() { return m_ColorMap; }
+		inline XSetWindowAttributes& GetWindowAttributes() { return m_WindowAttributes; }
+		inline XVisualINfo* GetVisualInfo() { return m_VisualInfo; }
+#endif
+
 	};
 
 } }
