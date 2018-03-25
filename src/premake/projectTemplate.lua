@@ -1,6 +1,8 @@
 function makeProject(name) 
 	project(name)
 	location ("../../Solution/" .. name .. "/")
+	
+	cppdialect "C++14"
 
 	filter {"configurations:Debug-GL"}
 		defines {
