@@ -1,9 +1,13 @@
 args=vs2017
+directory=../Solution
+
 if [ $# -gt 0 ]; then
 	args=$@
 fi
 
-mkdir ../Solution
+if [ ! -d "$directory" ]; then
+	mkdir $directory
+fi
 
 cp -R demo/res ../Solution/Sandbox/
 
