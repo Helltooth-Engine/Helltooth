@@ -1,5 +1,7 @@
 #pragma once
+#ifdef HT_WINDOWS
 #include <Windows.h>
+#endif
 #include <utility>
 #include <intrin.h>
 
@@ -8,12 +10,19 @@
 #endif
 
 #include "core/Internal.hpp"
-
+#if defined(HT_WINDOWS)
 #define HT_LEVEL_FATAL			0x04
 #define HT_LEVEL_ERROR			0x0C
 #define HT_LEVEL_WARNING		0x0E
 #define HT_LEVEL_INFO			0x0F
 #define HT_LEVEL_MSG			0x07
+#elif defined(HT_LINUX)
+#define HT_LEVEL_FATAL			"\033[0;31m
+#define HT_LEVEL_ERROR			"\033[1;31m
+#define HT_LEVEL_WARNING		"\033[1;33m
+#define HT_LEVEL_INFO			"\033[0;37m
+#define HT_LEVEL_MSG			"\033[1;37m
+#endif
 
 #define	HT_LOG_LEVEL_FATAL		0
 #define	HT_LOG_LEVEL_ERROR		1
@@ -95,13 +104,19 @@
 #endif
 
 namespace ht { namespace utils {
-#ifdef HT_WINDOWS
+#if defined(HT_WINDOWS)
 	template<typename First, typename ... Args>
 	void Log(unsigned int color, bool newline, First arg, Args... message) {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 		printf(arg, std::forward<Args>(message)...);
 		if (newline) printf("\n");
 	}
+#elif defined(HT_LINUX)
+	template<typename First, typename ... Args>
+	void Log(const char* color, bool newline, First arg, Args... message) {
+		printf((std::string(color) + arg).c_str(), std::forward<Args>(message)...);
+		if (newline) printf("\n");
+}
 #else
 #	error "Log file not created for other platforms."
 #endif
