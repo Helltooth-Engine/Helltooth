@@ -4,6 +4,7 @@
 #include <windowsx.h>
 #include <tchar.h>
 #elif defined(HT_LINUX)
+#define XLIB_ILLEGAL_ACCESS
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <GL/gl.h>
@@ -37,8 +38,8 @@ namespace ht { namespace core {
 #if defined(HT_WINDOWS)
 		HWND m_Hwnd;
 #elif defined(HT_LINUX)
-		Display m_Display;
-		Window m_Window;
+		_XDisplay* m_Display;
+		XID m_Window;
 #else
 #	error "Others platform is not supported"
 #endif
