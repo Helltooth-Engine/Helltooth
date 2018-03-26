@@ -32,7 +32,7 @@ namespace ht { namespace core {
 		u32 m_Width, m_Height;
 		bool m_IsVisible;
 		bool m_VSync;
-		std::wstring m_Title;
+		std::string m_Title;
 		graphics::Context* m_Context;
 
 #if defined(HT_WINDOWS)
@@ -53,7 +53,7 @@ namespace ht { namespace core {
 #endif
 
 	public:
-		Window(std::wstring title, u32 width, u32 height);
+		Window(std::string title, u32 width, u32 height);
 		~Window();
 
 		void SetVisible(bool visible);
@@ -65,7 +65,7 @@ namespace ht { namespace core {
 
 		static Window* GetWindow() { return s_Window; }
 
-		void SetTitle(std::wstring title);
+		void SetTitle(std::string title);
 #ifdef HT_WINDOWS
 		bool IsHWND(HWND other) { return m_Hwnd == other; }
 #endif

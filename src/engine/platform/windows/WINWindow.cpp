@@ -92,16 +92,16 @@ namespace ht { namespace core {
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 	}
 
-	Window::Window(std::wstring title, u32 width, u32 height)
+	Window::Window(std::string title, u32 width, u32 height)
 		:m_Title(title), m_Width(width), m_Height(height) {
 
 #if defined(HT_OPENGL)
-		m_Title.append(L" - OpenGL");
+		m_Title.append(" - OpenGL");
 #elif defined (HT_DIRECTX)
-		m_Title.append(L" - DirectX");
+		m_Title.append(" - DirectX");
 #endif
 
-		WNDCLASSEX wcex;
+		WNDCLASSEXA wcex;
 		wcex.cbSize			= sizeof(WNDCLASSEX);
 		wcex.lpfnWndProc	= WndProc;
 		wcex.cbClsExtra		= 0;
@@ -110,17 +110,17 @@ namespace ht { namespace core {
 		wcex.hIcon			= nullptr;
 		wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
 		wcex.hbrBackground	= 0;
-		wcex.lpszClassName	= L"Helltooth window";
+		wcex.lpszClassName	= "Helltooth window";
 		wcex.lpszMenuName	= 0;
 		wcex.hIconSm		= 0;
 		wcex.style			= CS_VREDRAW | CS_HREDRAW | CS_OWNDC;
 
-		if (!RegisterClassEx(&wcex)) {
+		if (!RegisterClassExA(&wcex)) {
 			DWORD word = GetLastError();
 			HT_FATAL("[Window] Could not register window class, %d!", word);
 			return;
 		}
-		m_Hwnd = CreateWindow(L"Helltooth window", m_Title.c_str(),
+		m_Hwnd = CreateWindowA("Helltooth window", m_Title.c_str(),
 			WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, m_Width, m_Height, 0, 0, wcex.hInstance, 0);
 
 
@@ -163,13 +163,13 @@ namespace ht { namespace core {
 		m_IsVisible = visible;
 	}
 
-	void Window::SetTitle(std::wstring title) {
+	void Window::SetTitle(std::string title) {
 #if defined(HT_OPENGL)
-		title.append(L" - OpenGL");
+		title.append(" - OpenGL");
 #elif defined (HT_DIRECTX)
-		title.append(L" - DirectX");
+		title.append(" - DirectX");
 #endif
-		SetWindowText(m_Hwnd, title.c_str());
+		SetWindowTextA(m_Hwnd, title.c_str());
 	}
 
 } }

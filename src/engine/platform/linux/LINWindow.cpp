@@ -4,7 +4,7 @@
 namespace ht { namespace core {
 	using namespace graphics;
 
-	Window::Window(std::wstring title, u32 width, u32 height) 
+	Window::Window(std::string title, u32 width, u32 height) 
 		: m_Title(title), m_Width(width), m_Height(height) {
 		m_Display = XOpenDisplay(nullptr);
 		if (m_Display == nullptr) {
@@ -15,9 +15,9 @@ namespace ht { namespace core {
 		m_Window = DefaultRootWindow(m_Display);
 
 #if defined(HT_OPENGL)
-		m_Title.append(L" - OpenGL");
+		m_Title.append(" - OpenGL");
 #elif defined (HT_DIRECTX)
-		m_Title.append(L" - DirectX");
+		m_Title.append(" - DirectX");
 #endif
 
 		m_Context = new Context(m_Display, m_Window);
@@ -26,7 +26,7 @@ namespace ht { namespace core {
 
 		XMapWindow(m_Display, m_Window);
 
-		XStoreName(m_Display, m_Window, title);
+		XStoreName(m_Display, m_Window, title.c_str());
 
 		s_Window = this;
 	}
@@ -47,8 +47,8 @@ namespace ht { namespace core {
 
 	}
 
-	void Window::SetTitle(std::wstring title) {
-		XStoreName(m_Display, m_Window, title);
+	void Window::SetTitle(std::string title) {
+		XStoreName(m_Display, m_Window, title.c_str());
 	}
 
 } }
