@@ -1,7 +1,5 @@
 #pragma once
 
-#ifdef HT_WINDOWS
-
 #define HT_MOUSE_LBUTTON		1
 #define HT_MOUSE_RBUTTON		2
 #define HT_MOUSE_BUTTON3		3
@@ -11,6 +9,8 @@
 #define HT_MOUSE_BUTTON7		7
 #define HT_MOUSE_BUTTON8		8
 #define HT_MOUSE_BUTTON9		9
+
+#ifdef HT_WINDOWS
 
 #define HT_KEY_UNKNOWN			-1
 #define HT_KEY_SPACE			32
@@ -145,6 +145,21 @@
 #define HT_KEY_RIGHT_SUPER		347
 
 #define HT_KEY_MENU				348
+
+#elif defined(HT_LINUX)
+
+#define HT_KEY_1				2
+#define HT_KEY_2				3
+#define HT_KEY_3				4
+#define HT_KEY_4				5
+#define HT_KEY_5				6
+#define HT_KEY_6				7
+#define HT_KEY_7				8
+#define HT_KEY_8				9
+#define HT_KEY_9				10
+#define HT_KEY_0				11
+
+
 #else
 #	error "Keys for other platforms are not implemented."
 #endif
