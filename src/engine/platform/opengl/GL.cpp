@@ -102,6 +102,7 @@ bool GLInit() {
 	return true;
 }
 
+#if defined(HT_WINDOWS)
 PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB;
 PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB;
 PFNWGLSWAPINTERVALEXTPROC wglSwapIntervalEXT;
@@ -113,4 +114,5 @@ bool wglInit() {
 
 	return true;
 }
-#endif
+#endif // HT_WINDOWS
+#endif // HT_OPENGL
