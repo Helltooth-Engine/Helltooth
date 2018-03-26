@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include <vector>
+#include <unistd.h>
 
 #include "String.hpp"
 #include "Log.hpp"
@@ -21,9 +22,10 @@ namespace ht { namespace utils {
 		static String Resolve(const String& path);
 
 		inline static bool Exists(const String& path) {
-			struct stat buffer;
-			return (stat(path.GetData(), &buffer) == 0);
-		}
+			if (access(path.GetData(), F_OK) != -1)
+        return true;
+		  return false;
+    }
 	};
 
 } }
