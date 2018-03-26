@@ -3,6 +3,8 @@
 #include <Windows.h>
 #endif
 #include <utility>
+#include <stdio.h>
+#include <string>
 
 #ifdef HT_OPENGL
 #include "platform/opengl/GL.hpp"
@@ -44,7 +46,7 @@
 #endif
 
 #if HT_LOG_LEVEL_ERROR <= HT_LOG_LEVEL
-#define HT_ERROR(format, ...)	ht::utils::Log(HT_LEVEL_ERROR, true, format, __VA_ARGS__)
+#define HT_ERROR(format, ...)	ht::utils::Log(HT_LEVEL_ERROR, true, format,  __VA_ARGS__)
 #define _HT_ERROR(format, ...)	ht::utils::Log(HT_LEVEL_ERROR, false, format, __VA_ARGS__)
 #else
 #define HT_ERROR(format, ...)
@@ -77,12 +79,12 @@
 #ifdef HT_DEBUG
 #define HT_ASSERT(condition, statement)							\
 		if(condition)  {										\
-			HT_FATAL("*******************");					\
-			HT_FATAL("ASSERTION FAILED");						\
+			HT_FATAL("%s", "*******************");				\
+			HT_FATAL("%s", "ASSERTION FAILED");					\
 			HT_FATAL("Condition: %s", #condition);				\
 			HT_FATAL("%s", statement);							\
 			HT_FATAL("File: %s, line: %d", __FILE__, __LINE__); \
-			HT_FATAL("*******************");					\
+			HT_FATAL("%s", "*******************");				\
 			int *a = nullptr;									\
 			*a = 1;												\
 		}
