@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <memory.h>
 
 #include "core/Internal.hpp"
 
