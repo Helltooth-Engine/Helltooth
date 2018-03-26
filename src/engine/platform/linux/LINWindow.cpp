@@ -7,8 +7,8 @@ namespace ht { namespace core {
 	Window::Window(std::wstring title, u32 width, u32 height) 
 		: m_Title(title), m_Width(width), m_Height(height) {
 		m_Display = XOpenDisplay(nullptr);
-		if (dpy == nullptr) {
-			HT_FATAL("[Window] Coult not connect to X Server.");
+		if (m_Display == nullptr) {
+			HT_FATAL("%s", "[Window] Coult not connect to X Server.");
 			return;
 		}
 
