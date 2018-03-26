@@ -2,7 +2,9 @@
 
 #include <unordered_map>
 #include <vector>
+#if defined(HT_LINUX)
 #include <unistd.h>
+#endif
 
 #include "String.hpp"
 #include "Log.hpp"
@@ -22,10 +24,15 @@ namespace ht { namespace utils {
 		static String Resolve(const String& path);
 
 		inline static bool Exists(const String& path) {
+#if defined(HT_WINDOWS)
+			struct stat buffer;
+			return (stat(path.GetData(), &buffer) == 0);
+#elif defined(HT_LINUX)
 			if (access(path.GetData(), F_OK) != -1)
-        return true;
-		  return false;
-    }
+        		return true;
+			return false;
+#endif
+    	}
 	};
 
 } }
