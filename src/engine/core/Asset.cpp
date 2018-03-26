@@ -30,7 +30,7 @@ namespace ht { namespace core {
 		delete database;
 
 		if (result == nullptr) {
-			HT_FATAL("[Asset] Texture format not supported!");
+			HT_FATAL("%s", "[Asset] Texture format not supported!");
 		}
 
 		return result;
