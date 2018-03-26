@@ -50,7 +50,9 @@ HT_CPP_FUNCTION_POINTER(glUniformBlockBinding);
 HT_CPP_FUNCTION_POINTER(glUniform1iv);
 HT_CPP_FUNCTION_POINTER(glGetUniformLocation);
 
+#if !defined(HT_LINUX)
 HT_CPP_FUNCTION_POINTER(glActiveTexture);
+#endif
 
 bool GLInit() {
 
@@ -93,7 +95,9 @@ bool GLInit() {
 	HT_GET_GL_FUNCTION(glUniform1iv);
 	HT_GET_GL_FUNCTION(glGetUniformLocation);
 
+#if !defined(HT_LINUX)
 	HT_GET_GL_FUNCTION(glActiveTexture);
+#endif
 
 	return true;
 }

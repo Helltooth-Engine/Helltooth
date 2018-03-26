@@ -9,12 +9,16 @@
 #endif
 
 #define HT_FUNCTION_NAME(function) PFN##function##PROC
-
+#ifdef HT_WINDOWS
 #define HT_APIENTRY __stdcall
+#else
+#define HT_APIENTRY
+#endif
 
 #define HT_CREATE_FUNCTION_POINTER(returntype, function, ...) typedef returntype(HT_APIENTRY * HT_FUNCTION_NAME(function)) (__VA_ARGS__); \
 		extern HT_FUNCTION_NAME(function) function
 
+#if !defined(HT_LINUX)
 typedef unsigned int GLenum;
 typedef unsigned int GLbitfield;
 typedef unsigned int GLuint;
@@ -33,6 +37,8 @@ typedef double GLdouble;
 typedef double GLclampd;
 typedef void GLvoid;
 typedef char GLchar;
+#endif // These typedefs are already defined for linux
+
 
 #define GL_ZERO 0
 #define GL_FALSE 0
@@ -163,9 +169,13 @@ HT_CREATE_FUNCTION_POINTER(GLint, glGetUniformLocation, GLuint program, const GL
 #define GL_TEXTURE31 0x84DF
 #define GL_BGRA 0x80E1
 
+#if !defined(HT_LINUX)
 HT_CREATE_FUNCTION_POINTER(void, glActiveTexture, GLenum texture);
+#endif
 
 extern bool GLInit();
+
+#if defined(HT_WINDOWS)
 
 #define WGL_DRAW_TO_WINDOW_ARB						0x2001
 #define WGL_SUPPORT_OPENGL_ARB						0x2010
@@ -192,5 +202,7 @@ extern PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB;
 extern PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB;
 extern PFNWGLSWAPINTERVALEXTPROC wglSwapIntervalEXT;
 extern bool wglInit();
+
+#endif // HT_WINDOWS
 
 #endif // HT_OPENGL
