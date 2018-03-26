@@ -2,8 +2,10 @@
 
 #if defined(HT_WINDOWS)
 #include <intrin.h>
+#define m128_get(x, y) x.m128_f32[y]
 #elif defined(HT_LINUX)
 #include <x86intrin.h>
+#define m128_get(x, y) x[y]
 #else
 #error Other platforms not supported.
 #endif

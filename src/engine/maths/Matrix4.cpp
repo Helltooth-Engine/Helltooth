@@ -153,7 +153,7 @@ namespace ht { namespace maths {
 		for (unsigned int y = 0; y < 4; y++)
 			for (unsigned int x = 0; x < 4; x++) {
 				__m128 res = _mm_mul_ps(rows[x], cols[y]);
-				tmp[x + y * 4] = res.m128_f32[0] + res.m128_f32[1] + res.m128_f32[2] + res.m128_f32[3];
+				tmp[x + y * 4] = m128_get(res, 0) + m128_get(res, 1) + m128_get(res, 2) + m128_get(res, 3);
 			}
 		
 		return tmp;
@@ -175,7 +175,7 @@ namespace ht { namespace maths {
 		for (int i = 1; i < 4; i++)
 			res = _mm_fmadd_ps(vec[i], col[i], res);
 
-		return Vector4(res.m128_f32[0], res.m128_f32[1], res.m128_f32[2], res.m128_f32[3]);
+		return Vector4(m128_get(res, 0), m128_get(res, 1), m128_get(res, 2), m128_get(res,3));
 	}
 
 	Vector3 operator*(const Matrix4& left, const Vector3& right) {
@@ -194,7 +194,7 @@ namespace ht { namespace maths {
 		for (int i = 1; i < 4; i++)
 			res = _mm_fmadd_ps(vec[i], col[i], res);
 
-		return Vector3(res.m128_f32[0], res.m128_f32[1], res.m128_f32[2]);
+		return Vector3(m128_get(res, 0), m128_get(res, 1), m128_get(res, 2));
 	}
 
 	Vector2 operator*(const Matrix4& left, const Vector2& right) {
@@ -213,7 +213,7 @@ namespace ht { namespace maths {
 		for (int i = 1; i < 4; i++)
 			res = _mm_fmadd_ps(vec[i], col[i], res);
 
-		return Vector2(res.m128_f32[0], res.m128_f32[1]);
+		return Vector2(m128_get(res, 0), m128_get(res, 1));
 	}
 
 	Matrix4 Matrix4::operator*=(const Matrix4& other) {
