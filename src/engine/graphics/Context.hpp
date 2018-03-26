@@ -62,7 +62,7 @@ namespace ht { namespace graphics {
 #if defined(HT_LINUX)
 		inline Colormap& GetColormap() { return m_ColorMap; }
 		inline XSetWindowAttributes& GetWindowAttributes() { return m_WindowAttributes; }
-		inline XVisualINfo* GetVisualInfo() { return m_VisualInfo; }
+		inline XVisualInfo* GetVisualInfo() { return m_VisualInfo; }
 #endif
 
 	};
