@@ -3,7 +3,6 @@
 #include <Windows.h>
 #endif
 #include <utility>
-#include <intrin.h>
 
 #ifdef HT_OPENGL
 #include "platform/opengl/GL.hpp"
@@ -14,21 +13,21 @@
 #define HT_LEVEL_FATAL			0x04
 #define HT_LEVEL_ERROR			0x0C
 #define HT_LEVEL_WARNING		0x0E
-#define HT_LEVEL_INFO			0x0F
-#define HT_LEVEL_MSG			0x07
+#define HT_LEVEL_INFO			  0x0F
+#define HT_LEVEL_MSG			  0x07
 #elif defined(HT_LINUX)
-#define HT_LEVEL_FATAL			"\033[0;31m
-#define HT_LEVEL_ERROR			"\033[1;31m
-#define HT_LEVEL_WARNING		"\033[1;33m
-#define HT_LEVEL_INFO			"\033[0;37m
-#define HT_LEVEL_MSG			"\033[1;37m
+#define HT_LEVEL_FATAL			"\\033[0;31m"
+#define HT_LEVEL_ERROR			"\\033[1;31m"
+#define HT_LEVEL_WARNING		"\\033[1;33m"
+#define HT_LEVEL_INFO			  "\\033[0;37m"
+#define HT_LEVEL_MSG			  "\\033[1;37m"
 #endif
 
 #define	HT_LOG_LEVEL_FATAL		0
 #define	HT_LOG_LEVEL_ERROR		1
 #define	HT_LOG_LEVEL_WARNING	2
-#define	HT_LOG_LEVEL_INFO		3 
-#define	HT_LOG_LEVEL_MSG		4	
+#define	HT_LOG_LEVEL_INFO		  3 
+#define	HT_LOG_LEVEL_MSG		  4	
 
 #if defined(HT_DEBUG) && !defined(HT_LOG_LEVEL)
 #	define HT_LOG_LEVEL 4
@@ -125,14 +124,16 @@ namespace ht { namespace utils {
 		u32 error = 0;
 		while (error = glGetError()) {
 			HT_FATAL("[GL] Error %u, calling %s in %s:%u", error, funcName, file, line);
-			__debugbreak();
+			int* a = nullptr;
+      *a = 1;
 		}
 	}
 #elif defined(HT_DIRECTX)
 	inline static void DXCall(HRESULT result, const char* funcName, const char* file, u32 line) {
 		if (result != S_OK) {
 			HT_FATAL("[DX] Error %u, calling %s in %s:%u", result, funcName, file, line);
-			__debugbreak();
+			int* a = nullptr;
+      *a = 1;
 		}
 	}
 #endif
