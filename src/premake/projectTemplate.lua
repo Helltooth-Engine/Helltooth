@@ -35,6 +35,13 @@ function makeProject(name)
 
 	filter {}
 
+	filter { "system:linux" }
+		buildoptions {
+			"-msse4.1",
+			"-mfma",
+			
+		}
+
 	defines {
 		("HT_" .. os.host():upper()),
 	}
