@@ -11,8 +11,10 @@
 #define HT_FUNCTION_NAME(function) PFN##function##PROC
 #ifdef HT_WINDOWS
 #define HT_APIENTRY __stdcall
+typedef void (*HT_PROC)();
 #else
 #define HT_APIENTRY
+typedef void (*HT_PROC)();
 #endif
 
 #define HT_CREATE_FUNCTION_POINTER(returntype, function, ...) typedef returntype(HT_APIENTRY * HT_FUNCTION_NAME(function)) (__VA_ARGS__); \

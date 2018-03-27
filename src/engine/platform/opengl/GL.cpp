@@ -1,14 +1,13 @@
 #ifdef HT_OPENGL
 #include "GL.hpp"
 
-
 #define HT_CPP_FUNCTION_POINTER(function) HT_FUNCTION_NAME(function) function
 #if defined(HT_WINDOWS)
 #define HT_GET_GL_FUNCTION(function) function = ( HT_FUNCTION_NAME(function) )wglGetProcAddress(#function); \
-	if((PROC)function == (PROC)0 || (PROC)function == (PROC)-1) return false;
+	if((HT_PROC)function == (HT_PROC)0 || (HT_PROC)function == (HT_PROC)-1) return false;
 #elif defined(HT_LINUX)
-#define HT_GET_GL_FUNCTION(function) function = ( HT_FUNCTION_NAME(function) )glXGetProcAddress(#function); \
-	if((PROC)function == (PROC)0 || (PROC)function == (PROC)-1) return false;
+#define HT_GET_GL_FUNCTION(function) function = ( HT_FUNCTION_NAME(function) )glXGetProcAddressARB((const unsigned char*)#function); \
+	if((HT_PROC)function == (HT_PROC)0 || (HT_PROC)function == (HT_PROC)-1) return false;
 #endif
 
 HT_CPP_FUNCTION_POINTER(glGenBuffers);
