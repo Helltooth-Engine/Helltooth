@@ -24,35 +24,40 @@ namespace ht { namespace graphics {
 		ShaderType type;
 
 		UniformBufferLayout(ShaderType type) : type(type) {}
-
+		
 		template<typename T>
-		void AddUniform() {
-			HT_ASSERT(true, "[UniformBufferLayout] Data type not recognized.");
-		}
-
-		template<>
-		void AddUniform<f32>() {
-			attributes.push_back(DataType::FLOAT);
-		}
-
-		template<>
-		void AddUniform<maths::Vector2>() {
-			attributes.push_back(DataType::VECTOR2);
-		}
-		template<>
-		void AddUniform<maths::Vector3>() {
-			attributes.push_back(DataType::VECTOR3);
-		}
-		template<>
-		void AddUniform<maths::Vector4>() {
-			attributes.push_back(DataType::VECTOR4);
-		}
-
-		template<>
-		void AddUniform<maths::Matrix4>() {
-			attributes.push_back(DataType::MATRIX4);
-		}
+		void AddUniform();
 	};
+
+	template<typename T>
+	void UniformBufferLayout::AddUniform() {
+		HT_ASSERT(true, "[UniformBufferLayout] Data type not recognized.");
+	}
+
+	template<>
+	void UniformBufferLayout::AddUniform<f32>() {
+		attributes.push_back(DataType::FLOAT);
+	}
+
+	template<>
+	void UniformBufferLayout::AddUniform<maths::Vector2>() {
+		attributes.push_back(DataType::VECTOR2);
+	}
+	
+	template<>
+	void UniformBufferLayout::AddUniform<maths::Vector3>() {
+		attributes.push_back(DataType::VECTOR3);
+	}
+	
+	template<>
+	void UniformBufferLayout::AddUniform<maths::Vector4>() {
+		attributes.push_back(DataType::VECTOR4);
+	}
+	
+	template<>
+	void UniformBufferLayout::AddUniform<maths::Matrix4>() {
+		attributes.push_back(DataType::MATRIX4);
+	}
 
 	class UniformBuffer {
 	private:
