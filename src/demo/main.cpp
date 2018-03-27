@@ -24,7 +24,7 @@ private:
 public:
 	// In here you should initialize stuff that's not depended to the rendering context
 	Game() 
-		: Application(L"Window", 1280, 720) {
+		: Application("Window", 1280, 720) {
 		VFS::Mount("res", "res/shaders/");
 		VFS::Mount("res", "res/textures/");
 
@@ -40,8 +40,8 @@ public:
 		float data[] = {
 			-0.5f, -0.5f, -1.0f, 0.0f, 0.0f,
 			-0.5f,  0.5f, -1.0f, 0.0f, 1.0f,
-			0.5f,  0.5f, -1.0f, 1.0f, 1.0f,
-			0.5f, -0.5f, -1.0f, 1.0f, 0.0f
+			 0.5f,  0.5f, -1.0f, 1.0f, 1.0f,
+			 0.5f, -0.5f, -1.0f, 1.0f, 0.0f
 		};
 
 		u16 indices[] = {
