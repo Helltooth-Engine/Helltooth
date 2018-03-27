@@ -42,7 +42,6 @@ namespace ht { namespace graphics {
 			fragData = FileUtils::ReadFile(VFS::Resolve(fragmentPath));
 			
 			if ((path & ShaderLocationType::FROM_HTSL) != 0) {
-				HT_MSG("");
 				htsl::Parser::Init();
 				std::vector<std::string> result;
 				result = htsl::Parser::Get()->Parse(vertData.GetData());
@@ -87,13 +86,13 @@ namespace ht { namespace graphics {
 
 		u32 vIndex = glGetUniformBlockIndex(m_Program, "Vertex");
 		if (vIndex == (u32)-1) {
-			HT_WARN("[Shader] No uniform block found called \"Vertex\", skipping it.");
+			HT_WARN("%s", "[Shader] No uniform block found called \"Vertex\", skipping it.");
 		}
 		else GL(glUniformBlockBinding(m_Program, vIndex, 0));
 
 		u32 fIndex = glGetUniformBlockIndex(m_Program, "Fragment");
 		if (fIndex == (u32)-1) {
-			HT_WARN("[Shader] No uniform block found called \"Fragment\", skipping it.");
+			HT_WARN("%s", "[Shader] No uniform block found called \"Fragment\", skipping it.");
 		}
 		else GL(glUniformBlockBinding(m_Program, fIndex, 1));
 
