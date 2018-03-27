@@ -32,15 +32,13 @@ function makeProject(name)
 		}
 		optimize "Full"
 		symbols "Off"
-
-	filter {}
-
 	filter { "system:linux" }
 		buildoptions {
 			"-msse4.1",
 			"-mfma",
 			
 		}
+	filter {}
 
 	defines {
 		("HT_" .. os.host():upper()),
