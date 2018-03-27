@@ -1,6 +1,5 @@
 #include <iostream>
 #include <Helltooth.hpp>
-#include <gl/GL.h>
 
 #include <graphics/shaders/Shader.hpp>
 
