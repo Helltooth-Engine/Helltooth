@@ -31,7 +31,7 @@ namespace ht { namespace graphics {
 #	elif defined(HT_LINUX)
 		GLXContext m_Context;
 		XVisualInfo* m_VisualInfo;
-		Colormap m_ColorMap;
+		Colormap m_Colormap;
 		XSetWindowAttributes m_WindowAttributes;
 #	endif
 #elif defined(HT_DIRECTX)
