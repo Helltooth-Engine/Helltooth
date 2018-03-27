@@ -36,10 +36,10 @@ namespace ht {
 	protected:
 		ht::core::Window *m_Window;
 		u32 m_MaxUps;
-		std::wstring m_Title;
+		std::string m_Title;
 
 	public:
-		Application(const std::wstring& title, u32 width, u32 height, u32 maxUps = 60)
+		Application(const std::string& title, u32 width, u32 height, u32 maxUps = 60)
 			: m_MaxUps(maxUps)
 			, m_Title(title) {
 			m_Window = new ht::core::Window(title, width, height);
@@ -75,7 +75,7 @@ namespace ht {
 
 				frames++;
 				if (overallTime >= 1.0f) {
-					m_Window->SetTitle(m_Title + L" | Updates: " + std::to_wstring(updates) + L" Frames: " + std::to_wstring(frames));
+					m_Window->SetTitle(m_Title + " | Updates: " + std::to_string(updates) + " Frames: " + std::to_string(frames));
 					updates = 0;
 					frames = 0;
 					delta = 0.0f;
