@@ -90,17 +90,17 @@ namespace ht { namespace graphics {
 			0 // End of attributes
 		};
 
-		m_VisualInfo = glxChooseVisual(display, 0, attributes);
+		m_VisualInfo = glXChooseVisual(display, 0, attributes);
 
 		if (m_VisualInfo == NULL) {
-			HT_FATAL("[Context] No appropriate visual found.");
+			HT_FATAL("%s", "[Context] No appropriate visual found.");
 			return;
 		}
 
-		m_ColorMap = XCreateColormap(display, window, m_VisualInfo->visual, AllocNone);
+		m_Colormap = XCreateColormap(display, window, m_VisualInfo->visual, AllocNone);
 
 		m_WindowAttributes.colormap = m_Colormap;
-		m_WindowAttributes.event_mask = ExposureMak | KeyPressMask;
+		m_WindowAttributes.event_mask = ExposureMask | KeyPressMask;
 	}
 
 	Context::~Context() {
