@@ -111,10 +111,6 @@ namespace ht { namespace graphics {
 
 	}
 
-	void Context::Clear() {
-
-	}
-
 #endif
 
 	void Context::Clear() {
