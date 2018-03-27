@@ -60,8 +60,8 @@ makeProject ("Sandbox")
 	}
 	
 	links {
-		"Helltooth.lib",
-		"Helltooth-ShadingLanguage.lib",
+		"Helltooth",
+		"Helltooth-ShadingLanguage",
 	}
 
 	filter {"configurations:Debug-GL", "system:windows" }
