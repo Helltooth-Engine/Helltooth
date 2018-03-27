@@ -51,7 +51,7 @@ namespace ht { namespace graphics {
 
 
 		template<typename T>
-		void AddLayout(utils::String semanticName, u16 count, u16 stride, bool normalized);
+		inline void AddLayout(utils::String semanticName, u16 count, u16 stride, bool normalized);
 
 		void SetSemanticNames(const std::vector<std::string>& semanticNames) {
 			HT_ASSERT(semanticNames.size() > m_Attributes.size(), "[BufferLayout] Too many semanticNames in the shader.");
@@ -76,24 +76,24 @@ namespace ht { namespace graphics {
 	};
 
 	template<typename T>
-	void BufferLayout::AddLayout(utils::String semanticName, u16 count, u16 stride, bool normalized) {
+	inline void BufferLayout::AddLayout(utils::String semanticName, u16 count, u16 stride, bool normalized) {
 		HT_ASSERT(true, "[BufferLayout] Data type not recognized.");
 	}
 
 	template<>
-	void BufferLayout::AddLayout<f32>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
+	inline void BufferLayout::AddLayout<f32>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
 		m_Attributes.push_back({ semanticName, DataType::FLOAT, count, stride, normalized });
 		m_Stride += stride * DataTypeSize(DataType::FLOAT);
 	}
 
 	template<>
-	void BufferLayout::AddLayout<u16>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
+	inline void BufferLayout::AddLayout<u16>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
 		m_Attributes.push_back({ semanticName, DataType::UNSIGNED_SHORT, count, stride, normalized });
 		m_Stride += stride * DataTypeSize(DataType::UNSIGNED_SHORT);
 	}
 
 	template<>
-	void BufferLayout::AddLayout<u32>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
+	inline void BufferLayout::AddLayout<u32>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
 		m_Attributes.push_back({ semanticName, DataType::UNSIGNED_INT, count, stride, normalized });
 		m_Stride += stride * DataTypeSize(DataType::UNSIGNED_INT);
 	}
