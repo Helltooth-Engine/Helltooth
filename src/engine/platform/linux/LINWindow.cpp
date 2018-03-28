@@ -4,6 +4,8 @@
 namespace ht { namespace core {
 	using namespace graphics;
 
+	Window* window::s_Window = nullptr;
+
 	Window::Window(std::string title, u32 width, u32 height) 
 		: m_Title(title), m_Width(width), m_Height(height) {
 		m_Display = XOpenDisplay(nullptr);
