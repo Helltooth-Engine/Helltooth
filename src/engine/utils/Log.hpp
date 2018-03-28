@@ -18,11 +18,11 @@
 #define HT_LEVEL_INFO			0x0F
 #define HT_LEVEL_MSG			0x07
 #elif defined(HT_LINUX)
-#define HT_LEVEL_FATAL			"\\033[0;31m"
-#define HT_LEVEL_ERROR			"\\033[1;31m"
-#define HT_LEVEL_WARNING		"\\033[1;33m"
-#define HT_LEVEL_INFO			"\\033[0;37m"
-#define HT_LEVEL_MSG			"\\033[1;37m"
+#define HT_LEVEL_FATAL			"\033[0;31m"
+#define HT_LEVEL_ERROR			"\033[1;31m"
+#define HT_LEVEL_WARNING		"\033[1;33m"
+#define HT_LEVEL_INFO			"\033[0;37m"
+#define HT_LEVEL_MSG			"\033[1;37m"
 #endif
 
 #define	HT_LOG_LEVEL_FATAL		0
