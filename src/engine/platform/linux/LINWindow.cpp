@@ -16,12 +16,9 @@ namespace ht { namespace core {
 
 		m_Window = DefaultRootWindow(m_Display);
 
-#if defined(HT_OPENGL)
 		m_Title.append(" - OpenGL");
-#elif defined (HT_DIRECTX)
-		m_Title.append(" - DirectX");
-#endif
 
+		
 		m_Context = new Context(m_Display, m_Window);
 
 		m_Window = XCreateWindow(m_Display, m_Window, 0, 0, width, height, 0, m_Context->GetVisualInfo()->depth, InputOutput,m_Context->GetVisualInfo()->visual, CWColormap | CWEventMask, m_Context->GetWindowAttributes());
@@ -34,7 +31,7 @@ namespace ht { namespace core {
 	}
 
 	Window::~Window() {
-	
+		delete m_Context;
 	}
 
 	void Window::SetVisible(bool visible) {
