@@ -101,6 +101,10 @@ namespace ht { namespace graphics {
 
 		m_WindowAttributes.colormap = m_Colormap;
 		m_WindowAttributes.event_mask = ExposureMask | KeyPressMask;
+	
+		if (!GLInit()) {
+			HT_FATAL("%s", "[GLContext] Could not initialize GL");
+		}
 	}
 
 	Context::~Context() {
