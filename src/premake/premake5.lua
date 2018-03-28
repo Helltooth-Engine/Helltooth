@@ -89,6 +89,12 @@ makeProject ("Sandbox")
 			"X11",
 			"GLU",
 		}
+	filter { "system:linux", "configurations:Release-GL"}
+		links {
+			"GL",
+			"X11",
+			"GLU",
+		}
 	filter {}
 	
 	sysincludedirs {
