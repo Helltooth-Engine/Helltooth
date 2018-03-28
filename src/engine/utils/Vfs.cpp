@@ -42,7 +42,7 @@ namespace ht { namespace utils {
 				return path;
 		}
 
-		HT_WARN("[VFS] Path \"%s\" could not be parsed", path);
+		HT_WARN("[VFS] Path \"%s\" could not be parsed", path.GetData());
 		return String();
 	}
 
