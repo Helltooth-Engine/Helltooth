@@ -1,4 +1,5 @@
 #include "Asset.hpp"
+#include "cereal/Cereal.hpp"
 
 namespace ht { namespace core {
 	using namespace Cereal;

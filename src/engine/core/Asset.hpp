@@ -2,8 +2,6 @@
 
 #include "Internal.hpp"
 
-#include "cereal/Cereal.hpp"
-
 #include "graphics/Texture.hpp"
 #include "graphics/Texture2D.hpp"
 
