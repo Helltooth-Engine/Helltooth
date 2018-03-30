@@ -3,33 +3,39 @@
 #error ("No Graphics API defined!")
 #endif
 
-#include "core/Window.hpp"
-#include "core/Asset.hpp"
+#include "core/entities/Entity.hpp"
 #include "core/input/Event.hpp"
+#include "core/input/EventBufferer.hpp"
 #include "core/input/EventDispatcher.hpp"
 #include "core/input/EventListener.hpp"
 #include "core/input/Keys.hpp"
+#include "core/Asset.hpp"
+#include "core/Internal.hpp"
+#include "core/Window.hpp"
 
-#include "graphics/buffers/VertexBuffer.hpp"
-#include "graphics/buffers/UniformBuffer.hpp"
+#include "graphics/buffers/BufferLayout.hpp"
 #include "graphics/buffers/IndexBuffer.hpp"
+#include "graphics/buffers/UniformBuffer.hpp"
+#include "graphics/buffers/VertexBuffer.hpp"
 #include "graphics/camera/Camera.hpp"
 #include "graphics/camera/FPSCamera.hpp"
+#include "graphics/shaders/Shader.hpp"
 #include "graphics/Context.hpp"
 #include "graphics/Enums.hpp"
-#include "core/entities/Entity.hpp"
+#include "graphics/Texture.hpp"
+#include "graphics/Texture2D.hpp"
 
 #include "maths/Mathcommon.hpp"
+#include "maths/Matrix4.hpp"
 #include "maths/Vector2.hpp"
 #include "maths/Vector3.hpp"
 #include "maths/Vector4.hpp"
-#include "maths/Matrix4.hpp"
 
+#include "utils/FileUtils.hpp"
 #include "utils/Log.hpp"
 #include "utils/String.hpp"
-#include "utils/Vfs.hpp"
 #include "utils/Timer.hpp"
-#include "utils/FileUtils.hpp"
+#include "utils/Vfs.hpp"
 
 namespace ht {
 	class Application {
@@ -40,8 +46,7 @@ namespace ht {
 
 	public:
 		Application(const std::string& title, u32 width, u32 height, u32 maxUps = 60)
-			: m_MaxUps(maxUps)
-			, m_Title(title) {
+			: m_MaxUps(maxUps), m_Title(title) {
 			m_Window = new ht::core::Window(title, width, height);
 		}
 
@@ -86,7 +91,8 @@ namespace ht {
 				overallTime += timerDelta;
 				delta += timerDelta;
 			}
-
 		}
+
 	};
+
 }

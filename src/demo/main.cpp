@@ -1,8 +1,6 @@
 #include <iostream>
 #include <Helltooth.hpp>
 
-#include <graphics/shaders/Shader.hpp>
-
 using namespace ht;
 using namespace core;
 using namespace maths;
