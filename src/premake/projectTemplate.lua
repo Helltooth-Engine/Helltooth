@@ -24,7 +24,6 @@ function makeProject(name)
 			"HT_DIRECTX",
 		}
 
-
 	filter {"configurations:Release-DX"}
 		defines {
 			"HT_RELEASE",
@@ -32,12 +31,16 @@ function makeProject(name)
 		}
 		optimize "Full"
 		symbols "Off"
+
 	filter { "system:linux" }
 		buildoptions {
 			"-msse4.1",
 			"-mfma",
-			
 		}
+	
+	filter { "system:windows" }
+		characterset "MBCS"
+
 	filter {}
 
 	defines {

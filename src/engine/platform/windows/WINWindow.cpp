@@ -109,7 +109,7 @@ namespace ht { namespace core {
 		wcex.cbWndExtra     = 0;
 		wcex.hInstance      = GetModuleHandleA(nullptr);
 		wcex.hIcon          = nullptr;
-		wcex.hCursor        = LoadCursor(NULL, IDC_ARROW);
+		wcex.hCursor        = LoadCursorA(NULL, MAKEINTRESOURCEA(32512));
 		wcex.hbrBackground  = 0;
 		wcex.lpszClassName  = "Helltooth window";
 		wcex.lpszMenuName   = 0;
@@ -148,9 +148,9 @@ namespace ht { namespace core {
 
 	void Window::Update() {
 		MSG msg;
-		if (PeekMessage(&msg, m_Hwnd, 0, 0, PM_REMOVE)) {
+		if (PeekMessageA(&msg, m_Hwnd, 0, 0, PM_REMOVE)) {
 			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+			DispatchMessageA(&msg);
 		}
 		m_Context->Update();
 	}
