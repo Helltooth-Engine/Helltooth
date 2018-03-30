@@ -64,6 +64,7 @@ namespace ht { namespace graphics {
 		GL(glAttachShader(m_Program, fragmentID));
 
 		GL(glLinkProgram(m_Program));
+
 #ifdef HT_DEBUG
 		GLint isLinked;
 		glGetProgramiv(m_Program, GL_LINK_STATUS, &isLinked);
@@ -79,6 +80,7 @@ namespace ht { namespace graphics {
 			delete[] data;
 		}
 #endif // HT_DEBUG
+
 		GL(glDetachShader(m_Program, vertexID));
 		GL(glDetachShader(m_Program, fragmentID)); 
 
