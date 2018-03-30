@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Vector2.hpp"
-#include "Vector3.hpp"
-
 #include "core/Internal.hpp"
+
+#include "maths/Vector3.hpp"
+#include "maths/Vector2.hpp"
 
 namespace ht { namespace maths {
 

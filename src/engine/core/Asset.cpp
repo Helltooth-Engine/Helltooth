@@ -3,15 +3,16 @@
 
 namespace ht { namespace core {
 	using namespace Cereal;
+	using namespace graphics;
 
-	graphics::Texture* Asset::LoadTexture(utils::String path) {
+	Texture* Asset::LoadTexture(utils::String path) {
 		Buffer buffer(1);
 		buffer.readFile(utils::VFS::Resolve(path).GetData());
 
 		Database* database = new Database();
 		database->read(buffer);
 
-		graphics::Texture* result = nullptr;
+		Texture* result = nullptr;
 
 		Object* object = database->getObject("texture2D");
 		if (object != nullptr) {
@@ -23,7 +24,7 @@ namespace ht { namespace core {
 
 			byte* pixels = pArray->getRawArray<byte>(new byte[pArray->getCount()]);
 
-			result = new graphics::Texture2D(pixels, width, height, graphics::GetFormat(bpp));
+			result = new Texture2D(pixels, width, height, graphics::GetFormat(bpp));
 			
 			delete[] pixels;
 		}

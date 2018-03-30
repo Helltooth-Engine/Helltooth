@@ -1,5 +1,4 @@
 #ifdef HT_DIRECTX
-
 #include "graphics/buffers/UniformBuffer.hpp"
 
 namespace ht { namespace graphics {
@@ -15,16 +14,18 @@ namespace ht { namespace graphics {
 			m_Data.push_back(0.0f);
 
 		D3D11_BUFFER_DESC bd = {};
-		bd.Usage = static_cast<D3D11_USAGE>(usage);
-		bd.ByteWidth = m_Size;
-		bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-		bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-		bd.StructureByteStride = m_Size;
+
+		bd.Usage                = static_cast<D3D11_USAGE>(usage);
+		bd.ByteWidth            = m_Size;
+		bd.BindFlags            = D3D11_BIND_CONSTANT_BUFFER;
+		bd.CPUAccessFlags       = D3D11_CPU_ACCESS_WRITE;
+		bd.StructureByteStride  = m_Size;
 
 		D3D11_SUBRESOURCE_DATA rd = {};
-		rd.pSysMem = &m_Data[0];
+
+		rd.pSysMem             = &m_Data[0];
 		
-		Window::GetWindow()->GetDevice()->CreateBuffer(&bd, &rd, &m_Buffer);
+		DX(Window::GetWindow()->GetDevice()->CreateBuffer(&bd, &rd, &m_Buffer));
 	}
 
 	UniformBuffer::~UniformBuffer() {
@@ -44,6 +45,7 @@ namespace ht { namespace graphics {
 
 	void UniformBuffer::Bind() {
 		D3D11_MAPPED_SUBRESOURCE mappedBuffer = {};
+
 		DX(HT_DXCONTEXT->Map(m_Buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedBuffer));
 		memcpy(mappedBuffer.pData, &m_Data[0], m_Size);
 		HT_DXCONTEXT->Unmap(m_Buffer, 0);
@@ -52,7 +54,8 @@ namespace ht { namespace graphics {
 			HT_DXCONTEXT->VSSetConstantBuffers(0, 1, &m_Buffer);
 		else if(m_Layout.type == ShaderType::FRAGMENT)
 			HT_DXCONTEXT->PSSetConstantBuffers(0, 1, &m_Buffer);
-		else HT_ASSERT(true, "[UniformBuffer] Shader Type not recognized");
+		else 
+			HT_ASSERT(true, "[UniformBuffer] Shader Type not recognized");
 	}
 
 } }

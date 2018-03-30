@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Internal.hpp"
+#include "core/Internal.hpp"
 
 #include "graphics/Texture.hpp"
 #include "graphics/Texture2D.hpp"

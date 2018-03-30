@@ -17,7 +17,6 @@ namespace ht { namespace core {
 		m_Window = DefaultRootWindow(m_Display);
 
 		m_Title.append(" - OpenGL");
-
 		
 		m_Context = new Context(m_Display, m_Window);
 
@@ -51,6 +50,5 @@ namespace ht { namespace core {
 	}
 
 } }
-
 
 #endif // HT_LINUX

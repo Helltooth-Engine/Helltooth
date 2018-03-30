@@ -10,12 +10,12 @@
 
 #include "core/Internal.hpp"
 
+#include "graphics/Enums.hpp"
+
 #include "maths/Vector2.hpp"
 #include "maths/Vector3.hpp"
 #include "maths/Vector4.hpp"
 #include "maths/Matrix4.hpp"
-
-#include "graphics/Enums.hpp"
 
 #include "utils/String.hpp"
 
@@ -49,10 +49,6 @@ namespace ht { namespace graphics {
 
 		void Init(void* shaderBlob = nullptr);
 
-
-		template<typename T>
-		inline void AddLayout(utils::String semanticName, u16 count, u16 stride, bool normalized);
-
 		void SetSemanticNames(const std::vector<std::string>& semanticNames) {
 			HT_ASSERT(semanticNames.size() > m_Attributes.size(), "[BufferLayout] Too many semanticNames in the shader.");
 
@@ -72,28 +68,32 @@ namespace ht { namespace graphics {
 			m_Attributes = newAttributes;
 		}
 
-		u32 GetStride() { return m_Stride; }
+		inline u32 GetStride() { return m_Stride; }
+
+		template<typename T>
+		inline void AddLayout(const utils::String& semanticName, u16 count, u16 stride, bool normalized);
+
 	};
 
 	template<typename T>
-	inline void BufferLayout::AddLayout(utils::String semanticName, u16 count, u16 stride, bool normalized) {
+	inline void BufferLayout::AddLayout(const utils::String& semanticName, u16 count, u16 stride, bool normalized) {
 		HT_ASSERT(true, "[BufferLayout] Data type not recognized.");
 	}
 
 	template<>
-	inline void BufferLayout::AddLayout<f32>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
+	inline void BufferLayout::AddLayout<f32>(const utils::String& semanticName, u16 count, u16 stride, bool normalized) {
 		m_Attributes.push_back({ semanticName, DataType::FLOAT, count, stride, normalized });
 		m_Stride += stride * DataTypeSize(DataType::FLOAT);
 	}
 
 	template<>
-	inline void BufferLayout::AddLayout<u16>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
+	inline void BufferLayout::AddLayout<u16>(const utils::String& semanticName, u16 count, u16 stride, bool normalized) {
 		m_Attributes.push_back({ semanticName, DataType::UNSIGNED_SHORT, count, stride, normalized });
 		m_Stride += stride * DataTypeSize(DataType::UNSIGNED_SHORT);
 	}
 
 	template<>
-	inline void BufferLayout::AddLayout<u32>(utils::String semanticName, u16 count, u16 stride, bool normalized) {
+	inline void BufferLayout::AddLayout<u32>(const utils::String& semanticName, u16 count, u16 stride, bool normalized) {
 		m_Attributes.push_back({ semanticName, DataType::UNSIGNED_INT, count, stride, normalized });
 		m_Stride += stride * DataTypeSize(DataType::UNSIGNED_INT);
 	}

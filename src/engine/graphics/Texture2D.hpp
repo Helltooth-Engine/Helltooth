@@ -1,11 +1,12 @@
 #pragma once
-#include "core/Internal.hpp"
 
 #if defined(HT_OPENGL)
 #include "platform/opengl/GL.hpp"
 #elif defined(HT_DIRECTX)
 #include "platform/directx/DX.hpp"
 #endif
+
+#include "core/Internal.hpp"
 
 #include "graphics/Enums.hpp"
 #include "graphics/Texture.hpp"

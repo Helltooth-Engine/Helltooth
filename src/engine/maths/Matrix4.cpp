@@ -32,12 +32,12 @@ namespace ht { namespace maths {
 
 		f32 tanHalf = tanh(ToRadians(fieldOfView) / 2.0f);
 
-		result[0 + 0 * 4] = 1.0f / (tanHalf * aspectRatio);
-		result[1 + 1 * 4] = 1.0f / tanHalf;
+		result[0 + 0 * 4] =  1.0f / (tanHalf * aspectRatio);
+		result[1 + 1 * 4] =  1.0f / tanHalf;
 		result[2 + 2 * 4] = -(farPlane + nearPlane) / (farPlane - nearPlane);
 		result[3 + 2 * 4] = -1.0f;
 		result[2 + 3 * 4] = -(2.0f * farPlane * nearPlane) / (farPlane - nearPlane);
-		result[3 + 3 * 4] = 0.0f;
+		result[3 + 3 * 4] =  0.0f;
 
 		return result;
 	}
@@ -66,7 +66,6 @@ namespace ht { namespace maths {
 		}
 		return *this;
 	}
-
 
 	Matrix4& Matrix4::Translate(f32 x, f32 y, f32 z) {
 		Matrix4 translationMat4 = Matrix4(1.0f);

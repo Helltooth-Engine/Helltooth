@@ -2,15 +2,14 @@
 
 #include "EventListener.hpp"
 
-
 namespace ht { namespace core {
 
 	class EventBufferer : public EventListener {
 	protected:
 		bool m_Keys[HT_MAX_KEYBOARD_KEYS];
 		bool m_MouseKeys[HT_MAX_MOUSE_BUTTONS];
+		
 		float m_MouseX, m_MouseY;
-	
 		float m_Scroll;
 
 	public:
@@ -31,6 +30,5 @@ namespace ht { namespace core {
 		virtual bool OnKeyRelease(u16 key);
 
 	};
-
 
 } }

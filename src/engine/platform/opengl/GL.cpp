@@ -102,14 +102,14 @@ bool GLInit() {
 }
 
 #if defined(HT_WINDOWS)
-PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB;
-PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB;
-PFNWGLSWAPINTERVALEXTPROC wglSwapIntervalEXT;
+PFNWGLCHOOSEPIXELFORMATARBPROC     wglChoosePixelFormatARB;
+PFNWGLCREATECONTEXTATTRIBSARBPROC  wglCreateContextAttribsARB;
+PFNWGLSWAPINTERVALEXTPROC          wglSwapIntervalEXT;
 
 bool wglInit() {
-	wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC)wglGetProcAddress("wglChoosePixelFormatARB");
-	wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
-	wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC)wglGetProcAddress("wglSwapIntervalEXT");
+	wglChoosePixelFormatARB     = (PFNWGLCHOOSEPIXELFORMATARBPROC)wglGetProcAddress("wglChoosePixelFormatARB");
+	wglCreateContextAttribsARB  = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
+	wglSwapIntervalEXT          = (PFNWGLSWAPINTERVALEXTPROC)wglGetProcAddress("wglSwapIntervalEXT");
 
 	return true;
 }

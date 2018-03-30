@@ -33,7 +33,7 @@ namespace ht { namespace core {
 	}
 
 	bool EventBufferer::OnKeyRepeat(u16 key, u16 modifier) {
-
+		// TODO: On key repeat
 		return true;
 	}
 

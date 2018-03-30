@@ -69,15 +69,13 @@ namespace ht { namespace graphics {
 		u32 m_Buffer;
 #elif defined(HT_DIRECTX)
 		ID3D11Buffer* m_Buffer;
-#else
-#error Platform not recognized!
 #endif
+
 	public:
 		UniformBuffer(UniformBufferLayout layout, BufferUsage usage = BufferUsage::DYNAMIC);
 		~UniformBuffer();
 
 		void Set(u32 index, void* data);
-
 		void Bind();
 
 		inline ShaderType GetShaderType() { return m_Layout.type; }

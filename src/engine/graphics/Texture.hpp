@@ -11,8 +11,8 @@ namespace ht { namespace graphics {
 		u32 m_Width;
 		u32 m_Height;
 
-		TextureFormat m_Format = TextureFormat::UNKNOWN;
-		TextureType m_Type = TextureType::UNKNOWN;
+		TextureFormat m_Format  = TextureFormat::UNKNOWN;
+		TextureType m_Type      = TextureType::UNKNOWN;
 
 #if defined(HT_OPENGL)
 		u32 m_Texture;

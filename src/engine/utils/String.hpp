@@ -44,7 +44,7 @@ namespace ht { namespace utils {
 		inline bool StartsWith(char c) const { return m_Data[0] == c; }
 		inline bool StartsWith(utils::String other) const { return memcmp(m_Data, other.m_Data, other.m_Size); }
 
-	public: // operator block
+	public:
 
 		void operator=(const char* string);
 		void operator=(const String& string);

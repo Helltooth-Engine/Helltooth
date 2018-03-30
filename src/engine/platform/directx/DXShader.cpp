@@ -1,23 +1,26 @@
 #ifdef HT_DIRECTX
-#include "graphics/shaders/Shader.hpp"
 #include "DX.hpp"
+#include "graphics/shaders/Shader.hpp"
 
 namespace ht { namespace graphics {
 	using namespace core;
 	using namespace utils;
 
-	Shader::Shader(BufferLayout* layout, String vertexPath, String fragmentPath, int path) : m_Layout(layout) {
+	Shader::Shader(BufferLayout* layout, const String& vertexPath, const String& fragmentPath, int path) 
+		: m_Layout(layout) {
 		UINT flag = D3DCOMPILE_ENABLE_STRICTNESS;
-#ifdef HT_DEBUG
+
+#if defined(HT_DEBUG)
 		flag |= D3DCOMPILE_DEBUG;
 #endif
+
 		char* vertex, *fragment;
 		u32 vSize, fSize;
 		if ((path & ShaderLocationType::FROM_PATH) != 0) {
-			String vertexData = FileUtils::ReadFile(VFS::Resolve(vertexPath));
+			String vertexData   = FileUtils::ReadFile(VFS::Resolve(vertexPath));
 			String fragmentData = FileUtils::ReadFile(VFS::Resolve(fragmentPath));
-			vSize = vertexData.GetSize() + 1;
-			fSize = fragmentData.GetSize() + 1;
+			vSize               = vertexData.GetSize()   + 1;
+			fSize               = fragmentData.GetSize() + 1;
 			
 			if ((path & ShaderLocationType::FROM_HTSL) != 0) {
 				htsl::Parser::Init();
@@ -58,7 +61,7 @@ namespace ht { namespace graphics {
 		}
 
 		ID3DBlob* vertexShaderBlob = nullptr, *vertexErrorBlob = nullptr;
-		D3DCompile(vertex, vSize, NULL, NULL, NULL, "main", "vs_5_0", flag, 0, &vertexShaderBlob, &vertexErrorBlob);
+		DX(D3DCompile(vertex, vSize, NULL, NULL, NULL, "main", "vs_5_0", flag, 0, &vertexShaderBlob, &vertexErrorBlob));
 		if (vertexErrorBlob) {
 			HT_WARN("Vertex shader errors: \n%s", static_cast<const char*>(vertexErrorBlob->GetBufferPointer()));
 			vertexErrorBlob->Release();
@@ -68,17 +71,19 @@ namespace ht { namespace graphics {
 
 		ID3DBlob* fragmentShaderBlob = nullptr, *fragmentErrorBlob = nullptr;
 
-		D3DCompile(fragment, fSize, NULL, NULL, NULL, "main", "ps_5_0", flag, 0, &fragmentShaderBlob, &fragmentErrorBlob);
+		DX(D3DCompile(fragment, fSize, NULL, NULL, NULL, "main", "ps_5_0", flag, 0, &fragmentShaderBlob, &fragmentErrorBlob));
 		if (fragmentErrorBlob) {
 			HT_WARN("Fragment shader errors: \n%s", static_cast<const char*>(fragmentErrorBlob->GetBufferPointer()));
 			fragmentErrorBlob->Release();
 		}
+
 		DX(HT_DXDEVICE->CreatePixelShader(fragmentShaderBlob->GetBufferPointer(), fragmentShaderBlob->GetBufferSize(), NULL, &m_FragmentShader));
 
 		m_Layout->Init(vertexShaderBlob);
 	
 		vertexShaderBlob->Release();
 		fragmentShaderBlob->Release();
+
 		delete[] vertex;
 		delete[] fragment;
 	}
@@ -86,8 +91,8 @@ namespace ht { namespace graphics {
 	Shader::~Shader() {
 		m_VertexShader->Release();
 		m_FragmentShader->Release();
-		if (modelLayout)
-			delete m_Layout;
+
+		if (modelLayout) delete m_Layout;
 	}
 
 	void Shader::Start() {

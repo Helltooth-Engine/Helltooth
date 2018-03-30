@@ -2,10 +2,10 @@
 
 namespace ht { namespace maths {
 
-	Vector4::Vector4() : x(0), y(0), z(0), w(0) {}
-	Vector4::Vector4(f32 x, f32 y, f32 z, f32 w) : x(x), y(y), z(z), w(w) {}
-	Vector4::Vector4(Vector2 xy, f32 z, f32 w) : x(xy.x), y(xy.y), z(z), w(w) {}
-	Vector4::Vector4(Vector3 xyz, f32 w) : x(xyz.x), y(xyz.y), z(xyz.z), w(w) {}
+	Vector4::Vector4()                           : x(0),     y(0),     z(0),     w(0) {}
+	Vector4::Vector4(f32 x, f32 y, f32 z, f32 w) : x(x),     y(y),     z(z),     w(w) {}
+	Vector4::Vector4(Vector2 xy, f32 z, f32 w)   : x(xy.x),  y(xy.y),  z(z),     w(w) {}
+	Vector4::Vector4(Vector3 xyz, f32 w)         : x(xyz.x), y(xyz.y), z(xyz.z), w(w) {}
 
 	Vector4 operator+(Vector4 left, const Vector4& right) {
 		left.x += right.x;

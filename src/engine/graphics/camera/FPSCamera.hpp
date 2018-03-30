@@ -11,6 +11,7 @@ namespace ht { namespace graphics {
 		f32 m_PitchSensitivty = 0.2f; // degres / second
 		
 		maths::Vector2 m_MouseLast;
+
 	public:
 		FPSCamera(const maths::Vector3& position);
 		FPSCamera(f32 x, f32 y, f32 z);

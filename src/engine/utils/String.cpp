@@ -1,6 +1,7 @@
 #include "String.hpp"
 
 namespace ht { namespace utils {
+
 	String::String()
 		: m_Size(0) {
 		m_Data = new char[1];

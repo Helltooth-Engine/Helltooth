@@ -2,9 +2,9 @@
 
 #include <vector>
 
-#include "EventListener.hpp"
-
 #include "core/Internal.hpp"
+
+#include "core/input/EventListener.hpp"
 
 namespace ht { namespace core {
 	

@@ -33,7 +33,7 @@ namespace ht { namespace graphics {
 #endif
 
 	public:
-		Shader(BufferLayout* layout, utils::String vertexPath, utils::String fragmentPath, int path = ShaderLocationType::FROM_PATH);
+		Shader(BufferLayout* layout, const utils::String& vertexPath, const utils::String& fragmentPath, int path = ShaderLocationType::FROM_PATH);
 		~Shader();
 
 		void Start();
@@ -46,7 +46,7 @@ namespace ht { namespace graphics {
 #endif
 		}
 #if defined(HT_OPENGL)
-		void SetSamplers(s32* array, u32 size) { glUniform1iv(glGetUniformLocation(m_Program, "samplers"), size, array); }
+		inline void SetSamplers(s32* array, u32 size) { glUniform1iv(glGetUniformLocation(m_Program, "samplers"), size, array); }
 #elif defined(HT_DIRECTX)
 		void SetSamplers(s32* array, u32 size);
 

@@ -2,8 +2,8 @@
 
 #include <fstream>
 
-#include "String.hpp"
-#include "Log.hpp"
+#include "utils/String.hpp"
+#include "utils/Log.hpp"
 
 namespace ht { namespace utils {
 

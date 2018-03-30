@@ -25,5 +25,4 @@ namespace ht { namespace graphics {
 		inline maths::Vector3 GetPosition() { return m_Position; }
 	};
 
-
 } }

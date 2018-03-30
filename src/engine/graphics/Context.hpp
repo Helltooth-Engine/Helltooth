@@ -1,4 +1,5 @@
 #pragma once
+
 #if defined(HT_DIRECTX)
 #include <d3d11.h>
 #include <d3d10.h>
@@ -23,7 +24,7 @@ namespace ht { namespace graphics {
 
 	class Context {
 	private:
-#ifdef HT_OPENGL
+#if defined(HT_OPENGL)
 #	if defined(HT_WINDOWS)
 		HDC m_DeviceContext;
 		HGLRC m_Context;
@@ -51,20 +52,19 @@ namespace ht { namespace graphics {
 #endif
 		~Context();
 
-#ifdef HT_DIRECTX
+		void Update();
+		void Clear();
+
+#if defined(HT_DIRECTX)
 		inline ID3D11Device* GetDevice() { return m_Device; }
 		inline ID3D11DeviceContext* GetDeviceContext() { return m_Context; }
 #endif
-
-		void Update();
-		void Clear();
 
 #if defined(HT_LINUX)
 		inline Colormap& GetColormap() { return m_Colormap; }
 		inline XSetWindowAttributes* GetWindowAttributes() { return &m_WindowAttributes; }
 		inline XVisualInfo* GetVisualInfo() { return m_VisualInfo; }
 #endif
-
 	};
 
 } }

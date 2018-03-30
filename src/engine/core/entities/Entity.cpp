@@ -3,7 +3,7 @@
 namespace ht { namespace core {
 	using namespace maths;
 
-	Entity::Entity(f32 x, f32 y, f32 z) 
+	Entity::Entity(f32 x, f32 y, f32 z)
 		: m_Position(x, y, z), m_ModelMatrix(1.0f), m_Modified(false) { }
 
 	Entity::Entity(const Vector3& position)

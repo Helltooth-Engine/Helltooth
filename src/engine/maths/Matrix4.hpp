@@ -3,13 +3,12 @@
 #include <string.h>
 #include <math.h>
 
-#include "Vector2.hpp"
-#include "Vector3.hpp"
-#include "Vector4.hpp"
-
-#include "Mathcommon.hpp"
-
 #include "core/Internal.hpp"
+
+#include "maths/Mathcommon.hpp"
+#include "maths/Vector2.hpp"
+#include "maths/Vector3.hpp"
+#include "maths/Vector4.hpp"
 
 namespace ht { namespace maths {
 

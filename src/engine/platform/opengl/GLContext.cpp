@@ -2,18 +2,20 @@
 #include "graphics/Context.hpp"
 
 namespace ht { namespace graphics {
+
 #if defined(HT_WINDOWS)
 	Context::Context(HWND& hwnd)
 		:m_Hwnd(hwnd) {
-		PIXELFORMATDESCRIPTOR pfd;
-		ZeroMemory(&pfd, sizeof(PIXELFORMATDESCRIPTOR));
-		pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR);
-		pfd.nVersion =	 1;
-		pfd.dwFlags		= PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
-		pfd.iPixelType	= PFD_TYPE_RGBA;
-		pfd.cColorBits	= 32;
-		pfd.cDepthBits	= 32;
-		pfd.iLayerType	= PFD_MAIN_PLANE;
+
+		PIXELFORMATDESCRIPTOR pfd = {};
+
+		pfd.nSize       = sizeof(PIXELFORMATDESCRIPTOR);
+		pfd.nVersion    = 1;
+		pfd.dwFlags     = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+		pfd.iPixelType  = PFD_TYPE_RGBA;
+		pfd.cColorBits  = 32;
+		pfd.cDepthBits  = 32;
+		pfd.iLayerType  = PFD_MAIN_PLANE;
 
 		m_DeviceContext = GetDC(hwnd);
 		int pixelFormat = ChoosePixelFormat(m_DeviceContext, &pfd);
@@ -33,16 +35,16 @@ namespace ht { namespace graphics {
 
 		wglInit();
 
-		int attribs[] =
-		{
+		int attribs[] = {
 			WGL_CONTEXT_PROFILE_MASK_ARB, WGL_CONTEXT_CORE_PROFILE_BIT_ARB,
-#ifdef HT_DEBUG
+#if defined(HT_DEBUG)
 			WGL_CONTEXT_FLAGS_ARB, WGL_CONTEXT_DEBUG_BIT_ARB,
 #else
 			WGL_CONTEXT_FLAGS_ARB,
 #endif
 			0, 0
 		};
+
 		m_Context = wglCreateContextAttribsARB(m_DeviceContext, NULL, attribs);
 		if (!m_Context) {
 			DWORD err = GetLastError();
@@ -52,6 +54,7 @@ namespace ht { namespace graphics {
 
 		wglMakeCurrent(NULL, NULL);
 		wglDeleteContext(fakeContext);
+
 		if (!wglMakeCurrent(m_DeviceContext, m_Context)) {
 			DWORD err = GetLastError();
 			HT_FATAL("[GLContext] Could not make context current, %d !", err);
@@ -82,6 +85,7 @@ namespace ht { namespace graphics {
 	}
 
 #elif defined(HT_LINUX)
+
 	Context::Context(Display* display, Window& window) {
 		GLint attributes[] = {
 			GLX_RGBA,
@@ -118,8 +122,9 @@ namespace ht { namespace graphics {
 #endif
 
 	void Context::Clear() {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 	}
 
 } }
+
 #endif

@@ -2,9 +2,9 @@
 
 #include <cmath>
 
-#include "Vector2.hpp"
-
 #include "core/Internal.hpp"
+
+#include "maths/Vector2.hpp"
 
 namespace ht { namespace maths {
 
@@ -37,12 +37,12 @@ namespace ht { namespace maths {
 
 		inline void Normalize() { 
 			f32 length = sqrt(x * x + y * y + z * z);
-			if (!length)
-				return;
+			if (!length) return;
 			x /= length;
 			y /= length;
 			z /= length;
 		}
+
 		inline bool operator==(const Vector3& other) { return (x == other.x) && (y == other.y) && (z == other.z); }
 		inline bool operator!=(const Vector3& other) { return (x != other.x) || (y != other.y) || (z != other.z); }
 	};

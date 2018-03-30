@@ -1,7 +1,8 @@
 #pragma once
-#include "Event.hpp"
 
 #include "core/Internal.hpp"
+
+#include "core/input/Event.hpp"
 
 #include "utils/Log.hpp"
 #include "utils/String.hpp"

@@ -16,74 +16,74 @@ namespace ht { namespace core {
 			window->m_ShouldClose = true;
 			break;
 		case WM_KEYDOWN:
-			e->m_EventType = EventType::KEYBOARD;
-			e->m_Key.key = wParam;
-			e->m_Key.modifiers = static_cast<u16>(Modifier::NONE);
-			e->m_Key.state = State::PRESSED;
-			inputEvent = true;
+			e->m_EventType               = EventType::KEYBOARD;
+			e->m_Key.key                 = wParam;
+			e->m_Key.modifiers           = static_cast<u16>(Modifier::NONE);
+			e->m_Key.state               = State::PRESSED;
+			inputEvent                   = true;
 			break;
 		case WM_KEYUP:
-			e->m_EventType = EventType::KEYBOARD;
-			e->m_Key.key = wParam;
-			e->m_Key.modifiers = static_cast<u16>(Modifier::NONE);
-			e->m_Key.state = State::RELEASED;
-			inputEvent = true;
+			e->m_EventType               = EventType::KEYBOARD;
+			e->m_Key.key                 = wParam;
+			e->m_Key.modifiers           = static_cast<u16>(Modifier::NONE);
+			e->m_Key.state               = State::RELEASED;
+			inputEvent                   = true;
 			break;
 		case WM_LBUTTONDOWN:
-			e->m_EventType = EventType::MOUSE;
-			e->m_Mouse.mouseButton = HT_MOUSE_LBUTTON;
-			e->m_Mouse.mouseButtonState = State::PRESSED;
-			e->m_Mouse.x = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y = static_cast<f32>(GET_Y_LPARAM(lParam));
-			inputEvent = true;
+			e->m_EventType               = EventType::MOUSE;
+			e->m_Mouse.mouseButton       = HT_MOUSE_LBUTTON;
+			e->m_Mouse.mouseButtonState  = State::PRESSED;
+			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			inputEvent                   = true;
 			break;
 		case WM_LBUTTONUP:
-			e->m_EventType = EventType::MOUSE;
-			e->m_Mouse.mouseButton = HT_MOUSE_LBUTTON;
-			e->m_Mouse.mouseButtonState = State::RELEASED;
-			e->m_Mouse.x = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y = static_cast<f32>(GET_Y_LPARAM(lParam));
-			inputEvent = true;
+			e->m_EventType               = EventType::MOUSE;
+			e->m_Mouse.mouseButton       = HT_MOUSE_LBUTTON;
+			e->m_Mouse.mouseButtonState  = State::RELEASED;
+			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			inputEvent                   = true;
 			break;
 		case WM_RBUTTONDOWN:
-			e->m_EventType = EventType::MOUSE;
-			e->m_Mouse.mouseButton = HT_MOUSE_RBUTTON;
-			e->m_Mouse.mouseButtonState = State::PRESSED;
-			e->m_Mouse.x = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y = static_cast<f32>(GET_Y_LPARAM(lParam));
-			inputEvent = true;
+			e->m_EventType               = EventType::MOUSE;
+			e->m_Mouse.mouseButton       = HT_MOUSE_RBUTTON;
+			e->m_Mouse.mouseButtonState  = State::PRESSED;
+			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			inputEvent                   = true;
 			break;
 		case WM_RBUTTONUP:
-			e->m_EventType = EventType::MOUSE;
-			e->m_Mouse.mouseButton = HT_MOUSE_RBUTTON;
-			e->m_Mouse.mouseButtonState = State::RELEASED;
-			e->m_Mouse.x = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y = static_cast<f32>(GET_Y_LPARAM(lParam));
-			inputEvent = true;
+			e->m_EventType               = EventType::MOUSE;
+			e->m_Mouse.mouseButton       = HT_MOUSE_RBUTTON;
+			e->m_Mouse.mouseButtonState  = State::RELEASED;
+			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			inputEvent                   = true;
 			break;
 		case WM_MBUTTONDOWN:
-			e->m_EventType = EventType::MOUSE;
-			e->m_Mouse.mouseButton = HT_MOUSE_BUTTON3;
-			e->m_Mouse.mouseButtonState = State::PRESSED;
-			e->m_Mouse.x = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y = static_cast<f32>(GET_Y_LPARAM(lParam));
-			inputEvent = true;
+			e->m_EventType               = EventType::MOUSE;
+			e->m_Mouse.mouseButton       = HT_MOUSE_BUTTON3;
+			e->m_Mouse.mouseButtonState  = State::PRESSED;
+			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			inputEvent                   = true;
 			break;
 		case WM_MBUTTONUP:
-			e->m_EventType = EventType::MOUSE;
-			e->m_Mouse.mouseButton = HT_MOUSE_BUTTON3;
-			e->m_Mouse.mouseButtonState = State::RELEASED;
-			e->m_Mouse.x = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y = static_cast<f32>(GET_Y_LPARAM(lParam));
-			inputEvent = true;
+			e->m_EventType               = EventType::MOUSE;
+			e->m_Mouse.mouseButton       = HT_MOUSE_BUTTON3;
+			e->m_Mouse.mouseButtonState  = State::RELEASED;
+			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			inputEvent                   = true;
 			break;
 		case WM_MOUSEMOVE:
-			e->m_EventType = EventType::MOUSE;
-			e->m_Mouse.mouseButton = -1;
-			e->m_Mouse.mouseButtonState = State::NONE;
-			e->m_Mouse.x = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y = static_cast<f32>(GET_Y_LPARAM(lParam));
-			inputEvent = true;
+			e->m_EventType               = EventType::MOUSE;
+			e->m_Mouse.mouseButton       = -1;
+			e->m_Mouse.mouseButtonState  = State::NONE;
+			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			inputEvent                   = true;
 			break;
 		}
 		if(inputEvent)
@@ -101,28 +101,28 @@ namespace ht { namespace core {
 		m_Title.append(" - DirectX");
 #endif
 
-		WNDCLASSEXA wcex;
-		wcex.cbSize			= sizeof(WNDCLASSEX);
-		wcex.lpfnWndProc	= WndProc;
-		wcex.cbClsExtra		= 0;
-		wcex.cbWndExtra		= 0;
-		wcex.hInstance		= GetModuleHandleA(nullptr);
-		wcex.hIcon			= nullptr;
-		wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
-		wcex.hbrBackground	= 0;
-		wcex.lpszClassName	= "Helltooth window";
-		wcex.lpszMenuName	= 0;
-		wcex.hIconSm		= 0;
-		wcex.style			= CS_VREDRAW | CS_HREDRAW | CS_OWNDC;
+		WNDCLASSEXA wcex = {};
+
+		wcex.cbSize         = sizeof(WNDCLASSEX);
+		wcex.lpfnWndProc    = WndProc;
+		wcex.cbClsExtra     = 0;
+		wcex.cbWndExtra     = 0;
+		wcex.hInstance      = GetModuleHandleA(nullptr);
+		wcex.hIcon          = nullptr;
+		wcex.hCursor        = LoadCursor(NULL, IDC_ARROW);
+		wcex.hbrBackground  = 0;
+		wcex.lpszClassName  = "Helltooth window";
+		wcex.lpszMenuName   = 0;
+		wcex.hIconSm        = 0;
+		wcex.style          = CS_VREDRAW | CS_HREDRAW | CS_OWNDC;
 
 		if (!RegisterClassExA(&wcex)) {
 			DWORD word = GetLastError();
 			HT_FATAL("[Window] Could not register window class, %d!", word);
 			return;
 		}
-		m_Hwnd = CreateWindowA("Helltooth window", m_Title.c_str(),
-			WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, m_Width, m_Height, 0, 0, wcex.hInstance, 0);
 
+		m_Hwnd = CreateWindowA("Helltooth window", m_Title.c_str(), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, m_Width, m_Height, 0, 0, wcex.hInstance, 0);
 
 		if (!m_Hwnd) {
 			DWORD word = GetLastError();
@@ -130,6 +130,7 @@ namespace ht { namespace core {
 			return;
 
 		}
+
 		SetVisible(true);
 		SetFocus(m_Hwnd);
 		UpdateWindow(m_Hwnd);
@@ -173,4 +174,5 @@ namespace ht { namespace core {
 	}
 
 } }
+
 #endif

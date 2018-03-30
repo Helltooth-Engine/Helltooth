@@ -2,14 +2,15 @@
 
 #include <unordered_map>
 #include <vector>
+
 #if defined(HT_LINUX)
 #include <unistd.h>
 #endif
 
-#include "String.hpp"
-#include "Log.hpp"
-
 #include "core/Internal.hpp"
+
+#include "utils/String.hpp"
+#include "utils/Log.hpp"
 
 namespace ht { namespace utils {
 
@@ -18,8 +19,8 @@ namespace ht { namespace utils {
 		static std::unordered_map<String, std::vector<String>> mounts;
 
 	public:
-		static void Mount(const String &virtualPath, const String &physicalPath);
-		static void Unmount(const String &path);
+		static void Mount(const String& virtualPath, const String& physicalPath);
+		static void Unmount(const String& path);
 
 		static String Resolve(const String& path);
 
@@ -29,10 +30,10 @@ namespace ht { namespace utils {
 			return (stat(path.GetData(), &buffer) == 0);
 #elif defined(HT_LINUX)
 			if (access(path.GetData(), F_OK) != -1)
-        		return true;
+				return true;
 			return false;
 #endif
-    	}
+		}
 	};
 
 } }

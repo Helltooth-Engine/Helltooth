@@ -6,8 +6,6 @@
 #elif defined(HT_LINUX)
 #include <x86intrin.h>
 #define m128_get(x, y) x[y]
-#else
-#error Other platforms not supported.
 #endif
 
 #if !defined(M_PI)

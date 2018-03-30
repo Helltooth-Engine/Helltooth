@@ -31,10 +31,7 @@ namespace ht { namespace core {
 		void SetRotation(f32 x, f32 y, f32 z);
 		void SetRotation(const maths::Vector3& rotation);
 
-		virtual void Update(f32 delta) {
-			if (m_Modified)
-				CalculateModelMatrix();
-		}
+		inline virtual void Update(f32 delta) { if (m_Modified) CalculateModelMatrix(); }
 
 		inline maths::Matrix4 GetModelMatrix() { return m_ModelMatrix; }
 		inline maths::Vector3 GetRotation() { return m_Rotation; }
@@ -44,6 +41,5 @@ namespace ht { namespace core {
 		inline void CalculateModelMatrix() { m_ModelMatrix = maths::Matrix4(1.0f).Rotate(m_Rotation).Translate(m_Position); }
 
 	};
-
 
 } }

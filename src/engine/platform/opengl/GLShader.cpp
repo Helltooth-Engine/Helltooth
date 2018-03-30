@@ -10,7 +10,8 @@ namespace ht { namespace graphics {
 		u32 id = GL(glCreateShader(static_cast<GLenum>(type)));
 		GL(glShaderSource(id, 1, &source, 0));
 		GL(glCompileShader(id));
-#ifdef HT_DEBUG
+
+#if defined(HT_DEBUG)
 		s32 result;
 		GL(glGetShaderiv(id, GL_COMPILE_STATUS, &result));
 		if (result == GL_FALSE) {
@@ -27,7 +28,7 @@ namespace ht { namespace graphics {
 		return id;
 	}
 
-	Shader::Shader(BufferLayout* layout, utils::String vertexPath, utils::String fragmentPath, int path) : m_Layout(layout) {
+	Shader::Shader(BufferLayout* layout, const String& vertexPath, const String& fragmentPath, int path) : m_Layout(layout) {
 		m_Program = GL(glCreateProgram());
 		u32 vertexID, fragmentID;
 

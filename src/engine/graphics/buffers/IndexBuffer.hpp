@@ -15,6 +15,7 @@ namespace ht { namespace graphics {
 	class IndexBuffer {
 	private:
 		u32 m_Count;
+
 #if defined(HT_OPENGL)
 		u32 m_IndexBuffer;
 		GLenum m_Format;
@@ -22,6 +23,7 @@ namespace ht { namespace graphics {
 		ID3D11Buffer* m_IndexBuffer;
 		DXGI_FORMAT m_Format;
 #endif
+
 	public:
 		IndexBuffer(u32* indices, u32 indexCount, BufferUsage usage);
 		IndexBuffer(u16* indices, u32 indexCount, BufferUsage usage);
