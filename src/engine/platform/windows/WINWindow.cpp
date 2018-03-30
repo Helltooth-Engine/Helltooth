@@ -99,7 +99,7 @@ namespace ht { namespace core {
 		m_Title.append(" - OpenGL");
 #elif defined (HT_DIRECTX)
 		m_Title.append(" - DirectX");
-#endif
+#endif // HT_OPENGL
 
 		WNDCLASSEXA wcex = {};
 
@@ -169,7 +169,7 @@ namespace ht { namespace core {
 		title.append(" - OpenGL");
 #elif defined (HT_DIRECTX)
 		title.append(" - DirectX");
-#endif
+#endif // HT_OPENGL
 		SetWindowTextA(m_Hwnd, title.c_str());
 	}
 

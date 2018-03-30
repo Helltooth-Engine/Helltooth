@@ -4,7 +4,7 @@
 #include "platform/opengl/GL.hpp"
 #elif defined(HT_DIRECTX)
 #include "platform/directx/DX.hpp"
-#endif
+#endif // HT_OPENGL
 
 #include <vector>
 
@@ -39,7 +39,7 @@ namespace ht { namespace graphics {
 		u32 m_VaoID;
 #elif defined(HT_DIRECTX)
 		ID3D11InputLayout* m_InputLayout;
-#endif
+#endif // HT_OPENGL
 
 	public:
 		BufferLayout();

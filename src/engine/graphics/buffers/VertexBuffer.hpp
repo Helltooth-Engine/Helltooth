@@ -4,9 +4,7 @@
 #include "platform/opengl/GL.hpp"
 #elif defined(HT_DIRECTX)
 #include "platform/directx/DX.hpp"
-#else
-#error Platform not recognzied
-#endif
+#endif // HT_OPENGL
 
 #include <vector>
 
@@ -24,7 +22,8 @@ namespace ht { namespace graphics {
 		u32 m_Buffer;
 #elif defined(HT_DIRECTX)
 		ID3D11Buffer* m_Buffer;
-#endif
+#endif // HT_OPENGL
+
 	public:
 		VertexBuffer(const void* data, u32 size, BufferUsage usage);
 		~VertexBuffer();

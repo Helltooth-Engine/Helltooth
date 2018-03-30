@@ -284,6 +284,4 @@
 #define HT_KEY_PAUSE            119
 #define HT_KEY_SCALE            120
 
-#else
-#	error "Keys for other platforms are not implemented."
-#endif
+#endif // HT_WINDOWS

@@ -1,6 +1,10 @@
 #pragma once
 #if !(defined(HT_OPENGL) || defined(HT_DIRECTX))
-#error ("No Graphics API defined!")
+#error "No Graphics API defined!"
+#endif
+
+#if !(defined(HT_WINDOWS) || defined(HT_LINUX))
+#error "Platform not supported!"
 #endif
 
 #include "core/entities/Entity.hpp"

@@ -37,4 +37,4 @@ namespace ht { namespace graphics {
 
 } }
 
-#endif
+#endif // HT_DIRECTX

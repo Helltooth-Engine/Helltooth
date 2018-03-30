@@ -24,7 +24,7 @@ namespace ht { namespace graphics {
 			GL(glDeleteShader(id));
 			return -1;
 		}
-#endif
+#endif // HT_DEBUG
 		return id;
 	}
 
@@ -78,7 +78,7 @@ namespace ht { namespace graphics {
 			GL(glDeleteProgram(m_Program));
 			delete[] data;
 		}
-#endif
+#endif // HT_DEBUG
 		GL(glDetachShader(m_Program, vertexID));
 		GL(glDetachShader(m_Program, fragmentID)); 
 
@@ -112,4 +112,4 @@ namespace ht { namespace graphics {
 
 } }
 
-#endif
+#endif // HT_OPENGL

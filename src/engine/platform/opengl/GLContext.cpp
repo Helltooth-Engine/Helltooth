@@ -41,7 +41,7 @@ namespace ht { namespace graphics {
 			WGL_CONTEXT_FLAGS_ARB, WGL_CONTEXT_DEBUG_BIT_ARB,
 #else
 			WGL_CONTEXT_FLAGS_ARB,
-#endif
+#endif // HT_DEBUG
 			0, 0
 		};
 
@@ -119,7 +119,7 @@ namespace ht { namespace graphics {
 
 	}
 
-#endif
+#endif // HT_LINUX
 
 	void Context::Clear() {
 		GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
@@ -127,4 +127,4 @@ namespace ht { namespace graphics {
 
 } }
 
-#endif
+#endif // HT_OPENGL

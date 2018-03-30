@@ -19,7 +19,7 @@ namespace ht { namespace graphics {
 #elif defined(HT_DIRECTX)
 		ID3D11ShaderResourceView* m_ResourceView;
 		ID3D11SamplerState* m_SamplerState;
-#endif
+#endif // HT_OPENGL
 
 	protected:
 		Texture(u32 width, u32 height, TextureType type) : m_Width(width), m_Height(height), m_Type(type) {}

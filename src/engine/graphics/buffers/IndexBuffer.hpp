@@ -4,7 +4,7 @@
 #include "platform/opengl/GL.hpp"
 #elif defined(HT_DIRECTX)
 #include "platform/directx/DX.hpp"
-#endif
+#endif // HT_OPENGL
 
 #include "core/Internal.hpp"
 
@@ -22,7 +22,7 @@ namespace ht { namespace graphics {
 #elif defined(HT_DIRECTX)
 		ID3D11Buffer* m_IndexBuffer;
 		DXGI_FORMAT m_Format;
-#endif
+#endif // HT_OPENGL
 
 	public:
 		IndexBuffer(u32* indices, u32 indexCount, BufferUsage usage);
@@ -35,7 +35,7 @@ namespace ht { namespace graphics {
 		inline GLenum GetFormat() { return m_Format; }
 #elif defined(HT_DIRECTX)
 		inline DXGI_FORMAT GetFormat() { return m_Format; }
-#endif
+#endif // HT_OPENGL
 
 		inline u32 GetCount() { return m_Count; }
 

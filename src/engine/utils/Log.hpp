@@ -2,7 +2,7 @@
 
 #ifdef HT_WINDOWS
 #include <Windows.h>
-#endif
+#endif // HT_WINDOWS
 
 #include <utility>
 #include <stdio.h>
@@ -10,7 +10,7 @@
 
 #ifdef HT_OPENGL
 #include "platform/opengl/GL.hpp"
-#endif
+#endif // HT_OPENGL
 
 #include "core/Internal.hpp"
 
@@ -26,7 +26,7 @@
 #define HT_LEVEL_WARNING        "\033[1;33m"
 #define HT_LEVEL_INFO           "\033[0;37m"
 #define HT_LEVEL_MSG            "\033[1;37m"
-#endif
+#endif // HT_WINDOWS
 
 #define	HT_LOG_LEVEL_FATAL      0
 #define	HT_LOG_LEVEL_ERROR      1
@@ -38,7 +38,7 @@
 #	define HT_LOG_LEVEL         4
 #else
 #	define HT_LOG_LEVEL         2
-#endif
+#endif // HT_DEBUG
 
 #if HT_LOG_LEVEL_FATAL <= HT_LOG_LEVEL
 #define HT_FATAL(format, ...)   ht::utils::Log(HT_LEVEL_FATAL, true, format, __VA_ARGS__)
@@ -46,7 +46,7 @@
 #else
 #define HT_FATAL(format, ...)
 #define _HT_FATAL(format, ...)
-#endif
+#endif // HT_LOG_LEVEL_FATAL
 
 #if HT_LOG_LEVEL_ERROR <= HT_LOG_LEVEL
 #define HT_ERROR(format, ...)   ht::utils::Log(HT_LEVEL_ERROR, true, format, __VA_ARGS__)
@@ -54,7 +54,7 @@
 #else
 #define HT_ERROR(format, ...)
 #define _HT_ERROR(format, ...)
-#endif
+#endif // HT_LOG_LEVEL_ERROR
 
 #if HT_LOG_LEVEL_WARNING <= HT_LOG_LEVEL
 #define HT_WARN(format, ...)   ht::utils::Log(HT_LEVEL_WARNING, true, format, __VA_ARGS__)
@@ -62,7 +62,7 @@
 #else
 #define HT_WARN(format, ...)
 #define _HT_WARN(format, ...)
-#endif
+#endif // HT_LOG_LEVEL_WARNING
 
 #if HT_LOG_LEVEL_INFO <= HT_LOG_LEVEL
 #define HT_INFO(format, ...)   ht::utils::Log(HT_LEVEL_INFO, true, format, __VA_ARGS__)
@@ -70,7 +70,7 @@
 #else
 #define HT_INFO(format, ...)
 #define _HT_INFO(format, ...)
-#endif
+#endif // HT_LOG_LEVEL_INFO
 
 #if HT_LOG_LEVEL_MSG <= HT_LOG_LEVEL
 #define HT_MSG(format, ...)   ht::utils::Log(HT_LEVEL_MSG, true, format, __VA_ARGS__)
@@ -78,7 +78,7 @@
 #else
 #define HT_MSG(format, ...)
 #define _HT_MSG(format, ...)
-#endif
+#endif // HT_LOG_LEVEL_MSG
 
 #ifdef HT_DEBUG
 #define HT_ASSERT(condition, statement)                         \
@@ -94,7 +94,7 @@
 		}
 #else
 #define HT_ASSERT(condition, statement)
-#endif
+#endif // HT_DEBUG
 
 #ifdef HT_DEBUG
 #	if defined(HT_OPENGL)
@@ -105,7 +105,7 @@
 #else
 #define GL(x) x
 #define DX(x) x
-#endif
+#endif // HT_DEBUG
 
 namespace ht { namespace utils {
 #if defined(HT_WINDOWS)
@@ -121,7 +121,7 @@ namespace ht { namespace utils {
 		printf((std::string(color) + arg).c_str(), std::forward<Args>(message)...);
 		if (newline) printf("\n");
 }
-#endif
+#endif // HT_WINDOWS
 
 #ifdef HT_OPENGL
 	inline static void GLCallLog(const char* funcName, const char* file, u32 line) {
@@ -140,6 +140,6 @@ namespace ht { namespace utils {
       *a = 1;
 		}
 	}
-#endif
+#endif // HT_OPENGL
 
 } }

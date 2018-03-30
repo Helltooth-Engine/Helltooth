@@ -5,7 +5,7 @@
 
 #if defined(HT_LINUX)
 #include <unistd.h>
-#endif
+#endif // HT_LINUX
 
 #include "core/Internal.hpp"
 
@@ -32,7 +32,7 @@ namespace ht { namespace utils {
 			if (access(path.GetData(), F_OK) != -1)
 				return true;
 			return false;
-#endif
+#endif // HT_WINDOWS
 		}
 	};
 

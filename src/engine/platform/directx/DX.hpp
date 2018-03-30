@@ -8,4 +8,4 @@
 #define HT_DXDEVICE   ht::core::Window::GetWindow()->GetDevice()
 #define HT_DXCONTEXT  ht::core::Window::GetWindow()->GetDeviceContext()
 
-#endif
+#endif // HT_DIRECTX

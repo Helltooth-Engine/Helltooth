@@ -6,7 +6,7 @@
 #include <dxgi.h>
 #elif defined(HT_OPENGL)
 #include "platform/opengl/GL.hpp"
-#endif
+#endif // HT_DIRECTX
 
 #if defined(HT_WINDOWS)
 #include <Windows.h>
@@ -16,7 +16,7 @@
 #include <GL/gl.h>
 #include <GL/glx.h>
 #include <GL/glu.h>
-#endif
+#endif // HT_WINDOWS
 
 #include "utils/Log.hpp"
 
@@ -34,7 +34,7 @@ namespace ht { namespace graphics {
 		XVisualInfo* m_VisualInfo;
 		Colormap m_Colormap;
 		XSetWindowAttributes m_WindowAttributes;
-#	endif
+#	endif // HT_WINDOWS
 #elif defined(HT_DIRECTX)
 		IDXGISwapChain* m_SwapChain;
 		ID3D11Device* m_Device;
@@ -42,14 +42,14 @@ namespace ht { namespace graphics {
 		ID3D11RenderTargetView* m_RenderTarget;
 		ID3D11DepthStencilView* m_DepthStencilView;
 		ID3D11Texture2D* m_DepthStencilBuffer;
-#endif
+#endif // HT_OPENGL
 
 	public:
 #if defined(HT_WINDOWS)
 		Context(HWND& hwnd);
 #elif defined(HT_LINUX)
 		Context(Display* dpy, Window& root);
-#endif
+#endif // HT_WINDOWS
 		~Context();
 
 		void Update();
@@ -58,13 +58,14 @@ namespace ht { namespace graphics {
 #if defined(HT_DIRECTX)
 		inline ID3D11Device* GetDevice() { return m_Device; }
 		inline ID3D11DeviceContext* GetDeviceContext() { return m_Context; }
-#endif
+#endif // HT_DIRECTX
 
 #if defined(HT_LINUX)
 		inline Colormap& GetColormap() { return m_Colormap; }
 		inline XSetWindowAttributes* GetWindowAttributes() { return &m_WindowAttributes; }
 		inline XVisualInfo* GetVisualInfo() { return m_VisualInfo; }
-#endif
+#endif // HT_LINUX
+
 	};
 
 } }

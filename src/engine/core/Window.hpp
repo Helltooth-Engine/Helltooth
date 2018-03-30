@@ -10,7 +10,7 @@
 #include <GL/gl.h>
 #include <GL/glx.h>
 #include <GL/glu.h>
-#endif
+#endif // HT_WINDOWS
 
 #include <stdio.h>
 #include <string>
@@ -40,7 +40,7 @@ namespace ht { namespace core {
 #elif defined(HT_LINUX)
 		_XDisplay* m_Display;
 		XID m_Window;
-#endif
+#endif // HT_WINDOWS
 		bool m_ShouldClose = false;
 
 		static Window* s_Window;
@@ -59,7 +59,7 @@ namespace ht { namespace core {
 		void SetTitle(std::string title);
 #ifdef HT_WINDOWS
 		inline bool IsHWND(HWND other) { return m_Hwnd == other; }
-#endif
+#endif // HT_WINDOWS
 
 		inline bool ShouldClose() { return m_ShouldClose; }
 		inline graphics::Context* GetContext() { return m_Context; }
@@ -67,12 +67,12 @@ namespace ht { namespace core {
 #ifdef HT_DIRECTX
 		inline ID3D11Device* GetDevice() { return m_Context->GetDevice(); }
 		inline ID3D11DeviceContext* GetDeviceContext() { return m_Context->GetDeviceContext(); }
-#endif
+#endif // HT_DIRECTX
 
 	private:
 #ifdef HT_WINDOWS
 		static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-#endif
+#endif // HT_WINDOWS
 
 	};
 

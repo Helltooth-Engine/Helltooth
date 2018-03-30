@@ -4,7 +4,7 @@
 #include "platform/opengl/GL.hpp"
 #elif defined(HT_DIRECTX)
 #include <d3d11.h>
-#endif
+#endif // HT_OPENGL
 
 #include "core/Internal.hpp"
 
@@ -19,7 +19,7 @@ namespace ht { namespace graphics {
 #elif defined(HT_DIRECTX)
 		STATIC  = D3D11_USAGE_DEFAULT,
 		DYNAMIC = D3D11_USAGE_DYNAMIC
-#endif
+#endif // HT_OPENGL
 	};
 
 	enum class DataType {
@@ -38,7 +38,7 @@ namespace ht { namespace graphics {
 		UNSIGNED_SHORT  = DXGI_FORMAT_R16_UINT,
 		UNSIGNED_INT    = DXGI_FORMAT_R32_UINT,
 		UNSIGNED_BYTE   = DXGI_FORMAT_R8_UINT,
-#endif
+#endif // HT_OPENGL
 		
 	};
 
@@ -49,7 +49,7 @@ namespace ht { namespace graphics {
 #elif defined(HT_DIRECTX)
 		VERTEX,
 		FRAGMENT,
-#endif
+#endif // HT_OPENGL
 		UNKOWN,
 	};
 
@@ -63,7 +63,7 @@ namespace ht { namespace graphics {
 		RGB   = UNKNOWN, // no support
 		RGBA  = DXGI_FORMAT_R8G8B8A8_UNORM,
 		BGRA  = DXGI_FORMAT_B8G8R8A8_UNORM,
-#endif
+#endif // HT_OPENGL
 	};
 
 	enum class TextureType {
@@ -83,4 +83,5 @@ namespace ht { namespace graphics {
 	extern u32 GetSemanticIndex(DataType type);
 	extern TextureFormat GetFormat(u32 bpp);
 	extern TextureFormat GetBaseFormat(TextureFormat);
+
 } }

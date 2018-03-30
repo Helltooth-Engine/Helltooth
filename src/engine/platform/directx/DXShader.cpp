@@ -12,7 +12,7 @@ namespace ht { namespace graphics {
 
 #if defined(HT_DEBUG)
 		flag |= D3DCOMPILE_DEBUG;
-#endif
+#endif // HT_DEBUG
 
 		char* vertex, *fragment;
 		u32 vSize, fSize;
@@ -103,4 +103,4 @@ namespace ht { namespace graphics {
 
 } }
 
-#endif
+#endif // HT_DIRECTX

@@ -6,7 +6,7 @@
 #include <gl/GL.h>
 #elif defined(HT_LINUX)
 #include <GL/glx.h>
-#endif
+#endif // HT_WINDOWS
 
 #define HT_FUNCTION_NAME(function) PFN##function##PROC
 
@@ -16,7 +16,7 @@ typedef void (*HT_PROC)(void);
 #else
 #define HT_APIENTRY
 typedef void (*HT_PROC)(void);
-#endif
+#endif // HT_WINDOWS
 
 #define HT_CREATE_FUNCTION_POINTER(returntype, function, ...) typedef returntype(HT_APIENTRY * HT_FUNCTION_NAME(function)) (__VA_ARGS__); \
 		extern HT_FUNCTION_NAME(function) function
@@ -40,7 +40,7 @@ typedef double                       GLdouble;
 typedef double                       GLclampd;
 typedef void                         GLvoid;
 typedef char                         GLchar;
-#endif // These typedefs are already defined for linux
+#endif // HT_LINUX
 
 
 #define GL_ZERO                      0
@@ -174,7 +174,7 @@ HT_CREATE_FUNCTION_POINTER(GLint, glGetUniformLocation, GLuint program, const GL
 
 #if !defined(HT_LINUX)
 HT_CREATE_FUNCTION_POINTER(void, glActiveTexture, GLenum texture);
-#endif
+#endif // HT_LINUX
 
 extern bool GLInit();
 

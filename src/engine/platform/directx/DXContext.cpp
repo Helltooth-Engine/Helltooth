@@ -30,7 +30,7 @@ namespace ht { namespace graphics {
 
 #if defined(HT_DEBUG)
 		createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
-#endif
+#endif // HT_DEBUG
 
 		m_Device = nullptr;
 		DX(D3D11CreateDeviceAndSwapChain(0, D3D_DRIVER_TYPE_HARDWARE, 0, createDeviceFlags, lvl, _countof(lvl), D3D11_SDK_VERSION, &sd, &m_SwapChain, &m_Device, &FeatureLevelIsSupprted, &m_Context));
@@ -96,4 +96,4 @@ namespace ht { namespace graphics {
 
 } }
 
-#endif
+#endif // HT_DIRECTX

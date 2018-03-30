@@ -8,7 +8,7 @@
 #elif defined(HT_LINUX)
 #define HT_GET_GL_FUNCTION(function) function = ( HT_FUNCTION_NAME(function) )glXGetProcAddressARB((const unsigned char*)#function); \
 	if((HT_PROC)function == (HT_PROC)0 || (HT_PROC)function == (HT_PROC)-1) return false;
-#endif
+#endif  // HT_WINDOWS
 
 HT_CPP_FUNCTION_POINTER(glGenBuffers);
 HT_CPP_FUNCTION_POINTER(glBindBuffer);
@@ -51,7 +51,7 @@ HT_CPP_FUNCTION_POINTER(glGetUniformLocation);
 
 #if !defined(HT_LINUX)
 HT_CPP_FUNCTION_POINTER(glActiveTexture);
-#endif
+#endif // HT_LINUX
 
 bool GLInit() {
 
@@ -96,7 +96,7 @@ bool GLInit() {
 
 #if !defined(HT_LINUX)
 	HT_GET_GL_FUNCTION(glActiveTexture);
-#endif
+#endif // HT_LINUX
 
 	return true;
 }

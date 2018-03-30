@@ -4,7 +4,7 @@
 #include "platform/opengl/GL.hpp"
 #elif defined(HT_DIRECTX)
 #include "platform/directx/DX.hpp"
-#endif
+#endif // HT_OPENGL
 
 #include "core/Internal.hpp"
 
@@ -17,7 +17,7 @@ namespace ht { namespace graphics {
 	private:
 #if defined(HT_DIRECTX)
 		ID3D11Texture2D* m_Texture;
-#endif
+#endif // HT_DIRECTX
 
 	public:
 		Texture2D(u32 width, u32 height, TextureFormat format);

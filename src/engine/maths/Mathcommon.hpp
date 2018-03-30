@@ -6,11 +6,11 @@
 #elif defined(HT_LINUX)
 #include <x86intrin.h>
 #define m128_get(x, y) x[y]
-#endif
+#endif // HT_WINDOWS
 
 #if !defined(M_PI)
 #define M_PI 3.14159265358979323846264338327950288419716939937510f
-#endif
+#endif // M_PI
 
 #define ToRadians(x) x * 0.01745329251f
 #define ToDegrees(x) x * 57.2957795131f
