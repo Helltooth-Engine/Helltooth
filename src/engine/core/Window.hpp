@@ -4,7 +4,7 @@
 #include <windowsx.h>
 #include <tchar.h>
 #elif defined(HT_LINUX)
-#define XLIB_ILLEGAL_ACCESS
+//#define XLIB_ILLEGAL_ACCESS
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <GL/gl.h>
@@ -38,8 +38,11 @@ namespace ht { namespace core {
 #if defined(HT_WINDOWS)
 		HWND m_Hwnd;
 #elif defined(HT_LINUX)
-		_XDisplay* m_Display;
+		_XDisplay* m_Display = nullptr;
 		XID m_Window;
+		XVisualInfo* m_VisualInfo = nullptr;
+		Colormap m_Colormap;
+		
 #endif // HT_WINDOWS
 		bool m_ShouldClose = false;
 
