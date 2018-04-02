@@ -36,6 +36,7 @@ function makeProject(name)
 		buildoptions {
 			"-msse4.1",
 			"-mfma",
+            "-ggdb",
 		}
 	
 	filter { "system:windows" }
