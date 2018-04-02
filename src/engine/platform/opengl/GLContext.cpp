@@ -86,37 +86,19 @@ namespace ht { namespace graphics {
 
 #elif defined(HT_LINUX)
 
-	Context::Context(Display* display, Window& window) {
-		GLint attributes[] = {
-			GLX_RGBA,
-			GLX_DEPTH_SIZE, 24,
-			GLX_DOUBLEBUFFER,
-			0 // End of attributes
-		};
-
-		m_VisualInfo = glXChooseVisual(display, 0, attributes);
-
-		if (m_VisualInfo == NULL) {
-			HT_FATAL("%s", "[Context] No appropriate visual found.");
-			return;
-		}
-
-		m_Colormap = XCreateColormap(display, window, m_VisualInfo->visual, AllocNone);
-
-		m_WindowAttributes.colormap = m_Colormap;
-		m_WindowAttributes.event_mask = ExposureMask | KeyPressMask;
-	
-		if (!GLInit()) {
-			HT_FATAL("%s", "[GLContext] Could not initialize GL");
-		}
+	Context::Context(_XDisplay* display, XID& window, XVisualInfo* visualInfo)
+		: m_Display(display) {
+		m_Context = glXCreateContext(m_Display, visualInfo, nullptr, GL_TRUE);
+		glXMakeCurrent(m_Display, window, m_Context);
 	}
 
 	Context::~Context() {
-
+		glXMakeCurrent(m_Display, None, nullptr);
+		glXDestroyContext(m_Display, m_Context);
 	}
 
 	void Context::Update() {
-
+		// The context updating is done in Window
 	}
 
 #endif // HT_LINUX
