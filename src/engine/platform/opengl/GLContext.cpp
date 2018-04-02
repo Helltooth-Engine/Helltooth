@@ -90,6 +90,10 @@ namespace ht { namespace graphics {
 		: m_Display(display) {
 		m_Context = glXCreateContext(m_Display, visualInfo, nullptr, GL_TRUE);
 		glXMakeCurrent(m_Display, window, m_Context);
+		
+		if(!GLInit()) {
+			HT_FATAL("%s", "[GLContext] Could not initialize GL");
+		}
 	}
 
 	Context::~Context() {
