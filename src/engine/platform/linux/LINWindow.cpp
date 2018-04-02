@@ -8,29 +8,52 @@ namespace ht { namespace core {
 
 	Window::Window(std::string title, u32 width, u32 height) 
 		: m_Title(title), m_Width(width), m_Height(height) {
+		m_Title.append(" - OpenGL");
+
 		m_Display = XOpenDisplay(nullptr);
 		if (m_Display == nullptr) {
 			HT_FATAL("%s", "[Window] Coult not connect to X Server.");
 			return;
 		}
 
-		m_Window = DefaultRootWindow(m_Display);
-
-		m_Title.append(" - OpenGL");
+		XID rootWindow = DefaultRootWindow(m_Display);
 		
-		m_Context = new Context(m_Display, m_Window);
+		int attributes[] = {
+			GLX_RGBA,
+			GLX_DEPTH_SIZE, 24,
+			GLX_DOUBLEBUFFER,
+			None
+		};
+		
+		m_VisualInfo = glXChooseVisual(m_Display, 0, attributes);
+		if (m_VisualInfo == nullptr) {
+			HT_FATAL("%s", "[Window] Could not select an appropriate visual");
+			return;
+		}
+		else {
+			HT_INFO("Visual %p selected!", m_VisualInfo->visualid);
+		}
 
-		m_Window = XCreateWindow(m_Display, m_Window, 0, 0, width, height, 0, m_Context->GetVisualInfo()->depth, InputOutput,m_Context->GetVisualInfo()->visual, CWColormap | CWEventMask, m_Context->GetWindowAttributes());
+		m_Colormap = XCreateColormap(m_Display, rootWindow, m_VisualInfo->visual, AllocNone);
 
+		XSetWindowAttributes windowAttribs = {};
+		windowAttribs.colormap = m_Colormap;
+		windowAttribs.event_mask = ExposureMask | KeyPressMask;
+
+		m_Window = XCreateWindow(m_Display, rootWindow, 0, 0, width, height, 0, m_VisualInfo->depth, InputOutput, m_VisualInfo->visual, CWColormap | CWEventMask, &windowAttribs);
+		
 		XMapWindow(m_Display, m_Window);
+		XStoreName(m_Display, m_Window, m_Title.c_str());
 
-		XStoreName(m_Display, m_Window, title.c_str());
+		m_Context = new graphics::Context(m_Display, m_Window, m_VisualInfo);
 
 		s_Window = this;
 	}
 
 	Window::~Window() {
 		delete m_Context;
+		XDestroyWindow(m_Display, m_Window);
+		XCloseDisplay(m_Display);
 	}
 
 	void Window::SetVisible(bool visible) {
@@ -38,11 +61,12 @@ namespace ht { namespace core {
 	}
 
 	void Window::Update() {
-
+		m_Context->Update();
+		glXSwapBuffers(m_Display, m_Window);
 	}
 
 	void Window::Clear() {
-
+		m_Context->Clear();
 	}
 
 	void Window::SetTitle(std::string title) {
