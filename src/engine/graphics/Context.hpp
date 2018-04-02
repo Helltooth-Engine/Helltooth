@@ -31,9 +31,7 @@ namespace ht { namespace graphics {
 		HWND m_Hwnd;
 #	elif defined(HT_LINUX)
 		GLXContext m_Context;
-		XVisualInfo* m_VisualInfo;
-		Colormap m_Colormap;
-		XSetWindowAttributes m_WindowAttributes;
+		_XDisplay* m_Display;
 #	endif // HT_WINDOWS
 #elif defined(HT_DIRECTX)
 		IDXGISwapChain* m_SwapChain;
@@ -48,7 +46,7 @@ namespace ht { namespace graphics {
 #if defined(HT_WINDOWS)
 		Context(HWND& hwnd);
 #elif defined(HT_LINUX)
-		Context(Display* dpy, Window& root);
+		Context(_XDisplay* display, XID& window, XVisualInfo* visualInfo);
 #endif // HT_WINDOWS
 		~Context();
 
@@ -59,12 +57,6 @@ namespace ht { namespace graphics {
 		inline ID3D11Device* GetDevice() { return m_Device; }
 		inline ID3D11DeviceContext* GetDeviceContext() { return m_Context; }
 #endif // HT_DIRECTX
-
-#if defined(HT_LINUX)
-		inline Colormap& GetColormap() { return m_Colormap; }
-		inline XSetWindowAttributes* GetWindowAttributes() { return &m_WindowAttributes; }
-		inline XVisualInfo* GetVisualInfo() { return m_VisualInfo; }
-#endif // HT_LINUX
 
 	};
 
