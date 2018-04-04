@@ -25,8 +25,8 @@ namespace ht { namespace graphics {
 #endif // HT_OPENGL
 
 	public:
-		IndexBuffer(u32* indices, u32 indexCount, BufferUsage usage);
-		IndexBuffer(u16* indices, u32 indexCount, BufferUsage usage);
+		IndexBuffer(const u32* indices, u32 indexCount, BufferUsage usage);
+		IndexBuffer(const u16* indices, u32 indexCount, BufferUsage usage);
 		~IndexBuffer();
 
 		void Bind();
