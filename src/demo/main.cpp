@@ -6,12 +6,14 @@ using namespace core;
 using namespace maths;
 using namespace utils;
 using namespace graphics;
+using namespace entities;
 
 class Game : public Application {
 private:
 	Camera* camera;
 	BufferLayout* layout;
-	Entity* entity;
+	Entity entity;
+	TransformComponent transform;
 	Shader* shader;
 	VertexBuffer* vbo;
 	IndexBuffer* ibo;
@@ -27,7 +29,7 @@ public:
 		VFS::Mount("res", "res/textures/");
 
 		camera = new FPSCamera(0, 0, 0);
-		entity = new Entity();
+		entity.AddComponent(&transform);
 	}
 
 	~Game() {
@@ -75,7 +77,7 @@ public:
 		buffer = new UniformBuffer(ulayout);
 		buffer->Set(0, &proj[0]);
 		buffer->Set(1, &viewMatrix[0]);
-		buffer->Set(2, &entity->GetModelMatrix()[0]);
+		buffer->Set(2, &transform.GetModelMatrix()[0]);
 
 		texture = Asset::LoadTexture("/res/final_logo.httexture");
 
@@ -97,12 +99,12 @@ public:
 
 	void Update(float delta) {
 		camera->Update(delta);
-		entity->Rotate(50.f * delta, 50.f * delta, 50.f * delta);
-		entity->Update(delta);
+		transform.Rotate(50.f * delta, 50.f * delta, 50.f * delta);
+		transform.Update(delta);
 		viewMatrix = camera->GetViewMatrix();
 
 		buffer->Set(1, &viewMatrix[0]);
-		buffer->Set(2, &entity->GetModelMatrix()[0]);
+		buffer->Set(2, &transform.GetModelMatrix()[0]);
 		buffer->Bind();
 	}
 

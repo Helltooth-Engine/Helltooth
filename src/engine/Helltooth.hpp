@@ -7,7 +7,6 @@
 #error "Platform not supported!"
 #endif
 
-#include "core/entities/Entity.hpp"
 #include "core/input/Event.hpp"
 #include "core/input/EventBufferer.hpp"
 #include "core/input/EventDispatcher.hpp"
@@ -16,6 +15,9 @@
 #include "core/Asset.hpp"
 #include "core/Internal.hpp"
 #include "core/Window.hpp"
+
+#include "entities/Entity.hpp"
+#include "entities/TransformComponent.hpp"
 
 #include "graphics/buffers/BufferLayout.hpp"
 #include "graphics/buffers/IndexBuffer.hpp"
