@@ -81,16 +81,16 @@
 #endif // HT_LOG_LEVEL_MSG
 
 #ifdef HT_DEBUG
-#define HT_ASSERT(condition, statement)                         \
-		if(condition) {                                         \
-			HT_FATAL("%s", "*******************");              \
-			HT_FATAL("%s", "ASSERTION FAILED");                 \
-			HT_FATAL("Condition: %s", #condition);              \
-			HT_FATAL("%s", statement);                          \
-			HT_FATAL("File: %s, line: %d", __FILE__, __LINE__); \
-			HT_FATAL("%s", "*******************");              \
-			int *a = nullptr;                                   \
-			*a = 1;                                             \
+#define HT_ASSERT(condition, statement)                          \
+		if(condition) {                                          \
+			HT_FATAL("%s", "*******************");               \
+			HT_FATAL("%s", "ASSERTION FAILED");                  \
+			HT_FATAL("Condition: %s", #condition);               \
+			HT_FATAL("%s", statement);                           \
+			HT_FATAL("File: %s, line: %d", __FILE__, __LINE__);  \
+			HT_FATAL("%s", "*******************");               \
+			int *a = nullptr;                                    \
+			*a = 1;                                              \
 		}
 #else
 #define HT_ASSERT(condition, statement)
