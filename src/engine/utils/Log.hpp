@@ -129,7 +129,7 @@ namespace ht { namespace utils {
 		while (error = glGetError()) {
 			HT_FATAL("[GL] Error %u, calling %s in %s:%u", error, funcName, file, line);
 			int* a = nullptr;
-      *a = 1;
+			*a = 1;
 		}
 	}
 #elif defined(HT_DIRECTX)
@@ -137,7 +137,7 @@ namespace ht { namespace utils {
 		if (result != S_OK) {
 			HT_FATAL("[DX] Error %u, calling %s in %s:%u", result, funcName, file, line);
 			int* a = nullptr;
-      *a = 1;
+			*a = 1;
 		}
 	}
 #endif // HT_OPENGL
