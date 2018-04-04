@@ -108,7 +108,6 @@ namespace ht { namespace graphics {
 	}
 
 	void Shader::Start() {
-		m_Layout->Start();
 		GL(glUseProgram(m_Program));
 	}
 

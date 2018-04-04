@@ -45,12 +45,15 @@ namespace ht { namespace graphics {
 			return 0;
 #endif // HT_DIRECTX
 		}
+
 #if defined(HT_OPENGL)
 		inline void SetSamplers(s32* array, u32 size) { glUniform1iv(glGetUniformLocation(m_Program, "samplers"), size, array); }
 #elif defined(HT_DIRECTX)
 		void SetSamplers(s32* array, u32 size);
 #endif // HT_OPENGL
 
+		inline void BindLayout() { m_Layout->Bind(); }
+		
 	};
 
 } }

@@ -98,7 +98,6 @@ namespace ht { namespace graphics {
 	void Shader::Start() {
 		HT_DXCONTEXT->VSSetShader(m_VertexShader, nullptr, 0);
 		HT_DXCONTEXT->PSSetShader(m_FragmentShader, nullptr, 0);
-		m_Layout->Start();
 	}
 
 } }
