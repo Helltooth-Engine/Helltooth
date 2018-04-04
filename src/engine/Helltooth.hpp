@@ -18,6 +18,7 @@
 
 #include "entities/Entity.hpp"
 #include "entities/TransformComponent.hpp"
+#include "entities/ModelComponent.hpp"
 
 #include "graphics/buffers/BufferLayout.hpp"
 #include "graphics/buffers/IndexBuffer.hpp"

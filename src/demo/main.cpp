@@ -14,9 +14,8 @@ private:
 	BufferLayout* layout;
 	Entity entity;
 	TransformComponent transform;
+	ModelComponent* model;
 	Shader* shader;
-	VertexBuffer* vbo;
-	IndexBuffer* ibo;
 	UniformBuffer* buffer;
 	Texture* texture;
 	Matrix4 proj, viewMatrix;
@@ -30,10 +29,11 @@ public:
 
 		camera = new FPSCamera(0, 0, 0);
 		entity.AddComponent(&transform);
+		entity.AddComponent(model);
 	}
 
 	~Game() {
-		delete camera, layout, entity, shader, vbo, ibo, buffer, texture;
+		delete camera, layout, entity, shader, buffer, model, texture;
 	}
 
 	void Init() {
@@ -55,7 +55,7 @@ public:
 
 
 		shader = new Shader(layout, "/res/shader.vert", "/res/shader.frag", ShaderLocationType::FROM_PATH | ShaderLocationType::FROM_HTSL);
-		vbo = new VertexBuffer(data, sizeof(data), BufferUsage::STATIC);
+		model = new ModelComponent(data, sizeof(data));
 
 #ifdef HT_OPENGL
 		s32 ids[] = { 0, 1 };
@@ -64,7 +64,7 @@ public:
 		glClearColor(0.3f, 0.4f, 0.7f, 1.0f);
 #endif
 
-		ibo = new IndexBuffer(indices, 6, BufferUsage::STATIC);
+		model->SetIndices(indices, sizeof(indices));
 
 		UniformBufferLayout ulayout(ShaderType::VERTEX);
 		ulayout.AddUniform<Matrix4>();
@@ -82,19 +82,15 @@ public:
 		texture = Asset::LoadTexture("/res/final_logo.httexture");
 
 		texture->Bind(0);
-
-		vbo->Bind(shader->GetStride());
-		shader->Start();
-		ibo->Bind();
-		buffer->Bind();
+		
 	}
 
 	void Render() {
-#ifdef HT_DIRECTX
-		HT_DXCONTEXT->DrawIndexed(ibo->GetCount(), 0, 0);
-#else
-		glDrawElements(GL_TRIANGLES, ibo->GetCount(), ibo->GetFormat(), 0);
-#endif
+		shader->Start();
+		model->Bind(shader->GetStride());
+		shader->BindLayout();
+		buffer->Bind();
+		model->Render();
 	}
 
 	void Update(float delta) {
