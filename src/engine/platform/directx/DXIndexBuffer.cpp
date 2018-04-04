@@ -7,7 +7,7 @@ namespace ht { namespace graphics {
 		: m_Count(indexCount), m_Format(DXGI_FORMAT_R32_UINT) {
 		D3D11_BUFFER_DESC bd = {};
 		bd.Usage      = static_cast<D3D11_USAGE>(usage);
-		bd.ByteWidth  = indexCount * sizeof(u32);
+		bd.ByteWidth  = indexCount;
 		bd.BindFlags  = D3D11_BIND_INDEX_BUFFER;
 
 		D3D11_SUBRESOURCE_DATA data = {};
@@ -19,7 +19,7 @@ namespace ht { namespace graphics {
 		: m_Count(indexCount), m_Format(DXGI_FORMAT_R16_UINT) {
 		D3D11_BUFFER_DESC bd = {};
 		bd.Usage      = static_cast<D3D11_USAGE>(usage);
-		bd.ByteWidth  = indexCount * sizeof(u32);
+		bd.ByteWidth  = indexCount;
 		bd.BindFlags  = D3D11_BIND_INDEX_BUFFER;
 
 		D3D11_SUBRESOURCE_DATA data = {};
