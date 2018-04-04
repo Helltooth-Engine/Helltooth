@@ -8,7 +8,7 @@ namespace ht { namespace graphics {
 		for (u32 i = 0; i < layout.attributes.size(); i++)
 			m_Size += DataTypeSize(layout.attributes[i]);
 		
-		HT_ASSERT(m_Size % 16 != 0, "[UniformBuffer] Layout not 16 byte aligned");
+		HT_ASSERT(m_Size % 16 == 0, "[UniformBuffer] Layout not 16 byte aligned");
 
 		for (u32 i = 0; i < m_Size / sizeof(f32); i++)
 			m_Data.push_back(0.0f);
@@ -55,7 +55,7 @@ namespace ht { namespace graphics {
 		else if(m_Layout.type == ShaderType::FRAGMENT)
 			HT_DXCONTEXT->PSSetConstantBuffers(0, 1, &m_Buffer);
 		else 
-			HT_ASSERT(true, "[UniformBuffer] Shader Type not recognized");
+			HT_ASSERT(false, "[UniformBuffer] Shader Type not recognized");
 	}
 
 } }

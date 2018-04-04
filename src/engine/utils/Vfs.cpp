@@ -19,14 +19,14 @@ namespace ht { namespace utils {
 
 	String VFS::Resolve(const String& path) {
 		if (!path.StartsWith('/')) {
-			HT_ASSERT(!Exists(path), "[VFS] File does not exist!");
+			HT_ASSERT(Exists(path), "[VFS] File does not exist!");
 			return path;
 		}
 
 		String subPath = path.Substring(1);
 
 		std::vector<String> dividedPath = subPath.Split('/');
-		HT_ASSERT(mounts[dividedPath[0]].empty() || mounts.find(dividedPath[0]) == mounts.end(), "[VFS] Mount point not found");
+		HT_ASSERT(!mounts[dividedPath[0]].empty() || mounts.find(dividedPath[0]) != mounts.end(), "[VFS] Mount point not found");
 
 		String physicalPart;
 		for (u32 i = 1; i < dividedPath.size(); i++) {

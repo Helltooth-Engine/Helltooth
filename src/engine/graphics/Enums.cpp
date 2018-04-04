@@ -13,7 +13,7 @@ namespace ht { namespace graphics {
 		case DataType::VECTOR4:        return sizeof(f32) * 4;
 		case DataType::MATRIX4:        return sizeof(f32) * 16;
 		}
-		HT_ASSERT(true, "[Enums] DataType not recognized!");
+		HT_ASSERT(false, "[Enums] DataType not recognized!");
 		return -1;
 	}
 
@@ -22,7 +22,7 @@ namespace ht { namespace graphics {
 		case TextureFormat::RGB:       return 3;
 		case TextureFormat::RGBA:      return 4;
 		}
-		HT_ASSERT(true, "[Enums] TextureFormat not recognized!");
+		HT_ASSERT(false, "[Enums] TextureFormat not recognized!");
 		return -1;
 	}
 
@@ -39,7 +39,7 @@ namespace ht { namespace graphics {
 		case DataType::MATRIX4:
 			return 4;
 		}
-		HT_ASSERT(true, "[Enums] Semantic Index not recognized!");
+		HT_ASSERT(false, "[Enums] Semantic Index not recognized!");
 		return -1;
 	}
 
@@ -48,7 +48,7 @@ namespace ht { namespace graphics {
 		case 24: return TextureFormat::RGB;
 		case 32: return TextureFormat::RGBA;
 		}
-		HT_ASSERT(true, "[Enums] Texture Format not recognized!");
+		HT_ASSERT(false, "[Enums] Texture Format not recognized!");
 		return TextureFormat::UNKNOWN;
 	}
 
@@ -56,7 +56,7 @@ namespace ht { namespace graphics {
 		switch (format) {
 		case TextureFormat::RGBA: return TextureFormat::BGRA;
 		}
-		HT_ASSERT(true, "[Enums] Texture Format not recognized!");
+		HT_ASSERT(false, "[Enums] Texture Format not recognized!");
 		return TextureFormat::UNKNOWN;
 	}
 

@@ -13,13 +13,13 @@ namespace ht { namespace entities {
 	}
 
 	void ModelComponent::Bind(u32 stride) {
-		HT_ASSERT(!m_IndexBuffer, "[ModelComponent] No index buffer found!");
+		HT_ASSERT(m_IndexBuffer, "[ModelComponent] No index buffer found!");
 		m_VertexBuffer->Bind(stride);
 		m_IndexBuffer->Bind();
 	}
 
 	void ModelComponent::Render() {
-		HT_ASSERT(!m_IndexBuffer, "[ModelComponent] No index buffer found!");
+		HT_ASSERT(m_IndexBuffer, "[ModelComponent] No index buffer found!");
 #if defined(HT_OPENGL)
 		glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), m_IndexBuffer->GetFormat(), 0);
 #elif defined(HT_DIRECTX)

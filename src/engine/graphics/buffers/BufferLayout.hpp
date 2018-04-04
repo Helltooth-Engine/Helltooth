@@ -50,7 +50,7 @@ namespace ht { namespace graphics {
 		void Init(void* shaderBlob = nullptr);
 
 		void SetSemanticNames(const std::vector<std::string>& semanticNames) {
-			HT_ASSERT(semanticNames.size() > m_Attributes.size(), "[BufferLayout] Too many semanticNames in the shader.");
+			HT_ASSERT(semanticNames.size() <= m_Attributes.size(), "[BufferLayout] Too many semanticNames in the shader.");
 
 			int semanticCount = 0;
 
@@ -77,7 +77,7 @@ namespace ht { namespace graphics {
 
 	template<typename T>
 	inline void BufferLayout::AddLayout(const utils::String& semanticName, u16 count, u16 stride, bool normalized) {
-		HT_ASSERT(true, "[BufferLayout] Data type not recognized.");
+		HT_ASSERT(false, "[BufferLayout] Data type not recognized.");
 	}
 
 	template<>

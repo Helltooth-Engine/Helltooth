@@ -57,7 +57,7 @@ namespace ht { namespace graphics {
 			memcpy(fragment, fragmentPath.GetData(), fSize);
 		}
 		else {
-			HT_ASSERT(true, "[Shader] ShaderLocationType Unknown!");
+			HT_ASSERT(false, "[Shader] ShaderLocationType Unknown!");
 		}
 
 		ID3DBlob* vertexShaderBlob = nullptr, *vertexErrorBlob = nullptr;

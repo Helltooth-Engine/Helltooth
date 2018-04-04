@@ -31,7 +31,7 @@ namespace ht { namespace graphics {
 					current.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 					break;
 				default:
-					HT_ASSERT(true, "[BufferLayout] Attribute count not supported.");
+					HT_ASSERT(false, "[BufferLayout] Attribute count not supported.");
 				}
 			}
 			else {

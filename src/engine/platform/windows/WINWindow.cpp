@@ -134,7 +134,7 @@ namespace ht { namespace core {
 		SetVisible(true);
 		SetFocus(m_Hwnd);
 		UpdateWindow(m_Hwnd);
-		HT_ASSERT(s_Window != nullptr, "Multiple windows not supported!");
+		HT_ASSERT(s_Window == nullptr, "Multiple windows not supported!");
 		s_Window = this;
 		m_Context = new Context(m_Hwnd);
 	}

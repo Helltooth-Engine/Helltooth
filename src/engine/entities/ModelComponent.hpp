@@ -25,7 +25,7 @@ namespace ht { namespace entities {
 
 		template <typename T>
 		inline void SetIndices(const T* indices, u32 indicesSize) {
-			HT_ASSERT(true, "Indices format not supported.");
+			HT_ASSERT(false, "Indices format not supported.");
 		}
 	};
 

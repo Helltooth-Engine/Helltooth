@@ -4,8 +4,8 @@ namespace ht { namespace core {
 
 	std::vector<EventListener*> EventDispatcher::s_EventListeners;
 	void EventDispatcher::Dispatch(Event* e) {
-		HT_ASSERT(e == nullptr, "Event cannot be nullptr!");
-		HT_ASSERT(e->m_EventType == EventType::UNKNOWN, "Event type unknown!");
+		HT_ASSERT(e, "Event cannot be nullptr!");
+		HT_ASSERT(e->m_EventType != EventType::UNKNOWN, "Event type unknown!");
 
 		switch (e->m_EventType) {
 		case EventType::MOUSE:
@@ -55,12 +55,12 @@ namespace ht { namespace core {
 	}
 
 	void EventDispatcher::Add(EventListener* listener) {
-		HT_ASSERT(listener == nullptr, "EventListener cannot be nullptr!");
+		HT_ASSERT(listener, "EventListener cannot be nullptr!");
 		s_EventListeners.push_back(listener);
 	}
 
 	void EventDispatcher::Remove(EventListener* listener) {
-		HT_ASSERT(listener == nullptr, "EventListener cannot be nullptr!");
+		HT_ASSERT(listener, "EventListener cannot be nullptr!");
 		for (u32 i = 0; i < s_EventListeners.size(); i++)
 			if (s_EventListeners[i] == listener) {
 				s_EventListeners.erase(s_EventListeners.begin() + i);

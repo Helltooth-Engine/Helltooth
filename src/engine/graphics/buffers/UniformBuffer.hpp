@@ -29,7 +29,7 @@ namespace ht { namespace graphics {
 
 	template<typename T>
 	inline void UniformBufferLayout::AddUniform() {
-		HT_ASSERT(true, "[UniformBufferLayout] Data type not recognized.");
+		HT_ASSERT(false, "[UniformBufferLayout] Data type not recognized.");
 	}
 
 	template<>

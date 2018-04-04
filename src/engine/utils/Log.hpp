@@ -83,7 +83,7 @@
 
 #ifdef HT_DEBUG
 #define HT_ASSERT(condition, statement)                          \
-		if(condition) {                                          \
+		if(!(condition)) {                                       \
 			HT_FATAL("%s", "*******************");               \
 			HT_FATAL("%s", "ASSERTION FAILED");                  \
 			HT_FATAL("Condition: %s", #condition);               \
