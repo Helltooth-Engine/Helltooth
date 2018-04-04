@@ -45,7 +45,7 @@ namespace ht { namespace graphics {
 		BufferLayout();
 		~BufferLayout();
 
-		void Start();
+		void Bind();
 
 		void Init(void* shaderBlob = nullptr);
 
