@@ -7,6 +7,7 @@
 #include <utility>
 #include <stdio.h>
 #include <string>
+#include <map>
 
 #ifdef HT_OPENGL
 #include "platform/opengl/GL.hpp"
@@ -125,9 +126,21 @@ namespace ht { namespace utils {
 
 #ifdef HT_OPENGL
 	inline static void GLCallLog(const char* funcName, const char* file, u32 line) {
+		static std::map<int, const char*> glErrors = {
+			{ 0x0500, "GL_INVALID_ENUM" },
+			{ 0x0501, "GL_INVALID_VALUE" },
+			{ 0x0502, "GL_INVALID_OPERATION" },
+			{ 0x0503, "GL_STACK_OVERFLOW" },
+			{ 0x0504, "GL_STACK_UNDERFLOW" },
+			{ 0x0505, "GL_OUT_OF_MEMORY" },
+			{ 0x0506, "GL_INVALID_FRAMEBUFFER_OPERATION" },
+			{ 0x0507, "GL_CONTEXT_LOST" },
+			{ 0x8031, "GL_TABLE_TOO_LARGE" },
+		};
+
 		u32 error = 0;
 		while (error = glGetError()) {
-			HT_FATAL("[GL] Error %u, calling %s in %s:%u", error, funcName, file, line);
+			HT_FATAL("[GL] Error %s, calling %s in %s:%u", glErrors[error], funcName, file, line);
 			int* a = nullptr;
 			*a = 1;
 		}
