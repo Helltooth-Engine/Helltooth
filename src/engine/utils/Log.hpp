@@ -147,8 +147,22 @@ namespace ht { namespace utils {
 	}
 #elif defined(HT_DIRECTX)
 	inline static void DXCall(HRESULT result, const char* funcName, const char* file, u32 line) {
+		static std::map<int, const char*> dxErrors = {
+			{ D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD,  "D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD" },
+			{ D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS,                 "D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS" },
+			{ D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS,                  "D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS" },
+			{ DXGI_ERROR_WAS_STILL_DRAWING,                              "DXGI_ERROR_WAS_STILL_DRAWING" },
+			{ D3D11_ERROR_FILE_NOT_FOUND,                                "D3D11_ERROR_FILE_NOT_FOUND" },
+			{ DXGI_ERROR_INVALID_CALL,                                   "DXGI_ERROR_INVALID_CALL" },
+			{ E_OUTOFMEMORY,                                             "E_OUTOFMEMORY" },
+			{ E_INVALIDARG,                                              "E_INVALIDARG" },
+			{ E_NOTIMPL,                                                 "E_NOTIMPL" },
+			{ S_FALSE,                                                   "S_FALSE" },
+			{ E_FAIL,                                                    "E_FAIL" },
+		};
+
 		if (result != S_OK) {
-			HT_FATAL("[DX] Error %u, calling %s in %s:%u", result, funcName, file, line);
+			HT_FATAL("[DX] Error %s, calling %s in %s:%u", dxErrors[result], funcName, file, line);
 			int* a = nullptr;
 			*a = 1;
 		}
