@@ -82,14 +82,12 @@ public:
 		texture = Asset::LoadTexture("/res/final_logo.httexture");
 
 		texture->Bind(0);
-		
 	}
 
 	void Render() {
 		shader->Start();
 		model->Bind(shader->GetStride());
 		shader->BindLayout();
-		buffer->Bind();
 		model->Render();
 	}
 
