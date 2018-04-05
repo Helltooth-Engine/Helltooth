@@ -13,7 +13,7 @@ namespace ht { namespace graphics {
 		for (u32 i = 0; i < m_Size / sizeof(f32); i++)
 			m_Data.push_back(0.0f);
 
-		D3D11_BUFFER_DESC bd = {};
+		D3D11_BUFFER_DESC bd    = {};
 
 		bd.Usage                = static_cast<D3D11_USAGE>(usage);
 		bd.ByteWidth            = m_Size;
@@ -23,9 +23,9 @@ namespace ht { namespace graphics {
 
 		D3D11_SUBRESOURCE_DATA rd = {};
 
-		rd.pSysMem             = &m_Data[0];
+		rd.pSysMem                = &m_Data[0];
 		
-		DX(Window::GetWindow()->GetDevice()->CreateBuffer(&bd, &rd, &m_Buffer));
+		DX(HT_DXDEVICE->CreateBuffer(&bd, &rd, &m_Buffer));
 	}
 
 	UniformBuffer::~UniformBuffer() {
