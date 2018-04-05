@@ -26,10 +26,10 @@ public:
 		: Application("Window", 1280, 720) {
 		VFS::Mount("res", "res/shaders/");
 		VFS::Mount("res", "res/textures/");
+		VFS::Mount("res", "res/models/");
 
-		camera = new FPSCamera(0, 0, 0);
+		camera = new FPSCamera(0, 0, -5);
 		entity.AddComponent(&transform);
-		entity.AddComponent(model);
 	}
 
 	~Game() {
@@ -37,25 +37,14 @@ public:
 	}
 
 	void Init() {
-		float data[] = {
-			-0.5f, -0.5f, -1.0f, 0.0f, 0.0f,
-			-0.5f,  0.5f, -1.0f, 0.0f, 1.0f,
-			 0.5f,  0.5f, -1.0f, 1.0f, 1.0f,
-			 0.5f, -0.5f, -1.0f, 1.0f, 0.0f
-		};
-
-		u16 indices[] = {
-			1, 2, 0,
-			2, 3, 0
-		};
-
 		layout = new BufferLayout();
-		layout->AddLayout<float>("UV", 2, 2, false);
 		layout->AddLayout<float>("POSITION", 3, 3, false);
-
+		layout->AddLayout<float>("UV", 2, 2, false);
+		layout->AddLayout<float>("NORMALS", 3, 3, false);
 
 		shader = new Shader(layout, "/res/shader.vert", "/res/shader.frag", ShaderLocationType::FROM_PATH | ShaderLocationType::FROM_HTSL);
-		model = new ModelComponent(data, sizeof(data));
+		model = Asset::LoadModel("/res/cube.htmodel");
+		entity.AddComponent(model);
 
 #ifdef HT_OPENGL
 		s32 ids[] = { 0, 1 };
@@ -63,8 +52,6 @@ public:
 
 		glClearColor(0.3f, 0.4f, 0.7f, 1.0f);
 #endif
-
-		model->SetIndices(indices, sizeof(indices));
 
 		UniformBufferLayout ulayout(ShaderType::VERTEX);
 		ulayout.AddUniform<Matrix4>();
@@ -79,9 +66,12 @@ public:
 		buffer->Set(1, &viewMatrix[0]);
 		buffer->Set(2, &transform.GetModelMatrix()[0]);
 
-		texture = Asset::LoadTexture("/res/final_logo.httexture");
+		texture = Asset::LoadTexture("/res/cube.httexture");
 
 		texture->Bind(0);
+#if defined(HT_OPENGL)
+		glEnable(GL_DEPTH_TEST);
+#endif
 	}
 
 	void Render() {
