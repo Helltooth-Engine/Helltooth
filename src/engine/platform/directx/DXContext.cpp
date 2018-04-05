@@ -92,6 +92,7 @@ namespace ht { namespace graphics {
 		m_SwapChain->Release();
 		m_DepthStencilBuffer->Release();
 		m_DepthStencilView->Release();
+		m_RasterizerState->Release();
 	}
 
 	void Context::Update() {
