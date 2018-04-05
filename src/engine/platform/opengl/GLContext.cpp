@@ -61,10 +61,10 @@ namespace ht { namespace graphics {
 			return;
 		}
 		
-		HT_WARN("GL version: %s", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
-		HT_WARN("GL vendor: %s", reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
-		HT_WARN("GL renderer: %s", reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
-		HT_WARN("GL shading language version: %s", reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+		HT_WARN("GL version: %s",                   reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+		HT_WARN("GL vendor: %s",                    reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+		HT_WARN("GL renderer: %s",                  reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+		HT_WARN("GL shading language version: %s",  reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
 
 		wglSwapIntervalEXT(0);
 
@@ -91,10 +91,10 @@ namespace ht { namespace graphics {
 		m_Context = glXCreateContext(m_Display, visualInfo, nullptr, GL_TRUE);
 		glXMakeCurrent(m_Display, window, m_Context);
 		
-		HT_WARN("GL version: %s", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
-		HT_WARN("GL vendor: %s", reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
-		HT_WARN("GL renderer: %s", reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
-		HT_WARN("GL shading language version: %s", reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+		HT_WARN("GL version: %s",                   reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+		HT_WARN("GL vendor: %s",                    reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+		HT_WARN("GL renderer: %s",                  reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+		HT_WARN("GL shading language version: %s",  reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
 		
 		if(!GLInit()) {
 			HT_FATAL("%s", "[GLContext] Could not initialize GL");
