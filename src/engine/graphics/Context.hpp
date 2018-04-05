@@ -40,6 +40,7 @@ namespace ht { namespace graphics {
 		ID3D11RenderTargetView* m_RenderTarget;
 		ID3D11DepthStencilView* m_DepthStencilView;
 		ID3D11Texture2D* m_DepthStencilBuffer;
+		ID3D11RasterizerState* m_RasterizerState;
 #endif // HT_OPENGL
 
 	public:

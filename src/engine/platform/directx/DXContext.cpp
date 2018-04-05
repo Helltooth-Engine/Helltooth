@@ -72,6 +72,16 @@ namespace ht { namespace graphics {
 		v.MinDepth  = 0.0f;
 		v.MaxDepth  = 1.0f;
 
+		D3D11_RASTERIZER_DESC rd = {};
+
+		rd.FillMode               = D3D11_FILL_SOLID;
+		rd.CullMode               = D3D11_CULL_BACK;
+		rd.FrontCounterClockwise  = true;
+		rd.DepthClipEnable        = true;
+
+		DX(m_Device->CreateRasterizerState(&rd, &m_RasterizerState));
+		m_Context->RSSetState(m_RasterizerState);
+
 		m_Context->RSSetViewports(1, &v);
 		m_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	}
