@@ -5,12 +5,16 @@ function makeProject(name)
 	cppdialect "C++14"
 
 	filter {"configurations:Debug-GL"}
+		objdir ("../../Intermediates/Debug-GL/" .. name .. "/")
+		targetdir ("../../bin/Debug-GL/" .. name .. "/")
 		defines {
 			"HT_DEBUG",
 			"HT_OPENGL",
 		}
 
 	filter {"configurations:Release-GL"}
+		objdir ("../../Intermediates/Release-GL/" .. name .. "/")
+		targetdir ("../../bin/Release-GL/" .. name .. "/")
 		defines {
 			"HT_RELEASE",
 			"HT_OPENGL",
@@ -19,12 +23,16 @@ function makeProject(name)
 		symbols "Off"
 
 	filter {"configurations:Debug-DX"}
-		defines {
+		objdir ("../../Intermediates/Debug-DX/" .. name .. "/")
+		targetdir ("../../bin/Debug-DX/" .. name .. "/")
+			defines {
 			"HT_DEBUG",
 			"HT_DIRECTX",
 		}
 
 	filter {"configurations:Release-DX"}
+		objdir ("../../Intermediates/Release-DX/" .. name .. "/")
+		targetdir ("../../bin/Release-DX/" .. name .. "/")
 		defines {
 			"HT_RELEASE",
 			"HT_DIRECTX",
@@ -47,7 +55,4 @@ function makeProject(name)
 	defines {
 		("HT_" .. os.host():upper()),
 	}
-
-	objdir ("../../Intermediates/" .. name .. "/")
-	targetdir ("../../bin/" .. name .. "/")
 end
