@@ -3,11 +3,13 @@
 
 namespace ht { namespace core {
 	using namespace Cereal;
+	using namespace entities;
 	using namespace graphics;
+	using namespace utils;
 
-	Texture* Asset::LoadTexture(utils::String path) {
+	Texture* Asset::LoadTexture(String path) {
 		Buffer buffer(1);
-		buffer.readFile(utils::VFS::Resolve(path).GetData());
+		buffer.readFile(VFS::Resolve(path).GetData());
 
 		Database* database = new Database();
 		database->read(buffer);
@@ -35,6 +37,42 @@ namespace ht { namespace core {
 			HT_FATAL("%s", "[Asset] Texture format not supported!");
 		}
 
+		return result;
+	}
+
+	ModelComponent* Asset::LoadModel(String path) {
+		Buffer buffer(1);
+		buffer.readFile(VFS::Resolve(path).GetData());
+
+		Database* database = new Database();
+		database->read(buffer);
+
+		ModelComponent* result = nullptr;
+
+		Object* object = database->getObject("model");
+		if (object != nullptr) {
+			bool hasBones = object->getField("hasBones")->getValue<bool>();
+			HT_ASSERT(!hasBones, "[Asset] Model with bones are not supported yet.");
+			// TODO: Support bones
+
+			Array* verticesData = object->getArray("verticesData");
+			f32* vertexData = new f32[verticesData->getCount()];
+			verticesData->getRawArray(vertexData);
+			
+			Array* indicesData = object->getArray("indicesData");
+			u32* indexData = new u32[indicesData->getCount()];
+			indicesData->getRawArray(reinterpret_cast<s32*>(indexData));
+
+			result = new ModelComponent(vertexData, verticesData->getCount() * sizeof(f32));
+			result->SetIndices(indexData, indicesData->getCount() * sizeof(u32));
+		}
+
+		delete database;
+
+		if (result == nullptr) {
+			HT_FATAL("%s", "[Asset] Model format not supported!");
+		}
+		
 		return result;
 	}
 
