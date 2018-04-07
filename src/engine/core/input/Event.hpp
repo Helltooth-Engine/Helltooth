@@ -36,27 +36,27 @@ namespace ht { namespace core {
 	};
 
 	struct Event {
-		EventType m_EventType;
+		EventType eventType;
 		union {
 			struct {
 				f32 x, y;
 				s8 mouseButton;
 				State mouseButtonState;
-			} m_Mouse;
+			} mouse;
 
 			struct {
 				u16 key;
 				State state;
 				u16 modifiers;
-			} m_Key;
+			} key;
 		};
 
 		Event() {
-			m_EventType = EventType::UNKNOWN;
-			m_Mouse.x = -1.f;
-			m_Mouse.y = -1.f;
-			m_Mouse.mouseButton = -1;
-			m_Mouse.mouseButtonState = State::UNKNOWN;
+			eventType = EventType::UNKNOWN;
+			mouse.x = -1.f;
+			mouse.y = -1.f;
+			mouse.mouseButton = -1;
+			mouse.mouseButtonState = State::UNKNOWN;
 		}
 	};
 

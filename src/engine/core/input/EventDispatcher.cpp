@@ -5,15 +5,15 @@ namespace ht { namespace core {
 	std::vector<EventListener*> EventDispatcher::s_EventListeners;
 	void EventDispatcher::Dispatch(Event* e) {
 		HT_ASSERT(e, "Event cannot be nullptr!");
-		HT_ASSERT(e->m_EventType != EventType::UNKNOWN, "Event type unknown!");
+		HT_ASSERT(e->eventType != EventType::UNKNOWN, "Event type unknown!");
 
-		switch (e->m_EventType) {
+		switch (e->eventType) {
 		case EventType::MOUSE:
 			{
-				f32 x = e->m_Mouse.x;
-				f32 y = e->m_Mouse.y;
-				u8 button = e->m_Mouse.mouseButton;
-				State state = e->m_Mouse.mouseButtonState;
+				f32 x        = e->mouse.x;
+				f32 y        = e->mouse.y;
+				u8 button    = e->mouse.mouseButton;
+				State state  = e->mouse.mouseButtonState;
 				switch (state) {
 				case State::PRESSED:
 					for (EventListener* listener : s_EventListeners)
@@ -32,9 +32,9 @@ namespace ht { namespace core {
 			break;
 		case EventType::KEYBOARD:
 			{
-				u16 key = e->m_Key.key;
-				u16 modifier = e->m_Key.modifiers;
-				State state = e->m_Key.state;
+				u16 key       = e->key.key;
+				u16 modifier  = e->key.modifiers;
+				State state   = e->key.state;
 				switch (state) {
 				case State::PRESSED:
 					for (EventListener* listener : s_EventListeners)

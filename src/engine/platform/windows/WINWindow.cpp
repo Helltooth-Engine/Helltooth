@@ -16,73 +16,73 @@ namespace ht { namespace core {
 			window->m_ShouldClose = true;
 			break;
 		case WM_KEYDOWN:
-			e->m_EventType               = EventType::KEYBOARD;
-			e->m_Key.key                 = wParam;
-			e->m_Key.modifiers           = static_cast<u16>(Modifier::NONE);
-			e->m_Key.state               = State::PRESSED;
+			e->eventType                 = EventType::KEYBOARD;
+			e->key.key                   = wParam;
+			e->key.modifiers             = static_cast<u16>(Modifier::NONE);
+			e->key.state                 = State::PRESSED;
 			inputEvent                   = true;
 			break;
 		case WM_KEYUP:
-			e->m_EventType               = EventType::KEYBOARD;
-			e->m_Key.key                 = wParam;
-			e->m_Key.modifiers           = static_cast<u16>(Modifier::NONE);
-			e->m_Key.state               = State::RELEASED;
+			e->eventType                 = EventType::KEYBOARD;
+			e->key.key                   = wParam;
+			e->key.modifiers             = static_cast<u16>(Modifier::NONE);
+			e->key.state                 = State::RELEASED;
 			inputEvent                   = true;
 			break;
 		case WM_LBUTTONDOWN:
-			e->m_EventType               = EventType::MOUSE;
-			e->m_Mouse.mouseButton       = HT_MOUSE_LBUTTON;
-			e->m_Mouse.mouseButtonState  = State::PRESSED;
-			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			e->eventType                 = EventType::MOUSE;
+			e->mouse.mouseButton         = HT_MOUSE_LBUTTON;
+			e->mouse.mouseButtonState    = State::PRESSED;
+			e->mouse.x                   = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->mouse.y                   = static_cast<f32>(GET_Y_LPARAM(lParam));
 			inputEvent                   = true;
 			break;
 		case WM_LBUTTONUP:
-			e->m_EventType               = EventType::MOUSE;
-			e->m_Mouse.mouseButton       = HT_MOUSE_LBUTTON;
-			e->m_Mouse.mouseButtonState  = State::RELEASED;
-			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			e->eventType                 = EventType::MOUSE;
+			e->mouse.mouseButton         = HT_MOUSE_LBUTTON;
+			e->mouse.mouseButtonState    = State::RELEASED;
+			e->mouse.x                   = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->mouse.y                   = static_cast<f32>(GET_Y_LPARAM(lParam));
 			inputEvent                   = true;
 			break;
 		case WM_RBUTTONDOWN:
-			e->m_EventType               = EventType::MOUSE;
-			e->m_Mouse.mouseButton       = HT_MOUSE_RBUTTON;
-			e->m_Mouse.mouseButtonState  = State::PRESSED;
-			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			e->eventType                 = EventType::MOUSE;
+			e->mouse.mouseButton         = HT_MOUSE_RBUTTON;
+			e->mouse.mouseButtonState    = State::PRESSED;
+			e->mouse.x                   = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->mouse.y                   = static_cast<f32>(GET_Y_LPARAM(lParam));
 			inputEvent                   = true;
 			break;
 		case WM_RBUTTONUP:
-			e->m_EventType               = EventType::MOUSE;
-			e->m_Mouse.mouseButton       = HT_MOUSE_RBUTTON;
-			e->m_Mouse.mouseButtonState  = State::RELEASED;
-			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			e->eventType                 = EventType::MOUSE;
+			e->mouse.mouseButton         = HT_MOUSE_RBUTTON;
+			e->mouse.mouseButtonState    = State::RELEASED;
+			e->mouse.x                   = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->mouse.y                   = static_cast<f32>(GET_Y_LPARAM(lParam));
 			inputEvent                   = true;
 			break;
 		case WM_MBUTTONDOWN:
-			e->m_EventType               = EventType::MOUSE;
-			e->m_Mouse.mouseButton       = HT_MOUSE_BUTTON3;
-			e->m_Mouse.mouseButtonState  = State::PRESSED;
-			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			e->eventType                 = EventType::MOUSE;
+			e->mouse.mouseButton         = HT_MOUSE_BUTTON3;
+			e->mouse.mouseButtonState    = State::PRESSED;
+			e->mouse.x                   = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->mouse.y                   = static_cast<f32>(GET_Y_LPARAM(lParam));
 			inputEvent                   = true;
 			break;
 		case WM_MBUTTONUP:
-			e->m_EventType               = EventType::MOUSE;
-			e->m_Mouse.mouseButton       = HT_MOUSE_BUTTON3;
-			e->m_Mouse.mouseButtonState  = State::RELEASED;
-			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			e->eventType                 = EventType::MOUSE;
+			e->mouse.mouseButton         = HT_MOUSE_BUTTON3;
+			e->mouse.mouseButtonState    = State::RELEASED;
+			e->mouse.x                   = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->mouse.y                   = static_cast<f32>(GET_Y_LPARAM(lParam));
 			inputEvent                   = true;
 			break;
 		case WM_MOUSEMOVE:
-			e->m_EventType               = EventType::MOUSE;
-			e->m_Mouse.mouseButton       = -1;
-			e->m_Mouse.mouseButtonState  = State::NONE;
-			e->m_Mouse.x                 = static_cast<f32>(GET_X_LPARAM(lParam));
-			e->m_Mouse.y                 = static_cast<f32>(GET_Y_LPARAM(lParam));
+			e->eventType                 = EventType::MOUSE;
+			e->mouse.mouseButton         = -1;
+			e->mouse.mouseButtonState    = State::NONE;
+			e->mouse.x                   = static_cast<f32>(GET_X_LPARAM(lParam));
+			e->mouse.y                   = static_cast<f32>(GET_Y_LPARAM(lParam));
 			inputEvent                   = true;
 			break;
 		}
