@@ -26,20 +26,20 @@ namespace ht { namespace entities {
 		void Move(f32 x, f32 y, f32 z)                    { m_Position += maths::Vector3(x, y, z);  m_Modified = true; }
 		void Move(const maths::Vector3& position)         { m_Position += position;                 m_Modified = true; }
 
-		void SetPosition(f32 x, f32 y, f32 z)             { m_Position = maths::Vector3(x, y, z);  m_Modified = true; }
-		void SetPosition(const maths::Vector3& position)  { m_Position = position;                 m_Modified = true; }
+		void SetPosition(f32 x, f32 y, f32 z)             { m_Position = maths::Vector3(x, y, z);   m_Modified = true; }
+		void SetPosition(const maths::Vector3& position)  { m_Position = position;                  m_Modified = true; }
 
 		void Rotate(f32 x, f32 y, f32 z)                  { m_Rotation += maths::Vector3(x, y, z);  m_Modified = true; }
 		void Rotate(const maths::Vector3& rotation)       { m_Rotation += rotation;                 m_Modified = true; }
 
-		void SetRotate(f32 x, f32 y, f32 z)               { m_Rotation = maths::Vector3(x, y, z);  m_Modified = true; }
-		void SetRotate(const maths::Vector3& rotation)    { m_Rotation = rotation;                 m_Modified = true; }
+		void SetRotate(f32 x, f32 y, f32 z)               { m_Rotation = maths::Vector3(x, y, z);   m_Modified = true; }
+		void SetRotate(const maths::Vector3& rotation)    { m_Rotation = rotation;                  m_Modified = true; }
 	
-		void Scale(f32 x, f32 y, f32 z)                   { m_Scale += maths::Vector3(x, y, z);  m_Modified = true; }
-		void Scale(const maths::Vector3& scale)           { m_Scale += scale;                    m_Modified = true; }
+		void Scale(f32 x, f32 y, f32 z)                   { m_Scale += maths::Vector3(x, y, z);     m_Modified = true; }
+		void Scale(const maths::Vector3& scale)           { m_Scale += scale;                       m_Modified = true; }
 
-		void SetScale(f32 x, f32 y, f32 z)                { m_Scale = maths::Vector3(x, y, z);   m_Modified = true; }
-		void SetScale(const maths::Vector3& scale)        { m_Scale = scale;                     m_Modified = true; }
+		void SetScale(f32 x, f32 y, f32 z)                { m_Scale = maths::Vector3(x, y, z);      m_Modified = true; }
+		void SetScale(const maths::Vector3& scale)        { m_Scale = scale;                        m_Modified = true; }
 	
 		virtual void Update(f32 delta)                    { if (m_Modified) CalculateModelMatrix(); }
 
