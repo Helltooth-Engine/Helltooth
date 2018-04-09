@@ -39,6 +39,7 @@ makeProject ("Helltooth")
 	files {
 		"../engine/**.hpp",
 		"../engine/**.cpp",
+		"../engine/**.htsl",
 	}
 	dependson "Helltooth-ShadingLanguage"
 	includedirs {
