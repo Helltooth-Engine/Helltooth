@@ -52,7 +52,7 @@ namespace ht { namespace graphics {
 		void SetSamplers(s32* array, u32 size);
 #endif // HT_OPENGL
 
-		inline void BindLayout() { m_Layout->Bind(); }
+		inline void BindLayout(VertexBuffer** buffers = nullptr) { m_Layout->Bind(); m_Layout->Start(buffers); }
 		
 	};
 
