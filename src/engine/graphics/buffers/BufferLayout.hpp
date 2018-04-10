@@ -118,9 +118,9 @@ namespace ht { namespace graphics {
 		m_Attributes.push_back({semanticName, DataType::MATRIX4, count, normalized, bufferId });
 		m_BuffersCount = bufferId;
 		if (m_Stride.size() <= bufferId)
-			m_Stride.push_back(count * DataTypeSize(DataType::FLOAT));
+			m_Stride.push_back(count * DataTypeSize(DataType::MATRIX4));
 		else
-			m_Stride[bufferId] += count * DataTypeSize(DataType::FLOAT);
+			m_Stride[bufferId] += count * DataTypeSize(DataType::MATRIX4);
 	}
 
 } }
