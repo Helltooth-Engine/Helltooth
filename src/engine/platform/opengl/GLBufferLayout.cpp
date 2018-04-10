@@ -13,11 +13,8 @@ namespace ht { namespace graphics {
 
 	void BufferLayout::Init(void* shaderBlob) { }
 
-	void BufferLayout::Bind() {
+	void BufferLayout::Bind(VertexBuffer** buffers) {
 		glBindVertexArray(m_VaoID);
-	}
-
-	void BufferLayout::Start(VertexBuffer** buffers) {
 		u32 attribOffset = 0;
 		u32 offset = 0;
 		if (buffers != nullptr) {
