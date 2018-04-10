@@ -16,7 +16,7 @@
 #include "core/Internal.hpp"
 
 #if defined(HT_WINDOWS)
-#define HT_LEVEL_FATAL          0x04
+#define HT_LEVEL_FATAL          0xC0
 #define HT_LEVEL_ERROR          0x0C
 #define HT_LEVEL_WARNING        0x0E
 #define HT_LEVEL_INFO           0x0F
