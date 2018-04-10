@@ -14,22 +14,22 @@ namespace ht { namespace graphics {
 		u32 lastBuffer = -1;
 
 		for (u32 i = 0; i < m_Attributes.size(); i++) {
-			D3D11_INPUT_ELEMENT_DESC current = {};
-			current.SemanticName = m_Attributes[i].semanticName.GetData();
+			D3D11_INPUT_ELEMENT_DESC current       = {};
+			current.SemanticName                   = m_Attributes[i].semanticName.GetData();
 
 			if (m_Attributes[i].type == DataType::MATRIX4) {
 				for (int k = 0; k < 4; k++) {
-					current.SemanticIndex = k;
-					current.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-					current.InputSlot = m_Attributes[i].bufferId;
-					current.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-					current.InstanceDataStepRate = 0;
-					if (lastBuffer != m_Attributes[i].bufferId) {
-						lastBuffer = m_Attributes[i].bufferId;
-						current.AlignedByteOffset = 0;
+					current.SemanticIndex          = k;
+					current.Format                 = DXGI_FORMAT_R32G32B32A32_FLOAT;
+					current.InputSlot              = m_Attributes[i].bufferId;
+					current.InputSlotClass         = m_Attributes[i].instancing ? D3D11_INPUT_PER_INSTANCE_DATA : D3D11_INPUT_PER_VERTEX_DATA;
+					current.InstanceDataStepRate   = 0;
+					if (lastBuffer                != m_Attributes[i].bufferId) {
+						lastBuffer                 = m_Attributes[i].bufferId;
+						current.AlignedByteOffset  = 0;
 					}
 					else {
-						current.AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+						current.AlignedByteOffset  = D3D11_APPEND_ALIGNED_ELEMENT;
 					}
 					elementDescs.push_back(current);
 				}
@@ -55,18 +55,18 @@ namespace ht { namespace graphics {
 					}
 				}
 				else {
-					current.Format = static_cast<DXGI_FORMAT>(m_Attributes[i].type);
+					current.Format             = static_cast<DXGI_FORMAT>(m_Attributes[i].type);
 				}
 
-				current.InputSlot = m_Attributes[i].bufferId;
-				current.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-				current.InstanceDataStepRate = 0;
-				if (lastBuffer != m_Attributes[i].bufferId) {
-					lastBuffer = m_Attributes[i].bufferId;
-					current.AlignedByteOffset = 0;
+				current.InputSlot              = m_Attributes[i].bufferId;
+				current.InputSlotClass         = m_Attributes[i].instancing ? D3D11_INPUT_PER_INSTANCE_DATA : D3D11_INPUT_PER_VERTEX_DATA;
+				current.InstanceDataStepRate   = 0;
+				if (lastBuffer                != m_Attributes[i].bufferId) {
+					lastBuffer                 = m_Attributes[i].bufferId;
+					current.AlignedByteOffset  = 0;
 				}
 				else {
-					current.AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+					current.AlignedByteOffset  = D3D11_APPEND_ALIGNED_ELEMENT;
 				}
 				elementDescs.push_back(current);
 			}

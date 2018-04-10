@@ -27,6 +27,7 @@ namespace ht { namespace graphics {
 		DataType type;
 		u16 count;
 		bool normalized;
+		bool instancing;
 		u32 bufferId;
 	};
 
@@ -74,18 +75,18 @@ namespace ht { namespace graphics {
 		inline u32 GetStride(u32 index = 0) { return m_Stride[index]; }
 
 		template<typename T>
-		inline void AddLayout(const utils::String& semanticName, u16 count, bool normalized, u32 bufferId = 0);
+		inline void AddLayout(const utils::String& semanticName, u16 count, bool normalized, bool instancing = false, u32 bufferId = 0);
 
 	};
 
 	template<typename T>
-	inline void BufferLayout::AddLayout(const utils::String& semanticName, u16 count, bool normalized, u32 bufferId) {
+	inline void BufferLayout::AddLayout(const utils::String& semanticName, u16 count, bool normalized, bool instancing, u32 bufferId) {
 		HT_ASSERT(false, "[BufferLayout] Data type not recognized.");
 	}
 
 	template<>
-	inline void BufferLayout::AddLayout<f32>(const utils::String& semanticName, u16 count, bool normalized, u32 bufferId) {
-		m_Attributes.push_back({ semanticName, DataType::FLOAT, count, normalized, bufferId });
+	inline void BufferLayout::AddLayout<f32>(const utils::String& semanticName, u16 count, bool normalized, bool instancing, u32 bufferId) {
+		m_Attributes.push_back({ semanticName, DataType::FLOAT, count, normalized, instancing, bufferId });
 		m_BuffersCount = bufferId;
 		if (m_Stride.size() <= bufferId)
 			m_Stride.push_back(count * DataTypeSize(DataType::FLOAT));
@@ -94,8 +95,8 @@ namespace ht { namespace graphics {
 	}
 
 	template<>
-	inline void BufferLayout::AddLayout<u16>(const utils::String& semanticName, u16 count, bool normalized, u32 bufferId) {
-		m_Attributes.push_back({ semanticName, DataType::UNSIGNED_SHORT, count, normalized, bufferId });
+	inline void BufferLayout::AddLayout<u16>(const utils::String& semanticName, u16 count, bool normalized, bool instancing, u32 bufferId) {
+		m_Attributes.push_back({ semanticName, DataType::UNSIGNED_SHORT, count, normalized, instancing, bufferId });
 		m_BuffersCount = bufferId;
 		if (m_Stride.size() <= bufferId)
 			m_Stride.push_back(count * DataTypeSize(DataType::FLOAT));
@@ -104,8 +105,8 @@ namespace ht { namespace graphics {
 	}
 
 	template<>
-	inline void BufferLayout::AddLayout<u32>(const utils::String& semanticName, u16 count, bool normalized, u32 bufferId) {
-		m_Attributes.push_back({ semanticName, DataType::UNSIGNED_INT, count, normalized, bufferId });
+	inline void BufferLayout::AddLayout<u32>(const utils::String& semanticName, u16 count, bool normalized, bool instancing, u32 bufferId) {
+		m_Attributes.push_back({ semanticName, DataType::UNSIGNED_INT, count, normalized, instancing, bufferId });
 		m_BuffersCount = bufferId;
 		if (m_Stride.size() <= bufferId)
 			m_Stride.push_back(count * DataTypeSize(DataType::FLOAT));
@@ -114,8 +115,8 @@ namespace ht { namespace graphics {
 	}
 
 	template<>
-	inline void BufferLayout::AddLayout<maths::Matrix4>(const utils::String& semanticName, u16 count, bool normalized, u32 bufferId) {
-		m_Attributes.push_back({semanticName, DataType::MATRIX4, count, normalized, bufferId });
+	inline void BufferLayout::AddLayout<maths::Matrix4>(const utils::String& semanticName, u16 count, bool normalized, bool instancing, u32 bufferId) {
+		m_Attributes.push_back({semanticName, DataType::MATRIX4, count, normalized, instancing, bufferId });
 		m_BuffersCount = bufferId;
 		if (m_Stride.size() <= bufferId)
 			m_Stride.push_back(count * DataTypeSize(DataType::MATRIX4));
