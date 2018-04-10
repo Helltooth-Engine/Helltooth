@@ -11,22 +11,21 @@ namespace ht { namespace graphics {
 
 		std::vector<D3D11_INPUT_ELEMENT_DESC> elementDescs;
 
-		u32 attribOffset = 0;
 		u32 lastBuffer = -1;
 
 		for (u32 i = 0; i < m_Attributes.size(); i++) {
 			D3D11_INPUT_ELEMENT_DESC current = {};
-			current.SemanticName  = m_Attributes[i + attribOffset].semanticName.GetData();
+			current.SemanticName = m_Attributes[i].semanticName.GetData();
 
-			if (m_Attributes[i + attribOffset].type == DataType::MATRIX4) {
-				for (int k = 0; k < 4; k++, attribOffset++) {
+			if (m_Attributes[i].type == DataType::MATRIX4) {
+				for (int k = 0; k < 4; k++) {
 					current.SemanticIndex = k;
 					current.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-					current.InputSlot = m_Attributes[i + attribOffset].bufferId;
+					current.InputSlot = m_Attributes[i].bufferId;
 					current.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 					current.InstanceDataStepRate = 0;
-					if (lastBuffer != m_Attributes[i + attribOffset].bufferId) {
-						lastBuffer = m_Attributes[i + attribOffset].bufferId;
+					if (lastBuffer != m_Attributes[i].bufferId) {
+						lastBuffer = m_Attributes[i].bufferId;
 						current.AlignedByteOffset = 0;
 					}
 					else {
@@ -37,8 +36,8 @@ namespace ht { namespace graphics {
 			}
 			else {
 				current.SemanticIndex = 0;
-				if (static_cast<DXGI_FORMAT>(m_Attributes[i + attribOffset].type) == DXGI_FORMAT_R32_FLOAT) {
-					switch (m_Attributes[i + attribOffset].count) {
+				if (static_cast<DXGI_FORMAT>(m_Attributes[i].type) == DXGI_FORMAT_R32_FLOAT) {
+					switch (m_Attributes[i].count) {
 					case 1:
 						current.Format = DXGI_FORMAT_R32_FLOAT;
 						break;
@@ -56,14 +55,14 @@ namespace ht { namespace graphics {
 					}
 				}
 				else {
-					current.Format = static_cast<DXGI_FORMAT>(m_Attributes[i + attribOffset].type);
+					current.Format = static_cast<DXGI_FORMAT>(m_Attributes[i].type);
 				}
 
-				current.InputSlot = m_Attributes[i + attribOffset].bufferId;
+				current.InputSlot = m_Attributes[i].bufferId;
 				current.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 				current.InstanceDataStepRate = 0;
-				if (lastBuffer != m_Attributes[i + attribOffset].bufferId) {
-					lastBuffer = m_Attributes[i + attribOffset].bufferId;
+				if (lastBuffer != m_Attributes[i].bufferId) {
+					lastBuffer = m_Attributes[i].bufferId;
 					current.AlignedByteOffset = 0;
 				}
 				else {
