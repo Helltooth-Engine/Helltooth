@@ -33,6 +33,8 @@ namespace ht { namespace graphics {
 					GL(glEnableVertexAttribArray(i + attribOffset));
 					GL(glVertexAttribPointer(i + attribOffset, m_Attributes[i].count / 4, static_cast<GLenum>(DataType::FLOAT), static_cast<GLboolean>(m_Attributes[i].normalized), m_Stride[lastBuffer], reinterpret_cast<GLvoid*>(offset)));
 					offset += 4 * dataSize;
+					if (m_Attributes[i].instancing)
+						GL(glVertexAttribDivisor(i + attribOffset, 1));
 				}
 			}
 			else {
@@ -40,6 +42,8 @@ namespace ht { namespace graphics {
 				GL(glEnableVertexAttribArray(i + attribOffset));
 				GL(glVertexAttribPointer(i + attribOffset, m_Attributes[i].count, static_cast<GLenum>(m_Attributes[i].type), static_cast<GLboolean>(m_Attributes[i].normalized), m_Stride[lastBuffer], reinterpret_cast<GLvoid*>(offset)));
 				offset += m_Attributes[i].count * dataSize;
+				if (m_Attributes[i].instancing)
+					GL(glVertexAttribDivisor(i + attribOffset, 1));
 			}
 		}
 	}
