@@ -38,9 +38,9 @@ public:
 
 	void Init() {
 		layout = new BufferLayout();
-		layout->AddLayout<float>("POSITION", 3, 3, false);
-		layout->AddLayout<float>("UV", 2, 2, false);
-		layout->AddLayout<float>("NORMALS", 3, 3, false);
+		layout->AddLayout<float>("POSITION", 3, false);
+		layout->AddLayout<float>("UV", 2, false);
+		layout->AddLayout<float>("NORMALS", 3, false);
 
 		shader = new Shader(layout, "/res/shader.vert", "/res/shader.frag", ShaderLocationType::FROM_PATH | ShaderLocationType::FROM_HTSL);
 		model = Asset::LoadModel("/res/cube.htmodel");
