@@ -11,6 +11,7 @@
 #include "core/Internal.hpp"
 
 #include "graphics/Enums.hpp"
+#include "graphics/buffers/VertexBuffer.hpp"
 
 #include "maths/Vector2.hpp"
 #include "maths/Vector3.hpp"
@@ -26,13 +27,16 @@ namespace ht { namespace graphics {
 		DataType type;
 		u16 count;
 		bool normalized;
+		u32 bufferId;
 	};
 
 	class BufferLayout {
 	protected:
 		std::vector<BufferAttribute> m_Attributes;
 
-		u32 m_Stride = 0;
+		std::vector<u32> m_Stride;
+
+		u32 m_BuffersCount = 0;
 
 #if defined(HT_OPENGL)
 		u32 m_VaoID;
@@ -45,6 +49,7 @@ namespace ht { namespace graphics {
 		~BufferLayout();
 
 		void Bind();
+		void Start(VertexBuffer** buffers = nullptr);
 
 		void Init(void* shaderBlob = nullptr);
 
@@ -67,40 +72,56 @@ namespace ht { namespace graphics {
 			m_Attributes = newAttributes;
 		}
 
-		inline u32 GetStride() { return m_Stride; }
+		inline u32 GetStride(u32 index = 0) { return m_Stride[index]; }
 
 		template<typename T>
-		inline void AddLayout(const utils::String& semanticName, u16 count, bool normalized);
+		inline void AddLayout(const utils::String& semanticName, u16 count, bool normalized, u32 bufferId = 0);
 
 	};
 
 	template<typename T>
-	inline void BufferLayout::AddLayout(const utils::String& semanticName, u16 count, bool normalized) {
+	inline void BufferLayout::AddLayout(const utils::String& semanticName, u16 count, bool normalized, u32 bufferId) {
 		HT_ASSERT(false, "[BufferLayout] Data type not recognized.");
 	}
 
 	template<>
-	inline void BufferLayout::AddLayout<f32>(const utils::String& semanticName, u16 count, bool normalized) {
-		m_Attributes.push_back({ semanticName, DataType::FLOAT, count, normalized });
-		m_Stride += count * DataTypeSize(DataType::FLOAT);
+	inline void BufferLayout::AddLayout<f32>(const utils::String& semanticName, u16 count, bool normalized, u32 bufferId) {
+		m_Attributes.push_back({ semanticName, DataType::FLOAT, count, normalized, bufferId });
+		m_BuffersCount = bufferId;
+		if (m_Stride.size() <= bufferId)
+			m_Stride.push_back(count * DataTypeSize(DataType::FLOAT));
+		else
+			m_Stride[bufferId] += count * DataTypeSize(DataType::FLOAT);
 	}
 
 	template<>
-	inline void BufferLayout::AddLayout<u16>(const utils::String& semanticName, u16 count, bool normalized) {
-		m_Attributes.push_back({ semanticName, DataType::UNSIGNED_SHORT, count, normalized });
-		m_Stride += count * DataTypeSize(DataType::UNSIGNED_SHORT);
+	inline void BufferLayout::AddLayout<u16>(const utils::String& semanticName, u16 count, bool normalized, u32 bufferId) {
+		m_Attributes.push_back({ semanticName, DataType::UNSIGNED_SHORT, count, normalized, bufferId });
+		m_BuffersCount = bufferId;
+		if (m_Stride.size() <= bufferId)
+			m_Stride.push_back(count * DataTypeSize(DataType::FLOAT));
+		else
+			m_Stride[bufferId] += count * DataTypeSize(DataType::FLOAT);
 	}
 
 	template<>
-	inline void BufferLayout::AddLayout<u32>(const utils::String& semanticName, u16 count, bool normalized) {
-		m_Attributes.push_back({ semanticName, DataType::UNSIGNED_INT, count, normalized });
-		m_Stride += count * DataTypeSize(DataType::UNSIGNED_INT);
+	inline void BufferLayout::AddLayout<u32>(const utils::String& semanticName, u16 count, bool normalized, u32 bufferId) {
+		m_Attributes.push_back({ semanticName, DataType::UNSIGNED_INT, count, normalized, bufferId });
+		m_BuffersCount = bufferId;
+		if (m_Stride.size() <= bufferId)
+			m_Stride.push_back(count * DataTypeSize(DataType::FLOAT));
+		else
+			m_Stride[bufferId] += count * DataTypeSize(DataType::FLOAT);
 	}
 
 	template<>
-	inline void BufferLayout::AddLayout<maths::Matrix4>(const utils::String& semanticName, u16 count, bool normalized) {
-		m_Attributes.push_back({semanticName, DataType::MATRIX4, count, normalized});
-		m_Stride += count * DataTypeSize(DataType::FLOAT);
+	inline void BufferLayout::AddLayout<maths::Matrix4>(const utils::String& semanticName, u16 count, bool normalized, u32 bufferId) {
+		m_Attributes.push_back({semanticName, DataType::MATRIX4, count, normalized, bufferId });
+		m_BuffersCount = bufferId;
+		if (m_Stride.size() <= bufferId)
+			m_Stride.push_back(count * DataTypeSize(DataType::FLOAT));
+		else
+			m_Stride[bufferId] += count * DataTypeSize(DataType::FLOAT);
 	}
 
 } }
