@@ -24,7 +24,7 @@ namespace ht { namespace entities {
 		template<typename T>
 		inline T* GetComponent() {
 			for (Component* component : m_Components)
-				if (component->IsInstance<T>())
+				if (component->IsInstance(T::TypeIdClass()))
 					return static_cast<T*>(component);
 			return nullptr;
 		}
@@ -32,8 +32,8 @@ namespace ht { namespace entities {
 		template<typename T>
 		inline const T* GetComponent() const {
 			for (const Component* component : m_Components)
-				if (component->IsInstance<T>())
-					return static_cast<T*>(component);
+				if (component->IsInstance(T::TypeIdClass()))
+					return static_cast<const T*>(component);
 			return nullptr;
 		}
 	};
