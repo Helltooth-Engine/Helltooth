@@ -6,7 +6,6 @@
 #include "graphics/buffers/VertexBuffer.hpp"
 #include "graphics/buffers/IndexBuffer.hpp"
 
-
 namespace ht { namespace entities {
 
 	class ModelComponent : public Component {
@@ -27,6 +26,9 @@ namespace ht { namespace entities {
 		inline void SetIndices(const T* indices, u32 indicesSize) {
 			HT_ASSERT(false, "Indices format not supported.");
 		}
+
+		graphics::IndexBuffer* GetIndexBuffer() { return m_IndexBuffer; }
+
 	};
 
 	template <>
