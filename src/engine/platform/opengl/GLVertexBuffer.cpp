@@ -14,6 +14,16 @@ namespace ht { namespace graphics {
 		GL(glDeleteBuffers(1, &m_Buffer));
 	}
 
+	void* VertexBuffer::Map(BufferMapType mapType) {
+		Bind();
+		void* data = GL(glMapBuffer(GL_ARRAY_BUFFER, static_cast<GLenum>(mapType)));
+		return data;
+	}
+
+	void VertexBuffer::Unmap() {
+		GL(glUnmapBuffer(GL_ARRAY_BUFFER));
+	}
+
 	void VertexBuffer::Bind(u32 stride) const {
 		GL(glBindBuffer(GL_ARRAY_BUFFER, m_Buffer));
 	}
