@@ -175,6 +175,10 @@ HT_CREATE_FUNCTION_POINTER(GLint, glGetUniformLocation, GLuint program, const GL
 #define GL_TEXTURE31  0x84DF
 #define GL_BGRA       0x80E1
 
+// Misc
+HT_CREATE_FUNCTION_POINTER(void, glDrawElementsInstanced, GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount);
+
+
 #if !defined(HT_LINUX)
 HT_CREATE_FUNCTION_POINTER(void, glActiveTexture, GLenum texture);
 #endif // HT_LINUX
