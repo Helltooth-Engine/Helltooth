@@ -75,7 +75,7 @@ namespace ht { namespace graphics {
 		DX(HT_DXDEVICE->CreateInputLayout(&elementDescs[0], elementDescs.size(), shader->GetBufferPointer(), shader->GetBufferSize(), &m_InputLayout));
 	}
 
-	void BufferLayout::Bind(VertexBuffer** buffers) {
+	void BufferLayout::Bind(const VertexBuffer** buffers) {
 		HT_DXCONTEXT->IASetInputLayout(m_InputLayout);
 	}
 

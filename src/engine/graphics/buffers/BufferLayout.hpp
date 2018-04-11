@@ -49,7 +49,7 @@ namespace ht { namespace graphics {
 		BufferLayout();
 		~BufferLayout();
 
-		void Bind(VertexBuffer** buffers = nullptr);
+		void Bind(const VertexBuffer** buffers = nullptr);
 
 		void Init(void* shaderBlob = nullptr);
 
