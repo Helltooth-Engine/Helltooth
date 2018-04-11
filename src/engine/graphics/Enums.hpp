@@ -78,6 +78,18 @@ namespace ht { namespace graphics {
 		FROM_HTSL   = 10
 	};
 
+	enum class BufferMapType {
+#if defined(HT_OPENGL)
+		READ_ONLY       = GL_READ_ONLY,
+		WRITE_ONLY      = GL_WRITE_ONLY,
+		READ_AND_WRITE  = GL_READ_WRITE,
+#elif defined(HT_DIRECTX)
+		READ_ONLY       = D3D11_MAP_READ,
+		WRITE_ONLY      = D3D11_MAP_WRITE,
+		READ_AND_WRITE  = D3D11_MAP_READ_WRITE,
+#endif // HT_OPENGL
+	};
+
 	extern u32 DataTypeSize(DataType type);
 	extern u32 TextureFormatSize(TextureFormat type);
 	extern u32 GetSemanticIndex(DataType type);
