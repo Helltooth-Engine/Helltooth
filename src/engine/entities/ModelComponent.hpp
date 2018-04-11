@@ -27,8 +27,8 @@ namespace ht { namespace entities {
 			HT_ASSERT(false, "Indices format not supported.");
 		}
 
-		const graphics::IndexBuffer* GetIndexBuffer() const { return m_IndexBuffer; }
-
+		const graphics::IndexBuffer*   GetIndexBuffer()   const { return m_IndexBuffer; }
+		const graphics::VertexBuffer*  GetVertexBuffer()  const { return m_VertexBuffer; }
 	};
 
 	template <>
