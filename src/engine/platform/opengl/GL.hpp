@@ -85,7 +85,9 @@ typedef char                         GLchar;
 #define GL_STATIC_DRAW               0x88E4
 #define GL_DYNAMIC_DRAW              0x88E8
 #define GL_STREAM_DRAW               0x88E0
+#define GL_READ_ONLY                 0x88B8
 #define GL_WRITE_ONLY                0x88B9
+#define GL_READ_WRITE                0x88BA
 
 HT_CREATE_FUNCTION_POINTER(void, glGenBuffers, GLsizei n, GLuint* buffers);
 HT_CREATE_FUNCTION_POINTER(void, glBindBuffer, GLenum target, GLuint buffer);
