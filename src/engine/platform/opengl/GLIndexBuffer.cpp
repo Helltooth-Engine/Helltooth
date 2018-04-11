@@ -21,7 +21,7 @@ namespace ht { namespace graphics {
 		GL(glDeleteBuffers(1, &m_IndexBuffer));
 	}
 
-	void IndexBuffer::Bind() {
+	void IndexBuffer::Bind() const {
 		GL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer));
 	}
 

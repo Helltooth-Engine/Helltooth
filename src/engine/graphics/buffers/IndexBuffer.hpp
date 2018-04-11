@@ -29,15 +29,15 @@ namespace ht { namespace graphics {
 		IndexBuffer(const u16* indices, u32 indexCount, BufferUsage usage);
 		~IndexBuffer();
 
-		void Bind();
+		void Bind() const;
 
 #if defined(HT_OPENGL)
-		inline GLenum GetFormat() { return m_Format; }
+		inline GLenum GetFormat() const { return m_Format; }
 #elif defined(HT_DIRECTX)
-		inline DXGI_FORMAT GetFormat() { return m_Format; }
+		inline DXGI_FORMAT GetFormat() const { return m_Format; }
 #endif // HT_OPENGL
 
-		inline u32 GetCount() { return m_Count; }
+		inline u32 GetCount() const { return m_Count; }
 
 	};
 

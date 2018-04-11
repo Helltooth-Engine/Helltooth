@@ -31,7 +31,7 @@ namespace ht { namespace graphics {
 		m_IndexBuffer->Release();
 	}
 
-	void IndexBuffer::Bind() {
+	void IndexBuffer::Bind() const{
 		HT_DXCONTEXT->IASetIndexBuffer(m_IndexBuffer, m_Format, 0);
 	}
 
