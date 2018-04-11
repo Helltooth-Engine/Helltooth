@@ -21,6 +21,15 @@ namespace ht { namespace graphics {
 		m_Buffer->Release();
 	}
 
+	void* VertexBuffer::Map(BufferMapType mapType) {
+		DX(HT_DXCONTEXT->Map(m_Buffer, 0, static_cast<D3D11_MAP>(mapType), 0, &m_MappedBuffer));
+		return m_MappedBuffer.pData;
+	}
+
+	void VertexBuffer::Unmap() {
+		HT_DXCONTEXT->Unmap(m_Buffer, 0);
+	}
+
 	void VertexBuffer::Bind(u32 stride) const {
 		static u32 offset = 0;
 		HT_DXCONTEXT->IASetVertexBuffers(0, 1, &m_Buffer, &stride, &offset);
