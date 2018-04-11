@@ -49,7 +49,7 @@ namespace ht { namespace entities {
 		maths::Vector3 GetScale()        const            { return m_Scale; }
 
 	protected:
-		void CalculateModelMatrix() { m_ModelMatrix = maths::Matrix4(1.0f).Scale(m_Scale).Rotate(m_Rotation).Translate(m_Position); m_Modified = false; }
+		void CalculateModelMatrix() { m_ModelMatrix = maths::Matrix4(1.0f).Translate(m_Position).Rotate(m_Rotation).Scale(m_Scale); m_Modified = false; }
 	};
 
 } }
