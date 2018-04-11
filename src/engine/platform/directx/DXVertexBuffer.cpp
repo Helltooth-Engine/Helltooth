@@ -7,10 +7,12 @@ namespace ht { namespace graphics {
 	VertexBuffer::VertexBuffer(const void* data, u32 size, BufferUsage usage) {
 		D3D11_BUFFER_DESC bd = {};
 
-		bd.Usage      = (D3D11_USAGE)usage;
-		bd.ByteWidth  = size;
-		bd.BindFlags  = D3D11_BIND_VERTEX_BUFFER;
-
+		bd.Usage           = (D3D11_USAGE)usage;
+		bd.ByteWidth       = size;
+		bd.BindFlags       = D3D11_BIND_VERTEX_BUFFER;
+		bd.CPUAccessFlags  = usage == BufferUsage::DYNAMIC ? D3D11_CPU_ACCESS_WRITE : 0;
+		if (data == nullptr)
+			data = new char[size];
 		D3D11_SUBRESOURCE_DATA rd = {};
 		rd.pSysMem    = data;
 		

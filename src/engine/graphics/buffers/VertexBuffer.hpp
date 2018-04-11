@@ -22,7 +22,7 @@ namespace ht { namespace graphics {
 		u32 m_Buffer;
 #elif defined(HT_DIRECTX)
 		ID3D11Buffer* m_Buffer;
-		D3D11_MAPPED_SUBRESOURCE m_MappedBuffer;
+		D3D11_MAPPED_SUBRESOURCE m_MappedBuffer = {};
 #endif // HT_OPENGL
 
 	public:
