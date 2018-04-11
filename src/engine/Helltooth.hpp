@@ -26,6 +26,7 @@
 #include "graphics/buffers/VertexBuffer.hpp"
 #include "graphics/camera/Camera.hpp"
 #include "graphics/camera/FPSCamera.hpp"
+#include "graphics/renderers/Renderer.hpp"
 #include "graphics/shaders/Shader.hpp"
 #include "graphics/Context.hpp"
 #include "graphics/Enums.hpp"
