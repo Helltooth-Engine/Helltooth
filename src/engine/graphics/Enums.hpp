@@ -87,7 +87,7 @@ namespace ht { namespace graphics {
 		READ_AND_WRITE  = GL_READ_WRITE,
 #elif defined(HT_DIRECTX)
 		READ_ONLY       = D3D11_MAP_READ,
-		WRITE_ONLY      = D3D11_MAP_WRITE,
+		WRITE_ONLY      = D3D11_MAP_WRITE_DISCARD,
 		READ_AND_WRITE  = D3D11_MAP_READ_WRITE,
 #endif // HT_OPENGL
 	};
