@@ -76,6 +76,9 @@ namespace ht { namespace graphics {
 	}
 
 	void BufferLayout::Bind(const VertexBuffer** buffers) {
+		for (u32 i = 0; i < m_BuffersCount; i++) {
+			buffers[i]->Bind(m_Stride[i]);
+		}
 		HT_DXCONTEXT->IASetInputLayout(m_InputLayout);
 	}
 
