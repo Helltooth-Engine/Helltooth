@@ -31,7 +31,7 @@ namespace ht { namespace graphics {
 				u8 dataSize = DataTypeSize(DataType::FLOAT);
 				for (int k = 0; k < 4; k++, attribOffset++) {
 					GL(glEnableVertexAttribArray(i + attribOffset));
-					GL(glVertexAttribPointer(i + attribOffset, m_Attributes[i].count / 4, static_cast<GLenum>(DataType::FLOAT), static_cast<GLboolean>(m_Attributes[i].normalized), m_Stride[lastBuffer], reinterpret_cast<GLvoid*>(offset)));
+					GL(glVertexAttribPointer(i + attribOffset, 4, static_cast<GLenum>(DataType::FLOAT), static_cast<GLboolean>(m_Attributes[i].normalized), m_Stride[lastBuffer], reinterpret_cast<GLvoid*>(offset)));
 					offset += 4 * dataSize;
 					if (m_Attributes[i].instancing)
 						GL(glVertexAttribDivisor(i + attribOffset, 1));
