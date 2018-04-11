@@ -20,8 +20,8 @@ namespace ht { namespace entities {
 		ModelComponent(const void* vertices, u32 verticesSize);
 		~ModelComponent();
 
-		void Bind(u32 stride = 0);
-		void Render();
+		void Bind(u32 stride = 0) const;
+		void Render() const;
 
 		template <typename T>
 		inline void SetIndices(const T* indices, u32 indicesSize) {
