@@ -48,20 +48,32 @@ namespace ht { namespace graphics {
 				memcpy(fragment, fragmentData.GetData(), fSize);
 			}
 		}
-		else if ((path & ShaderLocationType::FROM_MEMORY) != 0) {
-			vSize = vertexPath.GetSize() + 1;
-			fSize = fragmentPath.GetSize() + 1;
+		else {
+			String vertData = vertexPath;
+			String fragData = fragmentPath;
+			if ((path & ShaderLocationType::FROM_HTSL) != 0) {
+				htsl::Parser::Init();
+				std::vector<std::string> result;
+				result = htsl::Parser::Get()->Parse(vertexPath.GetData());
+				m_Layout->SetSemanticNames(htsl::Parser::Get()->GetVertexInputLayout());
+				modelLayout = true;
+				vertData = result[0];
+
+				result = htsl::Parser::Get()->Parse(fragmentPath.GetData());
+				fragData = result[0];
+
+				htsl::Parser::End();
+			}
+			vSize = vertData.GetSize() + 1;
+			fSize = fragData.GetSize() + 1;
 			vertex = new char[vSize];
 			fragment = new char[fSize];
-			memcpy(vertex, vertexPath.GetData(), vSize);
-			memcpy(fragment, fragmentPath.GetData(), fSize);
-		}
-		else {
-			HT_ASSERT(false, "[Shader] ShaderLocationType Unknown!");
+			memcpy(vertex, vertData.GetData(), vSize);
+			memcpy(fragment, fragData.GetData(), fSize);
 		}
 
 		ID3DBlob* vertexShaderBlob = nullptr, *vertexErrorBlob = nullptr;
-		DX(D3DCompile(vertex, vSize, NULL, NULL, NULL, "main", "vs_5_0", flag, 0, &vertexShaderBlob, &vertexErrorBlob));
+		D3DCompile(vertex, vSize, NULL, NULL, NULL, "main", "vs_5_0", flag, 0, &vertexShaderBlob, &vertexErrorBlob);
 		if (vertexErrorBlob) {
 			HT_WARN("Vertex shader errors: \n%s", static_cast<const char*>(vertexErrorBlob->GetBufferPointer()));
 			vertexErrorBlob->Release();
