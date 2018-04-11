@@ -43,10 +43,10 @@ namespace ht { namespace entities {
 
 		virtual void Update(f32 delta)                    { if (m_Modified) CalculateModelMatrix(); }
 
-		maths::Matrix4 GetModelMatrix()                   { return m_ModelMatrix; }
-		maths::Vector3 GetPosition()                      { return m_Position; }
-		maths::Vector3 GetRotation()                      { return m_Rotation; }
-		maths::Vector3 GetScale()                         { return m_Scale; }
+		maths::Matrix4 GetModelMatrix()  const            { return m_ModelMatrix; }
+		maths::Vector3 GetPosition()     const            { return m_Position; }
+		maths::Vector3 GetRotation()     const            { return m_Rotation; }
+		maths::Vector3 GetScale()        const            { return m_Scale; }
 
 	protected:
 		void CalculateModelMatrix() { m_ModelMatrix = maths::Matrix4(1.0f).Scale(m_Scale).Rotate(m_Rotation).Translate(m_Position); m_Modified = false; }
