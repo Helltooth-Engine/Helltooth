@@ -11,11 +11,14 @@ namespace ht { namespace graphics {
 		bd.ByteWidth       = size;
 		bd.BindFlags       = D3D11_BIND_VERTEX_BUFFER;
 		bd.CPUAccessFlags  = usage == BufferUsage::DYNAMIC ? D3D11_CPU_ACCESS_WRITE : 0;
+
 		if (data == nullptr)
 			data = new char[size];
+
 		D3D11_SUBRESOURCE_DATA rd = {};
-		rd.pSysMem    = data;
-		
+
+		rd.pSysMem = data;
+
 		DX(HT_DXDEVICE->CreateBuffer(&bd, &rd, &m_Buffer));
 	}
 
@@ -33,6 +36,7 @@ namespace ht { namespace graphics {
 	}
 
 	void VertexBuffer::Bind(u32 stride) const {
+		HT_ASSERT(stride, "[VertexBuffer] Stride can't be 0!");
 		static u32 offset = 0;
 		HT_DXCONTEXT->IASetVertexBuffers(0, 1, &m_Buffer, &stride, &offset);
 	}
