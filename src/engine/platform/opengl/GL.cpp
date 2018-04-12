@@ -50,6 +50,8 @@ HT_CPP_FUNCTION_POINTER(glUniformBlockBinding);
 HT_CPP_FUNCTION_POINTER(glUniform1iv);
 HT_CPP_FUNCTION_POINTER(glGetUniformLocation);
 
+HT_CPP_FUNCTION_POINTER(glGenerateMipmap);
+
 HT_CPP_FUNCTION_POINTER(glDrawElementsInstanced);
 
 #if !defined(HT_LINUX)
@@ -97,6 +99,8 @@ bool GLInit() {
 	HT_GET_GL_FUNCTION(glUniformBlockBinding);
 	HT_GET_GL_FUNCTION(glUniform1iv);
 	HT_GET_GL_FUNCTION(glGetUniformLocation);
+
+	HT_GET_GL_FUNCTION(glGenerateMipmap);
 
 	HT_GET_GL_FUNCTION(glDrawElementsInstanced);
 

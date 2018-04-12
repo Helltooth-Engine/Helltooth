@@ -175,6 +175,9 @@ HT_CREATE_FUNCTION_POINTER(GLint, glGetUniformLocation, GLuint program, const GL
 #define GL_TEXTURE31         0x84DF
 #define GL_BGRA              0x80E1
 #define GL_TEXTURE_LOD_BIAS  0x8501
+
+HT_CREATE_FUNCTION_POINTER(void, glGenerateMipmap, GLenum target);
+
 // Misc
 HT_CREATE_FUNCTION_POINTER(void, glDrawElementsInstanced, GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount);
 
