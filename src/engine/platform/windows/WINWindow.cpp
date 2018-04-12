@@ -85,6 +85,10 @@ namespace ht { namespace core {
 			e->mouse.y                   = static_cast<f32>(GET_Y_LPARAM(lParam));
 			inputEvent                   = true;
 			break;
+		case WM_SIZE:
+			if(window)
+				window->Resize(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+			break;
 		}
 		if(inputEvent)
 			EventDispatcher::Dispatch(e);
