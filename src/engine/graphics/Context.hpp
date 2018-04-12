@@ -54,6 +54,8 @@ namespace ht { namespace graphics {
 		void Update();
 		void Clear();
 
+		void Resize(u32 width, u32 height);
+
 #if defined(HT_DIRECTX)
 		inline ID3D11Device* GetDevice() { return m_Device; }
 		inline ID3D11DeviceContext* GetDeviceContext() { return m_Context; }

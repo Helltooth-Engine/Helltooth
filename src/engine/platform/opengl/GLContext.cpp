@@ -116,6 +116,10 @@ namespace ht { namespace graphics {
 		GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 	}
 
+	void Context::Resize(u32 width, u32 height) {
+		glViewport(0, 0, width, height);
+	}
+
 } }
 
 #endif // HT_OPENGL

@@ -95,6 +95,20 @@ namespace ht { namespace graphics {
 		m_RasterizerState->Release();
 	}
 
+	void Context::Resize(u32 width, u32 height) {
+		D3D11_VIEWPORT v = {};
+
+		v.TopLeftX       = 0;
+		v.TopLeftY       = 0;
+		v.Width          = width;
+		v.Height         = height;
+		v.MinDepth       = 0.0f;
+		v.MaxDepth       = 1.0f;
+
+		m_Context->RSSetViewports(1, &v);
+	}
+
+
 	void Context::Update() {
 		DX(m_SwapChain->Present(0, 0));
 	}
