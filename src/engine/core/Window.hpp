@@ -59,6 +59,7 @@ namespace ht { namespace core {
 		void Update();
 		void Clear();
 
+
 		void SetTitle(std::string title);
 #ifdef HT_WINDOWS
 		inline bool IsHWND(HWND other) { return m_Hwnd == other; }
@@ -66,6 +67,7 @@ namespace ht { namespace core {
 
 		inline bool ShouldClose() { return m_ShouldClose; }
 		inline graphics::Context* GetContext() { return m_Context; }
+		inline void Resize(u32 width, u32 height) { m_Width = width; m_Height = height; m_Context->Resize(width, height); }
 
 #ifdef HT_DIRECTX
 		inline ID3D11Device* GetDevice() { return m_Context->GetDevice(); }
