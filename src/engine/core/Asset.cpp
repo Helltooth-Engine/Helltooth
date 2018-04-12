@@ -65,6 +65,8 @@ namespace ht { namespace core {
 
 			result = new ModelComponent(vertexData, verticesData->getCount() * sizeof(f32));
 			result->SetIndices(indexData, indicesData->getCount() * sizeof(u32));
+			delete[] vertexData;
+			delete[] indexData;
 		}
 
 		delete database;
