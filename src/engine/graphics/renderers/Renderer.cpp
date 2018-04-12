@@ -22,7 +22,6 @@ namespace ht { namespace graphics {
 
 			m_Shader = new Shader(m_Layout, vertexShader, fragmentShader, ShaderLocationType::FROM_HTSL | ShaderLocationType::FROM_MEMORY);
 #if defined(HT_OPENGL)
-			m_Shader->Start();
 
 			s32 ids[] = {
 				 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 
@@ -86,11 +85,11 @@ namespace ht { namespace graphics {
 				data++;
 			}
 			m_InstanceData->Unmap();
-
+			m_InstanceData->Bind(m_Shader->GetStride());
 			const VertexBuffer* buffers[] = { renderable.model->GetVertexBuffer(), m_InstanceData };
 
-			m_Shader->BindLayout(buffers);
 			renderable.model->GetIndexBuffer()->Bind();
+			m_Shader->BindLayout(buffers);
 #if defined(HT_OPENGL)
 			GL(glDrawElementsInstanced(GL_TRIANGLES, renderable.model->GetIndexBuffer()->GetCount(), renderable.model->GetIndexBuffer()->GetFormat(), nullptr, renderable.transforms.size()));
 #elif defined(HT_DIRECTX)
