@@ -23,7 +23,7 @@ namespace ht { namespace graphics {
 					current.Format                 = DXGI_FORMAT_R32G32B32A32_FLOAT;
 					current.InputSlot              = m_Attributes[i].bufferId;
 					current.InputSlotClass         = m_Attributes[i].instancing ? D3D11_INPUT_PER_INSTANCE_DATA : D3D11_INPUT_PER_VERTEX_DATA;
-					current.InstanceDataStepRate   = 0;
+					current.InstanceDataStepRate   = m_Attributes[i].instancing ? 1 : 0;
 					if (lastBuffer                != m_Attributes[i].bufferId) {
 						lastBuffer                 = m_Attributes[i].bufferId;
 						current.AlignedByteOffset  = 0;
@@ -60,7 +60,7 @@ namespace ht { namespace graphics {
 
 				current.InputSlot              = m_Attributes[i].bufferId;
 				current.InputSlotClass         = m_Attributes[i].instancing ? D3D11_INPUT_PER_INSTANCE_DATA : D3D11_INPUT_PER_VERTEX_DATA;
-				current.InstanceDataStepRate   = 0;
+				current.InstanceDataStepRate   = m_Attributes[i].instancing ? 1 : 0;
 				if (lastBuffer                != m_Attributes[i].bufferId) {
 					lastBuffer                 = m_Attributes[i].bufferId;
 					current.AlignedByteOffset  = 0;
@@ -76,10 +76,15 @@ namespace ht { namespace graphics {
 	}
 
 	void BufferLayout::Bind(const VertexBuffer** buffers) {
-		for (u32 i = 0; i < m_BuffersCount; i++) {
-			buffers[i]->Bind(m_Stride[i]);
-		}
 		HT_DXCONTEXT->IASetInputLayout(m_InputLayout);
+		static u32 offset = 0;
+		for (u32 i = 0; i <= m_BuffersCount; i++) {
+			ID3D11Buffer* currentBuffer = buffers[i]->GetBuffer();
+			
+			HT_DXCONTEXT->IASetVertexBuffers(i, 1, &currentBuffer, &m_Stride[i], &offset);
+		}
+		
+
 	}
 
 } }
