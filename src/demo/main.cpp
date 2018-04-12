@@ -24,7 +24,7 @@ private:
 public:
 	// In here you should initialize stuff that's not depended to the rendering context
 	Game() 
-		: Application("Window", 1280, 720) {
+		: Application("Window", 1280, 540) {
 		srand(time(NULL));
 		VFS::Mount("res", "res/shaders/");
 		VFS::Mount("res", "res/textures/");
@@ -38,14 +38,14 @@ public:
 	}
 
 	void Init() {
-		proj = Matrix4::CreatePerspective(70, 0.01f, 1000.0f, 1.77f);
+		proj = Matrix4::CreatePerspective(70, 0.01f, 1000.0f, 2.34f);
 		renderer = new Renderer(camera, proj);
 		model = Asset::LoadModel("/res/cube.htmodel");
 		transforms.resize(500);
 		for (int i = 0; i < 500; i++) {
 			entities.emplace_back();
 			entities[i].AddComponent(model);
-			transforms[i] = TransformComponent(Vector3((f32)rand() / (f32)RAND_MAX * 200.f, (f32)rand() / (f32)RAND_MAX * 200.f, (f32)rand() / (f32)RAND_MAX * 200.f));
+			transforms[i] = TransformComponent(Vector3((f32)rand() / (f32)RAND_MAX * 200.f - 100.0f, (f32)rand() / (f32)RAND_MAX * 200.f - 100.0f, (f32)rand() / (f32)RAND_MAX * 200.f - 100.0f));
 			//transforms[i].Scale(1, 1, 1);
 			entities[i].AddComponent(&transforms[i]);
 		}
@@ -69,7 +69,7 @@ public:
 	void Update(float delta) {
 		camera->Update(delta);
 		for (TransformComponent& transform : transforms) {
-			transform.Rotate(0, (rand() % 101) * delta, 0);
+			transform.Rotate(0, 50.f * delta, 0);
 			transform.Update(delta);
 		}
 	}
