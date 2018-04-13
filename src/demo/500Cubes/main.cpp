@@ -24,7 +24,7 @@ private:
 public:
 	// In here you should initialize stuff that's not depended to the rendering context
 	Game() 
-		: Application("Window", 1280, 540) {
+		: Application("Window", 1280, 720) {
 		srand(time(NULL));
 		VFS::Mount("res", "res/shaders/");
 		VFS::Mount("res", "res/textures/");
