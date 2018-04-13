@@ -1,4 +1,5 @@
 require "projectTemplate"
+require "demoTemplate"
 
 workspace ("Helltooth")
 	filter { "system:windows"}
@@ -24,6 +25,7 @@ workspace ("Helltooth")
 	location "../../Solution/"
 	startproject "Sandbox"
 
+group "Helltooth"
 makeProject("Helltooth-ShadingLanguage")
 	kind ("StaticLib")
 	files {
@@ -47,63 +49,5 @@ makeProject ("Helltooth")
 		"../Helltooth-ShadingLanguage/src/htsl/",
 	}
 
-makeProject ("Sandbox")
-	kind ("ConsoleApp")
-	files {
-		"../demo/**.h",
-		"../demo/**.hpp",
-		"../demo/**.cpp",
-		"../../Solution/Sandbox/res/*/*.*"
-	}
-	dependson {
-		"Helltooth",
-		"Helltooth-ShadingLanguage",
-	}
-	
-	links {
-		"Helltooth",
-		"Helltooth-ShadingLanguage",
-	}
-
-	filter {"configurations:Debug-GL", "system:windows" }
-		links {
-			"opengl32"
-		}
-	filter {"configurations:Release-GL", "system:windows" }
-		links {
-			"opengl32"
-		}
-	filter {"configurations:Debug-DX", "system:windows" }
-		links {
-			"D3D11",
-			"d3dcompiler"
-		}
-	filter {"configurations:Release-DX", "system:windows" }
-		links {
-			"D3D11",
-			"d3dcompiler"
-		}
-
-	filter { "system:linux", "configurations:Debug-GL"}
-		links {
-			"GL",
-			"X11",
-			"GLU",
-		}
-	filter { "system:linux", "configurations:Release-GL"}
-		links {
-			"GL",
-			"X11",
-			"GLU",
-		}
-	filter {}
-	
-	sysincludedirs {
-		"../engine/",
-		"../Helltooth-ShadingLanguage/src/htsl/",
-	}
-
-	syslibdirs {
-		"../../bin/Helltooth/",
-		"../../bin/Helltooth-ShadingLanguage/",
-	}
+group "Sandbox"
+makeDemo ("500Cubes")
