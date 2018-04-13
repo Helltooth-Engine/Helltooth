@@ -1,9 +1,4 @@
-function makeProject(name) 
-	project(name)
-	location ("../../Solution/" .. name .. "/")
-	
-	cppdialect "C++14"
-
+function setDefines(name) 
 	filter {"configurations:Debug-GL"}
 		objdir ("../../Intermediates/Debug-GL/" .. name .. "/")
 		targetdir ("../../bin/Debug-GL/" .. name .. "/")
@@ -55,4 +50,13 @@ function makeProject(name)
 	defines {
 		("HT_" .. os.host():upper()),
 	}
+end
+
+function makeProject(name) 
+	project(name)
+	location ("../../Solution/" .. name .. "/")
+	
+	cppdialect "C++14"
+
+	setDefines(name)
 end
