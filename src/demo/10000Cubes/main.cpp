@@ -38,11 +38,11 @@ public:
 	}
 
 	void Init() {
-		proj = Matrix4::CreatePerspective(70, 0.01f, 1000.0f, 2.34f);
+		proj = Matrix4::CreatePerspective(70, 0.01f, 1000.0f, 1.77f);
 		renderer = new Renderer(camera, proj);
 		model = Asset::LoadModel("/res/cube.htmodel");
-		transforms.resize(500);
-		for (int i = 0; i < 500; i++) {
+		transforms.resize(10000);
+		for (int i = 0; i < 10000; i++) {
 			entities.emplace_back();
 			entities[i].AddComponent(model);
 			transforms[i] = TransformComponent(Vector3((f32)rand() / (f32)RAND_MAX * 200.f - 100.0f, (f32)rand() / (f32)RAND_MAX * 200.f - 100.0f, (f32)rand() / (f32)RAND_MAX * 200.f - 100.0f));
