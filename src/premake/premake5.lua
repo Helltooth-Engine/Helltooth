@@ -50,4 +50,4 @@ makeProject ("Helltooth")
 	}
 
 group "Sandbox"
-makeDemo ("500Cubes")
+makeDemo ("10000Cubes")
