@@ -11,15 +11,21 @@ namespace ht { namespace graphics {
 		bd.ByteWidth       = size;
 		bd.BindFlags       = D3D11_BIND_VERTEX_BUFFER;
 		bd.CPUAccessFlags  = usage == BufferUsage::DYNAMIC ? D3D11_CPU_ACCESS_WRITE : 0;
+		
+		bool created = false;
 
-		if (data == nullptr)
+		if (data == nullptr) {
 			data = new char[size];
+			created = true;
+		}
 
 		D3D11_SUBRESOURCE_DATA rd = {};
 
 		rd.pSysMem = data;
 
 		DX(HT_DXDEVICE->CreateBuffer(&bd, &rd, &m_Buffer));
+		if (created)
+			delete[] data;
 	}
 
 	VertexBuffer::~VertexBuffer() {
