@@ -24,7 +24,7 @@ namespace ht { namespace graphics {
 		D3D11_TEXTURE2D_DESC textureDesc = {};
 
 		textureDesc.Width               = width;
-		textureDesc.Height               = height;
+		textureDesc.Height              = height;
 		textureDesc.MipLevels           = 0;
 		textureDesc.ArraySize           = 1;
 		textureDesc.Format              = static_cast<DXGI_FORMAT>(GetBaseFormat(format));
@@ -45,7 +45,6 @@ namespace ht { namespace graphics {
 		viewDesc.Texture2D.MostDetailedMip  = 0;
 
 		DX(HT_DXDEVICE->CreateShaderResourceView(m_Texture, &viewDesc, &m_ResourceView));
-		HT_DXCONTEXT->GenerateMips(m_ResourceView);
 	}
 
 	Texture2D::Texture2D(byte* pixels, u32 width, u32 height, TextureFormat format) : Texture(width, height, TextureType::TEXTURE_2D, format) {
@@ -86,11 +85,8 @@ namespace ht { namespace graphics {
 	}
 
 	void Texture2D::SetPixels(byte* pixels) {
-		D3D11_MAPPED_SUBRESOURCE mappedTexture = {};
-
-		DX(HT_DXCONTEXT->Map(m_Texture, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedTexture));
-		memcpy(mappedTexture.pData, pixels, m_Width * m_Height * TextureFormatSize(m_Format));
-		HT_DXCONTEXT->Unmap(m_Texture, 0);
+		HT_DXCONTEXT->UpdateSubresource(m_Texture, 0, NULL, pixels, m_Width * TextureFormatSize(m_Format), 0);
+		HT_DXCONTEXT->GenerateMips(m_ResourceView);
 	}
 
 	void Texture2D::Bind(u32 slot) {
