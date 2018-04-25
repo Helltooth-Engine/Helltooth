@@ -5,11 +5,11 @@ namespace ht { namespace graphics {
 
 	void Texture2D::SetSamplerState() {
 		GL(glGenerateMipmap(GL_TEXTURE_2D));
-		GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
-		GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
-		GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
-		GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
-		GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS, 0.4f));
+		GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,  GL_NEAREST));
+		GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,  GL_LINEAR_MIPMAP_LINEAR));
+		GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,      GL_REPEAT));
+		GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,      GL_REPEAT));
+		GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS,    0.4f));
 	}
 
 	Texture2D::Texture2D(u32 width, u32 height, TextureFormat format) : Texture(width, height, TextureType::TEXTURE_2D, format) {
