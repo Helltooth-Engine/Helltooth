@@ -30,7 +30,7 @@ namespace ht { namespace graphics {
 		textureDesc.Format              = static_cast<DXGI_FORMAT>(GetBaseFormat(format));
 		textureDesc.BindFlags           = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
 		textureDesc.CPUAccessFlags      = 0;
-		textureDesc.Usage               = D3D11_USAGE_DYNAMIC;
+		textureDesc.Usage               = D3D11_USAGE_DEFAULT;
 		textureDesc.MiscFlags           = D3D11_RESOURCE_MISC_GENERATE_MIPS;
 		textureDesc.SampleDesc.Count    = 1;
 		textureDesc.SampleDesc.Quality  = 0;
