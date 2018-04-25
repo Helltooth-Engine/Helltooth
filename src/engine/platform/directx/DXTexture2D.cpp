@@ -80,8 +80,6 @@ namespace ht { namespace graphics {
 
 	Texture2D::~Texture2D() {
 		m_Texture->Release();
-		m_SamplerState->Release();
-		m_ResourceView->Release();
 	}
 
 	void Texture2D::SetPixels(byte* pixels) {

@@ -25,6 +25,14 @@ namespace ht { namespace graphics {
 		Texture(u32 width, u32 height, TextureType type) : m_Width(width), m_Height(height), m_Type(type) {}
 		Texture(u32 width, u32 height, TextureType type, TextureFormat format) : m_Width(width), m_Height(height), m_Type(type), m_Format(format) {}
 
+#ifdef HT_DIRECTX
+		~Texture() {
+			m_ResourceView->Release();
+			m_SamplerState->Release();
+		}
+#endif // HT_DIRECTX
+
+
 	public:
 		virtual void Bind(u32 slot) = 0;
 
