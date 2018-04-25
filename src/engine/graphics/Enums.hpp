@@ -74,10 +74,19 @@ namespace ht { namespace graphics {
 		TEXTURE_3D
 	};
 
+	enum class TextureCubeFace {
+		RIGHT,
+		LEFT,
+		TOP,
+		BOTTOM,
+		FRONT,
+		BACK
+	};
+
 	enum ShaderLocationType {
-		FROM_MEMORY = 00,
-		FROM_PATH   = 01,
-		FROM_HTSL   = 10
+		FROM_MEMORY  = 0x0,
+		FROM_PATH    = 0x1,
+		FROM_HTSL    = 0xA
 	};
 
 	enum class BufferMapType {
