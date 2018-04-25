@@ -24,7 +24,7 @@ namespace ht { namespace graphics {
 		D3D11_TEXTURE2D_DESC textureDesc = {};
 
 		textureDesc.Width               = width;
-		textureDesc.Width               = height;
+		textureDesc.Height               = height;
 		textureDesc.MipLevels           = 0;
 		textureDesc.ArraySize           = 1;
 		textureDesc.Format              = static_cast<DXGI_FORMAT>(GetBaseFormat(format));
