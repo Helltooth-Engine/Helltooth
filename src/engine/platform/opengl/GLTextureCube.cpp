@@ -25,7 +25,7 @@ namespace ht { namespace graphics {
 		GL(glBindTexture(GL_TEXTURE_CUBE_MAP, m_Texture));
 
 		for (u32 i = 0; i < 6; i++) {
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, static_cast<GLenum>(format), width, height, 0, static_cast<GLenum>(GetBaseFormat(format)), GL_UNSIGNED_BYTE, pixels[i]);
+			GL(glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, static_cast<GLenum>(format), width, height, 0, static_cast<GLenum>(GetBaseFormat(format)), GL_UNSIGNED_BYTE, pixels[i]));
 		}
 
 		SetSamplerState();
@@ -38,7 +38,7 @@ namespace ht { namespace graphics {
 	void TextureCube::SetPixels(byte** pixels) {
 		GL(glBindTexture(GL_TEXTURE_CUBE_MAP, m_Texture));
 		for (u32 i = 0; i < 6; i++) {
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, static_cast<GLenum>(format), width, height, 0, static_cast<GLenum>(GetBaseFormat(format)), GL_UNSIGNED_BYTE, pixels[i]);
+			GL(glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, static_cast<GLenum>(m_Format), m_Width, m_Height, 0, static_cast<GLenum>(GetBaseFormat(m_Format)), GL_UNSIGNED_BYTE, pixels[i]));
 		}
 	}
 
