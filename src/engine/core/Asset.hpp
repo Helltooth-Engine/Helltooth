@@ -6,6 +6,7 @@
 
 #include "graphics/Texture.hpp"
 #include "graphics/Texture2D.hpp"
+#include "graphics/TextureCube.hpp"
 
 #include "utils/String.hpp"
 #include "utils/Vfs.hpp"

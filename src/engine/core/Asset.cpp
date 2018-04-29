@@ -31,6 +31,37 @@ namespace ht { namespace core {
 			delete[] pixels;
 		}
 
+		object = database->getObject("texture3D");
+		if (object != nullptr) {
+			u32 width = static_cast<u32>(object->getField("width")->getValue<s32>());
+			u32 height = static_cast<u32>(object->getField("height")->getValue<s32>());
+			u32 bpp = static_cast<u32>(object->getField("bpp")->getValue<s32>());
+
+			Array* right = object->getArray("right");
+			Array* left = object->getArray("left");
+			Array* top = object->getArray("top");
+			Array* bottom = object->getArray("bottom");
+			Array* front = object->getArray("front");
+			Array* back = object->getArray("back");
+
+			byte** pixels = new byte*[6];
+			for (u32 i = 0; i < 6; i++)
+				pixels[i] = new byte[width * height * bpp / 8];
+
+			right->getRawArray(pixels[static_cast<u32>(TextureCubeFace::RIGHT)]);
+			left->getRawArray(pixels[static_cast<u32>(TextureCubeFace::LEFT)]);
+			top->getRawArray(pixels[static_cast<u32>(TextureCubeFace::TOP)]);
+			bottom->getRawArray(pixels[static_cast<u32>(TextureCubeFace::BOTTOM)]);
+			front->getRawArray(pixels[static_cast<u32>(TextureCubeFace::FRONT)]);
+			back->getRawArray(pixels[static_cast<u32>(TextureCubeFace::BACK)]);
+
+			result = new TextureCube(pixels, width, height, GetFormat(bpp));
+
+			for (u32 i = 0; i < 6; i++)
+				delete[] pixels[i];
+			delete[] pixels;
+		}
+
 		delete database;
 
 		if (result == nullptr) {
