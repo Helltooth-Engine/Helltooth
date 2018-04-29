@@ -49,7 +49,13 @@ namespace ht { namespace entities {
 		maths::Vector3 GetScale()        const            { return m_Scale; }
 
 	protected:
-		void CalculateModelMatrix() { m_ModelMatrix = maths::Matrix4(1.0f).Translate(m_Position).Rotate(m_Rotation).Scale(m_Scale); m_Modified = false; }
+		void CalculateModelMatrix() { 
+			if (m_Rotation.x > 360) m_Rotation.x -= 360;
+			if (m_Rotation.y > 360) m_Rotation.y -= 360;
+			if (m_Rotation.z > 360) m_Rotation.z -= 360;
+			m_ModelMatrix = maths::Matrix4(1.0f).Translate(m_Position).Rotate(m_Rotation).Scale(m_Scale); 
+			m_Modified = false; 
+		}
 	};
 
 } }
