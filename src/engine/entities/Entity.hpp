@@ -36,6 +36,14 @@ namespace ht { namespace entities {
 					return static_cast<const T*>(component);
 			return nullptr;
 		}
+
+		template<typename T>
+		inline const bool HasComponent() const {
+			for (const Component* component : m_Components)
+				if (component->IsInstance(T:TypeIdClass()))
+					return true;
+			return false;
+		}
 	};
 
 } }
