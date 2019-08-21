@@ -5,6 +5,7 @@
 #include "entities/Entity.hpp"
 #include "entities/ModelComponent.hpp"
 #include "entities/TransformComponent.hpp"
+#include "entities/SkyboxComponent.hpp"
 
 #include "graphics/buffers/VertexBuffer.hpp"
 #include "graphics/shaders/Shader.hpp"
@@ -25,6 +26,9 @@ namespace ht { namespace graphics {
 	private:
 		std::vector<Renderable>  m_Renderables;
 
+		entities::SkyboxComponent* m_SkyboxComponent = nullptr;
+		entities::ModelComponent* m_Quad = nullptr;
+
 		maths::Matrix4           m_Projection;
 		Shader*                  m_Shader;
 		Camera*                  m_Camera              = nullptr;
@@ -40,7 +44,7 @@ namespace ht { namespace graphics {
 		Renderer(Camera* camera, maths::Matrix4 projection, Shader* shader = nullptr);
 		~Renderer();
 
-		void Submit(const entities::Entity& m_Entity);
+		void Submit(const entities::Entity& entity);
 
 		void Render();
 

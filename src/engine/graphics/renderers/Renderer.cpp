@@ -49,8 +49,14 @@ namespace ht { namespace graphics {
 	}
 
 	void Renderer::Submit(const entities::Entity& entity) {
+		
 		const ModelComponent* model = entity.GetComponent<ModelComponent>();
-		HT_ASSERT(model, "[Renderer] Entities must have a Model");
+		// Entity doesn't have a model component, test to see if it has a skybox component
+		if (!model) {
+			const SkyboxComponent* skybox = entity.GetComponent<SkyboxComponent>();
+
+			HT_ASSERT(skybox, "[Renderer] Entities must have a Model or a Skybox");
+		} 
 
 		const TransformComponent* transform = entity.GetComponent<TransformComponent>();
 		
