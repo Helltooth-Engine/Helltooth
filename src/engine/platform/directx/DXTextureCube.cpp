@@ -58,7 +58,7 @@ namespace ht { namespace graphics {
 		
 		textureDesc.Width               = width;
 		textureDesc.Height              = height;
-		textureDesc.MipLevels           = 0;
+		textureDesc.MipLevels           = 1;
 		textureDesc.ArraySize           = 6;
 		textureDesc.Format              = static_cast<DXGI_FORMAT>(GetBaseFormat(format));
 		textureDesc.BindFlags           = D3D11_BIND_SHADER_RESOURCE;
