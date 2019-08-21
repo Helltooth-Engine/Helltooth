@@ -26,7 +26,7 @@ namespace ht { namespace graphics {
 	private:
 		std::vector<Renderable>  m_Renderables;
 
-		entities::SkyboxComponent* m_SkyboxComponent = nullptr;
+		const entities::SkyboxComponent* m_SkyboxComponent = nullptr;
 		entities::ModelComponent* m_Quad = nullptr;
 
 		maths::Matrix4           m_Projection;
@@ -49,6 +49,9 @@ namespace ht { namespace graphics {
 		void Render();
 
 		void End() { m_Renderables.clear(); }
+
+	private:
+		void CreateSkyboxQuad();
 	};
 
 } }

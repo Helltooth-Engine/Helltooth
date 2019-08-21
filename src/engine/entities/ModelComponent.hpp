@@ -16,6 +16,7 @@ namespace ht { namespace entities {
 		graphics::IndexBuffer* m_IndexBuffer = nullptr;
 
 	public:
+		// verticesSize is the size in bytes
 		ModelComponent(const void* vertices, u32 verticesSize);
 		~ModelComponent();
 

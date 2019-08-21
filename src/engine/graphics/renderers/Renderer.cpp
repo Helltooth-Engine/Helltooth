@@ -53,10 +53,13 @@ namespace ht { namespace graphics {
 		const ModelComponent* model = entity.GetComponent<ModelComponent>();
 		// Entity doesn't have a model component, test to see if it has a skybox component
 		if (!model) {
-			const SkyboxComponent* skybox = entity.GetComponent<SkyboxComponent>();
-
+			const SkyboxComponent* skybox = entity.GetComponent<SkyboxComponent>();			
+			
+			m_SkyboxComponent = skybox;
 			HT_ASSERT(skybox, "[Renderer] Entities must have a Model or a Skybox");
-		} 
+			if (m_Quad == nullptr)
+				CreateSkyboxQuad();
+		}
 
 		const TransformComponent* transform = entity.GetComponent<TransformComponent>();
 		
@@ -105,5 +108,22 @@ namespace ht { namespace graphics {
 		}
 	}
 
+	void Renderer::CreateSkyboxQuad() {
+		f32 vertices[] = {
+			-1.0f,  1.0f,
+			-1.0f, -1.0f,
+			 1.0f, -1.0f,
+			 1.0f,  1.0f
+		};
+
+		// if it doesn't work, it's clockwise
+		u32 indices[] = {
+			0, 1, 2,
+			2, 3, 0
+		};
+
+		m_Quad = new ModelComponent(vertices, sizeof(vertices));
+		m_Quad->SetIndices(indices, sizeof(indices));
+	}
 
 } }
