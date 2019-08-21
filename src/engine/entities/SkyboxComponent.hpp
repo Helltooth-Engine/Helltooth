@@ -13,7 +13,7 @@ namespace ht { namespace entities {
 		graphics::TextureCube* m_TextureCube;
 
 	public:
-		SkyboxComponent(graphics::TextureCube* textureCube = nullptr);
+		SkyboxComponent(graphics::Texture* texture);
 
 		graphics::TextureCube* GetTexture() { return m_TextureCube; }
 	};
