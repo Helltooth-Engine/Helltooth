@@ -36,6 +36,8 @@ namespace ht { namespace graphics {
 	public:
 		virtual void Bind(u32 slot) = 0;
 
+		inline TextureType GetType() { return m_Type; }
+
 	private:
 		virtual void SetSamplerState() = 0;
 	};
