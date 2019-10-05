@@ -40,6 +40,7 @@ function setDefines(name)
 			"-msse4.1",
 			"-mfma",
             "-ggdb",
+			"-fpermissive"
 		}
 	
 	filter { "system:windows" }
