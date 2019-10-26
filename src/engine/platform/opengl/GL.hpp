@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <gl/GL.h>
 #elif defined(HT_LINUX)
+#include <GL/gl.h>
 #include <GL/glx.h>
 #endif // HT_WINDOWS
 
@@ -225,5 +226,13 @@ extern PFNWGLSWAPINTERVALEXTPROC          wglSwapIntervalEXT;
 extern bool wglInit();
 
 #endif // HT_WINDOWS
+
+#if defined(HT_LINUX)
+
+typedef GLXContext (*PFNGLXREATECONTEXTATTRIBSARBPROC)(Display*, GLXFBConfig, GLXContext, Bool, const int*);
+extern PFNGLXREATECONTEXTATTRIBSARBPROC glXCreateContextAttribsARB;
+extern bool lglInit();
+
+#endif // HT_LINUX
 
 #endif // HT_OPENGL

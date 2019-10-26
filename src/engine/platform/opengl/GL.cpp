@@ -124,4 +124,17 @@ bool wglInit() {
 	return true;
 }
 #endif // HT_WINDOWS
+
+#if defined(HT_LINUX)
+
+PFNGLXREATECONTEXTATTRIBSARBPROC glXCreateContextAttribsARB;
+
+bool lglInit() {
+	glXCreateContextAttribsARB = (PFNGLXREATECONTEXTATTRIBSARBPROC)glXGetProcAddressARB((const unsigned char*)"glXCreateContextAttribsARB");
+
+	return true;
+}
+
+#endif // HT_LINUX
+
 #endif // HT_OPENGL
