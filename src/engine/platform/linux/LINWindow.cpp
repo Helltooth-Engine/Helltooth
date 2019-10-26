@@ -15,37 +15,83 @@ namespace ht { namespace core {
 			HT_FATAL("%s", "[Window] Coult not connect to X Server.");
 			return;
 		}
-
-		XID rootWindow = DefaultRootWindow(m_Display);
 		
-		int attributes[] = {
-			GLX_RGBA,
-			GLX_DEPTH_SIZE, 24,
-			GLX_DOUBLEBUFFER,
+		s32 screen = DefaultScreen(m_Display);
+		XID rootWindow = RootWindow(m_Display, screen);
+
+		int attribs[] = {
+			GLX_X_RENDERABLE, 	True,
+			GLX_DRAWABLE_TYPE, 	GLX_WINDOW_BIT,
+			GLX_RENDER_TYPE, 	GLX_RGBA_BIT,
+			GLX_X_VISUAL_TYPE,	GLX_TRUE_COLOR,
+			GLX_RED_SIZE,		8,
+			GLX_GREEN_SIZE,		8,
+			GLX_BLUE_SIZE,		8,
+			GLX_ALPHA_SIZE,		8,
+			GLX_DEPTH_SIZE,		24,
+			GLX_STENCIL_SIZE,	8,
+			GLX_DOUBLEBUFFER,	True,
 			None
 		};
-		
-		m_VisualInfo = glXChooseVisual(m_Display, 0, attributes);
-		if (m_VisualInfo == nullptr) {
-			HT_FATAL("%s", "[Window] Could not select an appropriate visual");
+
+		s32 major, minor;
+		if (!glXQueryVersion(m_Display, &major, &minor)) {
+			HT_FATAL("%s", "[GLContext] Could not query glX version");
 			return;
 		}
-		else {
-			HT_INFO("Visual %p selected!", m_VisualInfo->visualid);
+		if (major < 1 || (major == 1 && minor < 3)) {
+			HT_FATAL("%s", "[GLContext] glX version too low!");
+			return;
 		}
 
-		m_Colormap = XCreateColormap(m_Display, rootWindow, m_VisualInfo->visual, AllocNone);
+		s32 fbConfigCount = 0;
+		GLXFBConfig* fbConfigs = glXChooseFBConfig(m_Display, DefaultScreen(m_Display), attribs, &fbConfigCount);
+		if (!fbConfigs) {
+			HT_FATAL("%s", "[GLContext] Could not create fbConfigs");
+			return;
+		}
+		
+		if (fbConfigCount == 0) {
+			HT_FATAL("%s", "[GLContext] FB Config Count can not be 0");
+			return;
+		}
 
+		s32 bestFbConfigIndex = 0, bestSampleCount = 0;
+		for (s32 i = 0; i < fbConfigCount; i++) {
+			XVisualInfo* vi = glXGetVisualFromFBConfig(m_Display, fbConfigs[i]);
+			if (vi) {
+				int samples = 0, sampleCount = 0;
+				glXGetFBConfigAttrib(m_Display, fbConfigs[i], GLX_SAMPLE_BUFFERS, &samples);
+				glXGetFBConfigAttrib(m_Display, fbConfigs[i], GLX_SAMPLES, &sampleCount);
+
+				if(samples && sampleCount > bestSampleCount) {
+					bestFbConfigIndex = i;
+					bestSampleCount = sampleCount;
+				}
+			}
+			XFree(vi);
+		}
+
+		GLXFBConfig bestFbConfig = fbConfigs[bestFbConfigIndex];
+
+		XFree(fbConfigs);
+
+		XVisualInfo* vi = glXGetVisualFromFBConfig(m_Display, bestFbConfig);
+		
+		Colormap colormap = XCreateColormap(m_Display, rootWindow, vi->visual, AllocNone);
+		
 		XSetWindowAttributes windowAttribs = {};
-		windowAttribs.colormap = m_Colormap;
-		windowAttribs.event_mask = ExposureMask | KeyPressMask;
+		windowAttribs.colormap = colormap;
+		windowAttribs.background_pixmap = None;
+		windowAttribs.border_pixel = 0;
+		windowAttribs.event_mask = StructureNotifyMask;
 
-		m_Window = XCreateWindow(m_Display, rootWindow, 0, 0, width, height, 0, m_VisualInfo->depth, InputOutput, m_VisualInfo->visual, CWColormap | CWEventMask, &windowAttribs);
+		m_Window = XCreateWindow(m_Display, rootWindow, 0, 0, width, height, 0, vi->depth, InputOutput, vi->visual, CWColormap | CWEventMask, &windowAttribs);
 		
 		XMapWindow(m_Display, m_Window);
 		XStoreName(m_Display, m_Window, m_Title.c_str());
 
-		m_Context = new graphics::Context(m_Display, m_Window, m_VisualInfo);
+		m_Context = new graphics::Context(m_Display, m_Window, bestFbConfig);
 
 		s_Window = this;
 	}

@@ -86,9 +86,23 @@ namespace ht { namespace graphics {
 
 #elif defined(HT_LINUX)
 
-	Context::Context(_XDisplay* display, XID& window, XVisualInfo* visualInfo)
+	Context::Context(_XDisplay* display, XID& window, GLXFBConfig fbConfig)
 		: m_Display(display) {
-		m_Context = glXCreateContext(m_Display, visualInfo, nullptr, GL_TRUE);
+		if (!lglInit()) {
+			HT_FATAL("%s", "[GLContext] Could not initialize LGL");
+			return;
+		}
+		
+		int contextAttribs[] = {
+			GLX_CONTEXT_MAJOR_VERSION_ARB, 	4,
+			GLX_CONTEXT_MINOR_VERSION_ARB, 	0,
+			GLX_CONTEXT_FLAGS_ARB,			GLX_CONTEXT_CORE_PROFILE_BIT_ARB,
+			None
+		};
+
+		m_Context = glXCreateContextAttribsARB(m_Display, fbConfig, 0, True, contextAttribs);
+
+		//m_Context = glXCreateContext(m_Display, visualInfo, nullptr, GL_TRUE);
 		glXMakeCurrent(m_Display, window, m_Context);
 		
 		HT_WARN("GL version: %s",                   reinterpret_cast<const char*>(glGetString(GL_VERSION)));

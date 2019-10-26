@@ -38,10 +38,8 @@ namespace ht { namespace core {
 #if defined(HT_WINDOWS)
 		HWND m_Hwnd;
 #elif defined(HT_LINUX)
-		_XDisplay* m_Display = nullptr;
-		XID m_Window;
-		XVisualInfo* m_VisualInfo = nullptr;
-		Colormap m_Colormap;
+		_XDisplay* 		m_Display = nullptr;
+		XID 			m_Window;
 		
 #endif // HT_WINDOWS
 		bool m_ShouldClose = false;
