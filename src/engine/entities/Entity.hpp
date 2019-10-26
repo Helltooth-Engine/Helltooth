@@ -40,7 +40,7 @@ namespace ht { namespace entities {
 		template<typename T>
 		inline const bool HasComponent() const {
 			for (const Component* component : m_Components)
-				if (component->IsInstance(T:TypeIdClass()))
+				if (component->IsInstance(T::TypeIdClass()))
 					return true;
 			return false;
 		}
