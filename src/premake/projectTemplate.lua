@@ -6,6 +6,7 @@ function setDefines(name)
 			"HT_DEBUG",
 			"HT_OPENGL",
 		}
+		symbols "On"
 
 	filter {"configurations:Release-GL"}
 		objdir ("../../Intermediates/Release-GL/" .. name .. "/")
@@ -24,6 +25,7 @@ function setDefines(name)
 			"HT_DEBUG",
 			"HT_DIRECTX",
 		}
+		symbols "On"
 
 	filter {"configurations:Release-DX"}
 		objdir ("../../Intermediates/Release-DX/" .. name .. "/")
