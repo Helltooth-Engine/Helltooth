@@ -99,8 +99,8 @@ namespace ht { namespace graphics {
 			m_InstanceData->Bind(m_Shader->GetStride());
 			const VertexBuffer* buffers[] = { renderable.model->GetVertexBuffer(), m_InstanceData };
 
-			renderable.model->GetIndexBuffer()->Bind();
 			m_Shader->BindLayout(buffers);
+			renderable.model->GetIndexBuffer()->Bind();
 #if defined(HT_OPENGL)
 			GL(glDrawElementsInstanced(GL_TRIANGLES, renderable.model->GetIndexBuffer()->GetCount(), renderable.model->GetIndexBuffer()->GetFormat(), nullptr, renderable.transforms.size()));
 #elif defined(HT_DIRECTX)
