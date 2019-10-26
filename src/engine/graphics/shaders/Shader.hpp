@@ -47,7 +47,10 @@ namespace ht { namespace graphics {
 		}
 
 #if defined(HT_OPENGL)
-		inline void SetSamplers(s32* array, u32 size) { glUniform1iv(glGetUniformLocation(m_Program, "samplers"), size, array); }
+		inline void SetSamplers(s32* array, u32 size) { 
+			GL(int loc = glGetUniformLocation(m_Program, "textures"));
+			GL(glUniform1iv(loc, size, array)); 
+		}
 #elif defined(HT_DIRECTX)
 		void SetSamplers(s32* array, u32 size);
 #endif // HT_OPENGL

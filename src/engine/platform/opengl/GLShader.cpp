@@ -82,10 +82,10 @@ namespace ht { namespace graphics {
 
 #ifdef HT_DEBUG
 		GLint isLinked;
-		glGetProgramiv(m_Program, GL_LINK_STATUS, &isLinked);
+		GL(glGetProgramiv(m_Program, GL_LINK_STATUS, &isLinked));
 		if (isLinked == GL_FALSE) {
 			GLint maxLength = 0;
-			glGetProgramiv(m_Program, GL_INFO_LOG_LENGTH, &maxLength);
+			GL(glGetProgramiv(m_Program, GL_INFO_LOG_LENGTH, &maxLength));
 		
 			char* data = new char[maxLength];
 			GL(glGetProgramInfoLog(m_Program, maxLength, &maxLength, data));
@@ -102,13 +102,15 @@ namespace ht { namespace graphics {
 		GL(glDeleteShader(vertexID));
 		GL(glDeleteShader(fragmentID));
 
-		u32 vIndex = glGetUniformBlockIndex(m_Program, "Vertex");
+		u32 vIndex, fIndex;
+
+		GL(vIndex = glGetUniformBlockIndex(m_Program, "Vertex"));
 		if (vIndex == (u32)-1) {
 			HT_WARN("%s", "[Shader] No uniform block found called \"Vertex\", skipping it.");
 		}
 		else GL(glUniformBlockBinding(m_Program, vIndex, 0));
 
-		u32 fIndex = glGetUniformBlockIndex(m_Program, "Fragment");
+		GL(fIndex = glGetUniformBlockIndex(m_Program, "Fragment"));
 		if (fIndex == (u32)-1) {
 			HT_WARN("%s", "[Shader] No uniform block found called \"Fragment\", skipping it.");
 		}
