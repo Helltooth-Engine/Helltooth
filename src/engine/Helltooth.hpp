@@ -80,7 +80,7 @@ namespace ht {
 
 				if (delta >= timeFactor) {
 					Update(delta);
-					delta -= timeFactor;
+					delta = 0;
 					updates++;
 				}
 
@@ -91,13 +91,13 @@ namespace ht {
 					m_Window->SetTitle(m_Title + " | Updates: " + std::to_string(updates) + " Frames: " + std::to_string(frames));
 					updates = 0;
 					frames = 0;
-					delta = 0.0f;
 					overallTime -= 1.0f;
 				}
 				m_Window->Update();
 				timerDelta = timer.GetDelta();
 				overallTime += timerDelta;
 				delta += timerDelta;
+
 			}
 		}
 
