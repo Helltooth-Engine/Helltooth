@@ -48,6 +48,11 @@ namespace ht { namespace graphics {
 
 		m_SkyboxShader = new Shader(m_SkyboxLayout, vertexShader, fragmentShader, ShaderLocationType::FROM_HTSL | ShaderLocationType::FROM_MEMORY);
 
+#if defined(HT_OPENGL)
+		m_SkyboxShader->Start();
+		m_SkyboxShader->SetSampler("textureCube", 0);
+#endif // HT_OPENGL
+
 		UniformBufferLayout uniformLayout = UniformBufferLayout(ShaderType::VERTEX);
 		uniformLayout.AddUniform<Matrix4>();
 		uniformLayout.AddUniform<Matrix4>();
@@ -57,9 +62,6 @@ namespace ht { namespace graphics {
 
 		UniformBufferLayout skyboxUniformLayout = UniformBufferLayout(ShaderType::VERTEX);
 		skyboxUniformLayout.AddUniform<Matrix4>();
-		skyboxUniformLayout.AddUniform<Matrix4>();
-		skyboxUniformLayout.AddUniform<float>();
-		skyboxUniformLayout.AddUniform<Vector3>(); // padding
 
 		m_SkyboxUniform = new UniformBuffer(skyboxUniformLayout);
 		m_SkyboxUniform->Set(0, &m_Projection[0]);
@@ -117,6 +119,26 @@ namespace ht { namespace graphics {
 	}
 	
 	void Renderer::Render() {
+		// First render the skybox
+		if (m_SkyboxComponent) {
+			m_SkyboxShader->Start();
+			Matrix4 viewMatrix = m_Camera->GetViewMatrix();
+			viewMatrix[3 + 0 * 4] = 0;
+			viewMatrix[3 + 1 * 4] = 0;
+			viewMatrix[3 + 2 * 4] = 0;
+			Matrix4 inverseViewMatrix = viewMatrix.Inverse();
+			m_SkyboxUniform->Set(0, &inverseViewMatrix[0]);
+			m_SkyboxUniform->Bind();
+
+			m_SkyboxComponent->GetTexture()->Bind(0);
+
+			m_Quad->Bind();
+#if defined(HT_OPENGL)
+			GL(glDrawElements(GL_TRIANGLES, m_Quad->GetIndexBuffer()->GetCount(), m_Quad->GetIndexBuffer()->GetFormat(), nullptr));
+#elif defined(HT_DIRECTX)
+
+#endif // HT_OPENGL
+		}
 		for (u32 i = 0; i < m_TextureComponents.size(); i++)
 			m_TextureComponents[i]->GetTexture()->Bind(i);
 

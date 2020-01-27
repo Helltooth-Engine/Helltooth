@@ -7,10 +7,7 @@ layout {
 };
 
 uniform {
-	mat4 projectionMatrix;
-	mat4 viewMatrix;
-	float skyboxSize;
-	vec3 padding;
+	mat4 inverseViewMatrix;
 };
 
 out {
@@ -18,9 +15,13 @@ out {
 };
 
 main_block {
-	vec3 skyboxPosition = vec3(position.x * skyboxSize, position.y * skyboxSize, position.z * skyboxSize);
-	OUT_POSITION = projectionMatrix * viewMatrix * vec4(skyboxPosition, 1.0);
+	vec4 pos = vec4(position, 1.0);
+	pos.z = 0.999999;
 
-	uvs = position;
+	OUT_POSITION = pos;
+	
+	pos.w = 0;
+	
+	uvs = (inverseViewMatrix * pos).xyz;
 };
 )"
