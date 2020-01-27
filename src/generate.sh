@@ -1,4 +1,4 @@
-args=vs2017
+args=vs2019
 directory=../Solution
 
 if [ $# -gt 0 ]; then

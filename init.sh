@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PREMAKE_VERSION="5.0.0-alpha12"
+PREMAKE_VERSION="5.0.0-alpha14"
 uname_s=$(uname -s)
 uname_m=$(uname -m)
 os=""
