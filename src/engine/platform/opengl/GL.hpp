@@ -139,6 +139,7 @@ HT_CREATE_FUNCTION_POINTER(void, glGetProgramInfoLog, GLuint program, GLsizei ma
 HT_CREATE_FUNCTION_POINTER(GLuint, glGetUniformBlockIndex, GLuint program, const GLchar* uniformBlockName);
 HT_CREATE_FUNCTION_POINTER(void, glUniformBlockBinding, GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
 HT_CREATE_FUNCTION_POINTER(void, glUniform1iv, GLint location, GLsizei count, const GLint* value);
+HT_CREATE_FUNCTION_POINTER(void, glUniform1i, GLint location, GLint value);
 HT_CREATE_FUNCTION_POINTER(GLint, glGetUniformLocation, GLuint program, const GLchar* name);
 
 //Texture

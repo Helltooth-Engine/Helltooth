@@ -48,6 +48,7 @@ HT_CPP_FUNCTION_POINTER(glGetProgramInfoLog);
 HT_CPP_FUNCTION_POINTER(glGetUniformBlockIndex);
 HT_CPP_FUNCTION_POINTER(glUniformBlockBinding);
 HT_CPP_FUNCTION_POINTER(glUniform1iv);
+HT_CPP_FUNCTION_POINTER(glUniform1i);
 HT_CPP_FUNCTION_POINTER(glGetUniformLocation);
 
 HT_CPP_FUNCTION_POINTER(glGenerateMipmap);
@@ -98,6 +99,7 @@ bool GLInit() {
 	HT_GET_GL_FUNCTION(glGetUniformBlockIndex);
 	HT_GET_GL_FUNCTION(glUniformBlockBinding);
 	HT_GET_GL_FUNCTION(glUniform1iv);
+	HT_GET_GL_FUNCTION(glUniform1i);
 	HT_GET_GL_FUNCTION(glGetUniformLocation);
 
 	HT_GET_GL_FUNCTION(glGenerateMipmap);
