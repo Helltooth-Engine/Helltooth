@@ -4,12 +4,13 @@
 
 #include "entities/Entity.hpp"
 #include "entities/ModelComponent.hpp"
-#include "entities/TransformComponent.hpp"
 #include "entities/SkyboxComponent.hpp"
+#include "entities/TextureComponent.hpp"
+#include "entities/TransformComponent.hpp"
 
 #include "graphics/buffers/VertexBuffer.hpp"
-#include "graphics/shaders/Shader.hpp"
 #include "graphics/camera/Camera.hpp"
+#include "graphics/shaders/Shader.hpp"
 
 namespace ht { namespace graphics {
 
@@ -24,22 +25,27 @@ namespace ht { namespace graphics {
 
 	class Renderer {
 	private:
-		std::vector<Renderable>             m_Renderables;
+		std::vector<Renderable>                         m_Renderables;
+		std::vector<const entities::TextureComponent*>  m_TextureComponents;
 
-		const entities::SkyboxComponent*    m_SkyboxComponent = nullptr;
-		entities::ModelComponent*           m_Quad = nullptr;
+		const entities::SkyboxComponent*                m_SkyboxComponent     = nullptr;
+		entities::ModelComponent*                       m_Quad                = nullptr;
 
-		maths::Matrix4                      m_Projection;
-		Shader*                             m_Shader;
-		Shader*                             m_Shader;
-		Camera*                             m_Camera              = nullptr;
-		BufferLayout*                       m_Layout              = nullptr;
-		UniformBuffer*                      m_Uniform             = nullptr;
-		VertexBuffer*                       m_InstanceData        = nullptr;
+		maths::Matrix4                                  m_Projection;
+		Shader*                                         m_Shader;
+		Camera*                                         m_Camera              = nullptr;
+		BufferLayout*                                   m_Layout              = nullptr;
+		UniformBuffer*                                  m_Uniform             = nullptr;
+		VertexBuffer*                                   m_InstanceData        = nullptr;
 
-		u32                                 m_InstaceDataSize     = 0;
-		u32                                 m_InstaceDataSizeLast = 0;
-		bool                                m_OwnShader           = false;
+
+		Shader*                                         m_SkyboxShader;
+		BufferLayout*                                   m_SkyboxLayout        = nullptr;
+		UniformBuffer*                                  m_SkyboxUniform       = nullptr;
+
+		u32                                             m_InstaceDataSize     = 0;
+		u32                                             m_InstaceDataSizeLast = 0;
+		bool                                            m_OwnShader           = false;
 
 	public:
 		Renderer(Camera* camera, maths::Matrix4 projection, Shader* shader = nullptr);
