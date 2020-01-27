@@ -46,7 +46,7 @@ namespace ht { namespace graphics {
 		m_SkyboxLayout = new BufferLayout();
 		m_SkyboxLayout->AddLayout<float>("POSITION", 3, false, false, 0);
 
-		// m_SkyboxShader = new Shader(m_SkyboxLayout, vertexShader, fragmentShader, ShaderLocationType::FROM_HTSL | ShaderLocationType::FROM_MEMORY);
+		m_SkyboxShader = new Shader(m_SkyboxLayout, vertexShader, fragmentShader, ShaderLocationType::FROM_HTSL | ShaderLocationType::FROM_MEMORY);
 
 		UniformBufferLayout uniformLayout = UniformBufferLayout(ShaderType::VERTEX);
 		uniformLayout.AddUniform<Matrix4>();
