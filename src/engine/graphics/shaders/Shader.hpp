@@ -51,8 +51,13 @@ namespace ht { namespace graphics {
 			GL(int loc = glGetUniformLocation(m_Program, "textures"));
 			GL(glUniform1iv(loc, size, array)); 
 		}
+		
+		inline void SetSampler(const utils::String& name, u32 value) {
+			GL(int loc = glGetUniformLocation(m_Program, name.GetData()));
+			GL(glUniform1i(loc, value));
+		}
 #elif defined(HT_DIRECTX)
-		void SetSamplers(s32* array, u32 size);
+		void SetSamplers(s32* array, u32 size) { }
 #endif // HT_OPENGL
 
 		inline void BindLayout(const VertexBuffer** buffers = nullptr) { m_Layout->Bind(buffers); }
