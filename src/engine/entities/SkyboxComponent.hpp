@@ -15,7 +15,7 @@ namespace ht { namespace entities {
 	public:
 		SkyboxComponent(graphics::Texture* texture);
 
-		graphics::TextureCube* GetTexture() { return m_TextureCube; }
+		inline graphics::TextureCube* GetTexture() { return m_TextureCube; }
 	};
 
 } }
