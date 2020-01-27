@@ -97,14 +97,11 @@ namespace ht { namespace graphics {
 
 	}
 
-	void TextureCube::Bind(u32 slot) {
+	void TextureCube::Bind(u32 slot) const {
 		HT_DXCONTEXT->PSSetShaderResources(slot, 1, &m_ResourceView);
 		HT_DXCONTEXT->PSSetSamplers(slot, 1, &m_SamplerState);
 	}
 
-
 } }
-
-
 
 #endif // HT_DIRECTX

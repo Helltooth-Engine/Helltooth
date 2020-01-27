@@ -87,7 +87,7 @@ namespace ht { namespace graphics {
 		HT_DXCONTEXT->GenerateMips(m_ResourceView);
 	}
 
-	void Texture2D::Bind(u32 slot) {
+	void Texture2D::Bind(u32 slot) const {
 		HT_DXCONTEXT->PSSetShaderResources(slot, 1, &m_ResourceView);
 		HT_DXCONTEXT->PSSetSamplers(slot, 1, &m_SamplerState);
 	}

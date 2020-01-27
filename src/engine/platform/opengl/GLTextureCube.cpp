@@ -42,7 +42,7 @@ namespace ht { namespace graphics {
 		}
 	}
 
-	void TextureCube::Bind(u32 slot) {
+	void TextureCube::Bind(u32 slot) const {
 		GL(glBindTexture(GL_TEXTURE_CUBE_MAP, m_Texture));
 		GL(glActiveTexture(GL_TEXTURE0 + slot));
 	}
