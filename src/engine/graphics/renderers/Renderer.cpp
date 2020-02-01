@@ -64,7 +64,6 @@ namespace ht { namespace graphics {
 		skyboxUniformLayout.AddUniform<Matrix4>();
 
 		m_SkyboxUniform = new UniformBuffer(skyboxUniformLayout);
-		m_SkyboxUniform->Set(0, &m_Projection[0]);
 	}
 
 	Renderer::~Renderer() {
@@ -85,6 +84,7 @@ namespace ht { namespace graphics {
 			HT_ASSERT(skybox, "[Renderer] Entities must have a Model or a Skybox");
 			if (m_Quad == nullptr)
 				CreateSkyboxQuad();
+			return;
 		}
 
 		const TransformComponent* transform = entity.GetComponent<TransformComponent>();
@@ -132,7 +132,9 @@ namespace ht { namespace graphics {
 
 			m_SkyboxComponent->GetTexture()->Bind(0);
 
-			m_Quad->Bind();
+			const VertexBuffer* buffers[] = { m_Quad->GetVertexBuffer() };
+			m_SkyboxShader->BindLayout(buffers);
+			m_Quad->GetIndexBuffer()->Bind();
 #if defined(HT_OPENGL)
 			GL(glDrawElements(GL_TRIANGLES, m_Quad->GetIndexBuffer()->GetCount(), m_Quad->GetIndexBuffer()->GetFormat(), nullptr));
 #elif defined(HT_DIRECTX)
@@ -174,10 +176,10 @@ namespace ht { namespace graphics {
 
 	void Renderer::CreateSkyboxQuad() {
 		f32 vertices[] = {
-			-1.0f,  1.0f,
-			-1.0f, -1.0f,
-			 1.0f, -1.0f,
-			 1.0f,  1.0f
+			-1.0f,  1.0f, 0.0f,
+			-1.0f, -1.0f, 0.0f,
+			 1.0f, -1.0f, 0.0f,
+			 1.0f,  1.0f, 0.0f
 		};
 
 		// if it doesn't work, it's clockwise
