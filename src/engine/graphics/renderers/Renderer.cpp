@@ -138,7 +138,7 @@ namespace ht { namespace graphics {
 #if defined(HT_OPENGL)
 			GL(glDrawElements(GL_TRIANGLES, m_Quad->GetIndexBuffer()->GetCount(), m_Quad->GetIndexBuffer()->GetFormat(), nullptr));
 #elif defined(HT_DIRECTX)
-
+			HT_DXCONTEXT->DrawIndexed(m_Quad->GetIndexBuffer()->GetCount(), 0, 0);
 #endif // HT_OPENGL
 		}
 		for (u32 i = 0; i < m_TextureComponents.size(); i++)
