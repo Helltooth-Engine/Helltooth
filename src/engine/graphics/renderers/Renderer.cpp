@@ -166,9 +166,9 @@ namespace ht { namespace graphics {
 			m_Shader->BindLayout(buffers);
 			renderable.model->GetIndexBuffer()->Bind();
 #if defined(HT_OPENGL)
-			//GL(glDrawElementsInstanced(GL_TRIANGLES, renderable.model->GetIndexBuffer()->GetCount(), renderable.model->GetIndexBuffer()->GetFormat(), nullptr, renderable.transforms.size()));
+			GL(glDrawElementsInstanced(GL_TRIANGLES, renderable.model->GetIndexBuffer()->GetCount(), renderable.model->GetIndexBuffer()->GetFormat(), nullptr, renderable.transforms.size()));
 #elif defined(HT_DIRECTX)
-			//HT_DXCONTEXT->DrawIndexedInstanced(renderable.model->GetIndexBuffer()->GetCount(), m_InstaceDataSize, 0, 0, 0);
+			HT_DXCONTEXT->DrawIndexedInstanced(renderable.model->GetIndexBuffer()->GetCount(), m_InstaceDataSize, 0, 0, 0);
 #endif // HT_OPENGL
 
 		}

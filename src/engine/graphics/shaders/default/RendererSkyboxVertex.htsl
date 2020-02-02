@@ -20,6 +20,7 @@ main_block {
 	OUT_POSITION = pos;
 
 	pos.w = 0;
+	pos.x = -pos.x;
 
 	uvs = (inverseViewMatrix * pos).xyz;
 };
