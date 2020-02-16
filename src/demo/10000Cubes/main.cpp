@@ -50,7 +50,7 @@ public:
 		texture = Asset::LoadTexture("/res/cube.httexture");
 		textureComponent = new TextureComponent(texture);
 
-		skybox = Asset::LoadTexture("/res/test.htskybox");
+		skybox = Asset::LoadTexture("/res/test2.htskybox");
 		skyboxComponent = new SkyboxComponent(skybox);
 		skyboxEntity.AddComponent(skyboxComponent);
 		for (int i = 0; i < 10000; i++) {

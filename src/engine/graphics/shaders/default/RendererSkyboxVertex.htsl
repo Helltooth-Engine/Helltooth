@@ -16,12 +16,10 @@ out {
 
 main_block {
 	vec4 pos = vec4(position.xy, 0.999999, 1.0);
-
+	
 	OUT_POSITION = pos;
 
 	pos.w = 0;
-	pos.x = -pos.x;
-
 	uvs = (inverseViewMatrix * pos).xyz;
 };
 )"

@@ -122,11 +122,7 @@ namespace ht { namespace graphics {
 		// First render the skybox
 		if (m_SkyboxComponent) {
 			m_SkyboxShader->Start();
-			Matrix4 viewMatrix = m_Camera->GetViewMatrix();
-			viewMatrix[3 + 0 * 4] = 0;
-			viewMatrix[3 + 1 * 4] = 0;
-			viewMatrix[3 + 2 * 4] = 0;
-			Matrix4 inverseViewMatrix = viewMatrix.Inverse();
+			Matrix4 inverseViewMatrix = m_Camera->GetSkyboxViewMatrix();
 			m_SkyboxUniform->Set(0, &inverseViewMatrix[0]);
 			m_SkyboxUniform->Bind();
 
