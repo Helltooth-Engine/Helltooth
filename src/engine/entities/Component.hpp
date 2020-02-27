@@ -29,16 +29,16 @@
 
 #define HT_RTTI(Child, Parent)                                 \
 	public:                                                    \
-		static u32 TypeIdClass() {                             \
-			static int id = 0;                                 \
-			return (u32)&id;                                   \
+		static uptr TypeIdClass() {                            \
+			static u32 id = 0;                                 \
+			return (uptr)&id;                                  \
 		}                                                      \
 		                                                       \
-		virtual u32 TypeIdInstance() const {                   \
+		virtual uptr TypeIdInstance() const {                  \
 			return TypeIdClass();                              \
 		}                                                      \
 		                                                       \
-		virtual bool IsInstance(u32 id) const {                \
+		virtual bool IsInstance(size_t id) const {             \
 			if(TypeIdClass() == id)                            \
 				return true;                                   \
 			else                                               \
@@ -50,9 +50,9 @@ namespace ht { namespace entities {
 
 	class Component {
 	public:
-		virtual u32 TypeIdInstance() const = 0;
+		virtual uptr TypeIdInstance() const = 0;
 
-		virtual bool IsInstance(u32 id) const {
+		virtual bool IsInstance(uptr id) const {
 			return false;
 		}
 

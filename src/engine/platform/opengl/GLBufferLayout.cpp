@@ -39,7 +39,7 @@ namespace ht { namespace graphics {
 	void BufferLayout::Bind(const VertexBuffer** buffers) {
 		GL(glBindVertexArray(m_VaoID));
 		u32 attribOffset = 0;
-		u32 offset = 0;
+		uptr offset = 0;
 		if (buffers != nullptr) {
 			buffers[0]->Bind();
 		}

@@ -52,7 +52,7 @@ public:
 	// In here you should initialize stuff that's not depended to the rendering context
 	Game() 
 		: Application("Window", 1280, 720) {
-		srand(time(NULL));
+		srand((u32)time(NULL));
 		VFS::Mount("res", "res/shaders/");
 		VFS::Mount("res", "res/textures/");
 		VFS::Mount("res", "res/models/");

@@ -40,14 +40,14 @@ namespace ht { namespace core {
 			break;
 		case WM_KEYDOWN:
 			e->eventType                 = EventType::KEYBOARD;
-			e->key.key                   = wParam;
+			e->key.key                   = static_cast<u16>(wParam);
 			e->key.modifiers             = static_cast<u16>(Modifier::NONE);
 			e->key.state                 = State::PRESSED;
 			inputEvent                   = true;
 			break;
 		case WM_KEYUP:
 			e->eventType                 = EventType::KEYBOARD;
-			e->key.key                   = wParam;
+			e->key.key                   = static_cast<u16>(wParam);
 			e->key.modifiers             = static_cast<u16>(Modifier::NONE);
 			e->key.state                 = State::RELEASED;
 			inputEvent                   = true;

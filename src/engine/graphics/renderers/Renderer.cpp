@@ -169,7 +169,7 @@ namespace ht { namespace graphics {
 		if (m_InstaceDataSize != m_InstaceDataSizeLast) {
 			if (m_InstanceData)
 				delete m_InstanceData;
-			m_InstanceData = new VertexBuffer(0, m_InstaceDataSize * sizeof(InstanceData), BufferUsage::DYNAMIC);
+			m_InstanceData = new VertexBuffer(0, static_cast<u32>(m_InstaceDataSize * sizeof(InstanceData)), BufferUsage::DYNAMIC);
 			m_InstaceDataSizeLast = m_InstaceDataSize;
 		}
 		for (Renderable& renderable : m_Renderables) {
@@ -185,7 +185,7 @@ namespace ht { namespace graphics {
 			m_Shader->BindLayout(buffers);
 			renderable.model->GetIndexBuffer()->Bind();
 #if defined(HT_OPENGL)
-			GL(glDrawElementsInstanced(GL_TRIANGLES, renderable.model->GetIndexBuffer()->GetCount(), renderable.model->GetIndexBuffer()->GetFormat(), nullptr, renderable.transforms.size()));
+			GL(glDrawElementsInstanced(GL_TRIANGLES, renderable.model->GetIndexBuffer()->GetCount(), renderable.model->GetIndexBuffer()->GetFormat(), nullptr, static_cast<GLsizei>(renderable.transforms.size())));
 #elif defined(HT_DIRECTX)
 			HT_DXCONTEXT->DrawIndexedInstanced(renderable.model->GetIndexBuffer()->GetCount(), m_InstaceDataSize, 0, 0, 0);
 #endif // HT_OPENGL

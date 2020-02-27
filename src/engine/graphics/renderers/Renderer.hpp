@@ -66,8 +66,8 @@ namespace ht { namespace graphics {
 		BufferLayout*                                   m_SkyboxLayout        = nullptr;
 		UniformBuffer*                                  m_SkyboxUniform       = nullptr;
 
-		u32                                             m_InstaceDataSize     = 0;
-		u32                                             m_InstaceDataSizeLast = 0;
+		uptr                                            m_InstaceDataSize     = 0;
+		uptr                                            m_InstaceDataSizeLast = 0;
 		bool                                            m_OwnShader           = false;
 
 	public:

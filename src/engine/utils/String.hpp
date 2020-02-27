@@ -34,7 +34,7 @@ namespace ht { namespace utils {
 	class String {
 	private:
 		char* m_Data = nullptr;
-		u32 m_Size;
+		uptr m_Size;
 
 		mutable u32 m_HashValue = 0;
 
@@ -60,7 +60,7 @@ namespace ht { namespace utils {
 
 		u32 Hash() const;
 
-		inline u32 GetSize() const { return m_Size; }
+		inline uptr GetSize() const { return m_Size; }
 		inline const char* GetData() const { return m_Data; }
 
 		inline bool EndsWith(char c) const { return m_Data[m_Size - 1] == c; }

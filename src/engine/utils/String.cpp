@@ -72,7 +72,7 @@ namespace ht { namespace utils {
 	}
 
 	void String::Append(const char* string) {
-		u32 stringSize = strlen(string);
+		uptr stringSize = strlen(string);
 		char* temp = new char[m_Size + stringSize + 1];
 		memcpy(temp, m_Data, m_Size);
 		memcpy(temp + m_Size, string, stringSize + 1);
