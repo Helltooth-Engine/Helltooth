@@ -39,7 +39,7 @@ namespace ht { namespace maths {
 
 		Matrix4& Transpose();
 
-		Matrix4& Inverse();
+		Matrix4 Inverse();
 
 		friend Matrix4 operator*(const Matrix4& left, const Matrix4& right);
 		friend Vector4 operator*(const Matrix4& left, const Vector4& right);

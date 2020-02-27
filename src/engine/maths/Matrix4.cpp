@@ -67,7 +67,7 @@ namespace ht { namespace maths {
 		return *this;
 	}
 
-	Matrix4& Matrix4::Inverse() {
+	Matrix4 Matrix4::Inverse() {
 		f32 tmp[16];
 		tmp[0] = elements[5] * elements[10] * elements[15] -
 			elements[5] * elements[11] * elements[14] -
