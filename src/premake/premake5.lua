@@ -26,6 +26,15 @@ workspace ("Helltooth")
 	startproject "Sandbox"
 
 group "Helltooth"
+makeProject("Cereal")
+	kind("StaticLib")
+	files {
+		"../Cereal/Cereal/Cereal/**.h",
+	}
+	includedirs {
+		"../Cereal/Cereal/Cereal/src",
+	}
+
 makeProject("Helltooth-ShadingLanguage")
 	kind ("StaticLib")
 	files {
@@ -44,9 +53,12 @@ makeProject ("Helltooth")
 		"../engine/**.htsl",
 	}
 	dependson "Helltooth-ShadingLanguage"
+	dependson "Cereal"
+
 	includedirs {
 		"../engine/",
 		"../Helltooth-ShadingLanguage/src/htsl/",
+		"../Cereal/Cereal/",
 	}
 
 group "Sandbox"
