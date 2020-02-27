@@ -1,3 +1,6 @@
 [submodule "src/Helltooth-ShadingLanguage"]
 	path = src/Helltooth-ShadingLanguage
 	url = https://github.com/Helltooth-Engine/Helltooth-ShadingLanguage.git
+[submodule "src/Cereal"]
+	path = src/Cereal
+	url = https://github.com/marcizhu/Cereal.git
