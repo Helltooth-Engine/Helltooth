@@ -1,0 +1,20 @@
+R"(
+#htshader fragment
+#htversion 330 core
+
+in {
+	vec3 uvs;
+};
+
+uniform {
+	Texture3D textureCube;
+};
+
+layout {
+	vec4 color;
+};
+
+main_block {
+	color = sample3D(textureCube, uvs);
+};
+)"

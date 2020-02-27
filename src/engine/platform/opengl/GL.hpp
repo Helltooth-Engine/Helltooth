@@ -139,6 +139,7 @@ HT_CREATE_FUNCTION_POINTER(void, glGetProgramInfoLog, GLuint program, GLsizei ma
 HT_CREATE_FUNCTION_POINTER(GLuint, glGetUniformBlockIndex, GLuint program, const GLchar* uniformBlockName);
 HT_CREATE_FUNCTION_POINTER(void, glUniformBlockBinding, GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
 HT_CREATE_FUNCTION_POINTER(void, glUniform1iv, GLint location, GLsizei count, const GLint* value);
+HT_CREATE_FUNCTION_POINTER(void, glUniform1i, GLint location, GLint value);
 HT_CREATE_FUNCTION_POINTER(GLint, glGetUniformLocation, GLuint program, const GLchar* name);
 
 //Texture
@@ -184,6 +185,7 @@ HT_CREATE_FUNCTION_POINTER(GLint, glGetUniformLocation, GLuint program, const GL
 #define GL_TEXTURE_CUBE_MAP_NEGATIVE_Y  0x8518
 #define GL_TEXTURE_CUBE_MAP_POSITIVE_Z  0x8519
 #define GL_TEXTURE_CUBE_MAP_NEGATIVE_Z  0x851A
+#define GL_CLAMP_TO_EDGE                0x812F
 
 HT_CREATE_FUNCTION_POINTER(void, glGenerateMipmap, GLenum target);
 

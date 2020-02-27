@@ -22,6 +22,7 @@ namespace ht { namespace graphics {
 		virtual void Update(f32 delta) = 0;
 
 		inline maths::Matrix4 GetViewMatrix() { return m_ViewMatrix; }
+		inline maths::Matrix4 GetSkyboxViewMatrix() { return maths::Matrix4(1.0f).Rotate(-m_Rotation.x, -m_Rotation.y, 0).Inverse(); }
 		inline maths::Vector3 GetPosition() { return m_Position; }
 	};
 

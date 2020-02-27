@@ -67,6 +67,130 @@ namespace ht { namespace maths {
 		return *this;
 	}
 
+	Matrix4 Matrix4::Inverse() {
+		f32 tmp[16];
+		tmp[0] = elements[5] * elements[10] * elements[15] -
+			elements[5] * elements[11] * elements[14] -
+			elements[9] * elements[6] * elements[15] +
+			elements[9] * elements[7] * elements[14] +
+			elements[13] * elements[6] * elements[11] -
+			elements[13] * elements[7] * elements[10];
+
+		tmp[4] = -elements[4] * elements[10] * elements[15] +
+			elements[4] * elements[11] * elements[14] +
+			elements[8] * elements[6] * elements[15] -
+			elements[8] * elements[7] * elements[14] -
+			elements[12] * elements[6] * elements[11] +
+			elements[12] * elements[7] * elements[10];
+
+		tmp[8] = elements[4] * elements[9] * elements[15] -
+			elements[4] * elements[11] * elements[13] -
+			elements[8] * elements[5] * elements[15] +
+			elements[8] * elements[7] * elements[13] +
+			elements[12] * elements[5] * elements[11] -
+			elements[12] * elements[7] * elements[9];
+
+		tmp[12] = -elements[4] * elements[9] * elements[14] +
+			elements[4] * elements[10] * elements[13] +
+			elements[8] * elements[5] * elements[14] -
+			elements[8] * elements[6] * elements[13] -
+			elements[12] * elements[5] * elements[10] +
+			elements[12] * elements[6] * elements[9];
+
+		tmp[1] = -elements[1] * elements[10] * elements[15] +
+			elements[1] * elements[11] * elements[14] +
+			elements[9] * elements[2] * elements[15] -
+			elements[9] * elements[3] * elements[14] -
+			elements[13] * elements[2] * elements[11] +
+			elements[13] * elements[3] * elements[10];
+
+		tmp[5] = elements[0] * elements[10] * elements[15] -
+			elements[0] * elements[11] * elements[14] -
+			elements[8] * elements[2] * elements[15] +
+			elements[8] * elements[3] * elements[14] +
+			elements[12] * elements[2] * elements[11] -
+			elements[12] * elements[3] * elements[10];
+
+		tmp[9] = -elements[0] * elements[9] * elements[15] +
+			elements[0] * elements[11] * elements[13] +
+			elements[8] * elements[1] * elements[15] -
+			elements[8] * elements[3] * elements[13] -
+			elements[12] * elements[1] * elements[11] +
+			elements[12] * elements[3] * elements[9];
+
+		tmp[13] = elements[0] * elements[9] * elements[14] -
+			elements[0] * elements[10] * elements[13] -
+			elements[8] * elements[1] * elements[14] +
+			elements[8] * elements[2] * elements[13] +
+			elements[12] * elements[1] * elements[10] -
+			elements[12] * elements[2] * elements[9];
+
+		tmp[2] = elements[1] * elements[6] * elements[15] -
+			elements[1] * elements[7] * elements[14] -
+			elements[5] * elements[2] * elements[15] +
+			elements[5] * elements[3] * elements[14] +
+			elements[13] * elements[2] * elements[7] -
+			elements[13] * elements[3] * elements[6];
+
+		tmp[6] = -elements[0] * elements[6] * elements[15] +
+			elements[0] * elements[7] * elements[14] +
+			elements[4] * elements[2] * elements[15] -
+			elements[4] * elements[3] * elements[14] -
+			elements[12] * elements[2] * elements[7] +
+			elements[12] * elements[3] * elements[6];
+
+		tmp[10] = elements[0] * elements[5] * elements[15] -
+			elements[0] * elements[7] * elements[13] -
+			elements[4] * elements[1] * elements[15] +
+			elements[4] * elements[3] * elements[13] +
+			elements[12] * elements[1] * elements[7] -
+			elements[12] * elements[3] * elements[5];
+
+		tmp[14] = -elements[0] * elements[5] * elements[14] +
+			elements[0] * elements[6] * elements[13] +
+			elements[4] * elements[1] * elements[14] -
+			elements[4] * elements[2] * elements[13] -
+			elements[12] * elements[1] * elements[6] +
+			elements[12] * elements[2] * elements[5];
+
+		tmp[3] = -elements[1] * elements[6] * elements[11] +
+			elements[1] * elements[7] * elements[10] +
+			elements[5] * elements[2] * elements[11] -
+			elements[5] * elements[3] * elements[10] -
+			elements[9] * elements[2] * elements[7] +
+			elements[9] * elements[3] * elements[6];
+
+		tmp[7] = elements[0] * elements[6] * elements[11] -
+			elements[0] * elements[7] * elements[10] -
+			elements[4] * elements[2] * elements[11] +
+			elements[4] * elements[3] * elements[10] +
+			elements[8] * elements[2] * elements[7] -
+			elements[8] * elements[3] * elements[6];
+
+		tmp[11] = -elements[0] * elements[5] * elements[11] +
+			elements[0] * elements[7] * elements[9] +
+			elements[4] * elements[1] * elements[11] -
+			elements[4] * elements[3] * elements[9] -
+			elements[8] * elements[1] * elements[7] +
+			elements[8] * elements[3] * elements[5];
+
+		tmp[15] = elements[0] * elements[5] * elements[10] -
+			elements[0] * elements[6] * elements[9] -
+			elements[4] * elements[1] * elements[10] +
+			elements[4] * elements[2] * elements[9] +
+			elements[8] * elements[1] * elements[6] -
+			elements[8] * elements[2] * elements[5];
+
+		Matrix4 result;
+
+		f32 determinant = elements[0] * tmp[0] + elements[1] * tmp[4] + elements[2] * tmp[8] + elements[3] * tmp[12];
+
+		for (u32 i = 0; i < 16; i++)
+			result[i] = tmp[i] * determinant;
+
+		return result;
+	}
+
 	Matrix4& Matrix4::Translate(f32 x, f32 y, f32 z) {
 		Matrix4 translationMat4 = Matrix4(1.0f);
 		translationMat4[0 + 3 * 4] = x;

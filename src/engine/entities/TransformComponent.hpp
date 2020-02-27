@@ -20,7 +20,7 @@ namespace ht { namespace entities {
 		maths::Vector3 m_Scale;
 
 	public:
-		TransformComponent() : m_ModelMatrix(1.0f), m_Scale(1.f, 1.f, 1.f) {}
+		TransformComponent() : m_Modified(false), m_ModelMatrix(1.0f), m_Scale(1.f, 1.f, 1.f) {}
 		TransformComponent(const maths::Vector3& position) : m_Modified(true), m_Position(position), m_Scale(1.f, 1.f, 1.f) {}
 
 		void Move(f32 x, f32 y, f32 z)                    { m_Position += maths::Vector3(x, y, z);  m_Modified = true; }

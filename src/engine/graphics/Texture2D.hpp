@@ -26,7 +26,7 @@ namespace ht { namespace graphics {
 
 		void SetPixels(byte* pixels);
 
-		void Bind(u32 slot) override;
+		void Bind(u32 slot) const override;
 	
 	private:
 		void SetSamplerState();

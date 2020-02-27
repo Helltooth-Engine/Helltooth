@@ -35,7 +35,7 @@ namespace ht { namespace graphics {
 		GL(glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLenum>(m_Format), m_Width, m_Height, 0, static_cast<GLenum>(GetBaseFormat(m_Format)), GL_UNSIGNED_BYTE, pixels));
 	}
 
-	void Texture2D::Bind(u32 slot) {
+	void Texture2D::Bind(u32 slot) const {
 		GL(glBindTexture(GL_TEXTURE_2D, m_Texture));
 		GL(glActiveTexture(GL_TEXTURE0 + slot));
 	}

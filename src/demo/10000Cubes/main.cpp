@@ -16,8 +16,12 @@ private:
 	std::vector<Entity> entities;
 	std::vector<TransformComponent> transforms;
 	ModelComponent* model;
+	TextureComponent* textureComponent;
+	SkyboxComponent* skyboxComponent;
+	Entity skyboxEntity;
 	UniformBuffer* buffer;
 	Texture* texture;
+	Texture* skybox;
 	Matrix4 proj;
 	Renderer* renderer;
 
@@ -42,21 +46,27 @@ public:
 		renderer = new Renderer(camera, proj);
 		model = Asset::LoadModel("/res/cube.htmodel");
 		transforms.resize(10000);
+		
+		texture = Asset::LoadTexture("/res/cube.httexture");
+		textureComponent = new TextureComponent(texture);
+
+		skybox = Asset::LoadTexture("/res/test2.htskybox");
+		skyboxComponent = new SkyboxComponent(skybox);
+		skyboxEntity.AddComponent(skyboxComponent);
 		for (int i = 0; i < 10000; i++) {
 			entities.emplace_back();
 			entities[i].AddComponent(model);
 			transforms[i] = TransformComponent(Vector3((f32)rand() / (f32)RAND_MAX * 200.f - 100.0f, (f32)rand() / (f32)RAND_MAX * 200.f - 100.0f, (f32)rand() / (f32)RAND_MAX * 200.f - 100.0f));
 			//transforms[i].Scale(1, 1, 1);
 			entities[i].AddComponent(&transforms[i]);
+			entities[i].AddComponent(textureComponent);
 		}
+		entities.push_back(skyboxEntity);
 
 #ifdef HT_OPENGL
 		glClearColor(0.3f, 0.4f, 0.7f, 1.0f);
 		glEnable(GL_DEPTH_TEST);
 #endif
-		texture = Asset::LoadTexture("/res/cube.httexture");
-
-		texture->Bind(0);
 	}
 
 	void Render() {

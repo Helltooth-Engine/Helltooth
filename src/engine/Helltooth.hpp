@@ -17,8 +17,9 @@
 #include "core/Window.hpp"
 
 #include "entities/Entity.hpp"
-#include "entities/TransformComponent.hpp"
 #include "entities/ModelComponent.hpp"
+#include "entities/TextureComponent.hpp"
+#include "entities/TransformComponent.hpp"
 
 #include "graphics/buffers/BufferLayout.hpp"
 #include "graphics/buffers/IndexBuffer.hpp"

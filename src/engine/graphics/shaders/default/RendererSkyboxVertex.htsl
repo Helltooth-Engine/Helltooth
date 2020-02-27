@@ -1,0 +1,25 @@
+R"(
+#htshader vertex
+#htversion 330 core
+
+layout {
+	vec3 POSITION as position;
+};
+
+uniform {
+	mat4 inverseViewMatrix;
+};
+
+out {
+	vec3 uvs;
+};
+
+main_block {
+	vec4 pos = vec4(position.xy, 0.999999, 1.0);
+	
+	OUT_POSITION = pos;
+
+	pos.w = 0;
+	uvs = (inverseViewMatrix * pos).xyz;
+};
+)"

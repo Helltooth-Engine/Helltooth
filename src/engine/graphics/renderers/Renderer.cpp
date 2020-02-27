@@ -36,18 +36,41 @@ namespace ht { namespace graphics {
 		else
 			m_Shader = shader;
 
-		UniformBufferLayout m_UniformLayout = UniformBufferLayout(ShaderType::VERTEX);
-		m_UniformLayout.AddUniform<Matrix4>();
-		m_UniformLayout.AddUniform<Matrix4>();
+		const char* vertexShader =
+			#include "graphics/shaders/default/RendererSkyboxVertex.htsl"
+			;
+		const char* fragmentShader =
+			#include "graphics/shaders/default/RendererSkyboxFragment.htsl"
+			;
 
-		m_Uniform = new UniformBuffer(m_UniformLayout);
+		m_SkyboxLayout = new BufferLayout();
+		m_SkyboxLayout->AddLayout<float>("POSITION", 3, false, false, 0);
+
+		m_SkyboxShader = new Shader(m_SkyboxLayout, vertexShader, fragmentShader, ShaderLocationType::FROM_HTSL | ShaderLocationType::FROM_MEMORY);
+
+#if defined(HT_OPENGL)
+		m_SkyboxShader->Start();
+		m_SkyboxShader->SetSampler("textureCube", 0);
+#endif // HT_OPENGL
+
+		UniformBufferLayout uniformLayout = UniformBufferLayout(ShaderType::VERTEX);
+		uniformLayout.AddUniform<Matrix4>();
+		uniformLayout.AddUniform<Matrix4>();
+
+		m_Uniform = new UniformBuffer(uniformLayout);
 		m_Uniform->Set(0, &m_Projection[0]);
+
+		UniformBufferLayout skyboxUniformLayout = UniformBufferLayout(ShaderType::VERTEX);
+		skyboxUniformLayout.AddUniform<Matrix4>();
+
+		m_SkyboxUniform = new UniformBuffer(skyboxUniformLayout);
 	}
 
 	Renderer::~Renderer() {
 		if (m_Layout) delete m_Layout;
 		if (m_OwnShader) delete m_Shader;
 		delete m_Uniform;
+		delete m_SkyboxLayout, m_SkyboxShader, m_SkyboxUniform;
 	}
 
 	void Renderer::Submit(const entities::Entity& entity) {
@@ -61,25 +84,62 @@ namespace ht { namespace graphics {
 			HT_ASSERT(skybox, "[Renderer] Entities must have a Model or a Skybox");
 			if (m_Quad == nullptr)
 				CreateSkyboxQuad();
+			return;
 		}
 
 		const TransformComponent* transform = entity.GetComponent<TransformComponent>();
 		
+		bool foundModel = false;
 		for (size_t i = 0; i < m_Renderables.size(); i++) {
 			if (model == m_Renderables[i].model) {
 				m_Renderables[i].transforms.push_back(transform);
 				if (m_InstaceDataSize < m_Renderables[i].transforms.size() - 1)
 					m_InstaceDataSize = m_Renderables[i].transforms.size() - 1;
-				return;
+				foundModel = true;
+				break;
 			}
 		}
-		m_Renderables.push_back({ model });
-		m_Renderables[m_Renderables.size() - 1].transforms.push_back(transform);
+		if (!foundModel) {
+			m_Renderables.push_back({ model });
+			m_Renderables[m_Renderables.size() - 1].transforms.push_back(transform);
+		}
+		bool foundTexture = false;
+		const TextureComponent* texture = entity.GetComponent<TextureComponent>();
+		if (texture) {
+			for (u32 i = 0; i < m_TextureComponents.size(); i++)
+				if (m_TextureComponents[i] == texture) {
+					foundTexture = true;
+					break;
+				}
+			if (!foundTexture)
+				m_TextureComponents.push_back(texture);
+		}
 		if (m_InstaceDataSize < 1)
 			m_InstaceDataSize = 1;
 	}
 	
 	void Renderer::Render() {
+		// First render the skybox
+		if (m_SkyboxComponent) {
+			m_SkyboxShader->Start();
+			Matrix4 inverseViewMatrix = m_Camera->GetSkyboxViewMatrix();
+			m_SkyboxUniform->Set(0, &inverseViewMatrix[0]);
+			m_SkyboxUniform->Bind();
+
+			m_SkyboxComponent->GetTexture()->Bind(0);
+
+			const VertexBuffer* buffers[] = { m_Quad->GetVertexBuffer() };
+			m_SkyboxShader->BindLayout(buffers);
+			m_Quad->GetIndexBuffer()->Bind();
+#if defined(HT_OPENGL)
+			GL(glDrawElements(GL_TRIANGLES, m_Quad->GetIndexBuffer()->GetCount(), m_Quad->GetIndexBuffer()->GetFormat(), nullptr));
+#elif defined(HT_DIRECTX)
+			HT_DXCONTEXT->DrawIndexed(m_Quad->GetIndexBuffer()->GetCount(), 0, 0);
+#endif // HT_OPENGL
+		}
+		for (u32 i = 0; i < m_TextureComponents.size(); i++)
+			m_TextureComponents[i]->GetTexture()->Bind(i);
+
 		m_Shader->Start();
 		m_Uniform->Set(1, &m_Camera->GetViewMatrix()[0]);
 		m_Uniform->Bind();
@@ -112,10 +172,10 @@ namespace ht { namespace graphics {
 
 	void Renderer::CreateSkyboxQuad() {
 		f32 vertices[] = {
-			-1.0f,  1.0f,
-			-1.0f, -1.0f,
-			 1.0f, -1.0f,
-			 1.0f,  1.0f
+			-1.0f,  1.0f, 0.0f,
+			-1.0f, -1.0f, 0.0f,
+			 1.0f, -1.0f, 0.0f,
+			 1.0f,  1.0f, 0.0f
 		};
 
 		// if it doesn't work, it's clockwise
