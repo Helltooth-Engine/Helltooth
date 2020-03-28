@@ -23,6 +23,8 @@
 
 #pragma once
 
+#include <cstddef>
+
 typedef unsigned char          byte;
 
 typedef signed char            s8;
