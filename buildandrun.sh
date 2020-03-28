@@ -7,4 +7,6 @@ if [ ! -d $res_location ]; then
 fi
 
 make -d config=debug-gl_x64 -C Solution/
-./bin/Debug-GL/10000Cubes/10000Cubes
+
+cd bin/Debug-GL/10000Cubes/
+./10000Cubes
