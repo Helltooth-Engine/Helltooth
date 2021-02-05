@@ -104,7 +104,7 @@ namespace ht {
 
 				if (delta >= timeFactor) {
 					Update(delta);
-					delta = 0;
+					delta -= timeFactor;
 					updates++;
 				}
 
