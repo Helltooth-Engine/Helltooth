@@ -108,10 +108,13 @@ namespace ht { namespace core {
 		windowAttribs.colormap = colormap;
 		windowAttribs.background_pixmap = None;
 		windowAttribs.border_pixel = 0;
-		windowAttribs.event_mask = StructureNotifyMask;
+		windowAttribs.event_mask = StructureNotifyMask | KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask;
 
 		m_Window = XCreateWindow(m_Display, rootWindow, 0, 0, width, height, 0, vi->depth, InputOutput, vi->visual, CWColormap | CWEventMask, &windowAttribs);
 		
+		m_WindowDestroyAtom = XInternAtom(m_Display, "WM_DELETE_WINDOW", True);
+		XSetWMProtocols(m_Display, m_Window, &m_WindowDestroyAtom, 1);
+
 		XMapWindow(m_Display, m_Window);
 		XStoreName(m_Display, m_Window, m_Title.c_str());
 
@@ -158,9 +161,12 @@ namespace ht { namespace core {
 
 		Event* e = new Event();
 		bool inputEvent = false;
-		HT_WARN("%d", event.type);
 		switch (event.type) {
-		
+		case ClientMessage:
+			Atom atom = *reinterpret_cast<const Atom*>(event.xclient.data.l);
+			if (atom == window->m_WindowDestroyAtom)
+				window->m_ShouldClose = true;
+			break;
 		}
 		if (inputEvent)
 			EventDispatcher::Dispatch(e);

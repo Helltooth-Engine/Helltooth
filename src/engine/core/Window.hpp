@@ -63,6 +63,7 @@ namespace ht { namespace core {
 #elif defined(HT_LINUX)
 		_XDisplay* 		m_Display = nullptr;
 		XID 			m_Window;
+		Atom            m_WindowDestroyAtom;
 		
 #endif // HT_WINDOWS
 		bool m_ShouldClose = false;
