@@ -49,22 +49,22 @@ namespace ht { namespace graphics {
 	private:
 #if defined(HT_OPENGL)
 #	if defined(HT_WINDOWS)
-		HDC 						m_DeviceContext;
-		HGLRC 						m_Context;
-		HWND 						m_Hwnd;
+		HDC                         m_DeviceContext;
+		HGLRC                       m_Context;
+		HWND                        m_Hwnd;
 #	elif defined(HT_LINUX)
-		GLXContext 					m_Context;
-		_XDisplay* 					m_Display;
+		GLXContext                  m_Context;
+		_XDisplay*                  m_Display;
 		XID                         m_Window;
 #	endif // HT_WINDOWS
 #elif defined(HT_DIRECTX)
-		IDXGISwapChain* 			m_SwapChain;
-		ID3D11Device* 				m_Device;
-		ID3D11DeviceContext* 		m_Context;
-		ID3D11RenderTargetView* 	m_RenderTarget;
-		ID3D11DepthStencilView* 	m_DepthStencilView;
-		ID3D11Texture2D* 			m_DepthStencilBuffer;
-		ID3D11RasterizerState* 		m_RasterizerState;
+		IDXGISwapChain*             m_SwapChain;
+		ID3D11Device*               m_Device;
+		ID3D11DeviceContext*        m_Context;
+		ID3D11RenderTargetView*     m_RenderTarget;
+		ID3D11DepthStencilView*     m_DepthStencilView;
+		ID3D11Texture2D*            m_DepthStencilBuffer;
+		ID3D11RasterizerState*      m_RasterizerState;
 #endif // HT_OPENGL
 
 	public:

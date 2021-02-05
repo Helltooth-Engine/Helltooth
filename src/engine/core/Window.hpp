@@ -61,8 +61,8 @@ namespace ht { namespace core {
 #if defined(HT_WINDOWS)
 		HWND m_Hwnd;
 #elif defined(HT_LINUX)
-		_XDisplay* 		m_Display = nullptr;
-		XID 			m_Window;
+		_XDisplay*      m_Display = nullptr;
+		XID             m_Window;
 		Atom            m_WindowDestroyAtom;
 		
 #endif // HT_WINDOWS
