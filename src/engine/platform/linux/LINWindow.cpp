@@ -134,8 +134,12 @@ namespace ht { namespace core {
 	}
 
 	void Window::Update() {
+		while (XPending(m_Display)) {
+			XEvent event;
+			XNextEvent(m_Display, &event);
+			HandleXEvent(event);
+		}
 		m_Context->Update();
-		glXSwapBuffers(m_Display, m_Window);
 	}
 
 	void Window::Clear() {
@@ -148,6 +152,21 @@ namespace ht { namespace core {
 #endif // HT_OPENGL
 		XStoreName(m_Display, m_Window, title.c_str());
 	}
+
+	void Window::HandleXEvent(const XEvent& event) {
+		Window* window = Window::GetWindow();
+
+		Event* e = new Event();
+		bool inputEvent = false;
+		HT_WARN("%d", event.type);
+		switch (event.type) {
+		
+		}
+		if (inputEvent)
+			EventDispatcher::Dispatch(e);
+		delete e;
+	}
+
 
 } }
 
