@@ -108,7 +108,7 @@ namespace ht { namespace core {
 		windowAttribs.colormap = colormap;
 		windowAttribs.background_pixmap = None;
 		windowAttribs.border_pixel = 0;
-		windowAttribs.event_mask = StructureNotifyMask | KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask;
+		windowAttribs.event_mask = StructureNotifyMask | KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask | PointerMotionMask;
 
 		m_Window = XCreateWindow(m_Display, rootWindow, 0, 0, width, height, 0, vi->depth, InputOutput, vi->visual, CWColormap | CWEventMask, &windowAttribs);
 		
@@ -161,15 +161,45 @@ namespace ht { namespace core {
 
 		Event* e = new Event();
 		bool inputEvent = false;
+
 		switch (event.type) {
 		case ClientMessage:
+		{
 			Atom atom = *reinterpret_cast<const Atom*>(event.xclient.data.l);
 			if (atom == window->m_WindowDestroyAtom)
 				window->m_ShouldClose = true;
 			break;
 		}
+		case ButtonPress:
+		case ButtonRelease:
+			e->eventType                = EventType::MOUSE;
+			e->mouse.mouseButton        = event.xbutton.button;
+			e->mouse.mouseButtonState   = static_cast<State>(1 + (event.type == ButtonPress));
+			e->mouse.x                  = event.xbutton.x;
+			e->mouse.y                  = event.xbutton.y;
+			inputEvent                  = true;
+			break;
+		case MotionNotify:
+			e->eventType                = EventType::MOUSE;
+			e->mouse.mouseButton        = -1;
+			e->mouse.mouseButtonState   = State::NONE;
+			e->mouse.x                  = event.xbutton.x;
+			e->mouse.y                  = event.xbutton.y;
+			inputEvent                  = true;
+			break;
+		case KeyPress:
+		case KeyRelease:
+			e->eventType                = EventType::KEYBOARD;
+			e->key.key                  = event.xkey.keycode;
+			e->key.modifiers            = static_cast<u16>(Modifier::NONE);
+			e->key.state                = static_cast<State>(1 + (event.type == KeyPress));
+			inputEvent                  = true;
+			break;
+		}
+
 		if (inputEvent)
 			EventDispatcher::Dispatch(e);
+
 		delete e;
 	}
 

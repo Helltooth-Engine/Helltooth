@@ -75,11 +75,11 @@ namespace ht { namespace core {
 		};
 
 		Event() {
-			eventType = EventType::UNKNOWN;
-			mouse.x = -1.f;
-			mouse.y = -1.f;
-			mouse.mouseButton = -1;
-			mouse.mouseButtonState = State::UNKNOWN;
+			eventType               = EventType::UNKNOWN;
+			mouse.x                 = -1.f;
+			mouse.y                 = -1.f;
+			mouse.mouseButton       = -1;
+			mouse.mouseButtonState  = State::UNKNOWN;
 		}
 	};
 
