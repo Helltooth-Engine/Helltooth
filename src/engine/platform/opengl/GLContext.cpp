@@ -110,7 +110,7 @@ namespace ht { namespace graphics {
 #elif defined(HT_LINUX)
 
 	Context::Context(_XDisplay* display, XID& window, GLXFBConfig fbConfig)
-		: m_Display(display) {
+		: m_Display(display), m_Window(window) {
 		if (!lglInit()) {
 			HT_FATAL("%s", "[GLContext] Could not initialize LGL");
 			return;
@@ -126,7 +126,7 @@ namespace ht { namespace graphics {
 		m_Context = glXCreateContextAttribsARB(m_Display, fbConfig, 0, True, contextAttribs);
 
 		//m_Context = glXCreateContext(m_Display, visualInfo, nullptr, GL_TRUE);
-		glXMakeCurrent(m_Display, window, m_Context);
+		glXMakeCurrent(m_Display, m_Window, m_Context);
 		
 		HT_WARN("GL version: %s",                   reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 		HT_WARN("GL vendor: %s",                    reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
@@ -144,7 +144,7 @@ namespace ht { namespace graphics {
 	}
 
 	void Context::Update() {
-		// The context updating is done in Window
+		glXSwapBuffers(m_Display, m_Window);
 	}
 
 #endif // HT_LINUX

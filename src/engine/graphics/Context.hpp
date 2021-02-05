@@ -55,6 +55,7 @@ namespace ht { namespace graphics {
 #	elif defined(HT_LINUX)
 		GLXContext 					m_Context;
 		_XDisplay* 					m_Display;
+		XID                         m_Window;
 #	endif // HT_WINDOWS
 #elif defined(HT_DIRECTX)
 		IDXGISwapChain* 			m_SwapChain;
