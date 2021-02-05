@@ -31,11 +31,12 @@ namespace ht { namespace core {
 
 	Window::Window(std::string title, u32 width, u32 height) 
 		: m_Title(title), m_Width(width), m_Height(height) {
+#if defined(HT_OPENGL)
 		m_Title.append(" - OpenGL");
-
+#endif // HT_OPENGL
 		m_Display = XOpenDisplay(nullptr);
 		if (m_Display == nullptr) {
-			HT_FATAL("%s", "[Window] Coult not connect to X Server.");
+			HT_FATAL("%s", "[Window] Could not connect to X Server.");
 			return;
 		}
 		
@@ -126,7 +127,10 @@ namespace ht { namespace core {
 	}
 
 	void Window::SetVisible(bool visible) {
-
+		if (visible)
+			XMapWindow(m_Display, m_Window);
+		else
+			XUnmapWindow(m_Display, m_Window);
 	}
 
 	void Window::Update() {
@@ -139,6 +143,9 @@ namespace ht { namespace core {
 	}
 
 	void Window::SetTitle(std::string title) {
+#if defined(HT_OPENGL)
+		title.append(" - OpenGL");
+#endif // HT_OPENGL
 		XStoreName(m_Display, m_Window, title.c_str());
 	}
 
