@@ -82,7 +82,7 @@ namespace ht { namespace core {
 
 
 		void SetTitle(std::string title);
-#ifdef HT_WINDOWS
+#if defined(HT_WINDOWS)
 		inline bool IsHWND(HWND other) { return m_Hwnd == other; }
 #endif // HT_WINDOWS
 
@@ -90,7 +90,7 @@ namespace ht { namespace core {
 		inline graphics::Context* GetContext() { return m_Context; }
 		inline void Resize(u32 width, u32 height) { m_Width = width; m_Height = height; m_Context->Resize(width, height); }
 
-#ifdef HT_DIRECTX
+#if defined(HT_DIRECTX)
 		inline ID3D11Device* GetDevice() { return m_Context->GetDevice(); }
 		inline ID3D11DeviceContext* GetDeviceContext() { return m_Context->GetDeviceContext(); }
 #endif // HT_DIRECTX
@@ -98,6 +98,8 @@ namespace ht { namespace core {
 	private:
 #ifdef HT_WINDOWS
 		static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+#elif defined(HT_LINUX)
+		static void HandleXEvent(const XEvent& event);
 #endif // HT_WINDOWS
 
 	};
