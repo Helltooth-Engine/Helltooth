@@ -72,14 +72,14 @@
 namespace ht {
 	class Application {
 	protected:
-		ht::core::Window *m_Window;
+		core::Window *m_Window;
 		u32 m_MaxUps;
 		std::string m_Title;
 
 	public:
 		Application(const std::string& title, u32 width, u32 height, u32 maxUps = 60)
 			: m_MaxUps(maxUps), m_Title(title) {
-			m_Window = new ht::core::Window(title, width, height);
+			m_Window = new core::Window(title, width, height);
 		}
 
 		virtual void Init() = 0;
@@ -98,7 +98,7 @@ namespace ht {
 			u32 frames = 0;
 			u32 updates = 0;
 
-			ht::utils::Timer timer;
+			utils::Timer timer;
 			while (!m_Window->ShouldClose()) {
 				m_Window->Clear();
 
