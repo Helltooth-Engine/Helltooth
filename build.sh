@@ -17,7 +17,7 @@ if [ -n "$clean" ]; then
 	make clean config=$config -C Solution/ > /dev/null
 fi
 echo "Building..."
-make config=$config -C Solution/
+make config=$config -j 8 -C Solution/
 
 echo "Copying resources..."
 if [ ! -d $res_location ]; then
