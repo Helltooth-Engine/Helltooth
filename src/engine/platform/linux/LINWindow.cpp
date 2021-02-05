@@ -189,12 +189,17 @@ namespace ht { namespace core {
 			break;
 		case KeyPress:
 		case KeyRelease:
+		{
+			int keysyms_per_keycode_return;
+			KeySym* keysym = XGetKeyboardMapping(window->m_Display, event.xkey.keycode, 1, &keysyms_per_keycode_return);
 			e->eventType                = EventType::KEYBOARD;
-			e->key.key                  = event.xkey.keycode;
+			e->key.key                  = keysym[0];
 			e->key.modifiers            = static_cast<u16>(Modifier::NONE);
 			e->key.state                = static_cast<State>(1 + (event.type == KeyPress));
 			inputEvent                  = true;
+			XFree(keysym);
 			break;
+		}
 		}
 
 		if (inputEvent)
